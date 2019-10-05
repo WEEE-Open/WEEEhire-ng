@@ -12,7 +12,9 @@
     "ext-mbstring": "*",
     "ext-json": "*",
     "phpmyadmin/motranslator": "^4.0",
-    "willdurand/negotiation": "^2.3"
+    "willdurand/negotiation": "^2.3",
+    "ext-sqlite3": "*",
+    "ext-PDO": "*"
   },
   "require-dev": {
     "pds/skeleton": "~1.0"
