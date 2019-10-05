@@ -11,7 +11,8 @@
     "ext-ctype": "*",
     "ext-mbstring": "*",
     "ext-json": "*",
-    "phpmyadmin/motranslator": "^4.0"
+    "phpmyadmin/motranslator": "^4.0",
+    "willdurand/negotiation": "^2.3"
   },
   "require-dev": {
     "pds/skeleton": "~1.0"
