@@ -24,7 +24,7 @@ class Database {
 	public function addUser(User $user): array {
 		$token = bin2hex(random_bytes(10));
 
-		$stmt = $this->db->prepare('INSERT INTO users (token, name, surname, degreecourse, year, matricola, area, letter, published, status, recruiter, submitted) VALUES (:token, :namep, :surname, :degreecourse, :yearp, :matricola, :area, :letter, :published, :statusp, :recruiter, :submitted)');
+		$stmt = $this->db->prepare('INSERT INTO users (token, name, surname, degreecourse, year, matricola, area, letter, submitted) VALUES (:token, :namep, :surname, :degreecourse, :yearp, :matricola, :area, :letter, :submitted)');
 		$stmt->bindValue(':token', password_hash($token, PASSWORD_DEFAULT), SQLITE3_TEXT);
 		$stmt->bindValue(':namep', $user->name, SQLITE3_TEXT);
 		$stmt->bindValue(':surname', $user->surname, SQLITE3_TEXT);
@@ -33,11 +33,8 @@ class Database {
 		$stmt->bindValue(':matricola', $user->matricola, SQLITE3_TEXT);
 		$stmt->bindValue(':area', $user->area, SQLITE3_TEXT);
 		$stmt->bindValue(':letter', $user->letter, SQLITE3_TEXT);
-		$stmt->bindValue(':published', $user->published, SQLITE3_INTEGER);
-		$stmt->bindValue(':statusp', $user->status, $user->status === null ? SQLITE3_NULL : SQLITE3_INTEGER);
-		$stmt->bindValue(':recruiter', $user->recruiter, $user->recruiter === null ? SQLITE3_NULL : SQLITE3_INTEGER);
 		$stmt->bindValue(':submitted', $user->submitted);
-		if(!@$stmt->execute()) {
+		if(!$stmt->execute()) {
 			if($this->db->lastErrorCode() === 19 && stristr($this->db->lastErrorMsg(), 'matricola')) {
 				throw new DuplicateUserException();
 			} else {
@@ -45,11 +42,12 @@ class Database {
 			}
 		}
 		$id = $this->db->lastInsertRowID();
+
 		return [$id, $token];
 	}
 
 	public function getUser(string $id): User {
-		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status, recruiter, submitted FROM users WHERE id = :id LIMIT 1');
+		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status, recruiter, recruitertg, submitted FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if($result === false) {
@@ -58,11 +56,28 @@ class Database {
 		$row = $result->fetchArray(SQLITE3_ASSOC);
 		$result->finalize();
 		$user = new User();
-		foreach(['id', 'name', 'surname', 'degreecourse', 'year', 'matricola', 'area', 'letter', 'published', 'status', 'recruiter', 'submitted'] as $attr) {
+		foreach(
+			[
+				'id',
+				'name',
+				'surname',
+				'degreecourse',
+				'year',
+				'matricola',
+				'area',
+				'letter',
+				'published',
+				'status',
+				'recruiter',
+				'recruitertg',
+				'submitted'
+			] as $attr
+		) {
 			$user->$attr = $row[$attr];
 		}
 		$user->published = (bool) $user->published;
 		$user->status = $user->status === null ? null : (bool) $user->status;
+
 		return $user;
 	}
 
@@ -73,6 +88,7 @@ class Database {
 		if($result instanceof SQLite3Result) {
 			$row = $result->fetchArray(SQLITE3_ASSOC);
 			$result->finalize();
+
 			return $row !== false && password_verify($token, $row['token']);
 		} else {
 			throw new DatabaseException();
@@ -86,5 +102,23 @@ class Database {
 		if($result === false) {
 			throw new DatabaseException();
 		}
+	}
+
+	public function getAllUsersForTable() {
+		$result = $this->db->query('SELECT id, name, surname, area, recruiter, published, status, submitted FROM users');
+		$compact = [];
+		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
+			$compact[] = [
+				'id'        => $row['id'],
+				'name'      => $row['name'] . ' ' . $row['surname'],
+				'area'      => $row['area'],
+				'recruiter' => $row['recruiter'],
+				'published' => $row['published'],
+				'status'    => $row['status'],
+				'submitted' => $row['submitted']
+			];
+		}
+
+		return $compact;
 	}
 }
