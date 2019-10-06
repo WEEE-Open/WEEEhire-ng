@@ -6,3 +6,31 @@
 .the-button {
 	margin-bottom: 1em;
 }
+
+.status-waiting {
+	font-size: 2.2em;
+	height: 2.2em;
+	line-height: 2.2em;
+	border-radius: 0.2em;
+	background-color: #C7E1F3;
+}
+
+.status-approved {
+	font-size: 2.2em;
+	height: 2.2em;
+	line-height: 2.2em;
+	border-radius: 0.2em;
+	background-color: #7BFC91;
+}
+
+.status-rejected {
+	font-size: 2.2em;
+	height: 2.2em;
+	line-height: 2.2em;
+	border-radius: 0.2em;
+	background-color: #FC6464;
+}
+
+.space-above {
+	margin-top: 2em;
+}
