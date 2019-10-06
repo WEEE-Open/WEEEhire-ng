@@ -14,6 +14,9 @@
 			case 'db':
 				echo sprintf(__('Errore di connessione al database. Se il problema persiste, puoi contattarci all\'indirizzo %s'), WEEEHIRE_EMAIL_FALLBACK);
 				break;
+			case 'duplicate':
+				echo sprintf(__('Hai già inviato una candidatura con questa matricola. Puoi controllare la pagina con lo stato dal link che ti abbiamo mandato via email.'));
+				break;
 			default:
 				echo sprintf(__('Si è rotto qualcosa (o hai rotto qualcosa?) durante l\'invio. Puoi contattarci a %s e spiegarci cos\'è successo, se vuoi.'), WEEEHIRE_EMAIL_FALLBACK);
 				break;
@@ -134,9 +137,9 @@
 		<div class="col-md-3 col-lg-4">
 			<input id="matricola" name="matricola" placeholder="s123456" type="text" required="required" class="form-control">
 		</div>
-		<label for="interest" class="col-md-2 col-lg-1 col-form-label"><?=__('Interesse')?></label>
+		<label for="area" class="col-md-2 col-lg-1 col-form-label"><?=__('Interesse')?></label>
 		<div class="col-md-5 col-lg-6">
-			<select id="interest" name="interest" required="required" class="form-control" onchange="updateHints()">
+			<select id="area" name="area" required="required" class="form-control" onchange="updateHints()">
 				<option value selected disabled class="d-none"></option>
 				<option value="Riparazione Hardware"><?=__('Riparazione Hardware')?></option>
 				<option value="Elettronica"><?=__('Elettronica')?></option>
@@ -148,7 +151,7 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="motivational"><b>Lettera motivazionale</b></label>
+		<label for="letter"><b>Lettera motivazionale</b></label>
 		<div id="mlet-explain">
 			<div class="form-text" id="mlet-explain-">
 <?= __(<<<EOT
@@ -216,13 +219,13 @@ EOT
 ); ?>
 			</div>
 		</div>
-		<textarea id="motivational" name="motivational" cols="40" rows="5" required="required" class="form-control"></textarea>
+		<textarea id="letter" name="letter" cols="40" rows="5" required="required" class="form-control"></textarea>
 	</div>
 	<div class="form-group">
 		<div>
 			<span id="checkboxesHelpBlock" class="form-text text-muted"><?= sprintf(__('Dovresti leggere le <a href="%s">Informazioni sul trattamento dei dati personali</a> e almeno dare un\'occhiata alla pagina <a href="%s">Entra nel team</a> sul nostro sito prima di candidarti.'), 'privacy.php', 'http://weeeopen.polito.it/entra-nel-team.html') ?></a></span>
 			<div class="form-check">
-				<input name="mandatorycheckbox_1" id="mandatorycheckbox_0" type="checkbox" class="form-check-input" value="read" aria-describedby="checkboxesHelpBlock" required="required">
+				<input name="mandatorycheckbox_1" id="mandatorycheckbox_0" type="checkbox" class="form-check-input" value="true" aria-describedby="checkboxesHelpBlock" required="required">
 				<label for="mandatorycheckbox_0" class="form-check-label"><?= __('Ho letto le Informazioni sul trattamento dei dati personali e accetto le condizioni lì delineate') ?></label>
 			</div>
 			<div class="form-check">
@@ -238,13 +241,13 @@ EOT
 </form>
 </div>
 <script type="text/javascript">
-	let interest = document.getElementById("interest");
+	let area = document.getElementById("area");
 	let explanations = document.getElementById('mlet-explain').children;
 	function updateHints() {
 		for(let i = 0; explanations.length > i; i++) {
 			explanations[i].classList.add('d-none');
 		}
-		let explain = document.getElementById('mlet-explain-' + interest.value.replace(/\s+/g, '-'));
+		let explain = document.getElementById('mlet-explain-' + area.value.replace(/\s+/g, '-'));
 		if(explain !== null) {
 			explain.classList.remove('d-none');
 		}

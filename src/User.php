@@ -5,7 +5,7 @@ namespace WEEEOpen\WEEEHire;
 
 
 class User {
-	public $uuid;
+	public $id;
 
 	public $name;
 	public $surname;
