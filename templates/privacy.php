@@ -1,4 +1,4 @@
-<?php $this->layout('base', ['title' => 'Informazioni sul trattamento dei dati personali']) ?>
+<?php $this->layout('base', ['title' => __('Informazioni sul trattamento dei dati personali')]) ?>
 
 <h1>Informazioni sul trattamento dei dati personali (privacy policy)</h1>
 <p>In questa pagina si descrivono le modalità e le logiche del trattamento dei dati personali degli utenti (di seguito, gli "utenti") che interagendo con il sito join.weeeopen.it (di seguito il "sito") forniscono i propri dati personali, ai sensi dell'articolo 13 del Regolamento (UE) 2016/679.</p>
