@@ -33,11 +33,87 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="cdl" class="col-md-2 col-lg-1 col-form-label"><?=__('Corso di laurea')?></label>
+		<label for="degreecourse" class="col-md-2 col-lg-1 col-form-label"><?=__('Corso di laurea')?></label>
 		<div class="col-md-7 col-lg-6">
-			<select id="cdl" name="cdl" required="required" class="form-control">
+			<select id="degreecourse" name="degreecourse" required="required" class="form-control">
+				<optgroup label="<?= __('Ingegneria (L, LM)') ?>">
 				<option value selected disabled class="d-none"></option>
-				<option value="Asd">asd</option>
+				<option value="Automotive Engineering">Automotive Engineering</option>
+				<option value="Civil Engineering">Civil Engineering</option>
+				<option value="Communications And Computer Networks Engineering">Communications And Computer Networks Engineering</option>
+				<option value="Computer Engineering">Computer Engineering</option>
+				<option value="Electronic And Communications Engineering">Electronic And Communications Engineering</option>
+				<option value="Electronic Engineering">Electronic Engineering</option>
+				<option value="Engineering And Management">Engineering And Management</option>
+				<option value="ICT For Smart Societies">ICT For Smart Societies</option>
+				<option value="Ingegneria Aerospaziale">Ingegneria Aerospaziale</option>
+				<option value="Ingegneria Biomedica">Ingegneria Biomedica</option>
+				<option value="Ingegneria Chimica E Alimentare">Ingegneria Chimica E Alimentare</option>
+				<option value="Ingegneria Chimica E Dei Processi Sostenibili">Ingegneria Chimica E Dei Processi Sostenibili</option>
+				<option value="Ingegneria Civile">Ingegneria Civile</option>
+				<option value="Ingegneria Dei Materiali">Ingegneria Dei Materiali</option>
+				<option value="Ingegneria Del Cinema E Dei Mezzi Di Comunicazione">Ingegneria Del Cinema E Dei Mezzi Di Comunicazione</option>
+				<option value="Ingegneria Dell'autoveicolo">Ingegneria Dell'autoveicolo</option>
+				<option value="Ingegneria Della Produzione Industriale">Ingegneria Della Produzione Industriale</option>
+				<option value="Ingegneria Della Produzione Industriale E Dell'innovazione Tecnologica">Ingegneria Della Produzione Industriale E Dell'innovazione Tecnologica</option>
+				<option value="Ingegneria Edile">Ingegneria Edile</option>
+				<option value="Ingegneria Elettrica">Ingegneria Elettrica</option>
+				<option value="Ingegneria Elettronica">Ingegneria Elettronica</option>
+				<option value="Ingegneria Energetica">Ingegneria Energetica</option>
+				<option value="Ingegneria Energetica E Nucleare">Ingegneria Energetica E Nucleare</option>
+				<option value="Ingegneria Fisica">Ingegneria Fisica</option>
+				<option value="Ingegneria Gestionale L-8">Ingegneria Gestionale L-8</option>
+				<option value="Ingegneria Gestionale L-9">Ingegneria Gestionale L-9</option>
+				<option value="Ingegneria Informatica">Ingegneria Informatica</option>
+				<option value="Ingegneria Matematica">Ingegneria Matematica</option>
+				<option value="Ingegneria Meccanica">Ingegneria Meccanica</option>
+				<option value="Ingegneria Per L'ambiente E Il Territorio">Ingegneria Per L'ambiente E Il Territorio</option>
+				<option value="Matematica Per L'ingegneria">Matematica Per L'ingegneria</option>
+				<option value="Mechanical Engineering">Mechanical Engineering</option>
+				<option value="Mechatronic Engineering">Mechatronic Engineering</option>
+				<option value="Nanotechnologies For Icts">Nanotechnologies For Icts</option>
+				<option value="Petroleum And Mining Engineering">Petroleum And Mining Engineering</option>
+				<option value="Physics Of Complex Systems">Physics Of Complex Systems</option>
+				</optgroup>
+				<optgroup label="<?= __('Design (L, LM)') ?>">
+					<option value="Design E Comunicazione Visiva">Design E Comunicazione Visiva</option>
+					<option value="Design Sistemico">Design Sistemico</option>
+				</optgroup>
+				<optgroup label="<?= __('Architettura e pianificazione urbanistica (L, LM)') ?>">
+					<option value="Architecture">Architecture</option>
+					<option value="Architecture Construction City">Architecture Construction City</option>
+					<option value="Architecture For The Sustainability Design">Architecture For The Sustainability Design</option>
+					<option value="Architettura">Architettura</option>
+					<option value="Architettura Costruzione Città">Architettura Costruzione Città</option>
+					<option value="Architettura Per Il Progetto Sostenibile">Architettura Per Il Progetto Sostenibile</option>
+					<option value="Architettura Per Il Restauro E Valorizzazione Del Patrimonio">Architettura Per Il Restauro E Valorizzazione Del Patrimonio</option>
+					<option value="Pianificazione Territoriale, Urbanistica E Paesaggistico-ambientale">Pianificazione Territoriale, Urbanistica E Paesaggistico-ambientale</option>
+					<option value="Progettazione Delle Aree Verdi E Del Paesaggio">Progettazione Delle Aree Verdi E Del Paesaggio</option>
+					<option value="Territorial, Urban, Environmental And Landscape Planning">Territorial, Urban, Environmental And Landscape Planning</option>
+				</optgroup>
+				<optgroup label="<?= __('Dottorato (tutti i settori)') ?>">
+					<option value="Dottorato in Ambiente E Territorio">Dottorato in Ambiente E Territorio</option>
+					<option value="Dottorato in Architettura. Storia E Progetto">Dottorato in Architettura. Storia E Progetto</option>
+					<option value="Dottorato in Beni Architettonici E Paesaggistici">Dottorato in Beni Architettonici E Paesaggistici</option>
+					<option value="Dottorato in Beni Culturali">Dottorato in Beni Culturali</option>
+					<option value="Dottorato in Bioingegneria E Scienze Medico-chirurgiche">Dottorato in Bioingegneria E Scienze Medico-chirurgiche</option>
+					<option value="Dottorato in Energetica">Dottorato in Energetica</option>
+					<option value="Dottorato in Fisica">Dottorato in Fisica</option>
+					<option value="Dottorato in Gestione, Produzione E Design">Dottorato in Gestione, Produzione E Design</option>
+					<option value="Dottorato in Ingegneria Aerospaziale">Dottorato in Ingegneria Aerospaziale</option>
+					<option value="Dottorato in Ingegneria Biomedica">Dottorato in Ingegneria Biomedica</option>
+					<option value="Dottorato in Ingegneria Chimica">Dottorato in Ingegneria Chimica</option>
+					<option value="Dottorato in Ingegneria Civile E Ambientale">Dottorato in Ingegneria Civile E Ambientale</option>
+					<option value="Dottorato in Ingegneria Elettrica, Elettronica E Delle Comunicazioni">Dottorato in Ingegneria Elettrica, Elettronica E Delle Comunicazioni</option>
+					<option value="Dottorato in Ingegneria Informatica E Dei Sistemi">Dottorato in Ingegneria Informatica E Dei Sistemi</option>
+					<option value="Dottorato in Ingegneria Meccanica">Dottorato in Ingegneria Meccanica</option>
+					<option value="Dottorato in Ingegneria Per La Gestione Delle Acque E Del Territorio">Dottorato in Ingegneria Per La Gestione Delle Acque E Del Territorio</option>
+					<option value="Dottorato in Matematica Pura E Applicata">Dottorato in Matematica Pura E Applicata</option>
+					<option value="Dottorato in Metrologia">Dottorato in Metrologia</option>
+					<option value="Dottorato in Scienza E Tecnologia Dei Materiali">Dottorato in Scienza E Tecnologia Dei Materiali</option>
+					<option value="Dottorato in Storia Dell'architettura E Dell'urbanistica">Dottorato in Storia Dell'architettura E Dell'urbanistica</option>
+					<option value="Dottorato in Urban And Regional Development">Dottorato in Urban And Regional Development</option>
+				</optgroup>
 			</select>
 		</div>
 		<label for="year" class="col-md-1 col-form-label"><?=__('Anno')?></label>
