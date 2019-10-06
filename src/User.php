@@ -9,7 +9,7 @@ class User {
 
 	public $name;
 	public $surname;
-	public $studycourse;
+	public $degreecourse;
 	public $year;
 	public $matricola;
 	public $area;
@@ -18,19 +18,19 @@ class User {
 	/**
 	 * @var $published bool Result published or not
 	 */
-	public $published;
+	public $published = false;
 	/**
 	 * @var $status bool|null Approved or rejected
 	 */
-	public $status;
+	public $status = null;
 	/**
 	 * @var $recruiter string|null Recruiter name
 	 */
-	public $recruiter;
+	public $recruiter = null;
 	/**
 	 * @var $recruitertg string|null Recruiter Telegram username (without @)
 	 */
-	public $recruitertg;
+	public $recruitertg = null;
 	/**
 	 * @var $submitted int Form submission timestamp
 	 */
