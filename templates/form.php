@@ -123,11 +123,11 @@
 		<div class="col-md-2 col-lg-4">
 			<select id="year" name="year" required="required" class="form-control" onchange="dottorandize()">
 				<option value selected disabled class="d-none"></option>
-				<option value="1° Triennale"><?=__('1° Triennale')?></option>
-				<option value="2° Triennale"><?=__('2° Triennale')?></option>
-				<option value="3° Triennale"><?=__('3° Triennale')?></option>
-				<option value="1° Magistrale"><?=__('1° Magistrale')?></option>
-				<option value="2° Magistrale"><?=__('2° Magistrale')?></option>
+				<option value="1º Triennale"><?=__('1º Triennale')?></option>
+				<option value="2º Triennale"><?=__('2º Triennale')?></option>
+				<option value="3º Triennale"><?=__('3º Triennale')?></option>
+				<option value="1º Magistrale"><?=__('1º Magistrale')?></option>
+				<option value="2º Magistrale"><?=__('2º Magistrale')?></option>
 				<option value="Dottorato"><?=__('Dottorato')?></option>
 			</select>
 		</div>
