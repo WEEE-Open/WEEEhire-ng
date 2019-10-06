@@ -117,8 +117,8 @@ class Database {
 				'name'      => $row['name'] . ' ' . $row['surname'],
 				'area'      => $row['area'],
 				'recruiter' => $row['recruiter'],
-				'published' => $row['published'],
-				'status'    => $row['status'],
+				'published' => (bool) $row['published'],
+				'status'    => $row['status'] === null ? null : (bool) $row['status'],
 				'submitted' => $row['submitted']
 			];
 		}
