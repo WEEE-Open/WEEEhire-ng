@@ -59,14 +59,14 @@ class Database {
 		$result->finalize();
 		$user = new User();
 		foreach(['id', 'name', 'surname', 'degreecourse', 'year', 'matricola', 'area', 'letter', 'published', 'status', 'recruiter', 'submitted'] as $attr) {
-			$user->{$row[$attr]} = $row[$attr];
+			$user->$attr = $row[$attr];
 		}
 		$user->published = (bool) $user->published;
 		$user->status = $user->status === null ? null : (bool) $user->status;
 		return $user;
 	}
 
-	public function validateToken(string $id, string $token): bool {
+	public function validateToken(int $id, string $token): bool {
 		$stmt = $this->db->prepare('SELECT token FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id);
 		$result = $stmt->execute();
@@ -79,8 +79,8 @@ class Database {
 		}
 	}
 
-	public function deleteUser(string $id) {
-		$stmt = $this->db->prepare('SELECT token FROM users WHERE id = :id LIMIT 1');
+	public function deleteUser(int $id) {
+		$stmt = $this->db->prepare('DELETE FROM users WHERE id = :id');
 		$stmt->bindValue(':id', $id);
 		$result = $stmt->execute();
 		if($result === false) {
