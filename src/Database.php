@@ -46,8 +46,8 @@ class Database {
 		return [$id, $token];
 	}
 
-	public function getUser(string $id): User {
-		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status, recruiter, recruitertg, submitted FROM users WHERE id = :id LIMIT 1');
+	public function getUser(string $id): ?User {
+		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status, recruiter, recruitertg, submitted, notes FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if($result === false) {
@@ -55,6 +55,9 @@ class Database {
 		}
 		$row = $result->fetchArray(SQLITE3_ASSOC);
 		$result->finalize();
+		if($row === false) {
+			return null;
+		}
 		$user = new User();
 		foreach(
 			[
@@ -70,7 +73,8 @@ class Database {
 				'status',
 				'recruiter',
 				'recruitertg',
-				'submitted'
+				'submitted',
+				'notes'
 			] as $attr
 		) {
 			$user->$attr = $row[$attr];
@@ -83,7 +87,7 @@ class Database {
 
 	public function validateToken(int $id, string $token): bool {
 		$stmt = $this->db->prepare('SELECT token FROM users WHERE id = :id LIMIT 1');
-		$stmt->bindValue(':id', $id);
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 		$result = $stmt->execute();
 		if($result instanceof SQLite3Result) {
 			$row = $result->fetchArray(SQLITE3_ASSOC);
@@ -97,7 +101,7 @@ class Database {
 
 	public function deleteUser(int $id) {
 		$stmt = $this->db->prepare('DELETE FROM users WHERE id = :id');
-		$stmt->bindValue(':id', $id);
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 		$result = $stmt->execute();
 		if($result === false) {
 			throw new DatabaseException();
@@ -120,5 +124,43 @@ class Database {
 		}
 
 		return $compact;
+	}
+
+	public function saveNotes(int $id, string $notes) {
+		$stmt = $this->db->prepare('UPDATE users SET notes = :notes WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		if($notes === '') {
+			$stmt->bindValue(':notes', null, SQLITE3_NULL);
+		} else {
+			$stmt->bindValue(':notes', $notes, SQLITE3_TEXT);
+		}
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	public function setStatus(int $id, ?bool $status) {
+		$stmt = $this->db->prepare('UPDATE users SET status = :statusp WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		if($status === null) {
+			$stmt->bindValue(':statusp', null, SQLITE3_NULL);
+		} else {
+			$stmt->bindValue(':statusp', (int) $status, SQLITE3_INTEGER);
+		}
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	public function setPublished(int $id, bool $published) {
+		$stmt = $this->db->prepare('UPDATE users SET published = :pub WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		$stmt->bindValue(':pub', (int) $published, SQLITE3_INTEGER);
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
 	}
 }

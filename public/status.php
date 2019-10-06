@@ -26,7 +26,7 @@ try {
 	if($db->validateToken($id, $_GET['token'])) {
 		$user = $db->getUser($id);
 	} else {
-		http_response_code(400);
+		http_response_code(404);
 		echo $template->render('error', ['message' => 'Invalid id or token']);
 		exit;
 	}
@@ -38,8 +38,16 @@ try {
 
 if(isset($_GET['download'])) {
 	$attributes = (array) $user;
-	$secrets = ['status', 'published', 'recruiter', 'recruitertg'];
-	$attributes = array_diff_key($attributes, array_combine($secrets, $secrets));
+	$downloadable = [
+		'name',
+		'surname',
+		'degreecourse',
+		'year',
+		'matricola',
+		'area',
+		'letter'
+	];
+	$attributes = array_intersect_key($attributes, array_combine($downloadable, $downloadable));
 
 	header('Content-Type: application/json');
 	header('Content-Transfer-Encoding: Binary');

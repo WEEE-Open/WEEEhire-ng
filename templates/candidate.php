@@ -1,8 +1,6 @@
 <?php
 /** @var $user WEEEOpen\WEEEhire\User */
 /** @var $edit bool */
-/** @var $status bool|null */
-/** @var $published bool */
 $this->layout('base', ['title' => sprintf(__('Candidatura di %s %s (%s)'), htmlspecialchars($user->name), htmlspecialchars($user->surname), htmlspecialchars($user->matricola))]);
 if(isset($edit) && $edit) {
 	$readonly = '';
@@ -10,6 +8,21 @@ if(isset($edit) && $edit) {
 	$readonly = 'readonly';
 }
 ?>
+
+<?php if($user->status === true): ?>
+<div class="alert alert-success" role="alert">
+	<?= __('Candidatura approvata') ?>
+</div>
+<?php elseif($user->status === false): ?>
+	<div class="alert alert-danger" role="alert">
+		<?= __('Candidatura rifiutata') ?>
+	</div>
+<?php endif ?>
+<?php if($user->published): ?>
+<div class="alert alert-info" role="alert">
+	<?= __('Risultati pubblicati, ti consiglio di non modificarli') ?>
+</div>
+<?php endif ?>
 
 <div class="col-md-12">
 <form method="post">
@@ -61,14 +74,15 @@ if(isset($edit) && $edit) {
 		<textarea id="notes" name="notes" cols="40" rows="3" class="form-control"><?= htmlspecialchars($user->notes) ?></textarea>
 	</div>
 	<div class="form-group text-center">
-		<?php if($published): ?>
-			<a class="btn btn-outline-secondary" href="<?= htmlspecialchars(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['mail' => 'true'])) ?>"><?=__('Modifica dati')?></a>
+		<?php if($user->published): ?>
+			<a class="btn btn-primary" href="<?= htmlspecialchars(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['mail' => 'true'])) ?>"><?=__('Manda email')?></a>
 		<?php else: ?>
-			<button name="approve" value="true" type="submit" class="btn btn-success"><?=__('Approva candidatura')?></button>
-			<button name="reject" value="true" type="submit" class="btn btn-danger"><?=__('Rifiuta candidatura')?></button>
-			<?php if($status !== null): ?>
+			<?php if($user->status !== null): ?>
 				<button name="publishnow" value="true" type="submit" class="btn btn-primary"><?=__('Pubblica')?></button>
 				<button name="limbo" value="true" type="submit" class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
+			<?php else: ?>
+				<button name="approve" value="true" type="submit" class="btn btn-success"><?=__('Approva candidatura')?></button>
+				<button name="reject" value="true" type="submit" class="btn btn-danger"><?=__('Rifiuta candidatura')?></button>
 			<?php endif ?>
 		<?php endif ?>
 		<button name="save" value="true" type="submit" class="btn btn-outline-primary"><?=__('Salva note')?></button>
