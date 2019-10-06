@@ -47,7 +47,7 @@ class Database {
 	}
 
 	public function getUser(string $id): ?User {
-		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status, recruiter, recruitertg, submitted, notes FROM users WHERE id = :id LIMIT 1');
+		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status, recruiter, recruitertg, submitted, notes, emailed, invitelink FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if($result === false) {
@@ -74,13 +74,17 @@ class Database {
 				'recruiter',
 				'recruitertg',
 				'submitted',
-				'notes'
+				'notes',
+				'emailed',
+				'invitelink'
 			] as $attr
 		) {
 			$user->$attr = $row[$attr];
 		}
 		$user->published = (bool) $user->published;
+		$user->emailed = (bool) $user->emailed;
 		$user->status = $user->status === null ? null : (bool) $user->status;
+		$user->invitelink = $user->invitelink === null ? null : $user->invitelink;
 
 		return $user;
 	}
@@ -158,6 +162,37 @@ class Database {
 		$stmt = $this->db->prepare('UPDATE users SET published = :pub WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 		$stmt->bindValue(':pub', (int) $published, SQLITE3_INTEGER);
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	public function setRecruiter(int $id, string $name, string $tgid) {
+		$stmt = $this->db->prepare('UPDATE users SET recruiter = :recruiter, recruitertg = :tgid WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		$stmt->bindValue(':recruiter', $name, SQLITE3_TEXT);
+		$stmt->bindValue(':tgid', $tgid, SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	public function setInviteLink(int $id, string $invite) {
+		$stmt = $this->db->prepare('UPDATE users SET invitelink = :invite WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		$stmt->bindValue(':invite', $invite, SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	public function setEmailed(int $id, bool $emailed) {
+		$stmt = $this->db->prepare('UPDATE users SET emailed = :emailed WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		$stmt->bindValue(':emailed', (int) $emailed, SQLITE3_INTEGER);
 		$result = $stmt->execute();
 		if($result === false) {
 			throw new DatabaseException();

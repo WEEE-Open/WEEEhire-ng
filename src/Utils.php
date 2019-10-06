@@ -26,4 +26,13 @@ class Utils {
 		$newQuery = http_build_query($query);
 		return "$url?$newQuery";
 	}
+
+	public static function politoMail(string $matricola): string {
+		$first = strtolower(substr($matricola, 0, 1));
+		if($first === 'd') {
+			return "$matricola@polito.it";
+		} else {
+			return "$matricola@studenti.polito.it";
+		}
+	}
 }

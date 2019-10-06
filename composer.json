@@ -15,6 +15,9 @@
     "willdurand/negotiation": "^2.3",
     "ext-sqlite3": "*"
   },
+  "suggest": {
+    "ext-apcu": "Caches LDAP results avoiding continuous lookups"
+  },
   "require-dev": {
     "pds/skeleton": "~1.0"
   },

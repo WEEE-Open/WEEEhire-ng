@@ -1,6 +1,7 @@
 <?php
 /** @var $user WEEEOpen\WEEEhire\User */
 /** @var $edit bool */
+/** @var $recruiters string[][] */
 $this->layout('base', ['title' => sprintf(__('Candidatura di %s %s (%s)'), htmlspecialchars($user->name), htmlspecialchars($user->surname), htmlspecialchars($user->matricola))]);
 if(isset($edit) && $edit) {
 	$readonly = '';
@@ -74,13 +75,13 @@ if(isset($edit) && $edit) {
 		<textarea id="notes" name="notes" cols="40" rows="3" class="form-control"><?= htmlspecialchars($user->notes) ?></textarea>
 	</div>
 	<div class="form-group text-center">
-		<?php if($user->published): ?>
-			<a class="btn btn-primary" href="<?= htmlspecialchars(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['mail' => 'true'])) ?>"><?=__('Manda email')?></a>
-		<?php else: ?>
+		<?php if(!$user->published): ?>
 			<?php if($user->status !== null): ?>
-				<button name="publishnow" value="true" type="submit" class="btn btn-primary"><?=__('Pubblica')?></button>
 				<button name="limbo" value="true" type="submit" class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
-			<?php else: ?>
+				<?php if($user->status === false): ?>
+					<button name="publishnow" value="true" type="submit" class="btn btn-primary"><?=__('Pubblica')?></button>
+				<?php endif ?>
+				<?php else: ?>
 				<button name="approve" value="true" type="submit" class="btn btn-success"><?=__('Approva candidatura')?></button>
 				<button name="reject" value="true" type="submit" class="btn btn-danger"><?=__('Rifiuta candidatura')?></button>
 			<?php endif ?>
@@ -89,5 +90,54 @@ if(isset($edit) && $edit) {
 		<a class="btn btn-outline-secondary" href="<?= htmlspecialchars(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => 'true'])) ?>"><?=__('Modifica dati')?></a>
 	</div>
 </form>
+<?php endif ?>
+<?php if(!$edit && !$user->emailed && $user->status === true): ?>
+	<form method="post">
+		<div class="form-group">
+			<label for="recruiter"><?= __('Recruiter') ?></label>
+			<select id="recruiter" name="recruiter" required="required" class="form-control">
+				<?php
+				$hit = false;
+				foreach($recruiters as $recruiter):
+					if($user->recruiter === $recruiter[0]):
+						$hit = true;
+					?>
+						<option value="<?= htmlspecialchars($recruiter[1]) . '|' . htmlspecialchars($recruiter[0]) ?>" selected><?= htmlspecialchars($recruiter[0]) ?> (@<?= htmlspecialchars($recruiter[1]) ?>)</option>
+					<?php else:	?>
+						<option value="<?= htmlspecialchars($recruiter[1]) . '|' . htmlspecialchars($recruiter[0]) ?>"><?= htmlspecialchars($recruiter[0]) ?> (@<?= htmlspecialchars($recruiter[1]) ?>)</option>
+					<?php endif; endforeach; ?>
+				<?php if(!$hit): ?>
+				<option disabled hidden selected class="d-none"></option>
+				<?php endif ?>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="subject"><b><?= __('Oggetto') ?></b></label>
+			<input type="text" id="subject" name="subject" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="email"><b><?= __('Email') ?></b></label>
+			<textarea id="email" name="email" cols="40" rows="6" class="form-control" required></textarea>
+		</div>
+		<div class="form-group text-center">
+			<button name="publishnow" value="true" type="submit" class="btn btn-primary"><?=__('Pubblica e manda email')?></button>
+		</div>
+	</form>
+<?php elseif($user->emailed && $user->published && $user->status === true): ?>
+	<div class="alert alert-info" role="alert">
+		<?= sprintf(__('Mail inviata da %s'), $user->recruiter); ?>
+	</div>
+<?php endif ?>
+<?php if(!$edit && $user->status === true): ?>
+	<form method="post">
+		<?php if($user->invitelink !== null): ?>
+			<div class="alert alert-info" role="alert">
+				<?= sprintf(__('Link d\'invito: %s'), $user->invitelink); ?>
+			</div>
+		<?php endif ?>
+		<div class="form-group text-center">
+			<button name="invite" value="true" type="submit" class="btn btn-primary"><?=__('Genera link d\'invito')?></button>
+		</div>
+	</form>
 <?php endif ?>
 </div>

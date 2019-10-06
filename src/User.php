@@ -20,6 +20,10 @@ class User {
 	 */
 	public $published = false;
 	/**
+	 * @var $published bool Approval mail sent
+	 */
+	public $emailed = false;
+	/**
 	 * @var $status bool|null Approved or rejected
 	 */
 	public $status = null;
@@ -35,4 +39,8 @@ class User {
 	 * @var $submitted int Form submission timestamp
 	 */
 	public $submitted;
+	/**
+	 * @var $invitelink string|null Invite link for final registration
+	 */
+	public $invitelink;
 }
