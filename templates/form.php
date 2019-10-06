@@ -124,10 +124,10 @@ EOT
 	</div>
 	<div class="form-group">
 		<div>
-			<span id="checkboxesHelpBlock" class="form-text text-muted"><?= sprintf(__('Dovresti leggere la nostra <a href="%s">Privacy Policy</a> e almeno dare un\'occhiata alla pagina <a href="%s">Entra nel team</a> sul nostro sito prima di candidarti.'), 'privacy.php', 'http://weeeopen.polito.it/entra-nel-team.html') ?></a></span>
+			<span id="checkboxesHelpBlock" class="form-text text-muted"><?= sprintf(__('Dovresti leggere le <a href="%s">Informazioni sul trattamento dei dati personali</a> e almeno dare un\'occhiata alla pagina <a href="%s">Entra nel team</a> sul nostro sito prima di candidarti.'), 'privacy.php', 'http://weeeopen.polito.it/entra-nel-team.html') ?></a></span>
 			<div class="form-check">
 				<input name="checkbox" id="checkbox_0" type="checkbox" class="form-check-input" value="read" aria-describedby="checkboxesHelpBlock" required="required">
-				<label for="checkbox_0" class="form-check-label"><?= __('Ho letto la Privacy Policy e accetto le condizioni lì delineate') ?></label>
+				<label for="checkbox_0" class="form-check-label"><?= __('Ho letto le Informazioni sul trattamento dei dati personali e accetto le condizioni lì delineate') ?></label>
 			</div>
 			<div class="form-check">
 				<input name="checkbox" id="checkbox_1" type="checkbox" aria-describedby="checkboxesHelpBlock" required="required" class="form-check-input" value="policy">
