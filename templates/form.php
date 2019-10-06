@@ -1,6 +1,26 @@
 <?php $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 
 <div class="col-md-12">
+<?php if(isset($error)): ?>
+	<div class="alert alert-danger">
+		<?php
+		switch($error) {
+			case 'form':
+				echo __('Riempi tutti i campi del form, per favore');
+				break;
+			case 'consent':
+				echo __('È necessario prestare il consenso per procedere');
+				break;
+			case 'db':
+				echo sprintf(__('Errore di connessione al database. Se il problema persiste, puoi contattarci all\'indirizzo %s'), WEEEHIRE_EMAIL_FALLBACK);
+				break;
+			default:
+				echo sprintf(__('Si è rotto qualcosa (o hai rotto qualcosa?) durante l\'invio. Puoi contattarci a %s e spiegarci cos\'è successo, se vuoi.'), WEEEHIRE_EMAIL_FALLBACK);
+				break;
+		}
+		?>
+	</div>
+<?php endif ?>
 <form method="post">
 	<div class="form-group row">
 		<label for="name" class="col-md-2 col-lg-1 col-form-label"><?= __('Nome') ?></label>
@@ -126,18 +146,18 @@ EOT
 		<div>
 			<span id="checkboxesHelpBlock" class="form-text text-muted"><?= sprintf(__('Dovresti leggere le <a href="%s">Informazioni sul trattamento dei dati personali</a> e almeno dare un\'occhiata alla pagina <a href="%s">Entra nel team</a> sul nostro sito prima di candidarti.'), 'privacy.php', 'http://weeeopen.polito.it/entra-nel-team.html') ?></a></span>
 			<div class="form-check">
-				<input name="checkbox" id="checkbox_0" type="checkbox" class="form-check-input" value="read" aria-describedby="checkboxesHelpBlock" required="required">
-				<label for="checkbox_0" class="form-check-label"><?= __('Ho letto le Informazioni sul trattamento dei dati personali e accetto le condizioni lì delineate') ?></label>
+				<input name="mandatorycheckbox_1" id="mandatorycheckbox_0" type="checkbox" class="form-check-input" value="read" aria-describedby="checkboxesHelpBlock" required="required">
+				<label for="mandatorycheckbox_0" class="form-check-label"><?= __('Ho letto le Informazioni sul trattamento dei dati personali e accetto le condizioni lì delineate') ?></label>
 			</div>
 			<div class="form-check">
-				<input name="checkbox" id="checkbox_1" type="checkbox" aria-describedby="checkboxesHelpBlock" required="required" class="form-check-input" value="policy">
-				<label for="checkbox_1" class="form-check-label"><?= __('Dichiaro che tutte le informazioni inserite sono corrette e ho dato un\'occhiata alla pagina "Entra nel team" sul sito') ?></label>
+				<input name="mandatorycheckbox_0" id="mandatorycheckbox_1" type="checkbox" class="form-check-input" value="true" aria-describedby="checkboxesHelpBlock" required="required">
+				<label for="mandatorycheckbox_1" class="form-check-label"><?= __('Dichiaro che tutte le informazioni inserite sono corrette e ho dato un\'occhiata alla pagina "Entra nel team" sul sito') ?></label>
 			</div>
 			
 		</div>
 	</div>
 	<div class="form-group">
-		<button name="submit" type="submit" class="btn btn-primary">Submit</button>
+		<button type="submit" class="btn btn-primary"><?=__('Invia')?></button>
 	</div>
 </form>
 </div>
