@@ -10,7 +10,7 @@ require '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.ph
 
 $template = Template::create();
 
-if(defined('TEST_MODE') && TEST_MODE) {
+if(defined('TEST_MODE') && !TEST_MODE) {
 	error_log('Test mode, bypassing authentication');
 } else {
 	try {
