@@ -68,7 +68,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	http_response_code(303);
 	$query = http_build_query(['id' => $id, 'token' => $token]);
 	header("Location: /status.php?$query");
-	Email::sendMail(Utils::politoMail($user->matricola), 'Reclutamento WEEE Open', $template->render('confirm_email', ['link' => WEEEHIRE_SELF_LINK . "/status.php?$query"]));
+	Email::sendMail(Utils::politoMail($user->matricola), $template->render('confirm_email', ['subject' => true]), $template->render('confirm_email', ['link' => WEEEHIRE_SELF_LINK . "/status.php?$query", 'subject' => false]));
 	exit;
 }
 

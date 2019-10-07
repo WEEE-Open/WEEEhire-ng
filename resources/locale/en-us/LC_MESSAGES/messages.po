@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-07 15:57+0200\n"
-"PO-Revision-Date: 2019-10-07 15:52+0200\n"
+"POT-Creation-Date: 2019-10-07 19:59+0200\n"
+"PO-Revision-Date: 2019-10-07 20:05+0200\n"
 "Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
 "Language-Team: Italian <>\n"
 "Language: en-us\n"
@@ -42,7 +42,7 @@ msgstr "Candidate rejected"
 
 #: templates/candidate.php:33
 msgid "Risultati pubblicati, ti consiglio di non modificarli"
-msgstr ""
+msgstr "Results already published, I suggest you don't edit them"
 
 #: templates/candidate.php:39 templates/candidates.php:9 templates/form.php:29
 msgid "Nome"
@@ -83,39 +83,39 @@ msgstr "Cancel"
 
 #: templates/candidate.php:82
 msgid "Note"
-msgstr ""
+msgstr "Notes"
 
 #: templates/candidate.php:88
 msgid "Rimanda nel limbo"
-msgstr ""
+msgstr "Send back to limbo"
 
 #: templates/candidate.php:90
 msgid "Pubblica"
-msgstr ""
+msgstr "Publish"
 
 #: templates/candidate.php:93
 msgid "Approva candidatura"
-msgstr ""
+msgstr "Approve"
 
 #: templates/candidate.php:94
 msgid "Rifiuta candidatura"
-msgstr ""
+msgstr "Reject"
 
 #: templates/candidate.php:97
 msgid "Salva note"
-msgstr ""
+msgstr "Save notes"
 
 #: templates/candidate.php:98
 msgid "Modifica dati"
-msgstr ""
+msgstr "Edit info"
 
 #: templates/candidate.php:105 templates/candidates.php:12
 msgid "Recruiter"
-msgstr ""
+msgstr "Recruiter"
 
 #: templates/candidate.php:123
 msgid "Oggetto"
-msgstr ""
+msgstr "Subject"
 
 #: templates/candidate.php:133
 msgid "Email"
@@ -123,21 +123,21 @@ msgstr "Email"
 
 #: templates/candidate.php:137
 msgid "Pubblica e manda email"
-msgstr ""
+msgstr "Publish and send email"
 
 #: templates/candidate.php:186
 #, php-format
 msgid "Mail inviata da %s"
-msgstr ""
+msgstr "Mail sent by %s"
 
 #: templates/candidate.php:193
 #, php-format
 msgid "Link d'invito: %s"
-msgstr ""
+msgstr "Invite link: %s"
 
 #: templates/candidate.php:197
 msgid "Genera link d'invito"
-msgstr ""
+msgstr "Generate an invite link"
 
 #: templates/candidates.php:11
 msgid "Inviato"
@@ -153,15 +153,44 @@ msgstr "To be decided"
 
 #: templates/candidates.php:23
 msgid "Approvata, pubblicata"
-msgstr ""
+msgstr "Approved, published"
 
 #: templates/candidates.php:23 templates/candidates.php:25
 msgid "Approvata, da pubblicare"
-msgstr ""
+msgstr "Approved, not yet published"
 
 #: templates/candidates.php:25
 msgid "Rifiutata, pubblicata"
+msgstr "Reject, not yet published"
+
+#: templates/confirm_email.php:5
+msgid "Candidatura in WEEE Open"
+msgstr "Your application to WEEE Open"
+
+#: templates/confirm_email.php:7
+#, php-format
+msgid ""
+"Ciao!\n"
+"Abbiamo ricevuto la tua candidatura per il team WEEE Open, questa è la "
+"pagina da cui potrai verificare lo stato della tua domanda:\n"
+"%s\n"
+"Se la domanda sarà approvata, riceverai un'email sempre a questo indirizzo "
+"con scritto chi contattare per passare al colloquio. Le stesse informazioni "
+"saranno visibili anche alla pagina di cui sopra.\n"
+"Buona fortuna ;)\n"
+"Il software WEEEHire per conto del team WEEE Open"
 msgstr ""
+"Hi!\n"
+"We have received your application for the WEEE Open team, this is the web"
+" page "
+"where you’ll be able to check the status of your application:\n"
+"%s\n"
+"If your application is approved, you will receive another email at this"
+" address "
+"with our contacts to to schedule an interview with someone from our team. The "
+"same information will be available at the web page linked above.\n"
+"Good luck ;)\n"
+"The WEEEHire software on behalf of WEEE Open Team"
 
 #: templates/error.php:3 templates/error.php:6
 msgid "Errore"
