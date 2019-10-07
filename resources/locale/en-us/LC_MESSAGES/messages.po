@@ -54,7 +54,7 @@ msgstr "Surname"
 
 #: templates/candidate.php:49 templates/form.php:39
 msgid "Corso di laurea"
-msgstr "Degree course"
+msgstr "Academic Program"
 
 #: templates/candidate.php:53 templates/form.php:122
 msgid "Anno"
