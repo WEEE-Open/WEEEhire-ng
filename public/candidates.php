@@ -14,7 +14,7 @@ if(defined('TEST_MODE') && TEST_MODE) {
 	error_log('Test mode, bypassing authentication');
 } else {
 	try {
-		if(Utils::sessionExpired()) {
+		if(!Utils::sessionValid()) {
 			$oidc = new OpenIDConnectClient(WEEEHIRE_OIDC_ISSUER, WEEEHIRE_OIDC_CLIENT_KEY, WEEEHIRE_OIDC_CLIENT_SECRET);
 			$oidc->setRedirectURL(WEEEHIRE_SELF_LINK . $_SERVER['REQUEST_URI']);
 			$oidc->addScope('openid');
@@ -61,7 +61,7 @@ $db = new Database();
 $ldap = new Ldap(WEEEHIRE_LDAP_URL, WEEEHIRE_LDAP_BIND_DN, WEEEHIRE_LDAP_PASSWORD, WEEEHIRE_LDAP_USERS_DN,
 	WEEEHIRE_LDAP_INVITES_DN, WEEEHIRE_LDAP_STARTTLS);
 
-if($_GET['id']) {
+if(isset($_GET['id'])) {
 	$id = (int) $_GET['id'];
 	$user = $db->getUser($id);
 

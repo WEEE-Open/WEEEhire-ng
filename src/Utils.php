@@ -36,13 +36,13 @@ class Utils {
 		}
 	}
 
-	public static function sessionExpired(): bool {
+	public static function sessionValid(): bool {
 		$valid = true;
 		session_start();
 		if(isset($_SESSION['expires'])) {
-			if($_SESSION['expires'] >= time()) {
+			if($_SESSION['expires'] <= time()) {
 				// Grace time, only once
-				if($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['expires'] >= time() + 600) {
+				if($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['expires'] <= time() + 600) {
 					// Set to 0 to avoid loops with OIDC client
 					$_SESSION['expires'] = 0;
 					$valid = true;
