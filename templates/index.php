@@ -5,8 +5,8 @@
 <div class="col-md-12 text-center">
 	<a class="btn btn-lg btn-primary the-button" href="form.php"><?= __('Inizia') ?></a>
 </div>
-<?php if($_SESSION['locale'] === 'en_US'): ?>
-	<p>Il questionario è anche disponibile <a href="language.php?l=it_IT&from=<?= rawurlencode('/form.php') ?>">in Italiano</a></p>
+<?php if($_SESSION['locale'] === 'en-us'): ?>
+	<p>Il questionario è anche disponibile <a href="language.php?l=it-it&from=<?= rawurlencode('/form.php') ?>">in Italiano</a></p>
 <?php else: ?>
-	<p>The form is also available <a href="language.php?l=en_US&from=<?= rawurlencode('/form.php') ?>">in English</a></p>
+	<p>The form is also available <a href="language.php?l=en-us&from=<?= rawurlencode('/form.php') ?>">in English</a></p>
 <?php endif ?>
