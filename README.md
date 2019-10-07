@@ -27,8 +27,8 @@ LDAP is not bypassed, however. If APCu is disabled a warning will be printed, bu
 
 ```bash
 xgettext -k__ --from-code utf-8 templates/*.php -o messages.pot
-msgmerge --update locale/en-us/LC_MESSAGES/messages.po messages.pot
-msgfmt locale/en-us/LC_MESSAGES/messages.po --output-file=locale/en-us/LC_MESSAGES/messages.mo
+msgmerge --update resources/locale/en-us/LC_MESSAGES/messages.po messages.pot
+msgfmt resources/locale/en-us/LC_MESSAGES/messages.po --output-file=resources/locale/en-us/LC_MESSAGES/messages.mo
 ```
 
 TODO

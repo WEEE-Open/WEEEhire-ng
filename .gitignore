@@ -4,4 +4,4 @@ composer.phar
 weeehire.db
 config/config.php
 resources/locale/*/LC_MESSAGES/*.mo
-./messages.po
+messages.pot

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-07 14:51+0200\n"
-"PO-Revision-Date: 2019-10-07 14:57+0200\n"
+"PO-Revision-Date: 2019-10-07 15:36+0200\n"
 "Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
 "Language-Team: Italian <>\n"
 "Language: en-us\n"
@@ -20,25 +20,25 @@ msgstr ""
 #: templates/candidate.php:5
 #, php-format
 msgid "%s %s (%s)"
-msgstr ""
+msgstr "%s %s (%s)"
 
 #: templates/candidate.php:6
 #, php-format
 msgid "Candidatura di %s"
-msgstr ""
+msgstr "%s's application"
 
 #: templates/candidate.php:17 templates/candidates.php:3
 #: templates/candidates.php:5
 msgid "Candidati"
-msgstr ""
+msgstr "Candidates"
 
 #: templates/candidate.php:24
 msgid "Candidatura approvata"
-msgstr ""
+msgstr "Candidate approved"
 
 #: templates/candidate.php:28
 msgid "Candidatura rifiutata"
-msgstr ""
+msgstr "Candidate rejected"
 
 #: templates/candidate.php:33
 msgid "Risultati pubblicati, ti consiglio di non modificarli"
@@ -46,40 +46,40 @@ msgstr ""
 
 #: templates/candidate.php:39 templates/candidates.php:9 templates/form.php:29
 msgid "Nome"
-msgstr ""
+msgstr "Name"
 
 #: templates/candidate.php:43 templates/form.php:33
 msgid "Cognome"
-msgstr ""
+msgstr "Surname"
 
 #: templates/candidate.php:49 templates/form.php:39
 msgid "Corso di laurea"
-msgstr ""
+msgstr "Degree course"
 
 #: templates/candidate.php:53 templates/form.php:122
 msgid "Anno"
-msgstr ""
+msgstr "Year"
 
 #: templates/candidate.php:59 templates/form.php:136
 msgid "Matricola"
-msgstr ""
+msgstr "Matricola"
 
 #: templates/candidate.php:63 templates/candidates.php:10
 #: templates/form.php:140
 msgid "Interesse"
-msgstr ""
+msgstr "Preference"
 
 #: templates/candidate.php:69 templates/form.php:154
 msgid "Lettera motivazionale"
-msgstr ""
+msgstr "Motivational letter"
 
 #: templates/candidate.php:74
 msgid "Aggiorna dati"
-msgstr ""
+msgstr "Update info"
 
 #: templates/candidate.php:75
 msgid "Annulla"
-msgstr ""
+msgstr "Cancel"
 
 #: templates/candidate.php:82
 msgid "Note"
@@ -119,7 +119,7 @@ msgstr ""
 
 #: templates/candidate.php:133
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: templates/candidate.php:137
 msgid "Pubblica e manda email"
@@ -141,15 +141,15 @@ msgstr ""
 
 #: templates/candidates.php:11
 msgid "Inviato"
-msgstr ""
+msgstr "Sent"
 
 #: templates/candidates.php:13
 msgid "Stato"
-msgstr ""
+msgstr "Status"
 
 #: templates/candidates.php:20
 msgid "Da decidere"
-msgstr ""
+msgstr "To be decided"
 
 #: templates/candidates.php:23
 msgid "Approvata, pubblicata"
@@ -165,19 +165,19 @@ msgstr ""
 
 #: templates/error.php:3 templates/error.php:6
 msgid "Errore"
-msgstr ""
+msgstr "Error"
 
 #: templates/form.php:1
 msgid "Compila il questionario"
-msgstr ""
+msgstr "Fill the application form"
 
 #: templates/form.php:9
 msgid "Riempi tutti i campi del form, per favore"
-msgstr ""
+msgstr "Fill the entire form, please"
 
 #: templates/form.php:12
 msgid "È necessario prestare il consenso per procedere"
-msgstr ""
+msgstr "You need to agree to the terms to proceed"
 
 #: templates/form.php:15
 #, php-format
@@ -185,12 +185,17 @@ msgid ""
 "Errore di connessione al database. Se il problema persiste, puoi contattarci "
 "all'indirizzo %s"
 msgstr ""
+"Error connecting to database. If the problem continues, you can contact "
+"us at %s"
 
 #: templates/form.php:18
 msgid ""
 "Hai già inviato una candidatura con questa matricola. Puoi controllare la "
 "pagina con lo stato dal link che ti abbiamo mandato via email."
 msgstr ""
+"You already applied with this \"matricola\". You can check the status page"
+" from "
+"the link we sent you via email."
 
 #: templates/form.php:21
 #, php-format
@@ -198,70 +203,73 @@ msgid ""
 "Si è rotto qualcosa (o hai rotto qualcosa?) durante l'invio. Puoi "
 "contattarci a %s e spiegarci cos'è successo, se vuoi."
 msgstr ""
+"Something broke (or you did broke something?) while submitting the form. You"
+" can "
+"contact us at %s and tell us what happened, if you want."
 
 #: templates/form.php:42
 msgid "Ingegneria (L, LM)"
-msgstr ""
+msgstr "Engineering (L, LM)"
 
 #: templates/form.php:81
 msgid "Design (L, LM)"
-msgstr ""
+msgstr "Design (L, LM)"
 
 #: templates/form.php:85
 msgid "Architettura e pianificazione urbanistica (L, LM)"
-msgstr ""
+msgstr "Architecture and urban planning (L, LM)"
 
 #: templates/form.php:97
 msgid "Dottorato (tutti i settori)"
-msgstr ""
+msgstr "PhD (all subjects)"
 
 #: templates/form.php:126
 msgid "1º Triennale"
-msgstr ""
+msgstr "1st Bachelor's degree"
 
 #: templates/form.php:127
 msgid "2º Triennale"
-msgstr ""
+msgstr "2nd Bachelor's degree"
 
 #: templates/form.php:128
 msgid "3º Triennale"
-msgstr ""
+msgstr "3rd Bachelor's degree"
 
 #: templates/form.php:129
 msgid "1º Magistrale"
-msgstr ""
+msgstr "1st Master's degree"
 
 #: templates/form.php:130
 msgid "2º Magistrale"
-msgstr ""
+msgstr "2nd Master's degree"
 
 #: templates/form.php:131
 msgid "Dottorato"
-msgstr ""
+msgstr "PhD"
 
 #: templates/form.php:144
 msgid "Riparazione Hardware"
-msgstr ""
+msgstr "Hardware Repairs"
 
 #: templates/form.php:145
 msgid "Elettronica"
-msgstr ""
+msgstr "Electronics"
 
 #: templates/form.php:146
 msgid "Sviluppo Software"
-msgstr ""
+msgstr "Software Development"
 
 #: templates/form.php:147
 msgid "Riuso creativo"
-msgstr ""
+msgstr "Creative Reuse"
 
 #: templates/form.php:148
 msgid "Pubbliche relazioni"
-msgstr ""
+msgstr "Public relations"
 
 #: templates/form.php:149
 msgid "Altro"
-msgstr ""
+msgstr "Other"
 
 #: templates/form.php:226
 #, php-format
@@ -270,26 +278,31 @@ msgid ""
 "personali</a> e almeno dare un'occhiata alla pagina <a href=\"%s\">Entra nel "
 "team</a> sul nostro sito prima di candidarti."
 msgstr ""
+"You should read our <a href=\"%s\">Privacy policy</a> and at least skim over"
+" the <a href=\"%s\">Join the "
+"team</a> page on our website before applying."
 
 #: templates/form.php:229
 msgid ""
 "Ho letto le Informazioni sul trattamento dei dati personali e accetto le "
 "condizioni lì delineate"
-msgstr ""
+msgstr "I read the Privacy Policy and accept its conditions"
 
 #: templates/form.php:233
 msgid ""
 "Dichiaro che tutte le informazioni inserite sono corrette e ho dato "
 "un'occhiata alla pagina \"Entra nel team\" sul sito"
 msgstr ""
+"I declare that all the inserted information are correct and that I've at"
+" least skimmed the \"Join the team\" page on the website"
 
 #: templates/form.php:239
 msgid "Invia"
-msgstr ""
+msgstr "Send"
 
 #: templates/index.php:3
 msgid "Entra in WEEE Open"
-msgstr ""
+msgstr "Join WEEE Open"
 
 #: templates/index.php:4
 msgid ""
@@ -302,19 +315,19 @@ msgstr ""
 
 #: templates/index.php:6
 msgid "Inizia"
-msgstr ""
+msgstr "Begin"
 
 #: templates/privacy.php:1
 msgid "Informazioni sul trattamento dei dati personali"
-msgstr ""
+msgstr "Privacy Policy"
 
 #: templates/status.php:3 templates/status.php:6
 msgid "Stato della richiesta"
-msgstr ""
+msgstr "Application status"
 
 #: templates/status.php:8
 msgid "Ammesso/a al colloquio"
-msgstr ""
+msgstr "Admitted to the interview"
 
 #: templates/status.php:9
 #, php-format
@@ -323,21 +336,25 @@ msgid ""
 "favore contattata %1$s (<a href=\"https://t.me/%2$s\">@%2$s</a>) su Telegram "
 "per passare al colloquio."
 msgstr ""
+"We sent you a notification email, but if you haven't received it, "
+"please contact %1$s (<a href=\"https://t.me/%2$s\">@%2$s</a>) on Telegram "
+"to schedule an interview."
 
 #: templates/status.php:11
 msgid "Domanda respinta"
-msgstr ""
+msgstr "Rejected"
 
 #: templates/status.php:13
 msgid "Valutazione in corso"
-msgstr ""
+msgstr "Evaluation in progress"
 
 #: templates/status.php:14
 msgid ""
 "Salva questa pagina nei preferiti e torna a controllare lo stato più avanti."
 msgstr ""
+"Save this page in your favorites and come back later to check the status."
 
 #: templates/status.php:20
 #, php-format
 msgid "Candidatura inviata il %1$s alle %2$s"
-msgstr ""
+msgstr "Form sent on %1$s at %2$s"
