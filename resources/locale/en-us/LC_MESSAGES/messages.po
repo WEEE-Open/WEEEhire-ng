@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-07 19:59+0200\n"
+"POT-Creation-Date: 2019-10-08 01:07+0200\n"
 "PO-Revision-Date: 2019-10-07 20:05+0200\n"
 "Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
 "Language-Team: Italian <>\n"
@@ -27,8 +27,8 @@ msgstr "%s %s (%s)"
 msgid "Candidatura di %s"
 msgstr "%s's application"
 
-#: templates/candidate.php:17 templates/candidates.php:3
-#: templates/candidates.php:5
+#: templates/candidate.php:17 templates/candidates.php:5
+#: templates/candidates.php:8
 msgid "Candidati"
 msgstr "Candidates"
 
@@ -44,7 +44,7 @@ msgstr "Candidate rejected"
 msgid "Risultati pubblicati, ti consiglio di non modificarli"
 msgstr "Results already published, I suggest you don't edit them"
 
-#: templates/candidate.php:39 templates/candidates.php:9 templates/form.php:29
+#: templates/candidate.php:39 templates/candidates.php:12 templates/form.php:29
 msgid "Nome"
 msgstr "Name"
 
@@ -64,7 +64,7 @@ msgstr "Year"
 msgid "Matricola"
 msgstr "Matricola"
 
-#: templates/candidate.php:63 templates/candidates.php:10
+#: templates/candidate.php:63 templates/candidates.php:13
 #: templates/form.php:140
 msgid "Interesse"
 msgstr "Preference"
@@ -109,7 +109,7 @@ msgstr "Save notes"
 msgid "Modifica dati"
 msgstr "Edit info"
 
-#: templates/candidate.php:105 templates/candidates.php:12
+#: templates/candidate.php:105 templates/candidates.php:15
 msgid "Recruiter"
 msgstr "Recruiter"
 
@@ -139,29 +139,70 @@ msgstr "Invite link: %s"
 msgid "Genera link d'invito"
 msgstr "Generate an invite link"
 
-#: templates/candidates.php:11
+#: templates/candidates.php:7
+#, fuzzy, php-format
+msgid "Ciao, %s (%s)"
+msgstr "%s %s (%s)"
+
+#: templates/candidates.php:14
 msgid "Inviato"
 msgstr "Sent"
 
-#: templates/candidates.php:13
+#: templates/candidates.php:16
 msgid "Stato"
 msgstr "Status"
 
-#: templates/candidates.php:20
+#: templates/candidates.php:23
 msgid "Da decidere"
 msgstr "To be decided"
 
-#: templates/candidates.php:23
+#: templates/candidates.php:26
 msgid "Approvata, pubblicata"
 msgstr "Approved, published"
 
-#: templates/candidates.php:23 templates/candidates.php:25
+#: templates/candidates.php:26
 msgid "Approvata, da pubblicare"
 msgstr "Approved, not yet published"
 
-#: templates/candidates.php:25
+#: templates/candidates.php:28
 msgid "Rifiutata, pubblicata"
-msgstr "Reject, not yet published"
+msgstr "Rejected, published"
+
+#: templates/candidates.php:28
+#, fuzzy
+msgid "Rifiutata, da pubblicare"
+msgstr "Rejected, not yet published"
+
+#: templates/candidates.php:54
+msgid "Candidates management toolbar"
+msgstr ""
+
+#: templates/candidates.php:56
+#, fuzzy
+msgid "Pubblica rifiutati"
+msgstr "Publish rejected"
+
+#: templates/candidates.php:58
+msgid "Button group to delete candidates"
+msgstr ""
+
+#: templates/candidates.php:59
+msgid "Cancella più vecchi di..."
+msgstr ""
+
+#: templates/candidates.php:60
+msgid "Cancella più vecchi di questo numero di giorni"
+msgstr ""
+
+#: templates/candidates.php:62
+#, fuzzy
+msgid "giorni"
+msgstr "Update info"
+
+#: templates/candidates.php:64
+#, fuzzy
+msgid "Solo pubblicati"
+msgstr "Approved, published"
 
 #: templates/confirm_email.php:5
 msgid "Candidatura in WEEE Open"
@@ -181,14 +222,12 @@ msgid ""
 "Il software WEEEHire per conto del team WEEE Open"
 msgstr ""
 "Hi!\n"
-"We have received your application for the WEEE Open team, this is the web"
-" page "
-"where you’ll be able to check the status of your application:\n"
+"We have received your application for the WEEE Open team, this is the web "
+"page where you’ll be able to check the status of your application:\n"
 "%s\n"
-"If your application is approved, you will receive another email at this"
-" address "
-"with our contacts to to schedule an interview with someone from our team. The "
-"same information will be available at the web page linked above.\n"
+"If your application is approved, you will receive another email at this "
+"address with our contacts to to schedule an interview with someone from our "
+"team. The same information will be available at the web page linked above.\n"
 "Good luck ;)\n"
 "The WEEEHire software on behalf of WEEE Open Team"
 
