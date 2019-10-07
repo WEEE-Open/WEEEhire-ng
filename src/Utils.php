@@ -35,4 +35,27 @@ class Utils {
 			return "$matricola@studenti.polito.it";
 		}
 	}
+
+	public static function sessionExpired(): bool {
+		$valid = true;
+		session_start();
+		if(isset($_SESSION['expires'])) {
+			if($_SESSION['expires'] >= time()) {
+				// Grace time, only once
+				if($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['expires'] >= time() + 600) {
+					// Set to 0 to avoid loops with OIDC client
+					$_SESSION['expires'] = 0;
+					$valid = true;
+				} else {
+					$_SESSION['expires'] = 0;
+					$valid = false;
+				}
+			}
+		} else {
+			$_SESSION['expires'] = 0;
+			$valid = false;
+		}
+		session_write_close();
+		return $valid;
+	}
 }
