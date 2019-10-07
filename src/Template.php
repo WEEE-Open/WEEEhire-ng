@@ -11,9 +11,9 @@ class Template {
 		Loader::loadFunctions();
 
 		_setlocale(LC_MESSAGES, self::getLocale());
-		_textdomain('weeehire');
-		_bindtextdomain('weeehire', __DIR__ . '/data/locale/');
-		_bind_textdomain_codeset('weeehire', 'UTF-8');
+		_textdomain('messages');
+		_bindtextdomain('messages', __DIR__ . DIRECTORY_SEPARATOR .  '..' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'locale');
+		//_bind_textdomain_codeset('messages', 'UTF-8');
 
 		$engine = new Engine('..' . DIRECTORY_SEPARATOR . 'templates');
 		return $engine;
@@ -35,12 +35,12 @@ class Template {
 
 	private static function getLocaleNotCached(): string {
 		if(!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-			return 'en-US';
+			return 'en-us';
 		}
 
 		$negotiator = new LanguageNegotiator();
 
-		$priorities = ['en-US', 'it-IT'];
+		$priorities = ['en-us', 'it-it'];
 
 		$bestLanguage = $negotiator->getBest($_SERVER['HTTP_ACCEPT_LANGUAGE'], $priorities);
 

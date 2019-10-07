@@ -1,0 +1,343 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# quel_tale <lvps@users.noreply.github.com>, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-07 14:51+0200\n"
+"PO-Revision-Date: 2019-10-07 14:57+0200\n"
+"Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
+"Language-Team: Italian <>\n"
+"Language: en-us\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 19.08.1\n"
+
+#: templates/candidate.php:5
+#, php-format
+msgid "%s %s (%s)"
+msgstr ""
+
+#: templates/candidate.php:6
+#, php-format
+msgid "Candidatura di %s"
+msgstr ""
+
+#: templates/candidate.php:17 templates/candidates.php:3
+#: templates/candidates.php:5
+msgid "Candidati"
+msgstr ""
+
+#: templates/candidate.php:24
+msgid "Candidatura approvata"
+msgstr ""
+
+#: templates/candidate.php:28
+msgid "Candidatura rifiutata"
+msgstr ""
+
+#: templates/candidate.php:33
+msgid "Risultati pubblicati, ti consiglio di non modificarli"
+msgstr ""
+
+#: templates/candidate.php:39 templates/candidates.php:9 templates/form.php:29
+msgid "Nome"
+msgstr ""
+
+#: templates/candidate.php:43 templates/form.php:33
+msgid "Cognome"
+msgstr ""
+
+#: templates/candidate.php:49 templates/form.php:39
+msgid "Corso di laurea"
+msgstr ""
+
+#: templates/candidate.php:53 templates/form.php:122
+msgid "Anno"
+msgstr ""
+
+#: templates/candidate.php:59 templates/form.php:136
+msgid "Matricola"
+msgstr ""
+
+#: templates/candidate.php:63 templates/candidates.php:10
+#: templates/form.php:140
+msgid "Interesse"
+msgstr ""
+
+#: templates/candidate.php:69 templates/form.php:154
+msgid "Lettera motivazionale"
+msgstr ""
+
+#: templates/candidate.php:74
+msgid "Aggiorna dati"
+msgstr ""
+
+#: templates/candidate.php:75
+msgid "Annulla"
+msgstr ""
+
+#: templates/candidate.php:82
+msgid "Note"
+msgstr ""
+
+#: templates/candidate.php:88
+msgid "Rimanda nel limbo"
+msgstr ""
+
+#: templates/candidate.php:90
+msgid "Pubblica"
+msgstr ""
+
+#: templates/candidate.php:93
+msgid "Approva candidatura"
+msgstr ""
+
+#: templates/candidate.php:94
+msgid "Rifiuta candidatura"
+msgstr ""
+
+#: templates/candidate.php:97
+msgid "Salva note"
+msgstr ""
+
+#: templates/candidate.php:98
+msgid "Modifica dati"
+msgstr ""
+
+#: templates/candidate.php:105 templates/candidates.php:12
+msgid "Recruiter"
+msgstr ""
+
+#: templates/candidate.php:123
+msgid "Oggetto"
+msgstr ""
+
+#: templates/candidate.php:133
+msgid "Email"
+msgstr ""
+
+#: templates/candidate.php:137
+msgid "Pubblica e manda email"
+msgstr ""
+
+#: templates/candidate.php:186
+#, php-format
+msgid "Mail inviata da %s"
+msgstr ""
+
+#: templates/candidate.php:193
+#, php-format
+msgid "Link d'invito: %s"
+msgstr ""
+
+#: templates/candidate.php:197
+msgid "Genera link d'invito"
+msgstr ""
+
+#: templates/candidates.php:11
+msgid "Inviato"
+msgstr ""
+
+#: templates/candidates.php:13
+msgid "Stato"
+msgstr ""
+
+#: templates/candidates.php:20
+msgid "Da decidere"
+msgstr ""
+
+#: templates/candidates.php:23
+msgid "Approvata, pubblicata"
+msgstr ""
+
+#: templates/candidates.php:23 templates/candidates.php:25
+msgid "Approvata, da pubblicare"
+msgstr ""
+
+#: templates/candidates.php:25
+msgid "Rifiutata, pubblicata"
+msgstr ""
+
+#: templates/error.php:3 templates/error.php:6
+msgid "Errore"
+msgstr ""
+
+#: templates/form.php:1
+msgid "Compila il questionario"
+msgstr ""
+
+#: templates/form.php:9
+msgid "Riempi tutti i campi del form, per favore"
+msgstr ""
+
+#: templates/form.php:12
+msgid "È necessario prestare il consenso per procedere"
+msgstr ""
+
+#: templates/form.php:15
+#, php-format
+msgid ""
+"Errore di connessione al database. Se il problema persiste, puoi contattarci "
+"all'indirizzo %s"
+msgstr ""
+
+#: templates/form.php:18
+msgid ""
+"Hai già inviato una candidatura con questa matricola. Puoi controllare la "
+"pagina con lo stato dal link che ti abbiamo mandato via email."
+msgstr ""
+
+#: templates/form.php:21
+#, php-format
+msgid ""
+"Si è rotto qualcosa (o hai rotto qualcosa?) durante l'invio. Puoi "
+"contattarci a %s e spiegarci cos'è successo, se vuoi."
+msgstr ""
+
+#: templates/form.php:42
+msgid "Ingegneria (L, LM)"
+msgstr ""
+
+#: templates/form.php:81
+msgid "Design (L, LM)"
+msgstr ""
+
+#: templates/form.php:85
+msgid "Architettura e pianificazione urbanistica (L, LM)"
+msgstr ""
+
+#: templates/form.php:97
+msgid "Dottorato (tutti i settori)"
+msgstr ""
+
+#: templates/form.php:126
+msgid "1º Triennale"
+msgstr ""
+
+#: templates/form.php:127
+msgid "2º Triennale"
+msgstr ""
+
+#: templates/form.php:128
+msgid "3º Triennale"
+msgstr ""
+
+#: templates/form.php:129
+msgid "1º Magistrale"
+msgstr ""
+
+#: templates/form.php:130
+msgid "2º Magistrale"
+msgstr ""
+
+#: templates/form.php:131
+msgid "Dottorato"
+msgstr ""
+
+#: templates/form.php:144
+msgid "Riparazione Hardware"
+msgstr ""
+
+#: templates/form.php:145
+msgid "Elettronica"
+msgstr ""
+
+#: templates/form.php:146
+msgid "Sviluppo Software"
+msgstr ""
+
+#: templates/form.php:147
+msgid "Riuso creativo"
+msgstr ""
+
+#: templates/form.php:148
+msgid "Pubbliche relazioni"
+msgstr ""
+
+#: templates/form.php:149
+msgid "Altro"
+msgstr ""
+
+#: templates/form.php:226
+#, php-format
+msgid ""
+"Dovresti leggere le <a href=\"%s\">Informazioni sul trattamento dei dati "
+"personali</a> e almeno dare un'occhiata alla pagina <a href=\"%s\">Entra nel "
+"team</a> sul nostro sito prima di candidarti."
+msgstr ""
+
+#: templates/form.php:229
+msgid ""
+"Ho letto le Informazioni sul trattamento dei dati personali e accetto le "
+"condizioni lì delineate"
+msgstr ""
+
+#: templates/form.php:233
+msgid ""
+"Dichiaro che tutte le informazioni inserite sono corrette e ho dato "
+"un'occhiata alla pagina \"Entra nel team\" sul sito"
+msgstr ""
+
+#: templates/form.php:239
+msgid "Invia"
+msgstr ""
+
+#: templates/index.php:3
+msgid "Entra in WEEE Open"
+msgstr ""
+
+#: templates/index.php:4
+msgid ""
+"Compila il questionario per fare richiesta di ammissione in team. Premi il "
+"bottone qui sotto per iniziare."
+msgstr ""
+"Fill the application form if you want to join the team. Press the button"
+" below to "
+"start."
+
+#: templates/index.php:6
+msgid "Inizia"
+msgstr ""
+
+#: templates/privacy.php:1
+msgid "Informazioni sul trattamento dei dati personali"
+msgstr ""
+
+#: templates/status.php:3 templates/status.php:6
+msgid "Stato della richiesta"
+msgstr ""
+
+#: templates/status.php:8
+msgid "Ammesso/a al colloquio"
+msgstr ""
+
+#: templates/status.php:9
+#, php-format
+msgid ""
+"Ti abbiamo mandato un'email per informarti, ma se non fosse arrivata per "
+"favore contattata %1$s (<a href=\"https://t.me/%2$s\">@%2$s</a>) su Telegram "
+"per passare al colloquio."
+msgstr ""
+
+#: templates/status.php:11
+msgid "Domanda respinta"
+msgstr ""
+
+#: templates/status.php:13
+msgid "Valutazione in corso"
+msgstr ""
+
+#: templates/status.php:14
+msgid ""
+"Salva questa pagina nei preferiti e torna a controllare lo stato più avanti."
+msgstr ""
+
+#: templates/status.php:20
+#, php-format
+msgid "Candidatura inviata il %1$s alle %2$s"
+msgstr ""

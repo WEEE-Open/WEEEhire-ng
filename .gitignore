@@ -3,3 +3,5 @@ composer.phar
 /vendor/
 weeehire.db
 config/config.php
+resources/locale/*/LC_MESSAGES/*.mo
+./messages.po
