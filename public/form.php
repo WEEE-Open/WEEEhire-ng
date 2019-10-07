@@ -32,8 +32,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 		'letter'
 	];
 	$user = new User();
-	$user->submitted = time();
-	$user->matricola = strtolower($user->matricola);
 	foreach($attrs as $attr) {
 		if(isset($_POST[$attr])) {
 			$user->$attr = $_POST[$attr];
@@ -42,6 +40,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 			echo $template->render('form', ['error' => 'form']);
 			exit;
 		}
+	}
+	$user->submitted = time();
+	$user->matricola = strtolower($user->matricola);
+	if(preg_match('#^(s|d)\d+$#', $user->matricola) !== true) {
+		http_response_code(400);
+		echo $template->render('form', ['error' => 'form']);
+		exit;
 	}
 
 	$db = new Database();
@@ -63,6 +68,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	http_response_code(303);
 	$query = http_build_query(['id' => $id, 'token' => $token]);
 	header("Location: /status.php?$query");
+	Email::sendMail(Utils::politoMail($user->matricola), 'Reclutamento WEEE Open', $template->render('confirm_email', ['link' => WEEEHIRE_SELF_LINK . "/status.php?$query"]));
+	exit;
 }
 
 echo $template->render('form');

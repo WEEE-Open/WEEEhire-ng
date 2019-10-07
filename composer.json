@@ -8,12 +8,12 @@
     "league/plates": "3.*",
     "jumbojett/openid-connect-php": "^0.8.0",
     "ext-ldap": "*",
-    "ext-ctype": "*",
     "ext-mbstring": "*",
     "ext-json": "*",
     "phpmyadmin/motranslator": "^4.0",
     "willdurand/negotiation": "^2.3",
-    "ext-sqlite3": "*"
+    "ext-sqlite3": "*",
+    "phpmailer/phpmailer": "^6.1"
   },
   "suggest": {
     "ext-apcu": "Caches LDAP results avoiding continuous lookups"
