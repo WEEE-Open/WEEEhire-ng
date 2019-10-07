@@ -16,6 +16,7 @@ class Email {
 
 		$mail = new PHPMailer(true);
 		$mail->isMail();
+		$mail->CharSet = 'utf-8';
 
 		try {
 			$mail->setFrom('noreply@join.weeeopen.it', 'WEEE Open');
