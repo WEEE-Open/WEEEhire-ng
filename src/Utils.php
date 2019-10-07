@@ -38,7 +38,9 @@ class Utils {
 
 	public static function sessionValid(): bool {
 		$valid = true;
-		session_start();
+		if(session_status() === PHP_SESSION_NONE) {
+			session_start();
+		}
 		if(isset($_SESSION['expires'])) {
 			if($_SESSION['expires'] <= time()) {
 				// Grace time, only once
