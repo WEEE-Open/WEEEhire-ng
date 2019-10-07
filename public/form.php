@@ -43,7 +43,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	}
 	$user->submitted = time();
 	$user->matricola = strtolower($user->matricola);
-	if(preg_match('#^(s|d)\d+$#', $user->matricola) !== true) {
+	if(preg_match('#^(s|d)\d+$#', $user->matricola) !== 1) {
 		http_response_code(400);
 		echo $template->render('form', ['error' => 'form']);
 		exit;

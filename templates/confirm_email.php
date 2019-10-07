@@ -1,6 +1,6 @@
 <?php
-/** @var $ling string */
-sprintf(__(<<<EOT
+/** @var $link string */
+echo sprintf(__(<<<EOT
 Ciao!
 Abbiamo ricevuto la tua candidatura per il team WEEE Open, questa è la pagina da cui potrai verificare lo stato della tua domanda:
 %s
