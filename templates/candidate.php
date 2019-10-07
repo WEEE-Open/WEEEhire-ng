@@ -125,8 +125,8 @@ if(isset($edit) && $edit) {
 				<input type="text" id="subject" name="subject" class="form-control" required>
 			</div>
 			<div class="col-md-2 text-right">
-				<button class="btn btn-outline-secondary" id="email-it-btn">it_IT</button>
-				<button class="btn btn-outline-secondary" id="email-en-btn">en_US</button>
+				<button class="btn btn-outline-secondary" id="email-it-btn">it-IT</button>
+				<button class="btn btn-outline-secondary" id="email-en-btn">en-US</button>
 			</div>
 		</div>
 		<div class="form-group">
@@ -166,7 +166,7 @@ ${name}
 Team WEEE Open
 `;
 			} else if(lang === 'en-US') {
-				subject.value = 'Interview for WEEE Open';
+				subject.value = 'Interview for WEEE Open Team';
 				mail.value = `Hi ${firstname},
 
 We are glad that you are interested in our project!

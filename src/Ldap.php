@@ -16,10 +16,17 @@ class Ldap {
 	public static $multivalued = ['memberof' => true, 'sshpublickey' => true, 'weeelabnickname' => true];
 
 	public function __construct(string $url, string $bindDn, string $password, string $usersDn, string $invitesDn, bool $startTls = true) {
+		// TODO: defer LDAP connection to the first function that requires it (it's loaded in candidates.php without id, which does not require it)
 		$this->url = $url;
 		$this->starttls = $startTls;
 		$this->usersDn = $usersDn;
 		$this->invitesDn = $invitesDn;
+
+		if(TEST_MODE) {
+			error_log('Test mode enabled, not connecting to LDAP');
+			return;
+		}
+
 		$this->ds = ldap_connect($url);
 		if(!$this->ds) {
 			throw new LdapException('Cannot connect to LDAP server');
@@ -40,6 +47,15 @@ class Ldap {
 	}
 
 	public function getRecruiters(): array {
+		if(TEST_MODE) {
+			error_log('Test mode enabled, returning sample data');
+			return [
+				['Alice', 'ali'],
+				['Bob', 'b0b'],
+				['Mario Rossi', 'test'],
+			];
+		}
+
 		if($this->apcu) {
 			$cached = false;
 			/** @noinspection PhpComposerExtensionStubsInspection */
@@ -91,7 +107,7 @@ class Ldap {
 	 */
 	public function createInvite(User $user): string {
 		$inviteCode = strtoupper(bin2hex(random_bytes(12)));
-		$result = ldap_add($this->ds, "inviteCode=$inviteCode," . $this->invitesDn, [
+		$add = [
 			'cn' => $user->name . ' ' . $user->surname, // Mandatory attribute
 			'objectclass' => [
 				'inviteCodeContainer',
@@ -105,7 +121,15 @@ class Ldap {
 			'mail' => Utils::politoMail($user->matricola),
 			'schacpersonaluniquecode' => $user->matricola,
 			'degreecourse' => $user->degreecourse
-		]);
+		];
+
+		if(TEST_MODE) {
+			error_log('Test mode enabled, not creating an invite. I would have inserted:');
+			error_log(print_r($add, true));
+			return WEEEHIRE_INVITE_LINK . $inviteCode;
+		}
+
+		$result = ldap_add($this->ds, "inviteCode=$inviteCode," . $this->invitesDn, $add);
 		if(!$result) {
 			throw new LdapException('Cannot create invite');
 		}

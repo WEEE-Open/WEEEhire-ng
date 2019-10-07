@@ -15,14 +15,16 @@ php -S [::]:8777 public
 
 Done. Browse to `[::]:8777` and have fun.
 
-You do not need to configure the SSO part, neither to configure sendmail, nor to install APCu: these are required in production only.
+You do not need to configure the SSO part, neither LDAP, neither sendmail, nor to install APCu: these are required in production only.
 
 In fact, if TEST_MODE is trues in config.php:
 
 - Emails will *not* be sent, they are printed to stderr
 - Authentication is bypassed, access `[::]:8777/candidates.php` directly
+- No LDAP connections are made, example data is returned instead
+- APCu is not used at all
 
-LDAP is not bypassed, however. If APCu is disabled a warning will be printed, but the software will still work (even in production if you're desperate).  
+APCu is optional but strongly recommended in production.  
 
 ## Translations
 
