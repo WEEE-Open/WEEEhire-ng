@@ -64,6 +64,7 @@ if(defined('TEST_MODE') && TEST_MODE) {
 		}
 	} catch(OpenIDConnectClientException $e) {
 		session_destroy();
+		error_log($e);
 		http_response_code(500);
 		echo $template->render('error', ['message' => 'Authentication failed']);
 		exit;
