@@ -57,11 +57,10 @@ class Utils {
 			$_SESSION['expires'] = 0;
 			$valid = false;
 		}
-		if(!$valid && !isset($_SESSION['previousPage'])) {
+		if(!$valid) {
 			// We're about to enter a series of redirects...
 			$_SESSION['previousPage'] = $_SERVER['REQUEST_URI'];
-		} else {
-			unset($_SESSION['previousPage']);
+			$_SESSION['needsAuth'] = true;
 		}
 		session_write_close();
 		return $valid;
