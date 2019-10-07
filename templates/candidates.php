@@ -48,3 +48,16 @@ $this->layout('base', ['title' => __('Candidati'), 'datatables' => true])
 	<?php endforeach; ?>
 	</tbody>
 </table>
+<div class="btn-toolbar" role="toolbar" aria-label="<?= __('Candidates management toolbar') ?>">
+	<div class="input-group mr-3">
+		<button type="button" disabled class="btn btn-outline-dark"><?= __('Pubblica rifiutati') ?></button>
+	</div>
+	<div class="input-group" role="group" aria-label="<?= __('Button group to delete candidates') ?>">
+		<button type="button" disabled class="btn btn-outline-danger mr-2"><?= __('Cancella più vecchi di...') ?></button>
+		<input type="number" disabled min="0" class="form-control" aria-label="<?=__('Cancella più vecchi di questo numero di giorni')?>" aria-describedby="deletecandidateshelp">
+		<div class="input-group-append mr-2">
+			<div class="input-group-text"><?=__('giorni')?></div>
+		</div>
+		<small id="deletecandidateshelp" class="form-text text-muted"><?=__('Solo pubblicati')?></small>
+	</div>
+</div>
