@@ -15,11 +15,11 @@ if(session_status() === PHP_SESSION_NONE) {
 	session_start();
 }
 
-//if(!isset($_SESSION['needsAuth']) || !$_SESSION['needsAuth']) {
-//	http_response_code(303);
-//	header('Location: /candidates.php');
-//	exit;
-//}
+if(!isset($_SESSION['needsAuth']) || !$_SESSION['needsAuth']) {
+	http_response_code(303);
+	header('Location: /candidates.php');
+	exit;
+}
 
 try {
 	$oidc = new OpenIDConnectClient(WEEEHIRE_OIDC_ISSUER, WEEEHIRE_OIDC_CLIENT_KEY, WEEEHIRE_OIDC_CLIENT_SECRET);

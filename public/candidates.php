@@ -14,9 +14,9 @@ if(defined('TEST_MODE') && TEST_MODE) {
 	if(!Utils::sessionValid()) {
 		http_response_code(303);
 		header('Location: /auth.php');
+		exit;
 	}
 }
-
 
 $db = new Database();
 $ldap = new Ldap(WEEEHIRE_LDAP_URL, WEEEHIRE_LDAP_BIND_DN, WEEEHIRE_LDAP_PASSWORD, WEEEHIRE_LDAP_USERS_DN,
@@ -113,5 +113,5 @@ if(isset($_GET['id'])) {
 	exit;
 } else {
 	$users = $db->getAllUsersForTable();
-	echo $template->render('candidates', ['users' => $users]);
+	echo $template->render('candidates', ['users' => $users, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
 }

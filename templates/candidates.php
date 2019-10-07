@@ -1,7 +1,10 @@
 <?php
 /** @var $users array */
+/** @var $myname string */
+/** @var $myuser string */
 $this->layout('base', ['title' => __('Candidati'), 'datatables' => true])
 ?>
+<small><?= sprintf(__('Ciao, %s (%s)'), $myname, $myuser) ?></small>
 <h1><?=__('Candidati')?></h1>
 <table id="candidates" class="table" data-search="true">
 	<thead class="thead-dark">
