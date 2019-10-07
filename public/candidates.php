@@ -16,7 +16,7 @@ if(defined('TEST_MODE') && TEST_MODE) {
 	try {
 		if(!Utils::sessionValid()) {
 			$oidc = new OpenIDConnectClient(WEEEHIRE_OIDC_ISSUER, WEEEHIRE_OIDC_CLIENT_KEY, WEEEHIRE_OIDC_CLIENT_SECRET);
-			$oidc->setRedirectURL(WEEEHIRE_SELF_LINK . $_SERVER['REQUEST_URI']);
+			$oidc->setRedirectURL(WEEEHIRE_SELF_LINK . 'candidate.php');
 			$oidc->addScope('openid');
 			$oidc->addScope('profile');
 			$oidc->addScope('roles');
@@ -45,7 +45,17 @@ if(defined('TEST_MODE') && TEST_MODE) {
 					break;
 				}
 			}
-			if(!$authorized) {
+
+			if($authorized) {
+				http_response_code(303);
+				if(isset($_SESSION['previousPage'])) {
+					header('Location: ' . $_SESSION['previousPage']);
+					unset($_SESSION['previousPage']);
+				} else {
+					header('Location: /candidate.php');
+				}
+				exit;
+			} else {
 				session_destroy();
 				http_response_code(403);
 				echo $template->render('error', ['message' => 'You are not authorized to view this page.']);
