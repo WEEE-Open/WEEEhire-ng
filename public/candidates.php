@@ -10,13 +10,13 @@ require '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.ph
 
 $template = Template::create();
 
-if(defined('TEST_MODE') && TEST_MODE) {
+if(defined('TEST_MODE') && !TEST_MODE) {
 	error_log('Test mode, bypassing authentication');
 } else {
 	try {
 		if(!Utils::sessionValid()) {
 			$oidc = new OpenIDConnectClient(WEEEHIRE_OIDC_ISSUER, WEEEHIRE_OIDC_CLIENT_KEY, WEEEHIRE_OIDC_CLIENT_SECRET);
-			$oidc->setRedirectURL(WEEEHIRE_SELF_LINK . 'candidates.php');
+			$oidc->setRedirectURL(WEEEHIRE_SELF_LINK . '/candidates.php');
 			$oidc->addScope('openid');
 			$oidc->addScope('profile');
 			$oidc->addScope('roles');
