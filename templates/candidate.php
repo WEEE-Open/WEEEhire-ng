@@ -2,13 +2,22 @@
 /** @var $user WEEEOpen\WEEEhire\User */
 /** @var $edit bool */
 /** @var $recruiters string[][] */
-$this->layout('base', ['title' => sprintf(__('Candidatura di %s %s (%s)'), htmlspecialchars($user->name), htmlspecialchars($user->surname), htmlspecialchars($user->matricola))]);
+$titleShort = sprintf(__('%s %s (%s)'), htmlspecialchars($user->name), htmlspecialchars($user->surname), htmlspecialchars($user->matricola));
+$title = sprintf(__('Candidatura di %s'), $titleShort);
+$this->layout('base', ['title' => $title]);
 if(isset($edit) && $edit) {
 	$readonly = '';
 } else {
 	$readonly = 'readonly';
 }
 ?>
+
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="candidates.php"><?= __('Candidati') ?></a></li>
+		<li class="breadcrumb-item active" aria-current="page"><?= $titleShort ?></li>
+	</ol>
+</nav>
 
 <?php if($user->status === true): ?>
 <div class="alert alert-success" role="alert">
@@ -25,7 +34,6 @@ if(isset($edit) && $edit) {
 </div>
 <?php endif ?>
 
-<div class="col-md-12">
 <form method="post">
 	<div class="form-group row">
 		<label for="name" class="col-md-2 col-lg-1 col-form-label"><?= __('Nome') ?></label>
@@ -111,18 +119,68 @@ if(isset($edit) && $edit) {
 				<?php endif ?>
 			</select>
 		</div>
-		<div class="form-group">
-			<label for="subject"><b><?= __('Oggetto') ?></b></label>
-			<input type="text" id="subject" name="subject" class="form-control" required>
+		<div class="form-group row">
+			<label class="col-md-2 col-lg-1 col-form-label" for="subject"><b><?=__('Oggetto')?></b></label>
+			<div class="col-md-8 col-lg-9">
+				<input type="text" id="subject" name="subject" class="form-control" required>
+			</div>
+			<div class="col-md-2 text-right">
+				<button class="btn btn-outline-secondary" id="email-it-btn">it_IT</button>
+				<button class="btn btn-outline-secondary" id="email-en-btn">en_US</button>
+			</div>
 		</div>
 		<div class="form-group">
 			<label for="email"><b><?= __('Email') ?></b></label>
-			<textarea id="email" name="email" cols="40" rows="6" class="form-control" required></textarea>
+			<textarea id="email" name="email" rows="10" class="form-control" required></textarea>
 		</div>
 		<div class="form-group text-center">
 			<button name="publishnow" value="true" type="submit" class="btn btn-primary"><?=__('Pubblica e manda email')?></button>
 		</div>
 	</form>
+	<script>
+		let recruiter = document.getElementById('recruiter');
+		let mail = document.getElementById('email');
+		let subject = document.getElementById('subject');
+		let firstname = document.getElementById('name').value;
+		let lang = 'it-IT';
+		document.getElementById('email-it-btn').addEventListener('click', (e) => {e.preventDefault(); lang = 'it-IT'; templatize();});
+		document.getElementById('email-en-btn').addEventListener('click', (e) => {e.preventDefault(); lang = 'en-US'; templatize();});
+		function templatize() {
+			if(recruiter.value === '') {
+				mail.value = '';
+				return;
+			}
+			let recruiter_split = recruiter.value.split('|', 2);
+			let name = recruiter_split[1];
+			let telegram = recruiter_split[0];
+			if(lang === 'it-IT') {
+				subject.value = 'Colloquio per Team WEEE Open';
+				mail.value = `Ciao ${firstname},
+
+Ci fa piacere il tuo interesse per il nostro progetto!
+Abbiamo valutato la tua candidatrura e ora vorremmo scambiare due parole in maniera più diretta con te, sia per discutere delle attività che potresti svolgere nel Team, sia in modo che tu possa farci domande, se vuoi.
+Poiché utilizziamo Telegram per coordinare tutte le attività del team, ti chiedo di contattarmi lì: il mio username è @${telegram}, scrivimi pure.
+
+A presto,
+${name}
+Team WEEE Open
+`;
+			} else if(lang === 'en-US') {
+				subject.value = 'Interview for WEEE Open';
+				mail.value = `Hi ${firstname},
+
+We are glad that you are interested in our project!
+We read your application and we would like to meet you in person to discuss about the activities that you could do within the Team, and to let you ask some questions if you have any.
+Since we use Telegram for all the communications between team members, I'd like you to contact me there: my username is @${telegram}.
+
+See you soon,
+${name}
+Team WEEE Open
+`;
+			}}
+		recruiter.addEventListener('change', templatize.bind(null));
+		templatize();
+	</script>
 <?php elseif($user->emailed && $user->published && $user->status === true): ?>
 	<div class="alert alert-info" role="alert">
 		<?= sprintf(__('Mail inviata da %s'), $user->recruiter); ?>
@@ -140,4 +198,3 @@ if(isset($edit) && $edit) {
 		</div>
 	</form>
 <?php endif ?>
-</div>

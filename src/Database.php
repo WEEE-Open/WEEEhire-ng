@@ -198,4 +198,20 @@ class Database {
 			throw new DatabaseException();
 		}
 	}
+
+	public function updateUser(?User $user) {
+		$stmt = $this->db->prepare('UPDATE users SET name = :namep, surname = :surname, degreecourse = :degreecourse, year = :yearp, matricola = :matricola, area = :area, letter = :letter WHERE id = :id');
+		$stmt->bindValue(':id', $user->id, SQLITE3_INTEGER);
+		$stmt->bindValue(':namep', $user->name, SQLITE3_TEXT);
+		$stmt->bindValue(':surname', $user->surname, SQLITE3_TEXT);
+		$stmt->bindValue(':degreecourse', $user->degreecourse, SQLITE3_TEXT);
+		$stmt->bindValue(':yearp', $user->year, SQLITE3_TEXT);
+		$stmt->bindValue(':matricola', $user->matricola, SQLITE3_TEXT);
+		$stmt->bindValue(':area', $user->area, SQLITE3_TEXT);
+		$stmt->bindValue(':letter', $user->letter, SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
 }

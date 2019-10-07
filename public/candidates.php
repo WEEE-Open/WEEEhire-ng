@@ -74,11 +74,21 @@ if(isset($_GET['id'])) {
 	if($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$changed = false;
 		$notes = $_POST['notes'] ?? '';
-		if(isset($_POST['save'])) {
+
+		// These HAVE to be in mutual exclusion, or you have to check $changed in "sequential" ifs
+
+		if(isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['degreecourse']) && isset($_POST['year']) && isset($_POST['matricola']) && isset($_POST['area']) && isset($_POST['letter'])) {
+			foreach(['name', 'surname', 'degreecourse', 'year', 'matricola', 'area', 'letter'] as $attr) {
+				$user->$attr = $_POST[$attr];
+			}
+			$db->updateUser($user);
+			$changed = true;
+		} elseif(isset($_POST['save'])) {
 			$db->saveNotes($id, $notes);
 			$changed = true;
 		} else {
 			if(!$user->published) {
+				// Not published, and...
 				if(isset($_POST['approve'])) {
 					$db->setStatus($id, true);
 					$db->saveNotes($id, $notes);
@@ -94,13 +104,6 @@ if(isset($_GET['id'])) {
 				} elseif($user->status === false && isset($_POST['publishnow'])) {
 					$db->setPublished($id, true);
 					$db->saveNotes($id, $notes);
-					$changed = true;
-				}
-			} else {
-				// Published, and...
-				if($user->status === true && isset($_POST['invite'])) {
-					$link = $ldap->createInvite($user);
-					$db->setInviteLink($id, $link);
 					$changed = true;
 				} elseif($user->status === true && isset($_POST['publishnow']) && !$user->emailed) {
 					$email = $_POST['email'] ?? '';
@@ -123,11 +126,16 @@ if(isset($_GET['id'])) {
 					}
 					$recruiter = explode('|', $recruiter, 2);
 					$db->setRecruiter($id, $recruiter[1], $recruiter[0]);
-
-					// TODO: send email
-
+					Email::sendMail(Utils::politoMail($user->matricola), $subject, $email);
 					$db->setEmailed($id, true);
 					$db->setPublished($id, true);
+					$changed = true;
+				}
+			} else {
+				// Published, and...
+				if($user->status === true && isset($_POST['invite'])) {
+					$link = $ldap->createInvite($user);
+					$db->setInviteLink($id, $link);
 					$changed = true;
 				}
 			}
