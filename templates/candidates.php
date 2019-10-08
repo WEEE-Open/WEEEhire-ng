@@ -28,7 +28,7 @@ $this->layout('base', ['title' => __('Candidati'), 'datatables' => true])
 				$statusCell = $user['published'] ? __('Rifiutata, pubblicata') : '<b>' . __('Rifiutata, da pubblicare') . '</b>';
 			}
 		}
-		if(!$user['published'] && $user['notes']) {
+		if($user['notes']) {
 			$statusCell .= ' 📝';
 		}
 		if($user['status'] === true) {
