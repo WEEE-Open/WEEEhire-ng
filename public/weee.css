@@ -9,25 +9,22 @@
 
 .status-waiting {
 	font-size: 2.2em;
-	height: 2.2em;
-	line-height: 2.2em;
 	border-radius: 0.2em;
+	padding: 0.5em;
 	background-color: #C7E1F3;
 }
 
 .status-approved {
 	font-size: 2.2em;
-	height: 2.2em;
-	line-height: 2.2em;
 	border-radius: 0.2em;
+	padding: 0.5em;
 	background-color: #7BFC91;
 }
 
 .status-rejected {
 	font-size: 2.2em;
-	height: 2.2em;
-	line-height: 2.2em;
 	border-radius: 0.2em;
+	padding: 0.5em;
 	background-color: #FC6464;
 }
 
