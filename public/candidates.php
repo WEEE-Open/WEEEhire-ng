@@ -18,7 +18,13 @@ if(defined('TEST_MODE') && TEST_MODE) {
 	$_SESSION['groups'] = ['Admin', 'Foo', 'Bar'];
 	$_SESSION['isAdmin'] = true;
 } else {
-	if(!Utils::sessionValid() || isset($_SESSION['isAdmin']) || !$_SESSION['isAdmin']) {
+	if(!Utils::sessionValid() || !isset($_SESSION['isAdmin']) || !$_SESSION['isAdmin']) {
+		if(session_status() === PHP_SESSION_NONE) {
+			// We need to write
+			session_start();
+		}
+		$_SESSION['previousPage'] = $_SERVER['REQUEST_URI'];
+		$_SESSION['needsAuth'] = true;
 		http_response_code(303);
 		header('Location: /auth.php');
 		exit;

@@ -40,6 +40,8 @@ class Utils {
 		$valid = true;
 		if(session_status() === PHP_SESSION_NONE) {
 			session_start();
+			// Just read the contents
+			session_write_close();
 		}
 		if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] && isset($_SESSION['expires'])) {
 			if($_SESSION['expires'] <= time()) {
@@ -57,12 +59,6 @@ class Utils {
 			$_SESSION['expires'] = 0;
 			$valid = false;
 		}
-		if(!$valid) {
-			// We're about to enter a series of redirects...
-			$_SESSION['previousPage'] = $_SERVER['REQUEST_URI'];
-			$_SESSION['needsAuth'] = true;
-		}
-		session_write_close();
 		return $valid;
 	}
 }
