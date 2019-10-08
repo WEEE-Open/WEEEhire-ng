@@ -41,7 +41,7 @@ class Utils {
 		if(session_status() === PHP_SESSION_NONE) {
 			session_start();
 		}
-		if(isset($_SESSION['expires'])) {
+		if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] && isset($_SESSION['expires'])) {
 			if($_SESSION['expires'] <= time()) {
 				// Grace time, only once
 				if($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['expires'] <= time() + 600) {

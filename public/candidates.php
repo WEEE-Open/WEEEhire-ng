@@ -16,8 +16,9 @@ if(defined('TEST_MODE') && TEST_MODE) {
 	$_SESSION['uid'] = 'test.test';
 	$_SESSION['cn'] = 'Test Administrator';
 	$_SESSION['groups'] = ['Admin', 'Foo', 'Bar'];
+	$_SESSION['isAdmin'] = true;
 } else {
-	if(!Utils::sessionValid()) {
+	if(!Utils::sessionValid() || isset($_SESSION['isAdmin']) || !$_SESSION['isAdmin']) {
 		http_response_code(303);
 		header('Location: /auth.php');
 		exit;

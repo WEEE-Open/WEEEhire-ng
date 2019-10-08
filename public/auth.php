@@ -42,15 +42,17 @@ try {
 	$_SESSION['expires'] = $exp;
 	$_SESSION['refresh_token'] = $refresh_token;
 	$_SESSION['id_token'] = $id_token;
+	$_SESSION['isAdmin'] = true;
 	$authorized = false;
 	foreach(WEEEHIRE_OIDC_ALLOWED_GROUPS as $group) {
-		if(in_array($group, $groups)) {
+		if(in_array($group, $groups, true)) {
 			$authorized = true;
 			break;
 		}
 	}
 
 	if($authorized) {
+		$_SESSION['isAdmin'] = true;
 		http_response_code(303);
 		if(isset($_SESSION['previousPage'])) {
 			header('Location: ' . $_SESSION['previousPage']);
@@ -58,6 +60,7 @@ try {
 			header('Location: /candidates.php');
 		}
 	} else {
+		$_SESSION['isAdmin'] = false;
 		http_response_code(403);
 		echo $template->render('error', ['message' => 'You are not authorized to view this page.']);
 	}
