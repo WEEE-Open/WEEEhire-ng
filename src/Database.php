@@ -113,7 +113,7 @@ class Database {
 	}
 
 	public function getAllUsersForTable() {
-		$result = $this->db->query('SELECT id, name, surname, area, recruiter, published, status, submitted FROM users');
+		$result = $this->db->query('SELECT id, name, surname, area, recruiter, published, status, submitted, IFNULL(LENGTH(notes), 0) as nullnotes FROM users');
 		$compact = [];
 		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			$compact[] = [
@@ -121,6 +121,7 @@ class Database {
 				'name'      => $row['name'] . ' ' . $row['surname'],
 				'area'      => $row['area'],
 				'recruiter' => $row['recruiter'],
+				'notes'     => !(bool) $row['nullnotes'],
 				'published' => (bool) $row['published'],
 				'status'    => $row['status'] === null ? null : (bool) $row['status'],
 				'submitted' => $row['submitted']

@@ -28,6 +28,9 @@ $this->layout('base', ['title' => __('Candidati'), 'datatables' => true])
 				$statusCell = $user['published'] ? __('Rifiutata, pubblicata') : '<b>' . __('Rifiutata, da pubblicare') . '</b>';
 			}
 		}
+		if(!$user['published'] && $user['notes']) {
+			$statusCell .= ' 📝';
+		}
 		if($user['status'] === true) {
 			$tdcolor = 'class="table-success"';
 		} elseif($user['status'] === false) {
