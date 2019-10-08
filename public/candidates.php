@@ -10,6 +10,12 @@ $template = Template::create();
 
 if(defined('TEST_MODE') && TEST_MODE) {
 	error_log('Test mode, bypassing authentication');
+	if(session_status() === PHP_SESSION_NONE) {
+		session_start();
+	}
+	$_SESSION['uid'] = 'test.test';
+	$_SESSION['cn'] = 'Test Administrator';
+	$_SESSION['groups'] = ['Admin', 'Foo', 'Bar'];
 } else {
 	if(!Utils::sessionValid()) {
 		http_response_code(303);
@@ -51,15 +57,15 @@ if(isset($_GET['id'])) {
 			if(!$user->published) {
 				// Not published, and...
 				if(isset($_POST['approve'])) {
-					$db->setStatus($id, true);
+					$db->setStatus($id, true, $_SESSION['cn'] ?? null);
 					$db->saveNotes($id, $notes);
 					$changed = true;
 				} elseif(isset($_POST['reject'])) {
-					$db->setStatus($id, false);
+					$db->setStatus($id, false, $_SESSION['cn'] ?? null);
 					$db->saveNotes($id, $notes);
 					$changed = true;
 				} elseif($user->status !== null && isset($_POST['limbo'])) {
-					$db->setStatus($id, null);
+					$db->setStatus($id, null, null);
 					$db->saveNotes($id, $notes);
 					$changed = true;
 				} elseif($user->status === false && isset($_POST['publishnow'])) {

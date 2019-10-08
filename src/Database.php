@@ -144,13 +144,18 @@ class Database {
 		}
 	}
 
-	public function setStatus(int $id, ?bool $status) {
-		$stmt = $this->db->prepare('UPDATE users SET status = :statusp WHERE id = :id');
+	public function setStatus(int $id, ?bool $status, ?string $recruiter) {
+		$stmt = $this->db->prepare('UPDATE users SET status = :statusp, recruiter = :recruiter WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 		if($status === null) {
 			$stmt->bindValue(':statusp', null, SQLITE3_NULL);
 		} else {
 			$stmt->bindValue(':statusp', (int) $status, SQLITE3_INTEGER);
+		}
+		if($recruiter === null) {
+			$stmt->bindValue(':recruiter', null, SQLITE3_NULL);
+		} else {
+			$stmt->bindValue(':recruiter', $recruiter, SQLITE3_TEXT);
 		}
 		$result = $stmt->execute();
 		if($result === false) {
