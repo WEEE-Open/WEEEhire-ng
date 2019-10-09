@@ -68,7 +68,7 @@ $published = 0;
 	<?php endforeach; ?>
 	</tbody>
 </table>
-<div class="btn-toolbar" role="toolbar" aria-label="<?= __('Barra di gestione candidati') ?>">
+<div class="btn-toolbar mt-3" role="toolbar" aria-label="<?= __('Barra di gestione candidati') ?>">
 	<form method="post">
 		<div class="form-row">
 			<div class="input-group mr-2">
