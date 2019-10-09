@@ -158,7 +158,7 @@ if(isset($edit) && $edit) {
 				mail.value = `Ciao ${firstname},
 
 Ci fa piacere il tuo interesse per il nostro progetto!
-Abbiamo valutato la tua candidatrura e ora vorremmo scambiare due parole in maniera più diretta con te, sia per discutere delle attività che potresti svolgere nel Team, sia in modo che tu possa farci domande, se vuoi.
+Abbiamo valutato la tua candidatura e ora vorremmo scambiare due parole in maniera più diretta con te, sia per discutere delle attività che potresti svolgere nel Team, sia in modo che tu possa farci domande, se vuoi.
 Poiché utilizziamo Telegram per coordinare tutte le attività del team, ti chiedo di contattarmi lì: il mio username è @${telegram}, scrivimi pure.
 
 A presto,
