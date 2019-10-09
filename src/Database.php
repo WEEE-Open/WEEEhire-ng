@@ -113,7 +113,7 @@ class Database {
 	}
 
 	public function getAllUsersForTable() {
-		$result = $this->db->query('SELECT id, name, surname, area, recruiter, published, status, submitted, IFNULL(LENGTH(notes), 0) as notesl FROM users');
+		$result = $this->db->query('SELECT id, name, surname, area, recruiter, published, status, submitted, IFNULL(LENGTH(notes), 0) as notesl FROM users ORDER BY submitted DESC');
 		$compact = [];
 		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			$compact[] = [
