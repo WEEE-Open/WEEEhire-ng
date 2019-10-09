@@ -52,8 +52,10 @@ $published = 0;
 			$published++;
 			$trcolor = $tdcolor;
 		} else {
+			if($user['status'] !== null) {
+				$topublish++;
+			}
 			$trcolor = '';
-			$topublish++;
 		}
 		?>
 		<tr <?= $trcolor ?>>
