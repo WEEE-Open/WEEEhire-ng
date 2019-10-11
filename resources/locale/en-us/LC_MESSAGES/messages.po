@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-09 15:01+0200\n"
-"PO-Revision-Date: 2019-10-09 15:04+0200\n"
+"POT-Creation-Date: 2019-10-11 23:41+0200\n"
+"PO-Revision-Date: 2019-10-11 23:44+0200\n"
 "Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
 "Language-Team: Italian <>\n"
 "Language: en-us\n"
@@ -125,17 +125,17 @@ msgstr "Email"
 msgid "Pubblica e manda email"
 msgstr "Publish and send email"
 
-#: templates/candidate.php:186
+#: templates/candidate.php:188
 #, php-format
 msgid "Mail inviata da %s"
 msgstr "Mail sent by %s"
 
-#: templates/candidate.php:193
+#: templates/candidate.php:195
 #, php-format
 msgid "Link d'invito: %s"
 msgstr "Invite link: %s"
 
-#: templates/candidate.php:197
+#: templates/candidate.php:199
 msgid "Genera link d'invito"
 msgstr "Generate an invite link"
 
@@ -172,70 +172,54 @@ msgstr "Rejected, published"
 msgid "Rifiutata, da pubblicare"
 msgstr "Rejected, not yet published"
 
-#: templates/candidates.php:69
-msgid "Barra di gestione candidati"
-msgstr "Candidates management toolbar"
-
-#: templates/candidates.php:73
+#: templates/candidates.php:75
 msgid "Pubblica rifiutati"
 msgstr "Publish rejected"
 
-#: templates/candidates.php:75
-msgid "Gruppo di bottoni per pubblicare risultati e cancellare candidature"
-msgstr "Button group to publish and delete candidates"
-
-#: templates/candidates.php:76
-msgid "Cancella più vecchi di..."
-msgstr "Delete older than..."
-
-#: templates/candidates.php:77
-msgid "Cancella più vecchi di questo numero di giorni"
-msgstr "Delete older than n days"
-
-#: templates/candidates.php:79
-msgid "giorni"
-msgstr "days"
-
-#: templates/candidates.php:81
-msgid "Solo pubblicati"
-msgstr "Published only"
+#: templates/candidates.php:86
+msgid "Cancella"
+msgstr "Delete"
 
 #: templates/candidates.php:87
+msgid "Cancella candidati più vecchi di tot giorni (solo pubblicati)"
+msgstr "Delete older than n days (published only)"
+
+#: templates/candidates.php:92
 #, php-format
-msgid "%d candidato"
+msgid "%d candidato in totale"
 msgid_plural "%d candidati totali"
 msgstr[0] "%d candidate"
 msgstr[1] "%d candidates"
 
-#: templates/candidates.php:88
+#: templates/candidates.php:93
 #, php-format
 msgid "%d da valutare"
 msgid_plural "%d da valutare"
 msgstr[0] "%d to be decided"
 msgstr[1] "%d to be decided"
 
-#: templates/candidates.php:89
+#: templates/candidates.php:94
 #, php-format
 msgid "%d approvato"
 msgid_plural "%d approvati"
 msgstr[0] "%d approved"
 msgstr[1] "%d approved"
 
-#: templates/candidates.php:90
+#: templates/candidates.php:95
 #, php-format
 msgid "%d rifiutato"
 msgid_plural "%d rifiutati"
 msgstr[0] "%d rejected"
 msgstr[1] "%d rejected"
 
-#: templates/candidates.php:91
+#: templates/candidates.php:96
 #, php-format
 msgid "%d da pubblicare"
 msgid_plural "%d da pubblicare"
 msgstr[0] "%d to be published"
 msgstr[1] "%d to be published"
 
-#: templates/candidates.php:92
+#: templates/candidates.php:97
 #, php-format
 msgid "%d pubblicato"
 msgid_plural "%d pubblicati"
@@ -649,3 +633,9 @@ msgstr "Download all my data"
 #: templates/status.php:28
 msgid "Visto come siamo GDPR-compliant?"
 msgstr "We're very GDPR-compliant, aren't we?"
+
+#~ msgid "Cancella più vecchi di..."
+#~ msgstr "Delete older than..."
+
+#~ msgid "Solo pubblicati"
+#~ msgstr "Published only"
