@@ -125,6 +125,22 @@ if(isset($_GET['id'])) {
 	echo $template->render('candidate', ['user' => $user, 'edit' => isset($_GET['edit']), 'recruiters' => $ldap->getRecruiters()]);
 	exit;
 } else {
+	if($_SERVER['REQUEST_METHOD'] === 'POST') {
+		if(isset($_POST['publishallrejected'])) {
+			$db->publishRejected();
+			http_response_code(303);
+			header('Location: /auth.php');
+		} elseif(isset($_POST['deleteolderthan']) && isset($_POST['days'])) {
+			$days = (int) $_POST['days'];
+			if($days <= 0) {
+				$days = 0;
+			}
+			$db->deleteOlderThan($days);
+			http_response_code(303);
+			header('Location: /auth.php');
+		}
+	}
+
 	$users = $db->getAllUsersForTable();
 	echo $template->render('candidates', ['users' => $users, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
 }

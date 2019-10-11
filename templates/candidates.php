@@ -68,25 +68,28 @@ $published = 0;
 	<?php endforeach; ?>
 	</tbody>
 </table>
-<div class="btn-toolbar mt-3" role="toolbar" aria-label="<?= __('Barra di gestione candidati') ?>">
-	<form method="post">
-		<div class="form-row">
-			<div class="input-group mr-2">
-				<button type="button" disabled class="btn btn-outline-dark"><?= __('Pubblica rifiutati') ?></button>
-			</div>
-			<div class="input-group" role="group" aria-label="<?= __('Gruppo di bottoni per pubblicare risultati e cancellare candidature') ?>">
-				<button type="button" disabled class="btn btn-outline-danger mr-2"><?= __('Cancella più vecchi di...') ?></button>
-				<input type="number" disabled min="0" class="form-control" aria-label="<?=__('Cancella più vecchi di questo numero di giorni')?>" aria-describedby="deletecandidateshelp">
-				<div class="input-group-append mr-2">
-					<div class="input-group-text"><?=__('giorni')?></div>
-				</div>
-				<small id="deletecandidateshelp" class="form-text text-muted"><?=__('Solo pubblicati')?></small>
-			</div>
+
+<form method="post">
+	<div class="form-row mt-3">
+		<div class="form-group col-md-2">
+			<button type="submit" value="true" name="publishallrejected" class="btn btn-outline-dark"><?= __('Pubblica rifiutati') ?></button>
 		</div>
-	</form>
-</div>
+	</div>
+</form>
+
+<form method="post">
+	<div class="form-row">
+		<div class="form-group col-md-2">
+			<input name="days" id="deleteolderthandays" type="number" min="0" value="30" class="form-control" required>
+		</div>
+		<div class="form-group col-md-10">
+			<button type="submit" value="true" name="deleteolderthan" class="btn btn-outline-danger mr-2"><?= __('Cancella') ?></button>
+			<label for="deleteolderthandays"><?=__('Cancella candidati più vecchi di tot giorni (solo pubblicati)')?></label>
+		</div>
+	</div>
+</form>
 <ul class="list-group mt-3">
-	<li class="list-group-item"><?= sprintf(_ngettext('%d candidato', '%d candidati totali', $total), $total); ?></li>
+	<li class="list-group-item"><?= sprintf(_ngettext('%d candidato in totale', '%d candidati totali', $total), $total); ?></li>
 	<li class="list-group-item list-group-item-primary"><?= sprintf(_ngettext('%d da valutare', '%d da valutare', $tobe), $tobe); ?></li>
 	<li class="list-group-item list-group-item-success"><?= sprintf(_ngettext('%d approvato', '%d approvati', $approved), $approved); ?></li>
 	<li class="list-group-item list-group-item-danger"><?= sprintf(_ngettext('%d rifiutato', '%d rifiutati', $rejected), $rejected); ?></li>

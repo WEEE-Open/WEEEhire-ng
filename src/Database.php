@@ -220,4 +220,20 @@ class Database {
 			throw new DatabaseException();
 		}
 	}
+
+	public function publishRejected() {
+		$result = $this->db->query('UPDATE users SET published = 1 WHERE status = 0');
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	public function deleteOlderThan(int $days) {
+		$stmt = $this->db->prepare("DELETE FROM users WHERE published = 1 AND strftime('%s','now') - submitted >= :diff");
+		$stmt->bindValue(':diff', $days * 24 * 60 * 60, SQLITE3_INTEGER);
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
 }
