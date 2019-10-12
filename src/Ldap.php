@@ -16,7 +16,6 @@ class Ldap {
 	public static $multivalued = ['memberof' => true, 'sshpublickey' => true, 'weeelabnickname' => true];
 
 	public function __construct(string $url, string $bindDn, string $password, string $usersDn, string $invitesDn, bool $startTls = true) {
-		// TODO: defer LDAP connection to the first function that requires it (it's loaded in candidates.php without id, which does not require it)
 		$this->url = $url;
 		$this->starttls = $startTls;
 		$this->usersDn = $usersDn;
@@ -39,10 +38,8 @@ class Ldap {
 		if(!ldap_bind($this->ds, $bindDn, $password)) {
 			throw new LdapException('Bind with LDAP server failed');
 		}
-		if(extension_loaded('apcu') && ini_get('apcu.enabled')) {
+		if(Utils::hasApcu()) {
 			$this->apcu = true;
-		} else {
-			error_log('APCu is not enabled, please enable it, I beg you!');
 		}
 	}
 
