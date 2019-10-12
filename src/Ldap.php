@@ -7,7 +7,8 @@ namespace WEEEOpen\WEEEHire;
 use Exception;
 
 class Ldap {
-	protected $ds;
+	protected $bindDn;
+	protected $password;
 	protected $usersDn;
 	protected $invitesDn;
 	protected $url;
@@ -17,27 +18,12 @@ class Ldap {
 
 	public function __construct(string $url, string $bindDn, string $password, string $usersDn, string $invitesDn, bool $startTls = true) {
 		$this->url = $url;
+		$this->bindDn = $bindDn;
+		$this->password = $password;
 		$this->starttls = $startTls;
 		$this->usersDn = $usersDn;
 		$this->invitesDn = $invitesDn;
 
-		if(TEST_MODE) {
-			error_log('Test mode enabled, not connecting to LDAP');
-			return;
-		}
-
-		$this->ds = ldap_connect($url);
-		if(!$this->ds) {
-			throw new LdapException('Cannot connect to LDAP server');
-		}
-		if($startTls) {
-			if(!ldap_start_tls($this->ds)) {
-				throw new LdapException('Cannot STARTTLS with LDAP server');
-			}
-		}
-		if(!ldap_bind($this->ds, $bindDn, $password)) {
-			throw new LdapException('Bind with LDAP server failed');
-		}
 		if(Utils::hasApcu()) {
 			$this->apcu = true;
 		}
@@ -63,16 +49,17 @@ class Ldap {
 			}
 		}
 
-		$sr = ldap_search($this->ds, $this->usersDn, WEEEHIRE_LDAP_SHOW_USERS_FILTER, ['cn', 'telegramnickname']);
+		$ds = $this->connect();
+		$sr = ldap_search($ds, $this->usersDn, WEEEHIRE_LDAP_SHOW_USERS_FILTER, ['cn', 'telegramnickname']);
 		if(!$sr) {
 			throw new LdapException('Cannot search recruiters');
 		}
-		$count = ldap_count_entries($this->ds, $sr);
+		$count = ldap_count_entries($ds, $sr);
 		if($count === 0) {
 			return [];
 		} else {
 			$recruiters = [];
-			$entries = ldap_get_entries($this->ds, $sr);
+			$entries = ldap_get_entries($ds, $sr);
 			unset($entries['count']);
 			foreach($entries as $entry) {
 				if(isset($entry['cn'])) {
@@ -125,8 +112,9 @@ class Ldap {
 			error_log(print_r($add, true));
 			return WEEEHIRE_INVITE_LINK . $inviteCode;
 		}
-
-		$result = ldap_add($this->ds, "inviteCode=$inviteCode," . $this->invitesDn, $add);
+		
+		$ds = $this->connect();
+		$result = ldap_add($ds, "inviteCode=$inviteCode," . $this->invitesDn, $add);
 		if(!$result) {
 			throw new LdapException('Cannot create invite');
 		}
@@ -144,6 +132,28 @@ class Ldap {
 			}
 		}
 		return $things;
+	}
+
+
+	private function connect() {
+		if(TEST_MODE) {
+			error_log('Test mode enabled, not connecting to LDAP');
+			return null;
+		}
+
+		$ds = ldap_connect($this->url);
+		if(!$ds) {
+			throw new LdapException('Cannot connect to LDAP server');
+		}
+		if($this->starttls) {
+			if(!ldap_start_tls($ds)) {
+				throw new LdapException('Cannot STARTTLS with LDAP server');
+			}
+		}
+		if(!ldap_bind($ds, $this->bindDn, $this->password)) {
+			throw new LdapException('Bind with LDAP server failed');
+		}
+		return $ds;
 	}
 
 }
