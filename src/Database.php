@@ -241,7 +241,7 @@ class Database {
 
 
 	public function getInterview(string $id): ?Interview {
-		$stmt = $this->db->prepare('SELECT interview, interviewer, interviewertg, questions, answers, interviewstatus FROM users WHERE id = :id LIMIT 1');
+		$stmt = $this->db->prepare('SELECT interview, interviewer, interviewertg, notes AS questions, answers, interviewstatus FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if($result === false) {
@@ -284,7 +284,7 @@ class Database {
 	}
 
 	public function setInterviewData(int $id, ?string $questions, ?string $answers) {
-		$stmt = $this->db->prepare('UPDATE users SET questions = :q, answers = :a WHERE id = :id');
+		$stmt = $this->db->prepare('UPDATE users SET notes = :q, answers = :a WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 		$stmt->bindValue(':q', $questions, $questions === null ? SQLITE3_NULL : SQLITE3_TEXT);
 		$stmt->bindValue(':a', $answers, $answers === null ? SQLITE3_NULL : SQLITE3_TEXT);
@@ -311,7 +311,7 @@ class Database {
 
 	public function getAllInterviewsForTable() {
 		$dtz = new DateTimeZone('Europe/Rome');
-		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, interviewstatus, IFNULL(LENGTH(questions), 0) as ql, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname ASC, name ASC');
+		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, interviewstatus, IFNULL(LENGTH(notes), 0) as ql, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname ASC, name ASC');
 		$compact = [];
 		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			if($row['interview'] === null) {

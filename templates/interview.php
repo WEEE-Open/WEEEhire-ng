@@ -81,15 +81,15 @@ $this->layout('base', ['title' => $title]);
 	</div>
 	<form method="post">
 		<div class="form-group">
-			<label for="questions"><?= __('Domande per il colloquio') ?></label>
+			<label for="questions"><?= __('Note e domande per il colloquio') ?></label>
 			<textarea id="questions" name="questions" cols="40" rows="5" class="form-control"><?= htmlspecialchars($interview->questions) ?></textarea>
 		</div>
 		<div class="form-group">
-			<label for="answers"><?= __('Risposte date e commenti vari post-colloquio') ?></label>
+			<label for="answers"><?= __('Risposte e commenti vari post-colloquio') ?></label>
 			<textarea id="answers" name="answers" cols="40" rows="10" class="form-control"><?= htmlspecialchars($interview->answers) ?></textarea>
 		</div>
 		<div class="form-group text-center">
-		<?php if($interview->status === null): ?>
+		<?php if($interview->status === null && $interview->recruiter !== null && $interview->when !== null): ?>
 			<button name="approve" value="true" type="submit" class="btn btn-success"><?=__('Colloquio passato')?></button>
 			<button name="reject" value="true" type="submit" class="btn btn-danger"><?=__('Colloquio fallito')?></button>
 		<?php else: ?>
