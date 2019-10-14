@@ -1,5 +1,5 @@
 <?php
-/** @var $interviews array */
+/** @var $interviews \DateTime[][]|string[][] */
 /** @var $myname string */
 /** @var $myuser string */
 $this->layout('base', ['title' => __('Candidati')]);
@@ -10,6 +10,7 @@ $toschedule = 0;
 $scheduled = 0;
 $invited = 0;
 $toinvite = 0;
+
 $later = [];
 $prevdate = null;
 ?>
@@ -74,7 +75,7 @@ $prevdate = null;
 			$invited++;
 			$trcolor = $tdcolor;
 		} else {
-			if($int['interviewstatus'] !== null) {
+			if($int['interviewstatus'] === true) {
 				$toinvite++;
 			}
 			$trcolor = '';
@@ -84,7 +85,7 @@ $prevdate = null;
 			$prevdate = $date;
 			?>
 			<tr class="table-secondary">
-				<td colspan="5"><?= sprintf(__('Giorno %s'), $date) ?></td>
+				<td colspan="5"><?= sprintf(__('Giorno %s (%s)'), $date, $this->fetch('day', ['day' => $int['when']->format('N')])) ?></td>
 			</tr>
 			<?php
 		}
@@ -120,11 +121,12 @@ $prevdate = null;
 </tbody>
 </table>
 
-<!--<ul class="list-group mt-3">-->
-<!--	<li class="list-group-item">--><?//= sprintf(_ngettext('%d candidato in totale', '%d candidati totali', $total), $total); ?><!--</li>-->
-<!--	<li class="list-group-item list-group-item-primary">--><?//= sprintf(_ngettext('%d da valutare', '%d da valutare', $tobe), $tobe); ?><!--</li>-->
-<!--	<li class="list-group-item list-group-item-success">--><?//= sprintf(_ngettext('%d approvato', '%d approvati', $approved), $approved); ?><!--</li>-->
-<!--	<li class="list-group-item list-group-item-danger">--><?//= sprintf(_ngettext('%d rifiutato', '%d rifiutati', $rejected), $rejected); ?><!--</li>-->
-<!--	<li class="list-group-item">--><?//= sprintf(_ngettext('%d da pubblicare', '%d da pubblicare', $topublish), $topublish); ?><!--</li>-->
-<!--	<li class="list-group-item">--><?//= sprintf(_ngettext('%d pubblicato', '%d pubblicati', $published), $published); ?><!--</li>-->
-<!--</ul>-->
+<ul class="list-group mt-3">
+	<li class="list-group-item"><?= sprintf(_ngettext('%d candidato per il colloquio', '%d candidati per i colloqui', $total), $total); ?></li>
+	<li class="list-group-item list-group-item-primary"><?= sprintf(_ngettext('%d da fissare', '%d da fissare', $toschedule), $toschedule); ?></li>
+	<li class="list-group-item"><?= sprintf(_ngettext('%d colloquio fissato', '%d colloqui fissati', $scheduled), $scheduled); ?></li>
+	<li class="list-group-item list-group-item-success"><?= sprintf(_ngettext('%d approvato', '%d approvati', $approved), $approved); ?></li>
+	<li class="list-group-item list-group-item-danger"><?= sprintf(_ngettext('%d rifiutato', '%d rifiutati', $rejected), $rejected); ?></li>
+	<li class="list-group-item"><?= sprintf(_ngettext('%d da invitare', '%d da invitare', $toinvite), $toinvite); ?></li>
+	<li class="list-group-item list-group-item-success"><?= sprintf(_ngettext('%d invitato', '%d invitati', $invited), $invited); ?></li>
+</ul>
