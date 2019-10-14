@@ -31,7 +31,7 @@ $this->layout('base', ['title' => $title]);
 	</div>
 <?php else: ?>
 	<div class="alert alert-info" role="alert">
-		<?= sprintf(__('Colloquio fissato per il %s alle %s'), $interview->when->format('Y-m-d'), $interview->when->format('H:i')) ?>
+		<?= sprintf(__('Colloquio fissato per il %s alle %s con <a href="https://t.me/%s">%s</a>'), $interview->when->format('Y-m-d'), $interview->when->format('H:i'), $interview->recruitertg, $interview->recruiter) ?>
 	</div>
 <?php endif ?>
 

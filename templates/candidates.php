@@ -11,13 +11,7 @@ $topublish = 0;
 $published = 0;
 ?>
 
-<nav class="navbar navbar-expand-lg">
-	<div class="navbar-brand"><small><?= sprintf(__('Ciao, %s (%s)'), $myname, $myuser) ?></small></div>
-	<div class="navbar-nav">
-		<a class="nav-item nav-link active" href="candidates.php">Candidati <span class="sr-only">(current)</span></a>
-		<a class="nav-item nav-link" href="interviews.php">Colloqui</a>
-	</div>
-</nav>
+<?= $this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser]) ?>
 
 <h1><?=__('Candidati')?></h1>
 <table id="candidates" class="table" data-search="true">

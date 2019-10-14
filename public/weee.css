@@ -1,6 +1,6 @@
 .navbar.top {
-	border-bottom: 0.1em solid #00983a;
-	margin-bottom: 0.5em;
+	border-bottom: 0.1rem solid #00983a;
+	margin-bottom: 0.5rem;
 }
 
 .the-button {
@@ -30,4 +30,10 @@
 
 .space-above {
 	margin-top: 2em;
+}
+
+#adminnavbar {
+	padding: .5rem 0;
+	border-bottom: 0.1rem solid #00983a;
+	margin-bottom: 1rem;
 }

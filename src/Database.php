@@ -308,7 +308,6 @@ class Database {
 		}
 	}
 
-
 	public function getAllInterviewsForTable() {
 		$dtz = new DateTimeZone('Europe/Rome');
 		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, interviewstatus, IFNULL(LENGTH(notes), 0) as ql, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname ASC, name ASC');
@@ -339,4 +338,26 @@ class Database {
 		return $compact;
 	}
 
+	public function getAllAssignedInterviewsForTable() {
+		$dtz = new DateTimeZone('Europe/Rome');
+		$result = $this->db->query('SELECT id, name, surname, area, interviewer, interview FROM users WHERE status >= 1 AND published >= 1 AND interviewer IS NOT NULL and interview IS NOT NULL ORDER BY interviewer ASC, interview ASC, surname ASC, name ASC');
+		$compact = [];
+
+		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
+			$dt = new DateTime('now', $dtz);
+			$dt->setTimestamp((int) $row['interview']);
+
+			if(!isset($compact[$row['interviewer']])) {
+				$compact[$row['interviewer']] = [];
+			}
+			$compact[$row['interviewer']][] = [
+				'id'          => $row['id'],
+				'name'        => $row['name'] . ' ' . $row['surname'],
+				'area'        => $row['area'],
+				'when'        => $dt,
+			];
+		}
+
+		return $compact;
+	}
 }

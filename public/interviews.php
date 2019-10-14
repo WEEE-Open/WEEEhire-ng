@@ -110,6 +110,13 @@ if(isset($_GET['id'])) {
 //
 //	}
 
-	$interviews = $db->getAllInterviewsForTable();
-	echo $template->render('interviews', ['interviews' => $interviews, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
+	if(isset($_GET['byrecruiter'])) {
+		$interviews = $db->getAllAssignedInterviewsForTable();
+		echo $template->render('interviewsbyrecruiter', ['interviews' => $interviews, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
+		exit;
+	} else {
+		$interviews = $db->getAllInterviewsForTable();
+		echo $template->render('interviews', ['interviews' => $interviews, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
+		exit;
+	}
 }

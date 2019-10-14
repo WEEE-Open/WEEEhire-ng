@@ -15,13 +15,7 @@ $later = [];
 $prevdate = null;
 ?>
 
-<nav class="navbar navbar-expand-lg">
-	<div class="navbar-brand"><small><?= sprintf(__('Ciao, %s (%s)'), $myname, $myuser) ?></small></div>
-	<div class="navbar-nav">
-		<a class="nav-item nav-link" href="candidates.php">Candidati</a>
-		<a class="nav-item nav-link active" href="interviews.php">Colloqui<span class="sr-only">(current)</span></a>
-	</div>
-</nav>
+<?= $this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser]) ?>
 
 <h2><?=__('Colloqui fissati')?></h2>
 <table id="interviews" class="table">
