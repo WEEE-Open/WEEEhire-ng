@@ -21,6 +21,7 @@ $prevdate = null;
 			$time = $int['when']->format('H:i');
 			$statusCell = "<a href=\"/interviews.php?id=${int['id']}\">" . __('Da decidere') . '</a>';
 			if($date !== $prevdate) {
+				$prevdate = $date;
 				?>
 				<li class="list-group-item list-group-item-secondary">
 				<?=sprintf(__('Giorno %s (%s)'), $date, $this->fetch('day', ['day' => $int['when']->format('N')]))?>
