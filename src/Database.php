@@ -311,7 +311,7 @@ class Database {
 
 	public function getAllInterviewsForTable() {
 		$dtz = new DateTimeZone('Europe/Rome');
-		$result = $this->db->query('SELECT id, name, surname, area, interviewer, interview, interviewstatus, IFNULL(LENGTH(questions), 0) as ql, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users ORDER BY interview DESC, surname ASC, name ASC');
+		$result = $this->db->query('SELECT id, name, surname, area, interviewer, interview, interviewstatus, IFNULL(LENGTH(questions), 0) as ql, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users WHERE status > 1 AND published > 1 ORDER BY interview DESC, surname ASC, name ASC');
 		$compact = [];
 		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			if($row['interview'] === null) {
