@@ -50,12 +50,13 @@ if(isset($_GET['id'])) {
 
 		// These HAVE to be in mutual exclusion, or you have to check $changed in "sequential" ifs
 
-		if(isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['degreecourse']) && isset($_POST['year']) && isset($_POST['matricola']) && isset($_POST['area']) && isset($_POST['letter'])) {
-			foreach(['name', 'surname', 'degreecourse', 'year', 'matricola', 'area', 'letter'] as $attr) {
-				$user->$attr = $_POST[$attr];
+		if(isset($_POST['edit'])) {
+			// If all data is present, this method will update $user so it only has to be stored in the database
+			if($user->fromPost($_POST)) {
+				// Store it
+				$db->updateUser($user);
+				$changed = true;
 			}
-			$db->updateUser($user);
-			$changed = true;
 		} elseif(isset($_POST['save'])) {
 			$db->saveNotes($id, $notes);
 			$changed = true;
@@ -104,19 +105,13 @@ if(isset($_GET['id'])) {
 					$db->setPublished($id, true);
 					$changed = true;
 				}
-			} else {
-				// Published, and...
-				if($user->status === true && isset($_POST['invite'])) {
-					$link = $ldap->createInvite($user);
-					$db->setInviteLink($id, $link);
-					$changed = true;
-				}
 			}
 		}
 		if($changed) {
 			http_response_code(303);
 			// $_SERVER['REQUEST_URI'] is already url encoded
-			header("Location: ${_SERVER['REQUEST_URI']}");
+			$url = Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => null]);
+			header("Location: $url");
 			exit;
 		}
 	}

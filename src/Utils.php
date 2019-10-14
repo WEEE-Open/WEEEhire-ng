@@ -65,7 +65,7 @@ class Utils {
 	public static function hasApcu() {
 		// Yes one is apcu and the other apc...
 		$enabled = extension_loaded('apcu') && boolval(ini_get('apc.enabled'));
-		if(!$enabled) {
+		if(!$enabled && !TEST_MODE) {
 			error_log('APCu is not enabled, please enable it, I beg you!');
 		}
 		return $enabled;

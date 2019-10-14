@@ -43,4 +43,17 @@ class User {
 	 * @var $invitelink string|null Invite link for final registration
 	 */
 	public $invitelink;
+
+	public function fromPost(array $post) {
+		$attrs = ['name', 'surname', 'degreecourse', 'year', 'matricola', 'area', 'letter'];
+		foreach($attrs as $attr) {
+			if(!isset($post[$attr])) {
+				return false;
+			}
+		}
+		foreach($attrs as $attr) {
+			$this->$attr = $post[$attr];
+		}
+		return true;
+	}
 }
