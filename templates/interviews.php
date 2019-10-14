@@ -91,7 +91,7 @@ $prevdate = null;
 
 		?>
 		<tr <?= $trcolor ?>>
-			<td><a href="/candidates.php?id=<?= $int['id'] ?>"><?= htmlspecialchars($int['name']) ?></a></td>
+			<td><a href="/interviews.php?id=<?= $int['id'] ?>"><?= htmlspecialchars($int['name']) ?></a></td>
 			<td><?= htmlspecialchars($int['area']) ?></td>
 			<td><?= $time ?></td>
 			<td><?= htmlspecialchars($int['interviewer']) ?></td>
