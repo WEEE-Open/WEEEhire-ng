@@ -19,7 +19,15 @@ $prevdate = null;
 		foreach($ints as $int) {
 			$date = $int['when']->format('Y-m-d');
 			$time = $int['when']->format('H:i');
-			$statusCell = "<a href=\"/interviews.php?id=${int['id']}\">" . __('Da decidere') . '</a>';
+			if($int['status'] === null) {
+				$statusClass = '';
+			} else {
+				if($int['status']) {
+					$statusClass = 'list-group-item-success';
+				} else {
+					$statusClass = 'list-group-item-danger';
+				}
+			}
 			if($date !== $prevdate) {
 				$prevdate = $date;
 				?>
@@ -29,7 +37,7 @@ $prevdate = null;
 				<?php
 			}
 			?>
-			<li class="list-group-item d-flex justify-content-between align-items-center">
+			<li class="list-group-item d-flex justify-content-between align-items-center <?= $statusClass ?>">
 				<span><?= sprintf(__('<a href="interviews.php?id=%d">%s</a> (%s)'), $int['id'], htmlspecialchars($int['name']), htmlspecialchars($int['area'])) ?></span>
 				<span class="badge badge-secondary badge-pill"><?= $time ?></span>
 			</li>

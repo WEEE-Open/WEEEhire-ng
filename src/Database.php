@@ -340,7 +340,7 @@ class Database {
 
 	public function getAllAssignedInterviewsForTable() {
 		$dtz = new DateTimeZone('Europe/Rome');
-		$result = $this->db->query('SELECT id, name, surname, area, interviewer, interview FROM users WHERE status >= 1 AND published >= 1 AND interviewer IS NOT NULL and interview IS NOT NULL ORDER BY interviewer ASC, interview ASC, surname ASC, name ASC');
+		$result = $this->db->query('SELECT id, name, surname, area, interviewer, interview, interviewstatus AS status FROM users WHERE status >= 1 AND published >= 1 AND interviewer IS NOT NULL and interview IS NOT NULL ORDER BY interviewer ASC, interview ASC, surname ASC, name ASC');
 		$compact = [];
 
 		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
@@ -351,10 +351,11 @@ class Database {
 				$compact[$row['interviewer']] = [];
 			}
 			$compact[$row['interviewer']][] = [
-				'id'          => $row['id'],
-				'name'        => $row['name'] . ' ' . $row['surname'],
-				'area'        => $row['area'],
-				'when'        => $dt,
+				'id'     => $row['id'],
+				'name'   => $row['name'] . ' ' . $row['surname'],
+				'area'   => $row['area'],
+				'when'   => $dt,
+				'status' => $row['status'] === null ? null : (bool) $row['status'],
 			];
 		}
 
