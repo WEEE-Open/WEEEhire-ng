@@ -28,8 +28,8 @@ $prevdate = null;
 	<tr>
 		<th><?=__('Nome')?></th>
 		<th><?=__('Interesse')?></th>
-		<th><?=__('Colloquio')?></th>
-		<th><?=__('Recruiter')?></th>
+		<th><?=__('Ora')?></th>
+		<th><?=__('Tenuto da')?></th>
 		<th><?=__('Stato')?></th>
 	</tr>
 	</thead>
@@ -45,13 +45,13 @@ $prevdate = null;
 		$scheduled++;
 		$date = $int['when']->format('Y-m-d');
 		$time = $int['when']->format('H:i');
-		if($int['status'] === null) {
+		if($int['interviewstatus'] === null) {
 			$tobe++;
 			$statusCell = "<a href=\"/interviews.php?id=${int['id']}\">" . __('Da decidere') . '</a>';
 		} else {
-			if($int['status'] === true) {
+			if($int['interviewstatus'] === true) {
 				$approved++;
-				$statusCell = $int['invite'] ? __('Colloquio passato, con link d\'invito') : __('Colloquio passato');
+				$statusCell = $int['invite'] ? __('Colloquio passato, con link d\'invito') : "<a href=\"/interviews.php?id=${int['id']}\">" . __('Colloquio passato') . '</a>';
 			} else {
 				$rejected++;
 				$statusCell = __('Colloquio fallito');
@@ -63,9 +63,9 @@ $prevdate = null;
 		if($int['answers']) {
 			$statusCell .= ' ❗️';
 		}
-		if($int['status'] === true) {
+		if($int['interviewstatus'] === true) {
 			$tdcolor = 'class="table-success"';
-		} elseif($int['status'] === false) {
+		} elseif($int['interviewstatus'] === false) {
 			$tdcolor = 'class="table-danger"';
 		} else {
 			$tdcolor = '';
@@ -74,7 +74,7 @@ $prevdate = null;
 			$invited++;
 			$trcolor = $tdcolor;
 		} else {
-			if($int['status'] !== null) {
+			if($int['interviewstatus'] !== null) {
 				$toinvite++;
 			}
 			$trcolor = '';
@@ -106,7 +106,7 @@ $prevdate = null;
 <tr>
 	<th><?=__('Nome')?></th>
 	<th><?=__('Interesse')?></th>
-	<th><?=__('Recruiter')?></th>
+	<th><?=__('Recruiter che ha approvato')?></th>
 </tr>
 </thead>
 <tbody>
@@ -114,7 +114,7 @@ $prevdate = null;
 		<tr <?= $trcolor ?>>
 			<td><a href="/interviews.php?id=<?= $int['id'] ?>"><?= htmlspecialchars($int['name']) ?></a></td>
 			<td><?= htmlspecialchars($int['area']) ?></td>
-			<td><?= htmlspecialchars($int['interviewer']) ?></td>
+			<td><?= htmlspecialchars($int['recruiter']) ?></td>
 		</tr>
 	<?php endforeach; ?>
 </tbody>
