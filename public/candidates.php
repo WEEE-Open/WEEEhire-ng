@@ -128,7 +128,8 @@ if(isset($_GET['id'])) {
 		if(isset($_POST['publishallrejected'])) {
 			$db->publishRejected();
 			http_response_code(303);
-			header('Location: /auth.php');
+			header('Location: /candidates.php');
+			exit;
 		} elseif(isset($_POST['deleteolderthan']) && isset($_POST['days'])) {
 			$days = (int) $_POST['days'];
 			if($days <= 0) {
@@ -136,7 +137,8 @@ if(isset($_GET['id'])) {
 			}
 			$db->deleteOlderThan($days);
 			http_response_code(303);
-			header('Location: /auth.php');
+			header('Location: /candidates.php');
+			exit;
 		}
 	}
 
