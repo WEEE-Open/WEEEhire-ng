@@ -10,7 +10,15 @@ $tobe = 0;
 $topublish = 0;
 $published = 0;
 ?>
-<small><?= sprintf(__('Ciao, %s (%s)'), $myname, $myuser) ?></small>
+
+<nav class="navbar navbar-expand-lg">
+	<div class="navbar-brand"><small><?= sprintf(__('Ciao, %s (%s)'), $myname, $myuser) ?></small></div>
+	<div class="navbar-nav">
+		<a class="nav-item nav-link active" href="candidates.php">Candidati <span class="sr-only">(current)</span></a>
+		<a class="nav-item nav-link" href="interviews.php">Colloqui</a>
+	</div>
+</nav>
+
 <h1><?=__('Candidati')?></h1>
 <table id="candidates" class="table" data-search="true">
 	<thead class="thead-dark">

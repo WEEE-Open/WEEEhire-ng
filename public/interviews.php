@@ -3,6 +3,9 @@
 namespace WEEEOpen\WEEEHire;
 
 
+use DateTime;
+use DateTimeZone;
+
 require '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 require '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 
@@ -35,6 +38,7 @@ $db = new Database();
 if(isset($_GET['id'])) {
 	$id = (int) $_GET['id'];
 	$user = $db->getUser($id);
+	$interview = $db->getInterview($id);
 
 	if(!$user->status || !$user->published) {
 		http_response_code(400);
@@ -65,6 +69,30 @@ if(isset($_GET['id'])) {
 			$link = $ldap->createInvite($user);
 			$db->setInviteLink($id, $link);
 			$changed = true;
+		} elseif(isset($_POST['setinterview']) && isset($_POST['when1']) && isset($_POST['when2']) && isset($_POST['recruiter'])) {
+			$recruiter = $_POST['recruiter'];
+			if(strlen($recruiter) <= 0 || strpos($recruiter, '|') === false) {
+				http_response_code(400);
+				echo $template->render('error', ['message' => 'Select a recruiter']);
+				exit;
+			}
+			$recruiter = explode('|', $recruiter, 2);
+			$when = DateTime::createFromFormat("Y-m-d H:i", $_POST['when1'] . ' ' . $_POST['when2'], new DateTimeZone('Europe/Rome'));
+			$db->setInterviewSchedule($interview->id, $recruiter[1], $recruiter[0], $when);
+			$changed = true;
+		} elseif(isset($_POST['unsetinterview'])) {
+			$db->setInterviewSchedule($interview->id, null, null, null);
+			$changed = true;
+		} elseif(isset($_POST['approve']) || isset($_POST['reject']) || isset($_POST['save']) || isset($_POST['limbo'])) {
+			$db->setInterviewData($interview->id, $_POST['questions'] ?? null, $_POST['answers'] ?? null);
+			if(isset($_POST['approve'])) {
+				$db->setInterviewStatus($interview->id, true);
+			} elseif(isset($_POST['reject'])) {
+				$db->setInterviewStatus($interview->id, false);
+			} elseif(isset($_POST['limbo'])) {
+				$db->setInterviewStatus($interview->id, null);
+			}
+			$changed = true;
 		}
 
 		if($changed) {
@@ -75,13 +103,13 @@ if(isset($_GET['id'])) {
 		}
 	}
 
-	echo $template->render('interview', ['user' => $user, 'edit' => isset($_GET['edit']), 'recruiters' => $ldap->getRecruiters()]);
+	echo $template->render('interview', ['user' => $user, 'interview' => $interview, 'edit' => isset($_GET['edit']), 'recruiters' => $ldap->getRecruiters()]);
 	exit;
 } else {
-	if($_SERVER['REQUEST_METHOD'] === 'POST') {
+//	if($_SERVER['REQUEST_METHOD'] === 'POST') {
+//
+//	}
 
-	}
-
-	$users = $db->getAllUsersForTable();
-	echo $template->render('interviews', ['users' => $users, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
+	$interviews = $db->getAllInterviewsForTable();
+	echo $template->render('interviews', ['interviews' => $interviews, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
 }

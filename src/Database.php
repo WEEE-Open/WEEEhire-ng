@@ -4,6 +4,8 @@
 namespace WEEEOpen\WEEEHire;
 
 
+use DateTime;
+use DateTimeZone;
 use Exception;
 use SQLite3;
 use SQLite3Result;
@@ -236,4 +238,104 @@ class Database {
 			throw new DatabaseException();
 		}
 	}
+
+
+	public function getInterview(string $id): ?Interview {
+		$stmt = $this->db->prepare('SELECT interview, interviewer, interviewertg, questions, answers, interviewstatus FROM users WHERE id = :id LIMIT 1');
+		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+		$row = $result->fetchArray(SQLITE3_ASSOC);
+		$result->finalize();
+		if($row === false) {
+			return null;
+		}
+		$interview = new Interview();
+		$interview->id = (int) $id;
+		$interview->recruiter = $row['interviewer'];
+		$interview->recruitertg = $row['interviewertg'];
+		if($row['interview'] === null) {
+			$interview->when = null;
+		} else {
+			$dt = new DateTime('now', new DateTimeZone('Europe/Rome'));
+			$dt->setTimestamp((int) $row['interview']);
+			$interview->when = $dt;
+		}
+		$interview->questions = $row['questions'];
+		$interview->answers = $row['answers'];
+		$interview->status = $row['interviewstatus'] === null ? null : (bool) $row['interviewstatus'];
+
+		return $interview;
+	}
+
+	public function setInterviewSchedule(int $id, ?string $recruiter, ?string $recruitertg, ?DateTime $when) {
+		$stmt = $this->db->prepare('UPDATE users SET interview = :interview, interviewer = :interviewer, interviewertg = :interviewertg WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		$stmt->bindValue(':interview', $when === null ? null : $when->getTimestamp(),
+			$when === null ? SQLITE3_NULL : SQLITE3_TEXT);
+		$stmt->bindValue(':interviewer', $recruiter, $when === null ? SQLITE3_NULL : SQLITE3_TEXT);
+		$stmt->bindValue(':interviewertg', $recruitertg, $when === null ? SQLITE3_NULL : SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	public function setInterviewData(int $id, ?string $questions, ?string $answers) {
+		$stmt = $this->db->prepare('UPDATE users SET questions = :q, answers = :a WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		$stmt->bindValue(':q', $questions, $questions === null ? SQLITE3_NULL : SQLITE3_TEXT);
+		$stmt->bindValue(':a', $answers, $answers === null ? SQLITE3_NULL : SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	public function setInterviewStatus(int $id, ?bool $status) {
+		$stmt = $this->db->prepare('UPDATE users SET interviewstatus = :statusp WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		if($status === null) {
+			$stmt->bindValue(':statusp', null, SQLITE3_NULL);
+		} else {
+			$stmt->bindValue(':statusp', (int) $status, SQLITE3_INTEGER);
+		}
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+
+	public function getAllInterviewsForTable() {
+		$dtz = new DateTimeZone('Europe/Rome');
+		$result = $this->db->query('SELECT id, name, surname, area, interviewer, interview, interviewstatus, IFNULL(LENGTH(questions), 0) as ql, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users ORDER BY interview DESC, surname ASC, name ASC');
+		$compact = [];
+		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
+			if($row['interview'] === null) {
+				$when = null;
+			} else {
+				$dt = new DateTime('now', $dtz);
+				$dt->setTimestamp((int) $row['interview']);
+				$when = $dt;
+			}
+
+			$compact[] = [
+				'id'              => $row['id'],
+				'name'            => $row['name'] . ' ' . $row['surname'],
+				'area'            => $row['area'],
+				'interviewer'     => $row['interviewer'],
+				'interviewstatus' => $row['interviewstatus'] === null ? null : (bool) $row['interviewstatus'],
+				'questions'       => (bool) $row['ql'],
+				'answers'         => (bool) $row['al'],
+				'when'            => $when,
+				'invite'          => (bool) $row['il'],
+			];
+		}
+
+		return $compact;
+	}
+
 }
