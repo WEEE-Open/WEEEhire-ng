@@ -21,8 +21,8 @@ $this->layout('base', ['title' => __('Stato della richiesta')])
 	<?php endif ?>
 </div>
 <div class="text-center space-above">
-	<a id="remove" class="btn btn-danger mb-2" href="<?= htmlspecialchars(WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['delete' => 'true'])) ?>"><?= __('Elimina candidatura') ?></a>
-	<a id="download" class="btn btn-primary mb-2" href="<?= htmlspecialchars(WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['download' => 'true'])) ?>"><?=__('Scarica tutti i miei dati')?></a>
+	<a id="remove" class="btn btn-danger mb-2" href="<?= $this->e(WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['delete' => 'true'])) ?>"><?= __('Elimina candidatura') ?></a>
+	<a id="download" class="btn btn-primary mb-2" href="<?= $this->e(WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['download' => 'true'])) ?>"><?=__('Scarica tutti i miei dati')?></a>
 </div>
 <div class="text-center">
 	<small><?=__('Visto come siamo GDPR-compliant?')?></small>

@@ -2,7 +2,7 @@
 /** @var $user WEEEOpen\WEEEhire\User */
 /** @var $edit bool */
 /** @var $recruiters string[][] */
-$titleShort = sprintf(__('%s %s (%s)'), htmlspecialchars($user->name), htmlspecialchars($user->surname), htmlspecialchars($user->matricola));
+$titleShort = sprintf(__('%s %s (%s)'), $this->e($user->name), $this->e($user->surname), $this->e($user->matricola));
 $title = sprintf(__('%s - Candidatura'), $titleShort);
 $this->layout('base', ['title' => $title]);
 ?>
@@ -35,7 +35,7 @@ $this->layout('base', ['title' => $title]);
 <form method="post">
 	<div class="form-group">
 		<label for="notes"><b><?= __('Note') ?></b></label>
-		<textarea id="notes" name="notes" cols="40" rows="3" class="form-control"><?= htmlspecialchars($user->notes) ?></textarea>
+		<textarea id="notes" name="notes" cols="40" rows="3" class="form-control"><?= $this->e($user->notes) ?></textarea>
 	</div>
 	<div class="form-group text-center">
 		<?php if(!$user->published): ?>
@@ -50,7 +50,7 @@ $this->layout('base', ['title' => $title]);
 			<?php endif ?>
 		<?php endif ?>
 		<button name="save" value="true" type="submit" class="btn btn-outline-primary"><?=__('Salva note')?></button>
-		<a class="btn btn-outline-secondary" href="<?= htmlspecialchars(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => 'true'])) ?>"><?=__('Modifica dati')?></a>
+		<a class="btn btn-outline-secondary" href="<?= $this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => 'true'])) ?>"><?=__('Modifica dati')?></a>
 	</div>
 </form>
 <?php endif ?>
@@ -65,9 +65,9 @@ $this->layout('base', ['title' => $title]);
 					if($user->recruiter === $recruiter[0]):
 						$hit = true;
 					?>
-						<option value="<?= htmlspecialchars($recruiter[1]) . '|' . htmlspecialchars($recruiter[0]) ?>" selected><?= htmlspecialchars($recruiter[0]) ?> (@<?= htmlspecialchars($recruiter[1]) ?>)</option>
+						<option value="<?= $this->e($recruiter[1]) . '|' . $this->e($recruiter[0]) ?>" selected><?= $this->e($recruiter[0]) ?> (@<?= $this->e($recruiter[1]) ?>)</option>
 					<?php else:	?>
-						<option value="<?= htmlspecialchars($recruiter[1]) . '|' . htmlspecialchars($recruiter[0]) ?>"><?= htmlspecialchars($recruiter[0]) ?> (@<?= htmlspecialchars($recruiter[1]) ?>)</option>
+						<option value="<?= $this->e($recruiter[1]) . '|' . $this->e($recruiter[0]) ?>"><?= $this->e($recruiter[0]) ?> (@<?= $this->e($recruiter[1]) ?>)</option>
 					<?php endif; endforeach; ?>
 				<?php if(!$hit): ?>
 				<option disabled hidden selected class="d-none"></option>

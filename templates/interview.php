@@ -3,7 +3,7 @@
 /** @var $interview WEEEOpen\WEEEhire\Interview */
 /** @var $edit bool */
 /** @var $recruiters string[][] */
-$titleShort = sprintf(__('%s %s (%s)'), htmlspecialchars($user->name), htmlspecialchars($user->surname), htmlspecialchars($user->matricola));
+$titleShort = sprintf(__('%s %s (%s)'), $this->e($user->name), $this->e($user->surname), $this->e($user->matricola));
 $title = sprintf(__('%s - Colloquio'), $titleShort);
 $this->layout('base', ['title' => $title]);
 ?>
@@ -48,9 +48,9 @@ $this->layout('base', ['title' => $title]);
 					if($therecruiter === $recruiter[0]):
 						$hit = true;
 						?>
-						<option value="<?= htmlspecialchars($recruiter[1]) . '|' . htmlspecialchars($recruiter[0]) ?>" selected><?= htmlspecialchars($recruiter[0]) ?> (@<?= htmlspecialchars($recruiter[1]) ?>)</option>
+						<option value="<?= $this->e($recruiter[1]) . '|' . $this->e($recruiter[0]) ?>" selected><?= $this->e($recruiter[0]) ?> (@<?= $this->e($recruiter[1]) ?>)</option>
 					<?php else:	?>
-						<option value="<?= htmlspecialchars($recruiter[1]) . '|' . htmlspecialchars($recruiter[0]) ?>"><?= htmlspecialchars($recruiter[0]) ?> (@<?= htmlspecialchars($recruiter[1]) ?>)</option>
+						<option value="<?= $this->e($recruiter[1]) . '|' . $this->e($recruiter[0]) ?>"><?= $this->e($recruiter[0]) ?> (@<?= $this->e($recruiter[1]) ?>)</option>
 					<?php endif; endforeach; ?>
 				<?php if(!$hit): ?>
 					<option disabled hidden selected class="d-none"></option>
@@ -77,16 +77,16 @@ $this->layout('base', ['title' => $title]);
 
 <?php if(!$edit): ?>
 	<div class="form-group">
-		<a class="btn btn-outline-secondary" href="<?= htmlspecialchars(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => 'true'])) ?>"><?=__('Modifica dati')?></a>
+		<a class="btn btn-outline-secondary" href="<?= $this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => 'true'])) ?>"><?=__('Modifica dati')?></a>
 	</div>
 	<form method="post">
 		<div class="form-group">
 			<label for="questions"><?= __('Note e domande per il colloquio') ?></label>
-			<textarea id="questions" name="questions" cols="40" rows="5" class="form-control"><?= htmlspecialchars($interview->questions) ?></textarea>
+			<textarea id="questions" name="questions" cols="40" rows="5" class="form-control"><?= $this->e($interview->questions) ?></textarea>
 		</div>
 		<div class="form-group">
 			<label for="answers"><?= __('Risposte e commenti vari post-colloquio') ?></label>
-			<textarea id="answers" name="answers" cols="40" rows="10" class="form-control"><?= htmlspecialchars($interview->answers) ?></textarea>
+			<textarea id="answers" name="answers" cols="40" rows="10" class="form-control"><?= $this->e($interview->answers) ?></textarea>
 		</div>
 		<div class="form-group text-center">
 		<?php if($interview->status === null && $interview->recruiter !== null && $interview->when !== null): ?>

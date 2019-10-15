@@ -86,10 +86,10 @@ $prevdate = null;
 
 		?>
 		<tr <?= $trcolor ?>>
-			<td><a href="/interviews.php?id=<?= $int['id'] ?>"><?= htmlspecialchars($int['name']) ?></a></td>
-			<td><?= htmlspecialchars($int['area']) ?></td>
+			<td><a href="/interviews.php?id=<?= $int['id'] ?>"><?= $this->e($int['name']) ?></a></td>
+			<td><?= $this->e($int['area']) ?></td>
 			<td><?= $time ?></td>
-			<td><?= htmlspecialchars($int['interviewer']) ?></td>
+			<td><?= $this->e($int['interviewer']) ?></td>
 			<td <?= $tdcolor ?>><?= $statusCell ?></td>
 		</tr>
 	<?php endforeach; ?>
@@ -107,9 +107,9 @@ $prevdate = null;
 <tbody>
 	<?php foreach($later as $int): ?>
 		<tr <?= $trcolor ?>>
-			<td><a href="/interviews.php?id=<?= $int['id'] ?>"><?= htmlspecialchars($int['name']) ?></a></td>
-			<td><?= htmlspecialchars($int['area']) ?></td>
-			<td><?= htmlspecialchars($int['recruiter']) ?></td>
+			<td><a href="/interviews.php?id=<?= $int['id'] ?>"><?= $this->e($int['name']) ?></a></td>
+			<td><?= $this->e($int['area']) ?></td>
+			<td><?= $this->e($int['recruiter']) ?></td>
 		</tr>
 	<?php endforeach; ?>
 </tbody>

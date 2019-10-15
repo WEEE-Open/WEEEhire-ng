@@ -61,10 +61,10 @@ $published = 0;
 		}
 		?>
 		<tr <?= $trcolor ?>>
-			<td><a href="/candidates.php?id=<?= $user['id'] ?>"><?= htmlspecialchars($user['name']) ?></a></td>
-			<td><?= htmlspecialchars($user['area']) ?></td>
+			<td><a href="/candidates.php?id=<?= $user['id'] ?>"><?= $this->e($user['name']) ?></a></td>
+			<td><?= $this->e($user['area']) ?></td>
 			<td><?= $date ?></td>
-			<td><?= htmlspecialchars($user['recruiter']) ?></td>
+			<td><?= $this->e($user['recruiter']) ?></td>
 			<td <?= $tdcolor ?>><?= $statusCell ?></td>
 		</tr>
 	<?php endforeach; ?>

@@ -14,7 +14,7 @@ $prevdate = null;
 
 	<?php
 	foreach($interviews as $interviewer => $ints) {
-		echo '<h4 class="col-md-9 col-lg-6 mx-auto">' . htmlspecialchars($interviewer) . '</h4><ul class="list-group list-group-flush col-md-9 col-lg-6 mx-auto mb-3">';
+		echo '<h4 class="col-md-9 col-lg-6 mx-auto">' . $this->e($interviewer) . '</h4><ul class="list-group list-group-flush col-md-9 col-lg-6 mx-auto mb-3">';
 		$prevdate = null;
 		foreach($ints as $int) {
 			$date = $int['when']->format('Y-m-d');
@@ -38,7 +38,7 @@ $prevdate = null;
 			}
 			?>
 			<li class="list-group-item d-flex justify-content-between align-items-center <?= $statusClass ?>">
-				<span><?= sprintf(__('<a href="interviews.php?id=%d">%s</a> (%s)'), $int['id'], htmlspecialchars($int['name']), htmlspecialchars($int['area'])) ?></span>
+				<span><?= sprintf(__('<a href="interviews.php?id=%d">%s</a> (%s)'), $int['id'], $this->e($int['name']), $this->e($int['area'])) ?></span>
 				<span class="badge badge-secondary badge-pill"><?= $time ?></span>
 			</li>
 			<?php
