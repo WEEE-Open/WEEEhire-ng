@@ -1,8 +1,8 @@
 create table users
 (
 	id integer
-		constraint users_uuid_pk
-		primary key autoincrement,
+		constraint users_id_pk
+			primary key autoincrement,
 	name text not null,
 	surname text not null,
 	degreecourse text not null,
@@ -18,7 +18,12 @@ create table users
 	token text not null,
 	recruitertg text,
 	invitelink text,
-	notes text
+	notes text,
+	interview int,
+	interviewer text,
+	interviewertg text,
+	interviewstatus int,
+	answers int
 );
 
 create unique index users_matricola_uindex

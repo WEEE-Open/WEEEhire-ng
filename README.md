@@ -5,11 +5,11 @@ Manage applications to the team.
 ## Local development
 
 ```bash
-composer install
-cp config/config-example.php config/config.php
-nano config/config.php
 sqlite3 weeehire.db < database.sql
+cp config/config-example.php config/config.php
+nano config/config.php  # Optional, the defaults are good for a test instance but not for production
 msgfmt resources/locale/en-us/LC_MESSAGES/messages.po --output-file=resources/locale/en-us/LC_MESSAGES/messages.mo
+composer install
 php -S [::]:8777 public
 ```
 
@@ -24,7 +24,8 @@ In fact, if TEST_MODE is trues in config.php:
 - No LDAP connections are made, example data is returned instead
 - APCu is not used at all
 
-APCu is optional but strongly recommended in production.  
+APCu is optional but strongly recommended in production.
+WEEEHire will print some warnings to stderr if APCu is not enabled.
 
 ## Translations
 
@@ -41,19 +42,21 @@ And done.
 
 > Why en-us instead of en-US?
 
-`willdurand/negotiation` negotiates en-us even if supported languages includes en-US for some reason. It works, but motranslator skips some checks and parsing because it is a non-standard format. Getting the negotiator to negotiate en-US would be nice.
+`willdurand/negotiation` negotiates en-us even if supported languages includes en-US for some reason.
+It works, but motranslator skips some checks and parsing because it is a non-standard format.
+Getting the negotiator to negotiate en-US would be nice.
 
 ## Production deployment
 
 Basically the same as development:
 
 ```bash
-composer install --optimize-autoloader  # The optimization is not required but a nice touch
-msgfmt resources/locale/en-us/LC_MESSAGES/messages.po --output-file=resources/locale/en-us/LC_MESSAGES/messages.mo
+sqlite3 weeehire.db < database.sql
 cp config/config-example.php config/config.php
 nano config/config.php
-sqlite3 weeehire.db < database.sql
+msgfmt resources/locale/en-us/LC_MESSAGES/messages.po --output-file=resources/locale/en-us/LC_MESSAGES/messages.mo
 chown o-r weeehire.db  # Optional, prevent other users from reading the database
+composer install --optimize-autoloader  # The optimization is not required but a nice touch
 ```
 
 and a real web server is needed. The root directory is `public`, no need to serve files outside that directory.
