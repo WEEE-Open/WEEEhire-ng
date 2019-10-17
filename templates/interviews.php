@@ -106,7 +106,7 @@ $prevdate = null;
 </thead>
 <tbody>
 	<?php foreach($later as $int): ?>
-		<tr <?= $trcolor ?>>
+		<tr>
 			<td><a href="/interviews.php?id=<?= $int['id'] ?>"><?= $this->e($int['name']) ?></a></td>
 			<td><?= $this->e($int['area']) ?></td>
 			<td><?= $this->e($int['recruiter']) ?></td>

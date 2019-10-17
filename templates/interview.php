@@ -21,7 +21,7 @@ $this->layout('base', ['title' => $title]);
 	</div>
 <?php elseif($interview->status === false): ?>
 	<div class="alert alert-danger" role="alert">
-		<?= sprintf(__('Colloquio fallito  secondo %s'), $interview->recruiter) ?>
+		<?= sprintf(__('Colloquio fallito secondo %s'), $interview->recruiter) ?>
 	</div>
 <?php endif ?>
 
@@ -92,7 +92,7 @@ $this->layout('base', ['title' => $title]);
 		<?php if($interview->status === null && $interview->recruiter !== null && $interview->when !== null): ?>
 			<button name="approve" value="true" type="submit" class="btn btn-success"><?=__('Colloquio passato')?></button>
 			<button name="reject" value="true" type="submit" class="btn btn-danger"><?=__('Colloquio fallito')?></button>
-		<?php else: ?>
+		<?php elseif($interview->recruiter !== null && $interview->when !== null): ?>
 			<button name="limbo" value="true" type="submit" class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
 		<?php endif ?>
 			<button name="save" value="true" type="submit" class="btn btn-outline-primary"><?=__('Salva')?></button>
