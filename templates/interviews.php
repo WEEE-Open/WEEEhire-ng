@@ -41,7 +41,6 @@ $prevdate = null;
 		$date = $int['when']->format('Y-m-d');
 		$time = $int['when']->format('H:i');
 		if($int['interviewstatus'] === null) {
-			$tobe++;
 			$statusCell = "<a href=\"/interviews.php?id=${int['id']}\">" . __('Da decidere') . '</a>';
 		} else {
 			if($int['interviewstatus'] === true) {
