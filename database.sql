@@ -28,3 +28,9 @@ create table users
 
 create unique index users_matricola_uindex
 	on users (matricola);
+
+CREATE TABLE config 
+(
+	id integer not NULL,
+	value integer not NULL
+)
