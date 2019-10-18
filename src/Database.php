@@ -91,6 +91,19 @@ class Database {
 		return $user;
 	}
 
+	public function checkCandidature() {
+		$stmt = $this->db->prepare('SELECT value FROM config WHERE id = :id');
+		$stmt->bindValue(':id', 'scadenza', SQLITE3_INTEGER);
+		$result = $stmt->execute();
+		if($result instanceof SQLite3Result) {
+			$row = $result->fetchArray(SQLITE3_ASSOC);
+			$result->finalize();
+			return $row[1];
+		} else {
+			throw new DatabaseException();
+		}
+	}
+
 	public function validateToken(int $id, string $token): bool {
 		$stmt = $this->db->prepare('SELECT token FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
