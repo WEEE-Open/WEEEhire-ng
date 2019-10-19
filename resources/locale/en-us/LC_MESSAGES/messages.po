@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-14 23:47+0200\n"
-"PO-Revision-Date: 2019-10-14 23:56+0200\n"
+"POT-Creation-Date: 2019-10-19 16:08+0200\n"
+"PO-Revision-Date: 2019-10-19 16:09+0200\n"
 "Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
 "Language-Team: Italian <>\n"
 "Language: en-us\n"
@@ -37,6 +37,10 @@ msgstr "Interviews"
 #: templates/interviewsbyrecruiter.php:5 templates/interviewsbyrecruiter.php:13
 msgid "Recruiter"
 msgstr "Recruiter"
+
+#: templates/adminnavbar.php:11 templates/logout.php:1 templates/logout.php:3
+msgid "Logout"
+msgstr "Logout"
 
 #: templates/candidate.php:5 templates/interview.php:6
 #, php-format
@@ -116,13 +120,13 @@ msgid "Genera link d'invito"
 msgstr "Generate an invite link"
 
 #: templates/candidates.php:20 templates/form.php:29
-#: templates/interviews.php:24 templates/interviews.php:102
+#: templates/interviews.php:24 templates/interviews.php:101
 #: templates/userinfo.php:13
 msgid "Nome"
 msgstr "Name"
 
 #: templates/candidates.php:21 templates/form.php:140
-#: templates/interviews.php:25 templates/interviews.php:103
+#: templates/interviews.php:25 templates/interviews.php:102
 #: templates/userinfo.php:37
 msgid "Interesse"
 msgstr "Preference"
@@ -135,8 +139,7 @@ msgstr "Sent"
 msgid "Stato"
 msgstr "Status"
 
-#: templates/candidates.php:33 templates/interviewsbyrecruiter.php:22
-#: templates/interviews.php:45
+#: templates/candidates.php:33 templates/interviews.php:44
 msgid "Da decidere"
 msgstr "To be decided"
 
@@ -182,14 +185,14 @@ msgid_plural "%d da valutare"
 msgstr[0] "%d to be decided"
 msgstr[1] "%d to be decided"
 
-#: templates/candidates.php:96 templates/interviews.php:122
+#: templates/candidates.php:96 templates/interviews.php:121
 #, php-format
 msgid "%d approvato"
 msgid_plural "%d approvati"
 msgstr[0] "%d approved"
 msgstr[1] "%d approved"
 
-#: templates/candidates.php:97 templates/interviews.php:123
+#: templates/candidates.php:97 templates/interviews.php:122
 #, php-format
 msgid "%d rifiutato"
 msgid_plural "%d rifiutati"
@@ -624,7 +627,7 @@ msgstr "Interview passed according to %s"
 
 #: templates/interview.php:24
 #, php-format
-msgid "Colloquio fallito  secondo %s"
+msgid "Colloquio fallito secondo %s"
 msgstr "Interview failed according to %s"
 
 #: templates/interview.php:30
@@ -662,11 +665,11 @@ msgstr "Notes and questions for the interview"
 msgid "Risposte e commenti vari post-colloquio"
 msgstr "Answers and comments after the interview"
 
-#: templates/interview.php:93 templates/interviews.php:49
+#: templates/interview.php:93 templates/interviews.php:48
 msgid "Colloquio passato"
 msgstr "Interview passed"
 
-#: templates/interview.php:94 templates/interviews.php:52
+#: templates/interview.php:94 templates/interviews.php:51
 msgid "Colloquio fallito"
 msgstr "Interview failed"
 
@@ -674,12 +677,12 @@ msgstr "Interview failed"
 msgid "Salva"
 msgstr "Save"
 
-#: templates/interviewsbyrecruiter.php:26 templates/interviews.php:82
+#: templates/interviewsbyrecruiter.php:35 templates/interviews.php:81
 #, php-format
 msgid "Giorno %s (%s)"
 msgstr "%s (%s)"
 
-#: templates/interviewsbyrecruiter.php:32
+#: templates/interviewsbyrecruiter.php:41
 #, php-format
 msgid "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
 msgstr "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
@@ -692,52 +695,56 @@ msgstr "Scheduled interviews"
 msgid "Tenuto da"
 msgstr "Done by"
 
-#: templates/interviews.php:49
+#: templates/interviews.php:48
 msgid "Colloquio passato, con link d'invito"
 msgstr "Interview passed, with invite link"
 
-#: templates/interviews.php:98
+#: templates/interviews.php:97
 msgid "Colloqui da fissare"
 msgstr "Interviews to be scheduled"
 
-#: templates/interviews.php:104
+#: templates/interviews.php:103
 msgid "Recruiter che ha approvato"
 msgstr "Recruiter that approved"
 
-#: templates/interviews.php:119
+#: templates/interviews.php:118
 #, php-format
 msgid "%d candidato per il colloquio"
 msgid_plural "%d candidati per i colloqui"
 msgstr[0] "%d candidate for interview"
 msgstr[1] "%d candidates for interviews"
 
-#: templates/interviews.php:120
+#: templates/interviews.php:119
 #, php-format
 msgid "%d da fissare"
 msgid_plural "%d da fissare"
 msgstr[0] "%d to be scheduled"
 msgstr[1] "%d to be scheduled"
 
-#: templates/interviews.php:121
+#: templates/interviews.php:120
 #, php-format
 msgid "%d colloquio fissato"
 msgid_plural "%d colloqui fissati"
 msgstr[0] "%d interview scheduled"
 msgstr[1] "%d interviews scheduled"
 
-#: templates/interviews.php:124
+#: templates/interviews.php:123
 #, php-format
 msgid "%d da invitare"
 msgid_plural "%d da invitare"
 msgstr[0] "%d to invite"
 msgstr[1] "%d to invite"
 
-#: templates/interviews.php:125
+#: templates/interviews.php:124
 #, php-format
 msgid "%d invitato"
 msgid_plural "%d invitati"
 msgstr[0] "%d invited"
 msgstr[1] "%d invited"
+
+#: templates/logout.php:4
+msgid "Logout completato"
+msgstr "Logout done"
 
 #: templates/privacy.php:1
 msgid "Informazioni sul trattamento dei dati personali"
