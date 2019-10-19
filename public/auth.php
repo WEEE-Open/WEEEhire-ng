@@ -24,9 +24,7 @@ if(!isset($_SESSION['needsAuth']) || !$_SESSION['needsAuth']) {
 try {
 	$oidc = new OpenIDConnectClient(WEEEHIRE_OIDC_ISSUER, WEEEHIRE_OIDC_CLIENT_KEY, WEEEHIRE_OIDC_CLIENT_SECRET);
 	$oidc->setRedirectURL(WEEEHIRE_SELF_LINK . '/auth.php');
-	$oidc->addScope('openid');
-	$oidc->addScope('profile');
-	$oidc->addScope('roles');
+	$oidc->addScope(['openid', 'profile']);
 	$oidc->authenticate();
 
 	// For Keycloak go to clients > weeehire > mappers > add builtin > groups
