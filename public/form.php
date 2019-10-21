@@ -9,6 +9,27 @@ require '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.ph
 
 $template = Template::create();
 
+$db = new Database();
+$candidature_eta = 0;
+$today_time = time();
+
+try {
+    $candidature_eta = $db->getCandidature();
+} catch(DatabaseException $e) {
+    http_response_code(500);
+    echo $template->render('form', ['error' => 'database']);
+    exit;
+} catch(Exception $e) {
+    http_response_code(500);
+    echo $template->render('form', ['error' => 'wtf']);
+    exit;
+}
+
+if( $candidature_eta <= $today_time && $candidature_eta != null ){
+    echo $template->render('candidate_close');
+    exit;
+}
+
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$checkboxes = [
 		'mandatorycheckbox_0',
@@ -49,7 +70,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 		exit;
 	}
 
-	$db = new Database();
 	try {
 		list($id, $token) = $db->addUser($user);
 	} catch(DuplicateUserException $e) {
