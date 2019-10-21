@@ -60,7 +60,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 $expiry = $db->getConfigValue('expiry');
 if($expiry !== null) {
 	/** @noinspection PhpUnhandledExceptionInspection */
-	$expiry = new DateTime('@' . $expiry, new DateTimeZone('Europe/Rome'));
+	$expiryTemp = new DateTime('now', new DateTimeZone('Europe/Rome'));
+	$expiry = $expiryTemp->setTimestamp($expiry);
 }
 
 echo $template->render('settings',
