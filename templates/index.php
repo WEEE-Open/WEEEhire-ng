@@ -1,4 +1,7 @@
-<?php $this->layout('base', ['title' => 'WEEElcome']) ?>
+<?php
+/** @var $candidatureEta int */
+
+$this->layout('base', ['title' => 'WEEElcome']) ?>
 
 <h1><?= __('Entra in WEEE Open') ?></h1>
 <p><?= __('Compila il questionario per fare richiesta di ammissione in team. Premi il bottone qui sotto per iniziare.') ?></p>

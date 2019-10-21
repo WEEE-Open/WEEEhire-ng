@@ -23,8 +23,8 @@ try {
 
 $template = Template::create();
 // Get da DB -> se unixtime.now > candidature allora candidate_close : se no form
-if( $candidature_eta >= $today_time ){
+if( $candidature_eta <= $today_time ){
     echo $template->render('candidate_close');
 }else{
-    echo $template->render('index');
+    echo $template->render('index',['candidatureEta' => $candidature_eta]);
 }
