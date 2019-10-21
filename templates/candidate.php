@@ -9,68 +9,79 @@ $this->layout('base', ['title' => $title]);
 
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="candidates.php"><?= __('Candidati') ?></a></li>
-		<li class="breadcrumb-item active" aria-current="page"><?= $titleShort ?></li>
+		<li class="breadcrumb-item"><a href="candidates.php"><?=__('Candidati')?></a></li>
+		<li class="breadcrumb-item active" aria-current="page"><?=$titleShort?></li>
 	</ol>
 </nav>
 
 <?php if($user->status === true): ?>
-<div class="alert alert-success" role="alert">
-	<?= sprintf(__('Candidatura approvata, <a href="%s">passa al colloquio</a>'), 'interviews.php?id=' . $user->id) // It's an int, no risks here ?>
-</div>
+	<div class="alert alert-success" role="alert">
+		<?=sprintf(__('Candidatura approvata, <a href="%s">passa al colloquio</a>'),
+			'interviews.php?id=' . $user->id) // It's an int, no risks here ?>
+	</div>
 <?php elseif($user->status === false): ?>
 	<div class="alert alert-danger" role="alert">
-		<?= __('Candidatura rifiutata') ?>
+		<?=__('Candidatura rifiutata')?>
 	</div>
 <?php endif ?>
 <?php if($user->published): ?>
-<div class="alert alert-info" role="alert">
-	<?= __('Risultati pubblicati, ti consiglio di non modificarli') ?>
-</div>
+	<div class="alert alert-info" role="alert">
+		<?=__('Risultati pubblicati, ti consiglio di non modificarli')?>
+	</div>
 <?php endif ?>
 
-<?= $this->fetch('userinfo', ['user' => $user, 'edit' => $edit]) ?>
+<?=$this->fetch('userinfo', ['user' => $user, 'edit' => $edit])?>
 
 <?php if(!$edit): ?>
-<form method="post">
-	<div class="form-group">
-		<label for="notes"><b><?= __('Note') ?></b></label>
-		<textarea id="notes" name="notes" cols="40" rows="3" class="form-control"><?= $this->e($user->notes) ?></textarea>
-	</div>
-	<div class="form-group text-center">
-		<?php if(!$user->published): ?>
-			<?php if($user->status !== null): ?>
-				<button name="limbo" value="true" type="submit" class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
-				<?php if($user->status === false): ?>
-					<button name="publishnow" value="true" type="submit" class="btn btn-primary"><?=__('Pubblica')?></button>
-				<?php endif ?>
+	<form method="post">
+		<div class="form-group">
+			<label for="notes"><b><?=__('Note')?></b></label>
+			<textarea id="notes" name="notes" cols="40" rows="3"
+					class="form-control"><?=$this->e($user->notes)?></textarea>
+		</div>
+		<div class="form-group text-center">
+			<?php if(!$user->published): ?>
+				<?php if($user->status !== null): ?>
+					<button name="limbo" value="true" type="submit"
+							class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
+					<?php if($user->status === false): ?>
+						<button name="publishnow" value="true" type="submit"
+								class="btn btn-primary"><?=__('Pubblica')?></button>
+					<?php endif ?>
 				<?php else: ?>
-				<button name="approve" value="true" type="submit" class="btn btn-success"><?=__('Approva candidatura')?></button>
-				<button name="reject" value="true" type="submit" class="btn btn-danger"><?=__('Rifiuta candidatura')?></button>
+					<button name="approve" value="true" type="submit"
+							class="btn btn-success"><?=__('Approva candidatura')?></button>
+					<button name="reject" value="true" type="submit"
+							class="btn btn-danger"><?=__('Rifiuta candidatura')?></button>
+				<?php endif ?>
 			<?php endif ?>
-		<?php endif ?>
-		<button name="save" value="true" type="submit" class="btn btn-outline-primary"><?=__('Salva note')?></button>
-		<a class="btn btn-outline-secondary" href="<?= $this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => 'true'])) ?>"><?=__('Modifica dati')?></a>
-	</div>
-</form>
+			<button name="save" value="true" type="submit"
+					class="btn btn-outline-primary"><?=__('Salva note')?></button>
+			<a class="btn btn-outline-secondary"
+					href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'],
+						['edit' => 'true']))?>"><?=__('Modifica dati')?></a>
+		</div>
+	</form>
 <?php endif ?>
 <?php if(!$edit && !$user->emailed && $user->status === true): ?>
 	<form method="post">
 		<div class="form-group">
-			<label for="recruiter"><?= __('Recruiter') ?></label>
+			<label for="recruiter"><?=__('Recruiter')?></label>
 			<select id="recruiter" name="recruiter" required="required" class="form-control">
 				<?php
 				$hit = false;
 				foreach($recruiters as $recruiter):
 					if($user->recruiter === $recruiter[0]):
 						$hit = true;
-					?>
-						<option value="<?= $this->e($recruiter[1]) . '|' . $this->e($recruiter[0]) ?>" selected><?= $this->e($recruiter[0]) ?> (@<?= $this->e($recruiter[1]) ?>)</option>
-					<?php else:	?>
-						<option value="<?= $this->e($recruiter[1]) . '|' . $this->e($recruiter[0]) ?>"><?= $this->e($recruiter[0]) ?> (@<?= $this->e($recruiter[1]) ?>)</option>
+						?>
+						<option value="<?=$this->e($recruiter[1]) . '|' . $this->e($recruiter[0])?>"
+								selected><?=$this->e($recruiter[0])?> (@<?=$this->e($recruiter[1])?>)
+						</option>
+					<?php else: ?>
+						<option value="<?=$this->e($recruiter[1]) . '|' . $this->e($recruiter[0])?>"><?=$this->e($recruiter[0])?> (@<?=$this->e($recruiter[1])?>)</option>
 					<?php endif; endforeach; ?>
 				<?php if(!$hit): ?>
-				<option disabled hidden selected class="d-none"></option>
+					<option disabled hidden selected class="d-none"></option>
 				<?php endif ?>
 			</select>
 		</div>
@@ -85,11 +96,12 @@ $this->layout('base', ['title' => $title]);
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="email"><b><?= __('Email') ?></b></label>
+			<label for="email"><b><?=__('Email')?></b></label>
 			<textarea id="email" name="email" rows="10" class="form-control" required></textarea>
 		</div>
 		<div class="form-group text-center">
-			<button name="publishnow" value="true" type="submit" class="btn btn-primary"><?=__('Pubblica e manda email')?></button>
+			<button name="publishnow" value="true" type="submit"
+					class="btn btn-primary"><?=__('Pubblica e manda email')?></button>
 		</div>
 	</form>
 	<script>
@@ -98,8 +110,17 @@ $this->layout('base', ['title' => $title]);
 		let subject = document.getElementById('subject');
 		let firstname = document.getElementById('name').value;
 		let lang = 'it-IT';
-		document.getElementById('email-it-btn').addEventListener('click', (e) => {e.preventDefault(); lang = 'it-IT'; templatize();});
-		document.getElementById('email-en-btn').addEventListener('click', (e) => {e.preventDefault(); lang = 'en-US'; templatize();});
+		document.getElementById('email-it-btn').addEventListener('click', (e) => {
+			e.preventDefault();
+			lang = 'it-IT';
+			templatize();
+		});
+		document.getElementById('email-en-btn').addEventListener('click', (e) => {
+			e.preventDefault();
+			lang = 'en-US';
+			templatize();
+		});
+
 		function templatize() {
 			if(recruiter.value === '') {
 				mail.value = '';
@@ -135,23 +156,25 @@ Team WEEE Open
 			}
 			mail.dispatchEvent(new Event('input'));
 		}
+
 		recruiter.addEventListener('change', templatize.bind(null));
 		templatize();
 	</script>
 <?php elseif($user->emailed && $user->published && $user->status === true): ?>
 	<div class="alert alert-info" role="alert">
-		<?= sprintf(__('Mail inviata da %s'), $user->recruiter); ?>
+		<?=sprintf(__('Mail inviata da %s'), $user->recruiter);?>
 	</div>
 <?php endif ?>
 <?php if(!$edit && $user->status === true): ?>
 	<form method="post">
 		<?php if($user->invitelink !== null): ?>
 			<div class="alert alert-info" role="alert">
-				<?= sprintf(__('Link d\'invito: %s'), $user->invitelink); ?>
+				<?=sprintf(__('Link d\'invito: %s'), $user->invitelink);?>
 			</div>
 		<?php endif ?>
 		<div class="form-group text-center">
-			<button name="invite" value="true" type="submit" class="btn btn-primary"><?=__('Genera link d\'invito')?></button>
+			<button name="invite" value="true" type="submit"
+					class="btn btn-primary"><?=__('Genera link d\'invito')?></button>
 		</div>
 	</form>
 <?php endif ?>

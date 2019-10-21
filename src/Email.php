@@ -11,6 +11,7 @@ class Email {
 	public static function sendMail(string $to, string $subject, string $body) {
 		if(defined('TEST_MODE') && TEST_MODE) {
 			error_log("Test mode enabled, NOT sending email to $to, subject: $subject\nBody:\n$body");
+
 			return;
 		}
 

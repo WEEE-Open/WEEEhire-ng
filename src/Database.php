@@ -102,6 +102,7 @@ class Database {
 			if($row === false) {
 				throw new DatabaseException("Config value $option not found");
 			}
+
 			return $row['value'];
 		} else {
 			throw new DatabaseException();

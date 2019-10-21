@@ -16,7 +16,14 @@ class Ldap {
 	private $apcu = false;
 	public static $multivalued = ['memberof' => true, 'sshpublickey' => true, 'weeelabnickname' => true];
 
-	public function __construct(string $url, string $bindDn, string $password, string $usersDn, string $invitesDn, bool $startTls = true) {
+	public function __construct(
+		string $url,
+		string $bindDn,
+		string $password,
+		string $usersDn,
+		string $invitesDn,
+		bool $startTls = true
+	) {
 		$this->url = $url;
 		$this->bindDn = $bindDn;
 		$this->password = $password;
@@ -32,6 +39,7 @@ class Ldap {
 	public function getRecruiters(): array {
 		if(TEST_MODE) {
 			error_log('Test mode enabled, returning sample data');
+
 			return [
 				['Alice', 'ali'],
 				['Bob', 'b0b'],
@@ -79,6 +87,7 @@ class Ldap {
 				/** @noinspection PhpComposerExtensionStubsInspection */
 				apcu_store('recruiters', $recruiters, 3600); // 1 hour
 			}
+
 			return $recruiters;
 		}
 	}
@@ -92,32 +101,34 @@ class Ldap {
 	public function createInvite(User $user): string {
 		$inviteCode = strtoupper(bin2hex(random_bytes(12)));
 		$add = [
-			'cn' => $user->name . ' ' . $user->surname, // Mandatory attribute
-			'objectclass' => [
+			'cn'                      => $user->name . ' ' . $user->surname, // Mandatory attribute
+			'objectclass'             => [
 				'inviteCodeContainer',
 				'schacLinkageIdentifiers',
 				'schacPersonalCharacteristics',
 				'telegramAccount',
 				'weeeOpenPerson',
 			],
-			'givenname' => $user->name,
-			'sn' => $user->surname,
-			'mail' => Utils::politoMail($user->matricola),
+			'givenname'               => $user->name,
+			'sn'                      => $user->surname,
+			'mail'                    => Utils::politoMail($user->matricola),
 			'schacpersonaluniquecode' => $user->matricola,
-			'degreecourse' => $user->degreecourse
+			'degreecourse'            => $user->degreecourse
 		];
 
 		if(TEST_MODE) {
 			error_log('Test mode enabled, not creating an invite. I would have inserted:');
 			error_log(print_r($add, true));
+
 			return WEEEHIRE_INVITE_LINK . $inviteCode;
 		}
-		
+
 		$ds = $this->connect();
 		$result = ldap_add($ds, "inviteCode=$inviteCode," . $this->invitesDn, $add);
 		if(!$result) {
 			throw new LdapException('Cannot create invite');
 		}
+
 		return WEEEHIRE_INVITE_LINK . $inviteCode;
 	}
 
@@ -131,6 +142,7 @@ class Ldap {
 				$things[$attr] = $v[0];
 			}
 		}
+
 		return $things;
 	}
 
@@ -138,6 +150,7 @@ class Ldap {
 	private function connect() {
 		if(TEST_MODE) {
 			error_log('Test mode enabled, not connecting to LDAP');
+
 			return null;
 		}
 
@@ -153,6 +166,7 @@ class Ldap {
 		if(!ldap_bind($ds, $this->bindDn, $this->password)) {
 			throw new LdapException('Bind with LDAP server failed');
 		}
+
 		return $ds;
 	}
 

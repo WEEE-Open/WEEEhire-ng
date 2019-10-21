@@ -14,10 +14,12 @@ class Template {
 
 		_setlocale(LC_MESSAGES, $locale);
 		_textdomain('messages');
-		_bindtextdomain('messages', __DIR__ . DIRECTORY_SEPARATOR .  '..' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'locale');
+		_bindtextdomain('messages',
+			__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'locale');
 		//_bind_textdomain_codeset('messages', 'UTF-8');
 
 		$engine = new Engine('..' . DIRECTORY_SEPARATOR . 'templates');
+
 		return $engine;
 	}
 
@@ -26,10 +28,12 @@ class Template {
 
 		_setlocale(LC_MESSAGES, self::getLocale());
 		_textdomain('messages');
-		_bindtextdomain('messages', __DIR__ . DIRECTORY_SEPARATOR .  '..' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'locale');
+		_bindtextdomain('messages',
+			__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'locale');
 		//_bind_textdomain_codeset('messages', 'UTF-8');
 
 		$engine = new Engine('..' . DIRECTORY_SEPARATOR . 'templates');
+
 		return $engine;
 	}
 
@@ -43,6 +47,7 @@ class Template {
 		$locale = self::getLocaleNotCached();
 		$_SESSION['locale'] = $locale;
 		session_write_close();
+
 		return $locale;
 	}
 

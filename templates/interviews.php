@@ -15,7 +15,7 @@ $later = [];
 $prevdate = null;
 ?>
 
-<?= $this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser]) ?>
+<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser])?>
 
 <h2><?=__('Colloqui fissati')?></h2>
 <table id="interviews" class="table">
@@ -78,48 +78,55 @@ $prevdate = null;
 			$prevdate = $date;
 			?>
 			<tr class="table-secondary">
-				<td colspan="5"><?= sprintf(__('Giorno %s (%s)'), $date, $this->fetch('day', ['day' => $int['when']->format('N')])) ?></td>
+				<td colspan="5"><?=sprintf(__('Giorno %s (%s)'), $date,
+						$this->fetch('day', ['day' => $int['when']->format('N')]))?></td>
 			</tr>
 			<?php
 		}
 
 		?>
-		<tr <?= $trcolor ?>>
-			<td><a href="/interviews.php?id=<?= $int['id'] ?>"><?= $this->e($int['name']) ?></a></td>
-			<td><?= $this->e($int['area']) ?></td>
-			<td><?= $time ?></td>
-			<td><?= $this->e($int['interviewer']) ?></td>
-			<td <?= $tdcolor ?>><?= $statusCell ?></td>
+		<tr <?=$trcolor?>>
+			<td><a href="/interviews.php?id=<?=$int['id']?>"><?=$this->e($int['name'])?></a></td>
+			<td><?=$this->e($int['area'])?></td>
+			<td><?=$time?></td>
+			<td><?=$this->e($int['interviewer'])?></td>
+			<td <?=$tdcolor?>><?=$statusCell?></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>
 </table>
 <h2><?=__('Colloqui da fissare')?></h2>
 <table id="interviews" class="table">
-<thead class="thead-dark">
-<tr>
-	<th><?=__('Nome')?></th>
-	<th><?=__('Interesse')?></th>
-	<th><?=__('Recruiter che ha approvato')?></th>
-</tr>
-</thead>
-<tbody>
+	<thead class="thead-dark">
+	<tr>
+		<th><?=__('Nome')?></th>
+		<th><?=__('Interesse')?></th>
+		<th><?=__('Recruiter che ha approvato')?></th>
+	</tr>
+	</thead>
+	<tbody>
 	<?php foreach($later as $int): ?>
 		<tr>
-			<td><a href="/interviews.php?id=<?= $int['id'] ?>"><?= $this->e($int['name']) ?></a></td>
-			<td><?= $this->e($int['area']) ?></td>
-			<td><?= $this->e($int['recruiter']) ?></td>
+			<td><a href="/interviews.php?id=<?=$int['id']?>"><?=$this->e($int['name'])?></a></td>
+			<td><?=$this->e($int['area'])?></td>
+			<td><?=$this->e($int['recruiter'])?></td>
 		</tr>
 	<?php endforeach; ?>
-</tbody>
+	</tbody>
 </table>
 
 <ul class="list-group mt-3">
-	<li class="list-group-item"><?= sprintf(_ngettext('%d candidato per il colloquio', '%d candidati per i colloqui', $total), $total); ?></li>
-	<li class="list-group-item list-group-item-primary"><?= sprintf(_ngettext('%d da fissare', '%d da fissare', $toschedule), $toschedule); ?></li>
-	<li class="list-group-item"><?= sprintf(_ngettext('%d colloquio fissato', '%d colloqui fissati', $scheduled), $scheduled); ?></li>
-	<li class="list-group-item list-group-item-success"><?= sprintf(_ngettext('%d approvato', '%d approvati', $approved), $approved); ?></li>
-	<li class="list-group-item list-group-item-danger"><?= sprintf(_ngettext('%d rifiutato', '%d rifiutati', $rejected), $rejected); ?></li>
-	<li class="list-group-item"><?= sprintf(_ngettext('%d da invitare', '%d da invitare', $toinvite), $toinvite); ?></li>
-	<li class="list-group-item list-group-item-success"><?= sprintf(_ngettext('%d invitato', '%d invitati', $invited), $invited); ?></li>
+	<li class="list-group-item"><?=sprintf(_ngettext('%d candidato per il colloquio', '%d candidati per i colloqui',
+			$total), $total);?></li>
+	<li class="list-group-item list-group-item-primary"><?=sprintf(_ngettext('%d da fissare', '%d da fissare',
+			$toschedule), $toschedule);?></li>
+	<li class="list-group-item"><?=sprintf(_ngettext('%d colloquio fissato', '%d colloqui fissati', $scheduled),
+			$scheduled);?></li>
+	<li class="list-group-item list-group-item-success"><?=sprintf(_ngettext('%d approvato', '%d approvati', $approved),
+			$approved);?></li>
+	<li class="list-group-item list-group-item-danger"><?=sprintf(_ngettext('%d rifiutato', '%d rifiutati', $rejected),
+			$rejected);?></li>
+	<li class="list-group-item"><?=sprintf(_ngettext('%d da invitare', '%d da invitare', $toinvite), $toinvite);?></li>
+	<li class="list-group-item list-group-item-success"><?=sprintf(_ngettext('%d invitato', '%d invitati', $invited),
+			$invited);?></li>
 </ul>

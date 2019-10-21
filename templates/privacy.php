@@ -3,7 +3,9 @@
 <h1>Informazioni sul trattamento dei dati personali (privacy policy)</h1>
 <p>In questa pagina si descrivono le modalità e le logiche del trattamento dei dati personali degli utenti (di seguito, gli "utenti") che interagendo con il sito join.weeeopen.it (di seguito il "sito") forniscono i propri dati personali, ai sensi dell'articolo 13 del Regolamento (UE) 2016/679.</p>
 <h2>Titolare del trattamento</h2>
-<p>Titolare del trattamento è il Team WEEE Open, associazione non riconosciuta ai sensi degli articoli del 36, 37 e 38 del Codice civile. I contatti del Team WEEE Open sono disponibili sulla pagina "<a href="http://weeeopen.polito.it/contatti.html">contatti</a>" del sito web weeeopen.polito.it oppure all'indirizzo di posta elettronica composto dalla stringa <i>weeeopen</i> seguita dal simbolo @ seguito dal dominio <i>polito.it</i>.</p>
+<p>Titolare del trattamento è il Team WEEE Open, associazione non riconosciuta ai sensi degli articoli del 36, 37 e 38 del Codice civile. I contatti del Team WEEE Open sono disponibili sulla pagina "<a
+			href="http://weeeopen.polito.it/contatti.html">contatti</a>" del sito web weeeopen.polito.it oppure all'indirizzo di posta elettronica composto dalla stringa
+	<i>weeeopen</i> seguita dal simbolo @ seguito dal dominio <i>polito.it</i>.</p>
 <h2>Tipi di dati trattati</h2>
 <p>Sono trattati i dati comunicati dall'utente tramite la compilazione e l'invio, esplicito e volontario, dei moduli presenti sul sito, in aggiunta all'indirizzo email.</p>
 <p>L'indirizzo email degli utenti viene ottenuto concatenando la matricola, inserita dagli utenti nei moduli, alla stringa "@studenti.polito.it" o "@polito.it" a seconda del tipo di matricola immesso nei moduli.</p>

@@ -2,7 +2,7 @@
 /** @var string $day */
 switch($day) {
 	case '1':
-		echo  __('Lunedì');
+		echo __('Lunedì');
 		break;
 	case '2':
 		echo __('Martedì');

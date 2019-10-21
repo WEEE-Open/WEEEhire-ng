@@ -116,7 +116,8 @@ if(isset($_GET['id'])) {
 		}
 	}
 
-	echo $template->render('candidate', ['user' => $user, 'edit' => isset($_GET['edit']), 'recruiters' => $ldap->getRecruiters()]);
+	echo $template->render('candidate',
+		['user' => $user, 'edit' => isset($_GET['edit']), 'recruiters' => $ldap->getRecruiters()]);
 	exit;
 } else {
 	if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -138,5 +139,6 @@ if(isset($_GET['id'])) {
 	}
 
 	$users = $db->getAllUsersForTable();
-	echo $template->render('candidates', ['users' => $users, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
+	echo $template->render('candidates',
+		['users' => $users, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
 }

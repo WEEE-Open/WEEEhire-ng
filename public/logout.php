@@ -35,5 +35,6 @@ if(isset($token) && isset($locale)) {
 	// Perform local sign out
 	http_response_code(500);
 	$template = Template::create();
-	echo $template->render('error', ['message' => 'ID Token is missing, cannot perform single log out: you are still logged in to other applications!']);
+	echo $template->render('error',
+		['message' => 'ID Token is missing, cannot perform single log out: you are still logged in to other applications!']);
 }

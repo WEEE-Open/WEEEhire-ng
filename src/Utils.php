@@ -24,6 +24,7 @@ class Utils {
 			}
 		}
 		$newQuery = http_build_query($query);
+
 		return "$url?$newQuery";
 	}
 
@@ -59,6 +60,7 @@ class Utils {
 			$_SESSION['expires'] = 0;
 			$valid = false;
 		}
+
 		return $valid;
 	}
 
@@ -68,6 +70,7 @@ class Utils {
 		if(!$enabled && !TEST_MODE) {
 			error_log('APCu is not enabled, please enable it, I beg you!');
 		}
+
 		return $enabled;
 	}
 }

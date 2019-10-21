@@ -42,7 +42,10 @@ if(isset($_GET['id'])) {
 
 	if(!$user->status || !$user->published) {
 		http_response_code(400);
-		echo $template->render('error', ['message' => sprintf(__('È necessario approvare e pubblicare la candidatura di %s per accedere a questa pagina. Torna alla <a href="/candidates.php?id=%d">pagina di gestione candidato</a>.'), $user->name, $user->id)]);
+		echo $template->render('error', [
+			'message' => sprintf(__('È necessario approvare e pubblicare la candidatura di %s per accedere a questa pagina. Torna alla <a href="/candidates.php?id=%d">pagina di gestione candidato</a>.'),
+				$user->name, $user->id)
+		]);
 		exit;
 	}
 
@@ -77,7 +80,8 @@ if(isset($_GET['id'])) {
 				exit;
 			}
 			$recruiter = explode('|', $recruiter, 2);
-			$when = DateTime::createFromFormat("Y-m-d H:i", $_POST['when1'] . ' ' . $_POST['when2'], new DateTimeZone('Europe/Rome'));
+			$when = DateTime::createFromFormat("Y-m-d H:i", $_POST['when1'] . ' ' . $_POST['when2'],
+				new DateTimeZone('Europe/Rome'));
 			$db->setInterviewSchedule($interview->id, $recruiter[1], $recruiter[0], $when);
 			$changed = true;
 		} elseif(isset($_POST['unsetinterview'])) {
@@ -103,20 +107,27 @@ if(isset($_GET['id'])) {
 		}
 	}
 
-	echo $template->render('interview', ['user' => $user, 'interview' => $interview, 'edit' => isset($_GET['edit']), 'recruiters' => $ldap->getRecruiters()]);
+	echo $template->render('interview', [
+		'user'       => $user,
+		'interview'  => $interview,
+		'edit'       => isset($_GET['edit']),
+		'recruiters' => $ldap->getRecruiters()
+	]);
 	exit;
 } else {
-//	if($_SERVER['REQUEST_METHOD'] === 'POST') {
-//
-//	}
+	//	if($_SERVER['REQUEST_METHOD'] === 'POST') {
+	//
+	//	}
 
 	if(isset($_GET['byrecruiter'])) {
 		$interviews = $db->getAllAssignedInterviewsForTable();
-		echo $template->render('interviewsbyrecruiter', ['interviews' => $interviews, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
+		echo $template->render('interviewsbyrecruiter',
+			['interviews' => $interviews, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
 		exit;
 	} else {
 		$interviews = $db->getAllInterviewsForTable();
-		echo $template->render('interviews', ['interviews' => $interviews, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
+		echo $template->render('interviews',
+			['interviews' => $interviews, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
 		exit;
 	}
 }

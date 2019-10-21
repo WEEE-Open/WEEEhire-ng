@@ -54,6 +54,7 @@ class User {
 		foreach($attrs as $attr) {
 			$this->$attr = $post[$attr];
 		}
+
 		return true;
 	}
 }
