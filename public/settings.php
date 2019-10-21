@@ -2,6 +2,10 @@
 
 namespace WEEEOpen\WEEEHire;
 
+use DateTime;
+use DateTimeZone;
+use Exception;
+
 require '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 require '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 
@@ -33,13 +37,30 @@ if(defined('TEST_MODE') && TEST_MODE) {
 
 $db = new Database();
 
+$error = null;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $scadenzaNew = strtotime($_POST['scadenzaDate']);
-    $db->setScadenzaCandidature($scadenzaNew);
-}else if ($_GET['reset'] == 1) {
-    $db->clearScadenza();
+	if(isset($_POST['noexpiry'])) {
+		$db->unsetConfigValue('expiry');
+		http_response_code(303);
+		header('Location: /settings.php');
+		exit;
+	} elseif(isset($_POST['expiry'])) {
+		try {
+			$expiryNew = new DateTime($_POST['expiry'], new DateTimeZone('Europe/Rome'));
+			$db->setConfigValue('expiry', $expiryNew);
+			http_response_code(303);
+			header('Location: /settings.php');
+			exit;
+		} catch(Exception $e) {
+			$error = $e->getMessage();
+		}
+	}
+}
+$expiry = $db->getConfigValue('expiry');
+if($expiry !== null) {
+	/** @noinspection PhpUnhandledExceptionInspection */
+	$expiry = new DateTime('@' . $expiry, new DateTimeZone('Europe/Rome'));
 }
 
-$scadenzaOld = $db->getCandidature();
-
-echo $template->render('settings', ['users' => $users, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn'], 'scadenzaOld' => $scadenzaOld]);
+echo $template->render('settings', ['myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn'], 'expiry' => $expiry, 'error' => $error]);

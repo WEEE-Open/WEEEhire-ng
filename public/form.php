@@ -11,21 +11,12 @@ $template = Template::create();
 
 $db = new Database();
 
-try {
-    $candidature_eta = $db->getCandidature();
-} catch(DatabaseException $e) {
-    http_response_code(500);
-    echo $template->render('form', ['error' => 'database']);
-    exit;
-} catch(Exception $e) {
-    http_response_code(500);
-    echo $template->render('form', ['error' => 'wtf']);
-    exit;
-}
+$expiry = $db->getConfigValue('expiry');
 
-if($candidature_eta <= time() && $candidature_eta !== null) {
-    echo $template->render('candidate_close');
-    exit;
+// Get from DB -> if "unixtime.now >= expiry date" then candidate_close : else show the form
+if($expiry !== null && time() >= $expiry) {
+	echo $template->render('candidate_close');
+	exit;
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {

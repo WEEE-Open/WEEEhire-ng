@@ -33,4 +33,5 @@ CREATE TABLE config
 (
 	id VARCHAR not NULL primary key,
 	value bigint
-)
+);
+INSERT INTO config (id, value) VALUES ('expiry', NULL);

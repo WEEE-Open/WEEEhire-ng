@@ -91,40 +91,41 @@ class Database {
 		return $user;
 	}
 
-	public function getCandidature() {
-		$stmt = $this->db->prepare('SELECT value FROM config WHERE id = :id');
-		$stmt->bindValue(':id', 'scadenza', SQLITE3_TEXT);
+	public function getConfigValue(string $option) {
+		$stmt = $this->db->prepare("SELECT value FROM config WHERE id = :id");
+		$stmt->bindValue(':id', $option, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if($result instanceof SQLite3Result) {
 			$row = $result->fetchArray(SQLITE3_ASSOC);
 			$result->finalize();
+
+			if($row === false) {
+				throw new DatabaseException("Config value $option not found");
+			}
 			return $row['value'];
 		} else {
 			throw new DatabaseException();
 		}
 	}
 
-	public function clearScadenza(){
-        try{
-            $stmt = $this->db->prepare('UPDATE config SET value = :value WHERE id = :id');
-            $stmt->bindValue(':value', null, SQLITE3_NULL);
-            $stmt->bindValue(':id', 'scadenza', SQLITE3_TEXT);
-            $stmt->execute();
-        } catch (DatabaseException $ex) {
-            echo $ex->getMessage();
-        }
-    }
+	public function unsetConfigValue(string $option) {
+		$stmt = $this->db->prepare('UPDATE config SET value = null WHERE id = :id');
+		$stmt->bindValue(':id', $option, SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
 
-    public function setScadenzaCandidature( int $newScadenza) {
-	    try{
-        $stmt = $this->db->prepare('UPDATE config SET value = :value WHERE id = :id');
-        $stmt->bindValue(':value', $newScadenza, SQLITE3_INTEGER);
-        $stmt->bindValue(':id', 'scadenza', SQLITE3_TEXT);
-        $stmt->execute();
-        } catch (DatabaseException $ex) {
-            echo $ex->getMessage();
-        }
-    }
+	public function setConfigValue(string $option, DateTime $datetime) {
+		$stmt = $this->db->prepare('UPDATE config SET value = :value WHERE id = :id');
+		$stmt->bindValue(':value', $datetime->getTimestamp(), SQLITE3_INTEGER);
+		$stmt->bindValue(':id', $option, SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
 
 	public function validateToken(int $id, string $token): bool {
 		$stmt = $this->db->prepare('SELECT token FROM users WHERE id = :id LIMIT 1');
