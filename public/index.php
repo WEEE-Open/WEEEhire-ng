@@ -8,8 +8,9 @@ require '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.ph
 $db = new Database();
 $candidature_eta = 0;
 $today_time = time();
+
 try {
-    $candidature_eta = $db->checkCandidature();
+    $candidature_eta = $db->getCandidature();
 } catch(DatabaseException $e) {
     http_response_code(500);
     echo $template->render('form', ['error' => 'database']);

@@ -8,5 +8,6 @@
 		<a class="nav-item nav-link" href="candidates.php"><?=__('Candidati')?></a>
 		<a class="nav-item nav-link active" href="interviews.php"><?=__('Colloqui')?></a>
 		<a class="nav-item nav-link active" href="interviews.php?byrecruiter=true"><?=__('Recruiter')?></a>
-	</div>
+        <a class="nav-item nav-link active" href="settings.php"><?=__('Settings')?></a>
+    </div>
 </nav>
