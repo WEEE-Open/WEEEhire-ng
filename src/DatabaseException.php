@@ -1,8 +1,6 @@
 <?php
 
-
 namespace WEEEOpen\WEEEHire;
-
 
 use RuntimeException;
 
