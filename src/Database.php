@@ -104,6 +104,17 @@ class Database {
 		}
 	}
 
+	public function clearScadenza(){
+        try{
+            $stmt = $this->db->prepare('UPDATE config SET value = :value WHERE id = :id');
+            $stmt->bindValue(':value', null, SQLITE3_NULL);
+            $stmt->bindValue(':id', 'scadenza', SQLITE3_TEXT);
+            $stmt->execute();
+        } catch (DatabaseException $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
     public function setScadenzaCandidature( int $newScadenza) {
 	    try{
         $stmt = $this->db->prepare('UPDATE config SET value = :value WHERE id = :id');

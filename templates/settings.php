@@ -4,7 +4,7 @@
 /** @var $myuser string */
 /** @var $scadenzaOld DateTime */
 
-$this->layout('base', ['title' => __('Opzioni WEEEHire'), 'datatables' => true]); //TODO: Controllare user -- VEDI TODO IN TEMPLATES
+$this->layout('base', ['title' => __('Opzioni WEEEHire'), 'datatables' => true]);
 ?>
 
 <?= $this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser]) ?>
@@ -17,8 +17,16 @@ $this->layout('base', ['title' => __('Opzioni WEEEHire'), 'datatables' => true])
         <table class="table table-striped">
             <tbody>
             <tr>
-                <td class="align-middle"><?= __('Scadenza Candidature ') ?><b>(<?php echo $scadenzaOld->format('d-m-Y') ?>) :</b></td>
+                <td class="align-middle"><?= __('Scadenza Candidature ') ?>
+                    <b>(
+                        <?php if ($scadenzaOld === null) echo 'Nessuna Scadenza';
+                            else {
+                                $scadenzaOld = new \DateTime("@$scadenzaOld");
+                                echo $scadenzaOld->format('d-m-Y');
+                            }?>
+                        ) :</b></td>
                 <td><input type='date' class="form-control" name="scadenzaDate" /></td>
+                <td><button type="button" class="btn btn-outline-danger" onclick="location='settings.php?reset=1'">&#x274C;</button></td>
             </tr>
             </tbody>
         </table>

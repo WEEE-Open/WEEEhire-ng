@@ -32,5 +32,5 @@ create unique index users_matricola_uindex
 CREATE TABLE config 
 (
 	id VARCHAR not NULL primary key,
-	value bigint not NULL
+	value bigint
 )

@@ -33,26 +33,13 @@ if(defined('TEST_MODE') && TEST_MODE) {
 
 $db = new Database();
 
-if(isset($_GET['id'])) {
-    $ldap = new Ldap(WEEEHIRE_LDAP_URL, WEEEHIRE_LDAP_BIND_DN, WEEEHIRE_LDAP_PASSWORD, WEEEHIRE_LDAP_USERS_DN,
-        WEEEHIRE_LDAP_INVITES_DN, WEEEHIRE_LDAP_STARTTLS);
-    $id = (int)$_GET['id'];
-    $user = $db->getUser($id);
-
-    if ($user === null) {
-        http_response_code(404);
-        echo $template->render('error', ['message' => 'Invalid user ID']);
-        exit;
-    }
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $scadenzaNew = strtotime($_POST['scadenzaDate']);
     $db->setScadenzaCandidature($scadenzaNew);
+}else if ($_GET['reset'] == 1) {
+    $db->clearScadenza();
 }
 
-//TODO: Controllare tutti i controlli di accesso lato admin da candidates per esempio (chiedi a Ludo)
-$unixOld = $db->getCandidature();
-$scadenzaOld = new \DateTime("@$unixOld");
+$scadenzaOld = $db->getCandidature();
 
 echo $template->render('settings', ['users' => $users, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn'], 'scadenzaOld' => $scadenzaOld]);
