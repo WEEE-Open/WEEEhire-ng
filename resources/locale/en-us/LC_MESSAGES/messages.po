@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-19 16:08+0200\n"
-"PO-Revision-Date: 2019-10-19 16:09+0200\n"
+"POT-Creation-Date: 2019-10-22 22:53+0200\n"
+"PO-Revision-Date: 2019-10-22 22:58+0200\n"
 "Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
 "Language-Team: Italian <>\n"
 "Language: en-us\n"
@@ -17,30 +17,44 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 19.08.1\n"
 
-#: templates/adminnavbar.php:6
+#: templates/adminnavbar.php:7
 #, php-format
 msgid "Ciao, %s (%s)"
 msgstr "Hi, %s (%s)"
 
-#: templates/adminnavbar.php:8 templates/candidate.php:12
+#: templates/adminnavbar.php:10 templates/candidate.php:12
 #: templates/candidates.php:5 templates/candidates.php:16
 #: templates/interviews.php:5
 msgid "Candidati"
 msgstr "Candidates"
 
-#: templates/adminnavbar.php:9 templates/interview.php:13
+#: templates/adminnavbar.php:11 templates/interview.php:13
 msgid "Colloqui"
 msgstr "Interviews"
 
-#: templates/adminnavbar.php:10 templates/candidate.php:60
-#: templates/candidates.php:23 templates/interview.php:41
+#: templates/adminnavbar.php:12 templates/candidate.php:69
+#: templates/candidates.php:23 templates/interview.php:43
 #: templates/interviewsbyrecruiter.php:5 templates/interviewsbyrecruiter.php:13
 msgid "Recruiter"
 msgstr "Recruiter"
 
-#: templates/adminnavbar.php:11 templates/logout.php:1 templates/logout.php:3
+#: templates/adminnavbar.php:13
+msgid "Impostazioni"
+msgstr "Settings"
+
+#: templates/adminnavbar.php:14 templates/logout.php:1 templates/logout.php:3
 msgid "Logout"
 msgstr "Logout"
+
+#: templates/candidate_close.php:3
+msgid "Candidature chiuse"
+msgstr "Applications are closed"
+
+#: templates/candidate_close.php:4
+msgid ""
+"Ci dispiace, ma le candidature in questo periodo sono chiuse. Riprova in "
+"futuro."
+msgstr "Sorry, but applications are closed right now. Try again in the future."
 
 #: templates/candidate.php:5 templates/interview.php:6
 #, php-format
@@ -57,77 +71,77 @@ msgstr "%s's application"
 msgid "Candidatura approvata, <a href=\"%s\">passa al colloquio</a>"
 msgstr "Approved application, <a href=\"%s\">go to the interview page</a>"
 
-#: templates/candidate.php:23
+#: templates/candidate.php:24
 msgid "Candidatura rifiutata"
 msgstr "Candidate rejected"
 
-#: templates/candidate.php:28
+#: templates/candidate.php:29
 msgid "Risultati pubblicati, ti consiglio di non modificarli"
 msgstr "Results already published, I suggest you don't edit them"
 
-#: templates/candidate.php:37
+#: templates/candidate.php:38
 msgid "Note"
 msgstr "Notes"
 
-#: templates/candidate.php:43 templates/interview.php:96
+#: templates/candidate.php:46 templates/interview.php:112
 msgid "Rimanda nel limbo"
 msgstr "Send back to limbo"
 
-#: templates/candidate.php:45
+#: templates/candidate.php:49
 msgid "Pubblica"
 msgstr "Publish"
 
-#: templates/candidate.php:48
+#: templates/candidate.php:53
 msgid "Approva candidatura"
 msgstr "Approve"
 
-#: templates/candidate.php:49
+#: templates/candidate.php:55
 msgid "Rifiuta candidatura"
 msgstr "Reject"
 
-#: templates/candidate.php:52
+#: templates/candidate.php:59
 msgid "Salva note"
 msgstr "Save notes"
 
-#: templates/candidate.php:53 templates/interview.php:80
+#: templates/candidate.php:62 templates/interview.php:91
 msgid "Modifica dati"
 msgstr "Edit info"
 
-#: templates/candidate.php:78
+#: templates/candidate.php:89
 msgid "Oggetto"
 msgstr "Subject"
 
-#: templates/candidate.php:88
+#: templates/candidate.php:99
 msgid "Email"
 msgstr "Email"
 
-#: templates/candidate.php:92
+#: templates/candidate.php:104
 msgid "Pubblica e manda email"
 msgstr "Publish and send email"
 
-#: templates/candidate.php:143
+#: templates/candidate.php:165
 #, php-format
 msgid "Mail inviata da %s"
 msgstr "Mail sent by %s"
 
-#: templates/candidate.php:150 templates/interview.php:104
+#: templates/candidate.php:172 templates/interview.php:120
 #, php-format
 msgid "Link d'invito: %s"
 msgstr "Invite link: %s"
 
-#: templates/candidate.php:154 templates/interview.php:108
+#: templates/candidate.php:177 templates/interview.php:125
 msgid "Genera link d'invito"
 msgstr "Generate an invite link"
 
-#: templates/candidates.php:20 templates/form.php:29
-#: templates/interviews.php:24 templates/interviews.php:101
+#: templates/candidates.php:20 templates/form.php:31
+#: templates/interviews.php:24 templates/interviews.php:102
 #: templates/userinfo.php:13
 msgid "Nome"
 msgstr "Name"
 
-#: templates/candidates.php:21 templates/form.php:140
-#: templates/interviews.php:25 templates/interviews.php:102
-#: templates/userinfo.php:37
+#: templates/candidates.php:21 templates/form.php:143
+#: templates/interviews.php:25 templates/interviews.php:103
+#: templates/userinfo.php:42
 msgid "Interesse"
 msgstr "Preference"
 
@@ -159,54 +173,54 @@ msgstr "Rejected, published"
 msgid "Rifiutata, da pubblicare"
 msgstr "Rejected, not yet published"
 
-#: templates/candidates.php:77
+#: templates/candidates.php:78
 msgid "Pubblica rifiutati"
 msgstr "Publish rejected"
 
-#: templates/candidates.php:88
+#: templates/candidates.php:90
 msgid "Cancella"
 msgstr "Delete"
 
-#: templates/candidates.php:89
+#: templates/candidates.php:91
 msgid "Cancella candidati più vecchi di tot giorni (solo pubblicati)"
 msgstr "Delete older than n days (published only)"
 
-#: templates/candidates.php:94
+#: templates/candidates.php:96
 #, php-format
 msgid "%d candidato in totale"
 msgid_plural "%d candidati totali"
 msgstr[0] "%d candidate"
 msgstr[1] "%d candidates"
 
-#: templates/candidates.php:95
+#: templates/candidates.php:98
 #, php-format
 msgid "%d da valutare"
 msgid_plural "%d da valutare"
 msgstr[0] "%d to be decided"
 msgstr[1] "%d to be decided"
 
-#: templates/candidates.php:96 templates/interviews.php:121
+#: templates/candidates.php:100 templates/interviews.php:125
 #, php-format
 msgid "%d approvato"
 msgid_plural "%d approvati"
 msgstr[0] "%d approved"
 msgstr[1] "%d approved"
 
-#: templates/candidates.php:97 templates/interviews.php:122
+#: templates/candidates.php:102 templates/interviews.php:127
 #, php-format
 msgid "%d rifiutato"
 msgid_plural "%d rifiutati"
 msgstr[0] "%d rejected"
 msgstr[1] "%d rejected"
 
-#: templates/candidates.php:98
+#: templates/candidates.php:104
 #, php-format
 msgid "%d da pubblicare"
 msgid_plural "%d da pubblicare"
 msgstr[0] "%d to be published"
 msgstr[1] "%d to be published"
 
-#: templates/candidates.php:99
+#: templates/candidates.php:106
 #, php-format
 msgid "%d pubblicato"
 msgid_plural "%d pubblicati"
@@ -293,7 +307,7 @@ msgstr ""
 "Error connecting to database. If the problem continues, you can contact us "
 "at %s"
 
-#: templates/form.php:18
+#: templates/form.php:19
 msgid ""
 "Hai già inviato una candidatura con questa matricola. Puoi controllare la "
 "pagina con lo stato dal link che ti abbiamo mandato via email."
@@ -301,7 +315,7 @@ msgstr ""
 "You already applied with this \"matricola\". You can check the status page "
 "from the link we sent you via email."
 
-#: templates/form.php:21
+#: templates/form.php:22
 #, php-format
 msgid ""
 "Si è rotto qualcosa (o hai rotto qualcosa?) durante l'invio. Puoi "
@@ -310,91 +324,91 @@ msgstr ""
 "Something broke (or you did broke something?) while submitting the form. You "
 "can contact us at %s and tell us what happened, if you want."
 
-#: templates/form.php:33 templates/userinfo.php:17
+#: templates/form.php:35 templates/userinfo.php:18
 msgid "Cognome"
 msgstr "Surname"
 
-#: templates/form.php:39 templates/userinfo.php:23
+#: templates/form.php:41 templates/userinfo.php:25
 msgid "Corso di laurea"
 msgstr "Academic Program"
 
-#: templates/form.php:42
+#: templates/form.php:44
 msgid "Ingegneria (L, LM)"
 msgstr "Engineering (L, LM)"
 
-#: templates/form.php:81
+#: templates/form.php:83
 msgid "Design (L, LM)"
 msgstr "Design (L, LM)"
 
-#: templates/form.php:85
+#: templates/form.php:87
 msgid "Architettura e pianificazione urbanistica (L, LM)"
 msgstr "Architecture and urban planning (L, LM)"
 
-#: templates/form.php:97
+#: templates/form.php:99
 msgid "Dottorato (tutti i settori)"
 msgstr "PhD (all subjects)"
 
-#: templates/form.php:122 templates/userinfo.php:27
+#: templates/form.php:124 templates/userinfo.php:30
 msgid "Anno"
 msgstr "Year"
 
-#: templates/form.php:126
+#: templates/form.php:128
 msgid "1º Triennale"
 msgstr "1st Bachelor's degree"
 
-#: templates/form.php:127
+#: templates/form.php:129
 msgid "2º Triennale"
 msgstr "2nd Bachelor's degree"
 
-#: templates/form.php:128
+#: templates/form.php:130
 msgid "3º Triennale"
 msgstr "3rd Bachelor's degree"
 
-#: templates/form.php:129
+#: templates/form.php:131
 msgid "1º Magistrale"
 msgstr "1st Master's degree"
 
-#: templates/form.php:130
+#: templates/form.php:132
 msgid "2º Magistrale"
 msgstr "2nd Master's degree"
 
-#: templates/form.php:131
+#: templates/form.php:133
 msgid "Dottorato"
 msgstr "PhD"
 
-#: templates/form.php:136 templates/userinfo.php:33
+#: templates/form.php:138 templates/userinfo.php:37
 msgid "Matricola"
 msgstr "Matricola"
 
-#: templates/form.php:144
+#: templates/form.php:147
 msgid "Riparazione Hardware"
 msgstr "Hardware Repairs"
 
-#: templates/form.php:145
+#: templates/form.php:148
 msgid "Elettronica"
 msgstr "Electronics"
 
-#: templates/form.php:146
+#: templates/form.php:149
 msgid "Sviluppo Software"
 msgstr "Software Development"
 
-#: templates/form.php:147
+#: templates/form.php:150
 msgid "Riuso creativo"
 msgstr "Creative Reuse"
 
-#: templates/form.php:148
+#: templates/form.php:151
 msgid "Pubbliche relazioni"
 msgstr "Public relations"
 
-#: templates/form.php:149
+#: templates/form.php:152
 msgid "Altro"
 msgstr "Other"
 
-#: templates/form.php:154 templates/userinfo.php:43
+#: templates/form.php:157 templates/userinfo.php:49
 msgid "Lettera motivazionale"
 msgstr "Motivational letter"
 
-#: templates/form.php:157
+#: templates/form.php:160
 msgid ""
 "\n"
 "<p>Seleziona l'area del team che più ti interessa e qui compariranno delle "
@@ -404,7 +418,7 @@ msgstr ""
 "<p>Select the area of the team that you like and you'll see some guidelines "
 "for the letter here.</p>\n"
 
-#: templates/form.php:162
+#: templates/form.php:165
 msgid ""
 "\n"
 "<p>Descrivi qualsiasi tua esperienza di riparazione di computer (fissi o "
@@ -430,7 +444,7 @@ msgstr ""
 "<p>These <strong>are just guidelines</strong>, write anything that you "
 "consider relevant.</p>\n"
 
-#: templates/form.php:171
+#: templates/form.php:174
 msgid ""
 "\n"
 "<p>Uno degli obiettivi del team è la progettazione di strumenti elettronici "
@@ -468,7 +482,7 @@ msgstr ""
 "<p>These <strong>are just guidelines</strong>, write anything that you "
 "consider relevant.</p>\n"
 
-#: templates/form.php:181
+#: templates/form.php:184
 msgid ""
 "\n"
 "<p>Parla di qualsiasi tua esperienza nello scrivere software. Va bene anche "
@@ -506,7 +520,7 @@ msgstr ""
 "<p>These <strong>are just guidelines</strong>, write anything that you "
 "consider relevant.</p>\n"
 
-#: templates/form.php:191
+#: templates/form.php:194
 msgid ""
 "\n"
 "<p>Non tutti i computer che ci arrivano sono riparabili, ma vorremmo "
@@ -536,7 +550,7 @@ msgstr ""
 "<p>These <strong>are just guidelines</strong>, write anything that you "
 "consider relevant.</p>\n"
 
-#: templates/form.php:201
+#: templates/form.php:204
 msgid ""
 "\n"
 "<p>Descrivi qualsiasi tua esperienza nel gestire pagine o profili (e.g. "
@@ -563,7 +577,7 @@ msgstr ""
 "<p>These <strong>are just guidelines</strong>, write anything that you "
 "consider relevant.</p>\n"
 
-#: templates/form.php:210
+#: templates/form.php:213
 msgid ""
 "\n"
 "<p>Stupiscici.</p>\n"
@@ -571,7 +585,7 @@ msgstr ""
 "\n"
 "<p>Surprise us.</p>\n"
 
-#: templates/form.php:219
+#: templates/form.php:223
 #, php-format
 msgid ""
 "Dovresti leggere le <a href=\"%s\">Informazioni sul trattamento dei dati "
@@ -581,13 +595,13 @@ msgstr ""
 "You should read our <a href=\"%s\">Privacy policy</a> and at least skim over "
 "the <a href=\"%s\">Join the team</a> page on our website before applying."
 
-#: templates/form.php:222
+#: templates/form.php:229
 msgid ""
 "Ho letto le Informazioni sul trattamento dei dati personali e accetto le "
 "condizioni lì delineate"
 msgstr "I read the Privacy Policy and accept its conditions"
 
-#: templates/form.php:226
+#: templates/form.php:235
 msgid ""
 "Dichiaro che tutte le informazioni inserite sono corrette e ho dato "
 "un'occhiata alla pagina \"Entra nel team\" sul sito"
@@ -595,15 +609,15 @@ msgstr ""
 "I declare that all the inserted information are correct and that I've at "
 "least skimmed the \"Join the team\" page on the website"
 
-#: templates/form.php:232
+#: templates/form.php:241
 msgid "Invia"
 msgstr "Send"
 
-#: templates/index.php:3
+#: templates/index.php:6
 msgid "Entra in WEEE Open"
 msgstr "Join WEEE Open"
 
-#: templates/index.php:4
+#: templates/index.php:7
 msgid ""
 "Compila il questionario per fare richiesta di ammissione in team. Premi il "
 "bottone qui sotto per iniziare."
@@ -611,9 +625,41 @@ msgstr ""
 "Fill the application form if you want to join the team. Press the button "
 "below to start."
 
-#: templates/index.php:6
-msgid "Inizia"
-msgstr "Begin"
+#: templates/index.php:40
+msgid "Le candidature si chiuderanno tra meno di un'ora, affrettati!"
+msgstr "Applications will close in less than an hour, hurry up!"
+
+#: templates/index.php:42
+msgid "Le candidature si chiuderanno tra 1 ora."
+msgstr "Applications will close in 1 hour."
+
+#: templates/index.php:44
+msgid "Le candidature si chiuderanno tra ${hours} ore."
+msgstr "Applications will close in ${hours} hours."
+
+#: templates/index.php:48
+msgid "Le candidature si chiuderanno tra 1 giorno."
+msgstr "Applications will close in 1 day."
+
+#: templates/index.php:50
+msgid "Le candidature si chiuderanno tra 1 giorno e 1 ora."
+msgstr "Applications will close in 1 day and 1 hour."
+
+#: templates/index.php:52
+msgid "Le candidature si chiuderanno tra 1 giorno e ${hours} ore."
+msgstr "Applications will close in 1 day and ${hours} hours."
+
+#: templates/index.php:56
+msgid "Le candidature si chiuderanno tra ${days} giorni."
+msgstr "Applications will close in ${days} days."
+
+#: templates/index.php:58
+msgid "Le candidature si chiuderanno tra ${days} giorni e 1 ora."
+msgstr "Applications will close in ${days} days and 1 hour."
+
+#: templates/index.php:60
+msgid "Le candidature si chiuderanno tra ${days} giorni e ${hours} ore."
+msgstr "Applications will close in ${days} days and ${hours} hours."
 
 #: templates/interview.php:7
 #, php-format
@@ -641,39 +687,39 @@ msgid ""
 msgstr ""
 "Interview scheduled for %s at %s with <a href=\"https://t.me/%s\">%s</a>"
 
-#: templates/interview.php:60
+#: templates/interview.php:64
 msgid "Data"
 msgstr "Date"
 
-#: templates/interview.php:64 templates/interviews.php:26
+#: templates/interview.php:70 templates/interviews.php:26
 msgid "Ora"
 msgstr "Time"
 
-#: templates/interview.php:70
+#: templates/interview.php:78
 msgid "Fissa colloquio"
 msgstr "Schedule interview"
 
-#: templates/interview.php:71
+#: templates/interview.php:80
 msgid "Annulla colloquio"
 msgstr "Cancel interview"
 
-#: templates/interview.php:84
+#: templates/interview.php:95
 msgid "Note e domande per il colloquio"
 msgstr "Notes and questions for the interview"
 
-#: templates/interview.php:88
+#: templates/interview.php:100
 msgid "Risposte e commenti vari post-colloquio"
 msgstr "Answers and comments after the interview"
 
-#: templates/interview.php:93 templates/interviews.php:48
+#: templates/interview.php:107 templates/interviews.php:48
 msgid "Colloquio passato"
 msgstr "Interview passed"
 
-#: templates/interview.php:94 templates/interviews.php:51
+#: templates/interview.php:109 templates/interviews.php:51
 msgid "Colloquio fallito"
 msgstr "Interview failed"
 
-#: templates/interview.php:98
+#: templates/interview.php:114
 msgid "Salva"
 msgstr "Save"
 
@@ -699,43 +745,43 @@ msgstr "Done by"
 msgid "Colloquio passato, con link d'invito"
 msgstr "Interview passed, with invite link"
 
-#: templates/interviews.php:97
+#: templates/interviews.php:98
 msgid "Colloqui da fissare"
 msgstr "Interviews to be scheduled"
 
-#: templates/interviews.php:103
+#: templates/interviews.php:104
 msgid "Recruiter che ha approvato"
 msgstr "Recruiter that approved"
 
-#: templates/interviews.php:118
+#: templates/interviews.php:119
 #, php-format
 msgid "%d candidato per il colloquio"
 msgid_plural "%d candidati per i colloqui"
 msgstr[0] "%d candidate for interview"
 msgstr[1] "%d candidates for interviews"
 
-#: templates/interviews.php:119
+#: templates/interviews.php:121
 #, php-format
 msgid "%d da fissare"
 msgid_plural "%d da fissare"
 msgstr[0] "%d to be scheduled"
 msgstr[1] "%d to be scheduled"
 
-#: templates/interviews.php:120
+#: templates/interviews.php:123
 #, php-format
 msgid "%d colloquio fissato"
 msgid_plural "%d colloqui fissati"
 msgstr[0] "%d interview scheduled"
 msgstr[1] "%d interviews scheduled"
 
-#: templates/interviews.php:123
+#: templates/interviews.php:129
 #, php-format
 msgid "%d da invitare"
 msgid_plural "%d da invitare"
 msgstr[0] "%d to invite"
 msgstr[1] "%d to invite"
 
-#: templates/interviews.php:124
+#: templates/interviews.php:130
 #, php-format
 msgid "%d invitato"
 msgid_plural "%d invitati"
@@ -749,6 +795,33 @@ msgstr "Logout done"
 #: templates/privacy.php:1
 msgid "Informazioni sul trattamento dei dati personali"
 msgstr "Privacy Policy"
+
+#: templates/settings.php:6 templates/settings.php:18
+msgid "Opzioni WEEEHire"
+msgstr "WEEEHire options"
+
+#: templates/settings.php:19
+msgid ""
+"Modifica scadenza candidature e altri parametri di configurazione WEEEHire"
+msgstr ""
+"Edit applications expiry time and other configuration parameters for WEEEHire"
+
+#: templates/settings.php:24
+#, php-format
+msgid "Scadenza Candidature <b>(%s)</b>"
+msgstr "Applications expiry <b>(%s)</b>"
+
+#: templates/settings.php:25
+msgid "Nessuna Scadenza"
+msgstr "no expiry"
+
+#: templates/settings.php:34 templates/settings.php:38
+msgid "Conferma"
+msgstr "Confirm"
+
+#: templates/settings.php:40
+msgid "Elimina"
+msgstr "Delete"
 
 #: templates/status.php:3 templates/status.php:6
 msgid "Stato della richiesta"
@@ -769,44 +842,47 @@ msgstr ""
 "contact %1$s (<a href=\"https://t.me/%2$s\">@%2$s</a>) on Telegram to "
 "schedule an interview."
 
-#: templates/status.php:11
+#: templates/status.php:12
 msgid "Domanda respinta"
 msgstr "Rejected"
 
-#: templates/status.php:13
+#: templates/status.php:14
 msgid "Valutazione in corso"
 msgstr "Evaluation in progress"
 
-#: templates/status.php:14
+#: templates/status.php:15
 msgid ""
 "Salva questa pagina nei preferiti e torna a controllare lo stato più avanti."
 msgstr ""
 "Save this page in your favorites and come back later to check the status."
 
-#: templates/status.php:20
+#: templates/status.php:21
 #, php-format
 msgid "Candidatura inviata il %1$s alle %2$s"
 msgstr "Form sent on %1$s at %2$s"
 
-#: templates/status.php:24
+#: templates/status.php:27
 msgid "Elimina candidatura"
 msgstr "Delete my application"
 
-#: templates/status.php:25
+#: templates/status.php:30
 msgid "Scarica tutti i miei dati"
 msgstr "Download all my data"
 
-#: templates/status.php:28
+#: templates/status.php:33
 msgid "Visto come siamo GDPR-compliant?"
 msgstr "We're very GDPR-compliant, aren't we?"
 
-#: templates/userinfo.php:48
+#: templates/userinfo.php:55
 msgid "Aggiorna dati"
 msgstr "Update info"
 
-#: templates/userinfo.php:49
+#: templates/userinfo.php:58
 msgid "Annulla"
 msgstr "Cancel"
+
+#~ msgid "Inizia"
+#~ msgstr "Begin"
 
 #~ msgid "Candidatura approvata"
 #~ msgstr "Candidate approved"
