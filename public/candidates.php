@@ -105,6 +105,26 @@ if(isset($_GET['id'])) {
 					$db->setPublished($id, true);
 					$changed = true;
 				}
+			} else {
+				if(isset($_POST['approvefromhold'])) {
+					$db->setStatus($id, true, $_SESSION['cn'] ?? null);
+					// Leave on hold (so the application cannot be deleted)
+					//$db->setHold($id, false);
+					// Unpublish so we can choose a recruiter
+					$db->setPublished($id, false);
+					// Should have already been false
+					$db->setEmailed($id, false);
+					$db->saveNotes($id, $notes);
+					$changed = true;
+				} elseif($_POST['holdon']) {
+					$db->saveNotes($id, $notes);
+					$db->setHold($id, true);
+					$changed = true;
+				} elseif($_POST['holdoff']) {
+					$db->saveNotes($id, $notes);
+					$db->setHold($id, false);
+					$changed = true;
+				}
 			}
 		}
 		if($changed) {

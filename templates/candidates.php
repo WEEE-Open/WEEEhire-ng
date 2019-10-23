@@ -43,6 +43,9 @@ $published = 0;
 		if($user['notes']) {
 			$statusCell .= ' 📝';
 		}
+		if($user['hold']) {
+			$statusCell .= ' 🔒';
+		}
 		if($user['status'] === true) {
 			$tdcolor = 'class="table-success"';
 		} elseif($user['status'] === false) {

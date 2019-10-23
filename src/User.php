@@ -43,6 +43,10 @@ class User {
 	 * @var $invitelink string|null Invite link for final registration
 	 */
 	public $invitelink;
+	/**
+	 * @var $hold int Hold for the future
+	 */
+	public $hold;
 
 	public function fromPost(array $post) {
 		$attrs = ['name', 'surname', 'degreecourse', 'year', 'matricola', 'area', 'letter'];

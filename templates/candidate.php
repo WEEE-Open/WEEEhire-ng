@@ -54,6 +54,13 @@ $this->layout('base', ['title' => $title]);
 					<button name="reject" value="true" type="submit"
 							class="btn btn-danger"><?=__('Rifiuta candidatura')?></button>
 				<?php endif ?>
+			<?php elseif($user->published && $user->status === false): ?>
+				<?php if($user->hold): ?>
+					<button name="approvefromhold" value="true" type="submit" class="btn btn-success"><?=__('Approva candidatura')?></button>
+					<button name="holdoff" value="true" type="submit" class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
+				<?php else: ?>
+					<button name="holdon" value="true" type="submit" class="btn btn-secondary"><?=__('Metti in lista d\'attesa')?></button>
+				<?php endif ?>
 			<?php endif ?>
 			<button name="save" value="true" type="submit"
 					class="btn btn-outline-primary"><?=__('Salva note')?></button>

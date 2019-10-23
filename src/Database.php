@@ -26,7 +26,7 @@ class Database {
 	public function addUser(User $user): array {
 		$token = bin2hex(random_bytes(10));
 
-		$stmt = $this->db->prepare('INSERT INTO users (token, name, surname, degreecourse, year, matricola, area, letter, submitted) VALUES (:token, :namep, :surname, :degreecourse, :yearp, :matricola, :area, :letter, :submitted)');
+		$stmt = $this->db->prepare('INSERT INTO users (token, name, surname, degreecourse, year, matricola, area, letter, submitted, hold) VALUES (:token, :namep, :surname, :degreecourse, :yearp, :matricola, :area, :letter, :submitted, :hold)');
 		$stmt->bindValue(':token', password_hash($token, PASSWORD_DEFAULT), SQLITE3_TEXT);
 		$stmt->bindValue(':namep', $user->name, SQLITE3_TEXT);
 		$stmt->bindValue(':surname', $user->surname, SQLITE3_TEXT);
@@ -36,6 +36,7 @@ class Database {
 		$stmt->bindValue(':area', $user->area, SQLITE3_TEXT);
 		$stmt->bindValue(':letter', $user->letter, SQLITE3_TEXT);
 		$stmt->bindValue(':submitted', $user->submitted);
+		$stmt->bindValue(':hold', $user->hold);
 		if(!$stmt->execute()) {
 			if($this->db->lastErrorCode() === 19 && stristr($this->db->lastErrorMsg(), 'matricola')) {
 				throw new DuplicateUserException();
@@ -49,7 +50,7 @@ class Database {
 	}
 
 	public function getUser(string $id): ?User {
-		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status, recruiter, recruitertg, submitted, notes, emailed, invitelink FROM users WHERE id = :id LIMIT 1');
+		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status, hold, recruiter, recruitertg, submitted, notes, emailed, invitelink FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if($result === false) {
@@ -73,6 +74,7 @@ class Database {
 				'letter',
 				'published',
 				'status',
+				'hold',
 				'recruiter',
 				'recruitertg',
 				'submitted',
@@ -152,7 +154,7 @@ class Database {
 	}
 
 	public function getAllUsersForTable() {
-		$result = $this->db->query('SELECT id, name, surname, area, recruiter, published, status, submitted, IFNULL(LENGTH(notes), 0) as notesl FROM users ORDER BY submitted DESC');
+		$result = $this->db->query('SELECT id, name, surname, area, recruiter, published, status, submitted, hold, IFNULL(LENGTH(notes), 0) as notesl FROM users ORDER BY submitted DESC');
 		$compact = [];
 		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			$compact[] = [
@@ -160,6 +162,7 @@ class Database {
 				'name'      => $row['name'] . ' ' . $row['surname'],
 				'area'      => $row['area'],
 				'recruiter' => $row['recruiter'],
+				'hold'      => (bool) $row['hold'],
 				'notes'     => (bool) $row['notesl'],
 				'published' => (bool) $row['published'],
 				'status'    => $row['status'] === null ? null : (bool) $row['status'],
@@ -197,6 +200,16 @@ class Database {
 		} else {
 			$stmt->bindValue(':recruiter', $recruiter, SQLITE3_TEXT);
 		}
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	public function setHold(int $id, bool $hold) {
+		$stmt = $this->db->prepare('UPDATE users SET hold = :hold WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		$stmt->bindValue(':hold', $hold, SQLITE3_INTEGER);
 		$result = $stmt->execute();
 		if($result === false) {
 			throw new DatabaseException();
@@ -267,8 +280,12 @@ class Database {
 		}
 	}
 
-	public function deleteOlderThan(int $days) {
-		$stmt = $this->db->prepare("DELETE FROM users WHERE published = 1 AND strftime('%s','now') - submitted >= :diff");
+	public function deleteOlderThan(int $days, bool $deleteHold = false) {
+		if($deleteHold) {
+			$stmt = $this->db->prepare( "DELETE FROM users WHERE published = 1 AND strftime('%s','now') - submitted >= :diff" );
+		} else {
+			$stmt = $this->db->prepare( "DELETE FROM users WHERE published = 1 AND hold = 0 AND strftime('%s','now') - submitted >= :diff" );
+		}
 		$stmt->bindValue(':diff', $days * 24 * 60 * 60, SQLITE3_INTEGER);
 		$result = $stmt->execute();
 		if($result === false) {
