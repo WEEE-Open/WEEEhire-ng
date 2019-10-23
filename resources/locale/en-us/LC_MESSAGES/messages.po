@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-22 22:53+0200\n"
-"PO-Revision-Date: 2019-10-22 22:58+0200\n"
-"Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
-"Language-Team: Italian <>\n"
+"POT-Creation-Date: 2019-10-23 19:33+0200\n"
+"PO-Revision-Date: 2019-10-23 19:37+0200\n"
+"Last-Translator: Quel Tale <lvps@users.noreply.github.com>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: en-us\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 19.08.1\n"
+"X-Generator: Lokalize 19.08.2\n"
 
 #: templates/adminnavbar.php:7
 #, php-format
@@ -32,7 +32,7 @@ msgstr "Candidates"
 msgid "Colloqui"
 msgstr "Interviews"
 
-#: templates/adminnavbar.php:12 templates/candidate.php:69
+#: templates/adminnavbar.php:12 templates/candidate.php:76
 #: templates/candidates.php:23 templates/interview.php:43
 #: templates/interviewsbyrecruiter.php:5 templates/interviewsbyrecruiter.php:13
 msgid "Recruiter"
@@ -91,7 +91,7 @@ msgstr "Send back to limbo"
 msgid "Pubblica"
 msgstr "Publish"
 
-#: templates/candidate.php:53
+#: templates/candidate.php:53 templates/candidate.php:59
 msgid "Approva candidatura"
 msgstr "Approve"
 
@@ -99,37 +99,45 @@ msgstr "Approve"
 msgid "Rifiuta candidatura"
 msgstr "Reject"
 
-#: templates/candidate.php:59
+#: templates/candidate.php:60
+msgid "Togli dalla lista d'attesa"
+msgstr "Remove from hold"
+
+#: templates/candidate.php:62
+msgid "Metti in lista d'attesa"
+msgstr "Put on hold"
+
+#: templates/candidate.php:66
 msgid "Salva note"
 msgstr "Save notes"
 
-#: templates/candidate.php:62 templates/interview.php:91
+#: templates/candidate.php:69 templates/interview.php:91
 msgid "Modifica dati"
 msgstr "Edit info"
 
-#: templates/candidate.php:89
+#: templates/candidate.php:96
 msgid "Oggetto"
 msgstr "Subject"
 
-#: templates/candidate.php:99
+#: templates/candidate.php:106
 msgid "Email"
 msgstr "Email"
 
-#: templates/candidate.php:104
+#: templates/candidate.php:111
 msgid "Pubblica e manda email"
 msgstr "Publish and send email"
 
-#: templates/candidate.php:165
+#: templates/candidate.php:172
 #, php-format
 msgid "Mail inviata da %s"
 msgstr "Mail sent by %s"
 
-#: templates/candidate.php:172 templates/interview.php:120
+#: templates/candidate.php:179 templates/interview.php:120
 #, php-format
 msgid "Link d'invito: %s"
 msgstr "Invite link: %s"
 
-#: templates/candidate.php:177 templates/interview.php:125
+#: templates/candidate.php:184 templates/interview.php:125
 msgid "Genera link d'invito"
 msgstr "Generate an invite link"
 
@@ -173,54 +181,54 @@ msgstr "Rejected, published"
 msgid "Rifiutata, da pubblicare"
 msgstr "Rejected, not yet published"
 
-#: templates/candidates.php:78
+#: templates/candidates.php:81
 msgid "Pubblica rifiutati"
 msgstr "Publish rejected"
 
-#: templates/candidates.php:90
+#: templates/candidates.php:93
 msgid "Cancella"
 msgstr "Delete"
 
-#: templates/candidates.php:91
+#: templates/candidates.php:94
 msgid "Cancella candidati più vecchi di tot giorni (solo pubblicati)"
 msgstr "Delete older than n days (published only)"
 
-#: templates/candidates.php:96
+#: templates/candidates.php:99
 #, php-format
 msgid "%d candidato in totale"
 msgid_plural "%d candidati totali"
 msgstr[0] "%d candidate"
 msgstr[1] "%d candidates"
 
-#: templates/candidates.php:98
+#: templates/candidates.php:101
 #, php-format
 msgid "%d da valutare"
 msgid_plural "%d da valutare"
 msgstr[0] "%d to be decided"
 msgstr[1] "%d to be decided"
 
-#: templates/candidates.php:100 templates/interviews.php:125
+#: templates/candidates.php:103 templates/interviews.php:125
 #, php-format
 msgid "%d approvato"
 msgid_plural "%d approvati"
 msgstr[0] "%d approved"
 msgstr[1] "%d approved"
 
-#: templates/candidates.php:102 templates/interviews.php:127
+#: templates/candidates.php:105 templates/interviews.php:127
 #, php-format
 msgid "%d rifiutato"
 msgid_plural "%d rifiutati"
 msgstr[0] "%d rejected"
 msgstr[1] "%d rejected"
 
-#: templates/candidates.php:104
+#: templates/candidates.php:107
 #, php-format
 msgid "%d da pubblicare"
 msgid_plural "%d da pubblicare"
 msgstr[0] "%d to be published"
 msgstr[1] "%d to be published"
 
-#: templates/candidates.php:106
+#: templates/candidates.php:109
 #, php-format
 msgid "%d pubblicato"
 msgid_plural "%d pubblicati"
