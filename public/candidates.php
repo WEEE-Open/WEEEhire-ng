@@ -116,8 +116,16 @@ if(isset($_GET['id'])) {
 		}
 	}
 
+	if (isset($_POST['voted'])) {
+        $db->setEvaluation($id,$_SESSION['uid'],$_SESSION['cn'],$_POST['vote']);
+        header ('Location: ' . $_SERVER['REQUEST_URI']);
+        exit(); //TODO: Ho trovato questa come soluzione per evitare il submit del form via refreshing, vedi se trovi qualcosa di meglio
+	}
+
+	$evaluations = $db->getEvaluation($id);
+
 	echo $template->render('candidate',
-		['user' => $user, 'edit' => isset($_GET['edit']), 'recruiters' => $ldap->getRecruiters()]);
+		['user' => $user, 'edit' => isset($_GET['edit']), 'recruiters' => $ldap->getRecruiters(), 'evaluations' => $evaluations, 'uid' => $_SESSION['uid']]);
 	exit;
 } else {
 	if($_SERVER['REQUEST_METHOD'] === 'POST') {
