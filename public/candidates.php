@@ -116,11 +116,17 @@ if(isset($_GET['id'])) {
 		}
 	}
 
-	if (isset($_POST['voted'])) {
+	if (isset($_POST['voted']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $db->setEvaluation($id,$_SESSION['uid'],$_SESSION['cn'],$_POST['vote']);
         header ('Location: ' . $_SERVER['REQUEST_URI']);
         exit(); //TODO: Ho trovato questa come soluzione per evitare il submit del form via refreshing, vedi se trovi qualcosa di meglio
 	}
+
+    if (isset($_POST['deleted']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        $db->removeEvaluation($id,$_SESSION['uid']);
+        header ('Location: ' . $_SERVER['REQUEST_URI']);
+        exit(); //TODO: Ho trovato questa come soluzione per evitare il submit del form via refreshing, vedi se trovi qualcosa di meglio
+    }
 
 	$evaluations = $db->getEvaluation($id);
 

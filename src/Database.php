@@ -161,6 +161,14 @@ class Database {
         if($result === false) throw new DatabaseException();
     }
 
+    public function removeEvaluation(int $userId, string $idEvaluator) {
+        $stmt = $this->db->prepare("DELETE FROM evaluation WHERE ref_user_id = :id_user AND id_evaluator = :id_eva");
+        $stmt->bindValue(':id_user', $userId, SQLITE3_INTEGER);
+        $stmt->bindValue(':id_eval', $idEvaluator, SQLITE3_TEXT);
+        $result = $stmt->execute();
+        if($result === false) throw new DatabaseException();
+    }
+
 	public function validateToken(int $id, string $token): bool {
 		$stmt = $this->db->prepare('SELECT token FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);

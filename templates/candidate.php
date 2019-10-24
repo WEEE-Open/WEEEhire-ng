@@ -56,7 +56,10 @@ $this->layout('base', ['title' => $title]);
             <tr>
                 <td><?php echo $evaluation['name_evaluator']?></td>
                 <td><?php echo date('Y-m-d H:i:s', $evaluation['date']/1000)?></td>
-                <td class="align-middle"><?php echo $evaluation['vote']?> ⭐</td>
+                <td class="align-middle">
+                    <?php echo $evaluation['vote']?> ⭐
+                    <?php if ( $evaluation['id_evaluator'] == $uid ):?><button type="submit" name="deleted" class="btn btn-outline-danger btn-sm">🗑</button> <?php endif; ?>
+                </td> <!-- TODO: Handling botton per la rimozione del voto -->
             </tr>
             <?php endforeach; ?>
             </tbody>
