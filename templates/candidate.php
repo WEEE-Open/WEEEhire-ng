@@ -41,7 +41,9 @@ $this->layout('base', ['title' => $title]);
     ?>
         <div class="row">
             <div class="col"><h4><?=__('Valutazioni')?></h4></div>
-            <div class="col"><p class="text-right"><?=__('Media Valutazioni: '); echo round($media/sizeof($evaluations),2)?> ⭐</p></div>
+            <div class="col"><p class="text-right"><?=__('Media Valutazioni: ');
+                if (sizeof($evaluations) === 0): echo 0;
+                else: echo round($media/sizeof($evaluations),2); endif; ?> ⭐</p></div>
         </div>
         <table class="table table-striped">
             <thead>
@@ -49,6 +51,7 @@ $this->layout('base', ['title' => $title]);
                 <th scope="col"><?=__('Nome Valutatore')?></th>
                 <th scope="col"><?=__('Data')?></th>
                 <th scope="col"><?=__('Voto')?></th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -56,10 +59,13 @@ $this->layout('base', ['title' => $title]);
             <tr>
                 <td><?php echo $evaluation['name_evaluator']?></td>
                 <td><?php echo date('Y-m-d H:i:s', $evaluation['date']/1000)?></td>
-                <td class="align-middle">
-                    <?php echo $evaluation['vote']?> ⭐
-                    <?php if ( $evaluation['id_evaluator'] == $uid ):?><button type="submit" name="deleted" class="btn btn-outline-danger btn-sm">🗑</button> <?php endif; ?>
-                </td> <!-- TODO: Handling botton per la rimozione del voto -->
+                <td class="align-middle"><?php echo $evaluation['vote']?> ⭐</td> <!-- TODO: Handling botton per la rimozione del voto -->
+                <td><?php if ( $evaluation['id_evaluator'] == $uid ):?>
+                        <form method="post" target="_self">
+                            <input type="hidden" name="id_evaluation" value="<?php echo $evaluation['id_evaluation'] ?>" />
+                            <button type="submit" name="deleted" class="btn btn-outline-danger btn-sm">🗑</button>
+                        </form>
+                    <?php endif; ?></td>
             </tr>
             <?php endforeach; ?>
             </tbody>

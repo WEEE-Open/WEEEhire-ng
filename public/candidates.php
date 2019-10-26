@@ -123,7 +123,7 @@ if(isset($_GET['id'])) {
 	}
 
     if (isset($_POST['deleted']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-        $db->removeEvaluation($id,$_SESSION['uid']);
+        $db->removeEvaluation($_POST["id_evaluation"]);
         header ('Location: ' . $_SERVER['REQUEST_URI']);
         exit(); //TODO: Ho trovato questa come soluzione per evitare il submit del form via refreshing, vedi se trovi qualcosa di meglio
     }

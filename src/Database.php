@@ -137,6 +137,7 @@ class Database {
             while($row = $result->fetchArray(SQLITE3_ASSOC)) {
 
                 $compact[] = [
+                    'id_evaluation'         => $row['id_evaluation'],
                     'id_user'               => $row['ref_user_id'],
                     'id_evaluator'          => $row['id_evaluator'],
                     'name_evaluator'        => $row['desc_evaluator'],
@@ -161,10 +162,9 @@ class Database {
         if($result === false) throw new DatabaseException();
     }
 
-    public function removeEvaluation(int $userId, string $idEvaluator) {
-        $stmt = $this->db->prepare("DELETE FROM evaluation WHERE ref_user_id = :id_user AND id_evaluator = :id_eva");
-        $stmt->bindValue(':id_user', $userId, SQLITE3_INTEGER);
-        $stmt->bindValue(':id_eval', $idEvaluator, SQLITE3_TEXT);
+    public function removeEvaluation(int $id) {
+        $stmt = $this->db->prepare("DELETE FROM evaluation WHERE id_evaluation = :id");
+        $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
         $result = $stmt->execute();
         if($result === false) throw new DatabaseException();
     }
