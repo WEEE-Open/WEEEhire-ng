@@ -136,8 +136,28 @@ if(isset($_GET['id'])) {
 		}
 	}
 
+	if(isset($_POST['voted']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+		$db->setEvaluation($id, $_SESSION['uid'], $_SESSION['cn'], $_POST['vote']);
+		header('Location: ' . $_SERVER['REQUEST_URI']);
+		exit();
+	}
+
+	if(isset($_POST['deleted']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+		$db->removeEvaluation($_POST["id_evaluation"]);
+		header('Location: ' . $_SERVER['REQUEST_URI']);
+		exit();
+	}
+
+	$evaluations = $db->getEvaluation($id);
+
 	echo $template->render('candidate',
-		['user' => $user, 'edit' => isset($_GET['edit']), 'recruiters' => $ldap->getRecruiters()]);
+		[
+			'user'        => $user,
+			'edit'        => isset($_GET['edit']),
+			'recruiters'  => $ldap->getRecruiters(),
+			'evaluations' => $evaluations,
+			'uid'         => $_SESSION['uid']
+		]);
 	exit;
 } else {
 	if($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -35,3 +35,15 @@ CREATE TABLE config
 	value bigint
 );
 INSERT INTO config (id, value) VALUES ('expiry', NULL);
+
+CREATE TABLE evaluation
+(
+    id_evaluation integer primary key autoincrement,
+    ref_user_id     integer,
+    id_evaluator    varchar,
+    desc_evaluator  varchar not null,
+    date            timestamp,
+    vote            integer not null,
+
+    foreign key (ref_user_id) references users (id)
+)

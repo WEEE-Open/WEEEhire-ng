@@ -130,6 +130,53 @@ class Database {
 		}
 	}
 
+	public function getEvaluation(int $userId) {
+		$stmt = $this->db->prepare("SELECT * FROM evaluation WHERE ref_user_id = :id");
+		$stmt->bindValue(':id', $userId, SQLITE3_INTEGER);
+		$result = $stmt->execute();
+		if($result instanceof SQLite3Result) {
+			$compact = [];
+			while($row = $result->fetchArray(SQLITE3_ASSOC)) {
+
+				$compact[] = [
+					'id_evaluation'  => $row['id_evaluation'],
+					'id_user'        => $row['ref_user_id'],
+					'id_evaluator'   => $row['id_evaluator'],
+					'name_evaluator' => $row['desc_evaluator'],
+					'date'           => $row['date'],
+					'vote'           => $row['vote'],
+				];
+			}
+
+			return $compact;
+
+		} else {
+			throw new DatabaseException();
+		}
+	}
+
+	public function setEvaluation(int $userId, string $idEvaluator, string $descEvaluator, int $vote) {
+		$stmt = $this->db->prepare("INSERT INTO evaluation (ref_user_id, id_evaluator, desc_evaluator, date, vote) VALUES (:id_user, :id_eval, :desc_eval, :time, :vote)");
+		$stmt->bindValue(':id_user', $userId, SQLITE3_INTEGER);
+		$stmt->bindValue(':id_eval', $idEvaluator, SQLITE3_TEXT);
+		$stmt->bindValue(':desc_eval', $descEvaluator, SQLITE3_TEXT);
+		$stmt->bindValue(':time', time() * 1000, SQLITE3_INTEGER);
+		$stmt->bindValue(':vote', $vote, SQLITE3_INTEGER);
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	public function removeEvaluation(int $id) {
+		$stmt = $this->db->prepare("DELETE FROM evaluation WHERE id_evaluation = :id");
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
 	public function validateToken(int $id, string $token): bool {
 		$stmt = $this->db->prepare('SELECT token FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
