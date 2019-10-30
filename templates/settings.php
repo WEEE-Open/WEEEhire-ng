@@ -19,7 +19,7 @@ $this->layout('base', ['title' => __('Opzioni WEEEHire'), 'datatables' => true])
 	<p><i><?=__('Modifica scadenza candidature e altri parametri di configurazione WEEEHire')?></i></p>
 	<form method="post">
 		<div class="form-group row">
-			<div class="<?= $expiry === null ? 'col-sm-12 col-lg-8' : 'col-sm-12 col-lg-6' ?>">
+			<div class="<?=$expiry === null ? 'col-sm-12 col-lg-8' : 'col-sm-12 col-lg-6'?>">
 				<label for="expiry">
 					<?=sprintf(__('Scadenza Candidature <b>(%s)</b>'),
 						$expiry === null ? __('Nessuna Scadenza') : $expiry->format('d-m-Y'))?>
