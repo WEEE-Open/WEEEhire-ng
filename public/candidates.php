@@ -105,26 +105,6 @@ if(isset($_GET['id'])) {
 					$db->setPublished($id, true);
 					$changed = true;
 				}
-			} else {
-				if(isset($_POST['approvefromhold'])) {
-					$db->setStatus($id, true, $_SESSION['cn'] ?? null);
-					// Leave on hold (so the application cannot be deleted)
-					//$db->setHold($id, false);
-					// Unpublish so we can choose a recruiter
-					$db->setPublished($id, false);
-					// Should have already been false
-					$db->setEmailed($id, false);
-					$db->saveNotes($id, $notes);
-					$changed = true;
-				} elseif($_POST['holdon']) {
-					$db->saveNotes($id, $notes);
-					$db->setHold($id, true);
-					$changed = true;
-				} elseif($_POST['holdoff']) {
-					$db->saveNotes($id, $notes);
-					$db->setHold($id, false);
-					$changed = true;
-				}
 			}
 		}
 		if($changed) {
@@ -136,28 +116,22 @@ if(isset($_GET['id'])) {
 		}
 	}
 
-	if(isset($_POST['voted']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-		$db->setEvaluation($id, $_SESSION['uid'], $_SESSION['cn'], $_POST['vote']);
-		header('Location: ' . $_SERVER['REQUEST_URI']);
-		exit();
+	if (isset($_POST['voted']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        $db->setEvaluation($id,$_SESSION['uid'],$_SESSION['cn'],$_POST['vote']);
+        header ('Location: ' . $_SERVER['REQUEST_URI']);
+        exit();
 	}
 
-	if(isset($_POST['deleted']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-		$db->removeEvaluation($_POST["id_evaluation"]);
-		header('Location: ' . $_SERVER['REQUEST_URI']);
-		exit();
-	}
+    if (isset($_POST['deleted']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        $db->removeEvaluation($_POST["id_evaluation"]);
+        header ('Location: ' . $_SERVER['REQUEST_URI']);
+        exit();
+    }
 
 	$evaluations = $db->getEvaluation($id);
 
 	echo $template->render('candidate',
-		[
-			'user'        => $user,
-			'edit'        => isset($_GET['edit']),
-			'recruiters'  => $ldap->getRecruiters(),
-			'evaluations' => $evaluations,
-			'uid'         => $_SESSION['uid']
-		]);
+		['user' => $user, 'edit' => isset($_GET['edit']), 'recruiters' => $ldap->getRecruiters(), 'evaluations' => $evaluations, 'uid' => $_SESSION['uid']]);
 	exit;
 } else {
 	if($_SERVER['REQUEST_METHOD'] === 'POST') {

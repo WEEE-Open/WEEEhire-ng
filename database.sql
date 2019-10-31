@@ -32,9 +32,11 @@ create unique index users_matricola_uindex
 CREATE TABLE config 
 (
 	id VARCHAR not NULL primary key,
-	value bigint
+	value VARCHAR
 );
 INSERT INTO config (id, value) VALUES ('expiry', NULL);
+INSERT INTO config (id, value) VALUES ('rolesUnavailable', NULL);
+
 
 CREATE TABLE evaluation
 (
