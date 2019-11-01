@@ -6,5 +6,6 @@ function getRoles() {
 		'Sviluppo software'    => __('Sviluppo software'),
 		'Riuso creativo'       => __('Riuso creativo'),
 		'Pubbliche relazioni'  => __('Pubbliche relazioni'),
+		'Altro'                => __('Altro'),
 	];
 }

@@ -154,8 +154,6 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			</div>
 			<label for="area" class="col-md-2 col-lg-1 col-form-label"><?=__('Interesse')?></label>
 			<div class="col-md-5 col-lg-6">
-				<?php
-				?>
 				<select id="area" name="area" required="required" class="form-control" onchange="updateHints()">
 					<option value selected disabled class="d-none"></option>
 					<?php foreach($allRoles as $value => $role): ?>
@@ -164,6 +162,11 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				</select>
 			</div>
 		</div>
+<!--		?php if(count($roles) > 0): ?>-->
+<!--		<div class="form-group">-->
+<!--			<p>?= __('Alcune aree del team sono al completo, scegli in maniera saggia per quale candidarti.') ?></p>-->
+<!--		</div>-->
+<!--		?php endif; ?>-->
 		<div class="form-group">
 			<label for="letter"><b><?=__('Lettera motivazionale')?></b></label>
 			<div id="mlet-explain">
