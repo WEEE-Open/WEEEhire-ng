@@ -20,6 +20,7 @@ create table users
 	invitelink text,
 	notes text,
 	interview int,
+	hold int,
 	interviewer text,
 	interviewertg text,
 	interviewstatus int,
@@ -35,6 +36,7 @@ CREATE TABLE config
 	value bigint
 );
 INSERT INTO config (id, value) VALUES ('expiry', NULL);
+INSERT INTO config (id, value) VALUES ('rolesUnavailable', NULL);
 
 CREATE TABLE evaluation
 (

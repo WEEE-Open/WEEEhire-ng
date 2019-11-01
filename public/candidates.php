@@ -151,12 +151,11 @@ if(isset($_GET['id'])) {
 	$evaluations = $db->getEvaluation($id);
 
 	echo $template->render('candidate',
-		[
-			'user'        => $user,
-			'edit'        => isset($_GET['edit']),
-			'recruiters'  => $ldap->getRecruiters(),
-			'evaluations' => $evaluations,
-			'uid'         => $_SESSION['uid']
+		['user'        => $user,
+		 'edit'        => isset($_GET['edit']),
+		 'recruiters'  => $ldap->getRecruiters(),
+		 'evaluations' => $evaluations,
+		 'uid'         => $_SESSION['uid']
 		]);
 	exit;
 } else {

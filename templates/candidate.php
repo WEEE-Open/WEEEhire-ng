@@ -120,10 +120,13 @@ $this->layout('base', ['title' => $title]);
 				<?php endif ?>
 			<?php elseif($user->published && $user->status === false): ?>
 				<?php if($user->hold): ?>
-					<button name="approvefromhold" value="true" type="submit" class="btn btn-success"><?=__('Approva candidatura')?></button>
-					<button name="holdoff" value="true" type="submit" class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
+					<button name="approvefromhold" value="true" type="submit"
+							class="btn btn-success"><?=__('Approva candidatura')?></button>
+					<button name="holdoff" value="true" type="submit"
+							class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
 				<?php else: ?>
-					<button name="holdon" value="true" type="submit" class="btn btn-secondary"><?=__('Metti in lista d\'attesa')?></button>
+					<button name="holdon" value="true" type="submit"
+							class="btn btn-secondary"><?=__('Metti in lista d\'attesa')?></button>
 				<?php endif ?>
 			<?php endif ?>
 			<button name="save" value="true" type="submit"

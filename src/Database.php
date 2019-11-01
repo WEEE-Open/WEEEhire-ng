@@ -120,9 +120,9 @@ class Database {
 		}
 	}
 
-	public function setConfigValue(string $option, DateTime $datetime) {
+	public function setConfigValue(string $option, string $value) {
 		$stmt = $this->db->prepare('UPDATE config SET value = :value WHERE id = :id');
-		$stmt->bindValue(':value', $datetime->getTimestamp(), SQLITE3_INTEGER);
+		$stmt->bindValue(':value', $value, SQLITE3_TEXT);
 		$stmt->bindValue(':id', $option, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if($result === false) {
@@ -329,9 +329,9 @@ class Database {
 
 	public function deleteOlderThan(int $days, bool $deleteHold = false) {
 		if($deleteHold) {
-			$stmt = $this->db->prepare( "DELETE FROM users WHERE published = 1 AND strftime('%s','now') - submitted >= :diff" );
+			$stmt = $this->db->prepare("DELETE FROM users WHERE published = 1 AND strftime('%s','now') - submitted >= :diff");
 		} else {
-			$stmt = $this->db->prepare( "DELETE FROM users WHERE published = 1 AND hold = 0 AND strftime('%s','now') - submitted >= :diff" );
+			$stmt = $this->db->prepare("DELETE FROM users WHERE published = 1 AND hold = 0 AND strftime('%s','now') - submitted >= :diff");
 		}
 		$stmt->bindValue(':diff', $days * 24 * 60 * 60, SQLITE3_INTEGER);
 		$result = $stmt->execute();
