@@ -74,7 +74,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 		header('Location: ' . $_SERVER['REQUEST_URI']);
 		exit();
 	} elseif(isset($_POST['roles'])) {
-		$rolesRule = implode(',', $_POST['roles']);
+		$rolesRule = implode('|', $_POST['roles']);
 		$db->setConfigValue('rolesUnavailable', $rolesRule);
 		http_response_code(303);
 		header('Location: ' . $_SERVER['REQUEST_URI']);

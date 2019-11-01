@@ -4,8 +4,15 @@
 /** @var $expiry String */
 /** @var $rolesUnavailable String */
 
-
-$this->layout('base', ['title' => __('Opzioni WEEEHire'), 'datatables' => true]);
+$this->layout('base', ['title' => __('Opzioni WEEEHire')]);
+require_once 'roles.php';
+$allRoles = getRoles();
+if($rolesUnavailable === null) {
+	$roles = [];
+} else {
+	$roles = explode('|', $rolesUnavailable);
+	$roles = array_combine($roles, $roles);
+}
 ?>
 
 <?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser])?>
@@ -24,7 +31,7 @@ $this->layout('base', ['title' => __('Opzioni WEEEHire'), 'datatables' => true])
 			<div class="<?=$expiry === null ? 'col-sm-12 col-lg-8' : 'col-sm-12 col-lg-6'?>">
 				<label for="expiry">
 					<?=sprintf(__('Scadenza Candidature <b>(%s)</b>'),
-						$expiry === null ? __('Nessuna Scadenza') : $expiry->format('d-m-Y'))?>
+						$expiry === null ? __('nessuna scadenza') : $expiry->format('d-m-Y'))?>
 				</label>
 			</div>
 			<div class="col-sm-6 col-lg-3">
@@ -46,51 +53,40 @@ $this->layout('base', ['title' => __('Opzioni WEEEHire'), 'datatables' => true])
 	</form>
 	<hr>
 	<h4 class="mb-3"><i><?=__('Modifica i ruoli disponibili per i nuovi candidati')?></i></h4>
-	<?php
-	$roles = explode(',', $rolesUnavailable);
-	?>
 	<form method="post">
 		<div class="row justify-content-between">
 			<div class="col">
 				<div class="row">
-					<div class="col" style="border-right:1px solid #d7d7d7;">
-						<h5 style="color: limegreen">Ruoli disponibili</h5>
-						<?php if(!in_array('hardware', $roles)): ?>
-							<p><?=__('Riparazione Hardware')?></p> <?php endif; ?>
-						<?php if(!in_array('electronic', $roles)): ?> <p><?=__('Elettronica')?></p> <?php endif; ?>
-						<?php if(!in_array('development', $roles)): ?>
-							<p><?=__('Sviluppo Software')?></p> <?php endif; ?>
-						<?php if(!in_array('fun', $roles)): ?> <p><?=__('Riuso Creativo')?></p> <?php endif; ?>
-						<?php if(!in_array('relationship', $roles)): ?>
-							<p><?=__('Pubbliche Relazioni')?></p> <?php endif; ?>
+					<div class="col border-right">
+						<h5 class="text-success"><?=__('Ruoli disponibili')?></h5>
+						<?php foreach($allRoles as $value => $role): ?>
+							<?php if(!isset($roles[$value])): ?>
+								<p><?= $this->e($role) ?></p>
+							<?php endif; ?>
+						<?php endforeach; ?>
 					</div>
-					<div class="col" style="border-right:1px solid #d7d7d7;">
-						<h5 style="color: red">Ruoli non disponibili</h5>
-						<?php if(in_array('hardware', $roles)): ?>
-							<p><?=__('Riparazione Hardware')?></p> <?php endif; ?>
-						<?php if(in_array('electronic', $roles)): ?> <p><?=__('Elettronica')?></p> <?php endif; ?>
-						<?php if(in_array('development', $roles)): ?>
-							<p><?=__('Sviluppo Software')?></p> <?php endif; ?>
-						<?php if(in_array('fun', $roles)): ?> <p><?=__('Riuso Creativo')?></p> <?php endif; ?>
-						<?php if(in_array('relationship', $roles)): ?>
-							<p><?=__('Pubbliche Relazioni')?></p> <?php endif; ?>
+					<div class="col border-right">
+						<h5 class="text-danger"><?=__('Ruoli non disponibili')?></h5>
+						<?php foreach($allRoles as $value => $role): ?>
+							<?php if(isset($roles[$value])): ?>
+								<p><?= $this->e($role) ?></p>
+							<?php endif; ?>
+						<?php endforeach; ?>
 					</div>
 				</div>
 			</div>
 			<div class="col ml-3">
 				<div class="row">
-					<select size="5" class="custom-select mb-2" multiple name="roles[]">
-						<option value="hardware"><?=__('Riparazione Hardware')?></option>
-						<option value="electronic"><?=__('Elettronica')?></option>
-						<option value="development"><?=__('Sviluppo Software')?></option>
-						<option value="fun"><?=__('Riuso Creativo')?></option>
-						<option value="relationship"><?=__('Pubbliche Relazioni')?></option>
+					<label for="roles"><?= __('Seleziona i ruoli da rendere non disponibili') ?></label>
+					<select size="5" class="custom-select mb-2" multiple name="roles[]" id="roles">
+						<?php foreach($allRoles as $value => $role): ?>
+							<option <?= isset($roles[$value]) ? 'selected' : '' ?> value="<?= $this->e($value) ?>"><?= $this->e($role) ?></option>
+						<?php endforeach; ?>
 					</select>
 				</div>
 				<div class="row justify-content-between mt-3">
-					<button type="submit" class="btn btn-warning" name="rolesReset"
-							value="1"><?=__('Rendi tutti disponibili')?></button>
-					<button type="submit" class="btn btn-primary"><?=__('Conferma')?></button>
+					<button type="submit" class="btn btn-primary mb-md-0 mb-2"><?=__('Conferma')?></button>
+					<button type="submit" class="btn btn-warning" name="rolesReset" value="true"><?=__('Rendi tutti disponibili')?></button>
 				</div>
 			</div>
 		</div>

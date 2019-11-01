@@ -1,7 +1,15 @@
 <?php
 
-/** @var $rolesUnavailable String */
+/** @var string|null $rolesUnavailable */
 
+if($rolesUnavailable === null) {
+	$roles = [];
+} else {
+	$roles = explode(',', $rolesUnavailable);
+	$roles = array_combine($roles, $roles);
+}
+require_once 'roles.php';
+$allRoles = getRoles();
 $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 
 <div class="col-md-12">
@@ -147,21 +155,12 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			<label for="area" class="col-md-2 col-lg-1 col-form-label"><?=__('Interesse')?></label>
 			<div class="col-md-5 col-lg-6">
 				<?php
-				$roles = explode(',', $rolesUnavailable);
 				?>
 				<select id="area" name="area" required="required" class="form-control" onchange="updateHints()">
 					<option value selected disabled class="d-none"></option>
-					<option <?php if(in_array('hardware', $roles))
-						echo 'disabled' ?> value="Riparazione Hardware"><?=__('Riparazione Hardware')?></option>
-					<option <?php if(in_array('electronic', $roles))
-						echo 'disabled' ?> value="Elettronica"><?=__('Elettronica')?></option>
-					<option <?php if(in_array('development', $roles))
-						echo 'disabled' ?> value="Sviluppo Software"><?=__('Sviluppo Software')?></option>
-					<option <?php if(in_array('fun', $roles))
-						echo 'disabled' ?> value="Riuso-creativo"><?=__('Riuso creativo')?></option>
-					<option <?php if(in_array('relationship', $roles))
-						echo 'disabled' ?> value="Pubbliche-relazioni"><?=__('Pubbliche relazioni')?></option>
-					<!-- option value="Altro"><?=__('Altro')?></option -->
+					<?php foreach($allRoles as $value => $role): ?>
+						<option <?= isset($roles[$value]) ? 'disabled' : '' ?> value="<?= $this->e($value) ?>"><?= $this->e($role) ?></option>
+					<?php endforeach; ?>
 				</select>
 			</div>
 		</div>
