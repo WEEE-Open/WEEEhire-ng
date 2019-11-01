@@ -66,21 +66,21 @@ if($expiry !== null) {
 	$expiryTemp = new DateTime('now', new DateTimeZone('Europe/Rome'));
 	$expiry = $expiryTemp->setTimestamp($expiry);
 }
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rolesReset'])):
-	$db->unsetConfigValue('rolesUnavailable');
-	header('Location: ' . $_SERVER['REQUEST_URI']);
-	exit();
-endif;
 
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['roles'])):
-	$rolesRule = '';
-	foreach($_POST['roles'] as $role) {
-		$rolesRule = $rolesRule . $role . ',';
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+	if(isset($_POST['rolesReset'])) {
+		$db->unsetConfigValue('rolesUnavailable');
+		http_response_code(303);
+		header('Location: ' . $_SERVER['REQUEST_URI']);
+		exit();
+	} elseif(isset($_POST['roles'])) {
+		$rolesRule = implode(',', $_POST['roles']);
+		$db->setConfigValue('rolesUnavailable', $rolesRule);
+		http_response_code(303);
+		header('Location: ' . $_SERVER['REQUEST_URI']);
+		exit();
 	}
-	$db->setConfigValue('rolesUnavailable', substr($rolesRule, 0, -1));
-	header('Location: ' . $_SERVER['REQUEST_URI']);
-	exit();
-endif;
+}
 
 echo $template->render('settings',
 	[
