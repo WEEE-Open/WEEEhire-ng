@@ -84,5 +84,4 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $rolesUnvailable = $db->getConfigValue('rolesUnavailable');
 
-
 echo $template->render('form', ['rolesUnavailable' => $rolesUnvailable]);

@@ -48,7 +48,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	} elseif(isset($_POST['expiry'])) {
 		try {
 			$expiryNew = new DateTime($_POST['expiry'], new DateTimeZone('Europe/Rome'));
-			$db->setConfigValue('expiry', $expiryNew->getTimestamp());
+			$db->setConfigValue('expiry', (string) $expiryNew->getTimestamp());
 			http_response_code(303);
 			header('Location: /settings.php');
 			exit;
