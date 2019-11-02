@@ -78,7 +78,7 @@ if($rolesUnavailable === null) {
 			<div class="col ml-3">
 				<div class="row">
 					<label for="roles"><?= __('Seleziona i ruoli da rendere non disponibili') ?></label>
-					<select size="5" class="custom-select mb-2" multiple name="roles[]" id="roles">
+					<select size="<?= count($allRoles) ?>" class="custom-select mb-2" multiple name="roles[]" id="roles">
 						<?php foreach($allRoles as $value => $role): ?>
 							<option <?= isset($roles[$value]) ? 'selected' : '' ?> value="<?= $this->e($value) ?>"><?= $this->e($role) ?></option>
 						<?php endforeach; ?>
