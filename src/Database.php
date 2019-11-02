@@ -201,19 +201,22 @@ class Database {
 	}
 
 	public function getAllUsersForTable() {
+		$votes = $this->getAllEvaluationsAverage();
+
 		$result = $this->db->query('SELECT id, name, surname, area, recruiter, published, status, submitted, hold, IFNULL(LENGTH(notes), 0) as notesl FROM users ORDER BY submitted DESC');
 		$compact = [];
 		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			$compact[] = [
-				'id'        => $row['id'],
-				'name'      => $row['name'] . ' ' . $row['surname'],
-				'area'      => $row['area'],
-				'recruiter' => $row['recruiter'],
-				'hold'      => (bool) $row['hold'],
-				'notes'     => (bool) $row['notesl'],
-				'published' => (bool) $row['published'],
-				'status'    => $row['status'] === null ? null : (bool) $row['status'],
-				'submitted' => $row['submitted']
+				'id'         => $row['id'],
+				'name'       => $row['name'] . ' ' . $row['surname'],
+				'area'       => $row['area'],
+				'recruiter'  => $row['recruiter'],
+				'hold'       => (bool) $row['hold'],
+				'notes'      => (bool) $row['notesl'],
+				'published'  => (bool) $row['published'],
+				'status'     => $row['status'] === null ? null : (bool) $row['status'],
+				'submitted'  => $row['submitted'],
+				'evaluation' => $votes[$row['id']] ?? null,
 			];
 		}
 
@@ -475,5 +478,16 @@ class Database {
 		$dt->setTimestamp($timestamp);
 
 		return $dt;
+	}
+
+	private function getAllEvaluationsAverage() {
+		$result = $this->db->query('SELECT ref_user_id AS id, AVG(vote) AS vote FROM evaluation GROUP BY ref_user_id');
+
+		$averages = [];
+		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
+			$averages[$row['id']] = (float) $row['vote'];
+		}
+
+		return $averages;
 	}
 }

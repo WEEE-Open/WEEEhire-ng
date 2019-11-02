@@ -116,11 +116,11 @@ if(isset($_GET['id'])) {
 					$db->setEmailed($id, false);
 					$db->saveNotes($id, $notes);
 					$changed = true;
-				} elseif($_POST['holdon']) {
+				} elseif(isset($_POST['holdon'])) {
 					$db->saveNotes($id, $notes);
 					$db->setHold($id, true);
 					$changed = true;
-				} elseif($_POST['holdoff']) {
+				} elseif(isset($_POST['holdoff'])) {
 					$db->saveNotes($id, $notes);
 					$db->setHold($id, false);
 					$changed = true;

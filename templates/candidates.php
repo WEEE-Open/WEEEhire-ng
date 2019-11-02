@@ -2,13 +2,14 @@
 /** @var $users array */
 /** @var $myname string */
 /** @var $myuser string */
-$this->layout('base', ['title' => __('Candidati'), 'datatables' => true]);
+$this->layout('base', ['title' => __('Candidati'), 'datatables' => true, 'fontAwesome' => true]);
 $total = 0;
 $approved = 0;
 $rejected = 0;
 $tobe = 0;
 $topublish = 0;
 $published = 0;
+require_once 'stars.php';
 ?>
 
 <?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser])?>
@@ -19,6 +20,7 @@ $published = 0;
 	<tr>
 		<th><?=__('Nome')?></th>
 		<th data-sortable="true"><?=__('Interesse')?></th>
+		<th data-sortable="true"><?=__('Voto')?></th>
 		<th data-sortable="true"><?=__('Inviato')?></th>
 		<th data-sortable="true"><?=__('Recruiter')?></th>
 		<th data-sortable="true"><?=__('Stato')?></th>
@@ -66,6 +68,7 @@ $published = 0;
 		<tr <?=$trcolor?>>
 			<td><a href="/candidates.php?id=<?=$user['id']?>"><?=$this->e($user['name'])?></a></td>
 			<td><?=$this->e($user['area'])?></td>
+			<td><?=$user['evaluation'] === null ? '' : sprintf('%3.1f', $user['evaluation']) . '&nbsp;' . stars($user['evaluation']) ?></td>
 			<td><?=$date?></td>
 			<td><?=$this->e($user['recruiter'])?></td>
 			<td <?=$tdcolor?>><?=$statusCell?></td>
