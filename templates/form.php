@@ -189,9 +189,9 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Sviluppo-software">
-					<p><?=__('Parla di qualsiasi tua esperienza nello scrivere software. Va bene anche \"per l\'esame di ... ho creato un programma che fa ...\" o \"ho fatto il sito web per la panetteria all\'angolo\".') ?></p>
+					<p><?=__('Parla di qualsiasi tua esperienza nello scrivere software. Va bene anche "per l\'esame di ... ho creato un programma che fa ..." o "ho fatto il sito web per la panetteria all\'angolo".') ?></p>
 					<p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
-					<p><?=__('La <a href=\"https://github.com/weee-open\" target=\"_blank\">maggior parte del software realizzato in team</a> (osserva in particolare Tarallo, peracotta, turbofresa e bot) è in PHP o Python. Cosa ne pensi di quei linguaggi e del codice di quei progetti?')?></p>
+					<p><?=__('La <a href="https://github.com/weee-open" target="_blank">maggior parte del software realizzato in team</a> (osserva in particolare Tarallo, peracotta, turbofresa e bot) è in PHP o Python. Cosa ne pensi di quei linguaggi e del codice di quei progetti?')?></p>
 					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
 					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
