@@ -4,12 +4,13 @@
 /** @var $recruiters string[][] */
 /** @var $evaluations string[][] */
 /** @var $uid string */
+/** @var $cn string */
 
 $titleShort = sprintf(__('%s %s (%s)'), $this->e($user->name), $this->e($user->surname), $this->e($user->matricola));
 $title = sprintf(__('%s - Candidatura'), $titleShort);
-$this->layout('base', ['title' => $title]);
+$this->layout('base', ['title' => $title, 'fontAwesome' => true]);
+require_once 'stars.php';
 ?>
-
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="candidates.php"><?=__('Candidati')?></a></li>
@@ -36,66 +37,78 @@ $this->layout('base', ['title' => $title]);
 <?=$this->fetch('userinfo', ['user' => $user, 'edit' => $edit, 'evaluations' => $evaluations, 'uid' => $uid])?>
 
 <?php if(!$edit):
-	$media = 0;
-	foreach($evaluations as $evaluation): $media += $evaluation['vote']; endforeach;
+	$total = 0;
+	foreach($evaluations as $evaluation) {
+		$total += $evaluation['vote'];
+	}
+	if(count($evaluations) > 0) {
+		$avg = round($total / count($evaluations), 2);
+	}
+	$voted = false;
+	foreach($evaluations as $evaluation) {
+		if($evaluation['id_evaluator'] === $uid) {
+			$voted = true;
+			break;
+		}
+	}
 	?>
 	<div class="row">
 		<div class="col"><h4><?=__('Valutazioni')?></h4></div>
-		<div class="col"><p class="text-right"><?=__('Media Valutazioni: ');
-				if(sizeof($evaluations) === 0): echo 0;
-				else: echo round($media / sizeof($evaluations), 2); endif;?> ⭐</p></div>
+		<?php if(count($evaluations) === 0): ?>
+			<div class="col"></div>
+		<?php else: ?>
+			<div class="col"><p class="text-right"><?=sprintf(__('Valutazione:&nbsp;%s&nbsp;%s'), $avg, stars($avg)) ?></p></div>
+		<?php endif ?>
 	</div>
 	<table class="table table-striped">
 		<thead>
 		<tr>
-			<th scope="col"><?=__('Nome Valutatore')?></th>
-			<th scope="col"><?=__('Data')?></th>
+			<th scope="col"><?=__('Nome valutatore')?></th>
 			<th scope="col"><?=__('Voto')?></th>
-			<th scope="col"></th>
+			<th scope="col"><?=__('Data')?></th>
+			<th scope="col"><?=__('Azioni')?></th>
 		</tr>
 		</thead>
 		<tbody>
 		<?php foreach($evaluations as $evaluation): ?>
 			<tr>
-				<td><?php echo $evaluation['name_evaluator'] ?></td>
-				<td><?php echo date('Y-m-d H:i:s', $evaluation['date'] / 1000) ?></td>
-				<td class="align-middle"><?php echo $evaluation['vote'] ?> ⭐</td>
-				<td><?php if($evaluation['id_evaluator'] == $uid): ?>
-						<form method="post" target="_self">
-							<input type="hidden" name="id_evaluation"
-									value="<?php echo $evaluation['id_evaluation'] ?>" />
-							<button type="submit" name="deleted" class="btn btn-outline-danger btn-sm">🗑</button>
-						</form>
-					<?php endif; ?></td>
+				<td><?= sprintf(__('%s (%s)'), $evaluation['name_evaluator'], $evaluation['id_evaluator']) ?></td>
+				<td class="align-middle"><?= $evaluation['vote'] ?>&nbsp;</td>
+				<td><?= date('Y-m-d H:i', $evaluation['date']) ?></td>
+				<td>
+					<form method="post">
+						<input type="hidden" name="id_evaluation" value="<?= $evaluation['id_evaluation'] ?>" />
+						<button type="submit" name="deleted" class="btn btn-outline-danger btn-sm"><?= __('Elimina 🗑') ?></button>
+					</form>
+				</td>
 			</tr>
 		<?php endforeach; ?>
+		<?php if(!$voted): ?>
+		<tr>
+			<td><?= sprintf(__('%s (%s)'), $cn, $uid) ?></td>
+			<td colspan="3">
+				<form method="post">
+					<div class="form-row row">
+						<label for="FormControlVote" class="sr-only"><?=__('Voto')?></label>
+						<div class="col-8">
+							<select name="vote" class="form-control star-color" id="FormControlVote">
+								<option value="1">1 ★</option>
+								<option value="2">2 ★★</option>
+								<option value="3">3 ★★★</option>
+								<option value="4">4 ★★★★</option>
+								<option value="5">5 ★★★★★</option>
+							</select>
+						</div>
+						<div class="col-4">
+							<button type="submit" name="voted" class="btn btn-outline-primary"><?=__('Vota')?></button>
+						</div>
+					</div>
+				</form>
+			</td>
+		</tr>
+		<?php endif; ?>
 		</tbody>
 	</table>
-
-	<?php
-	$check = true;
-	foreach($evaluations as $evaluation): if($evaluation['id_evaluator'] == $uid) {
-		$check = false;
-	} endforeach;
-	if($check): ?>
-		<form target="_self" method="post" style="background-color: #f2f2f2; padding-top: 4px; padding-bottom: 4px">
-			<div class="row justify-content-end">
-				<div class="col-4">
-					<select name="vote" class="form-control" id="FormControlVote">
-						<option value="1">1 ★</option>
-						<option value="2">2 ★★</option>
-						<option value="3">3 ★★★</option>
-						<option value="4">4 ★★★★</option>
-						<option value="5">5 ★★★★★</option>
-					</select>
-				</div>
-				<div class="col-4">
-					<button type="submit" name="voted" class="btn btn-outline-warning"
-							onclick=""><?=__('Vota')?></button>
-				</div>
-			</div>
-		</form>
-	<?php endif; ?>
 
 	<form method="post">
 		<div class="form-group">
