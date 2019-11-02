@@ -1,7 +1,7 @@
 <?php
 function getRoles() {
 	return [
-		'Riparazione Hardware' => __('Riparazione Hardware'),
+		'Riparazione hardware' => __('Riparazione hardware'),
 		'Elettronica'          => __('Elettronica'),
 		'Sviluppo software'    => __('Sviluppo software'),
 		'Riuso creativo'       => __('Riuso creativo'),
