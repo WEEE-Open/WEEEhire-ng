@@ -1,5 +1,4 @@
-create table users
-(
+create table users (
 	id integer
 		constraint users_id_pk
 			primary key autoincrement,
@@ -28,24 +27,26 @@ create table users
 );
 
 create unique index users_matricola_uindex
-	on users (matricola);
+	on users(matricola);
 
-CREATE TABLE config 
-(
-	id VARCHAR not NULL primary key,
-	value bigint
+CREATE TABLE config (
+	id varchar not null primary key,
+	value varchar
 );
-INSERT INTO config (id, value) VALUES ('expiry', NULL);
-INSERT INTO config (id, value) VALUES ('rolesUnavailable', NULL);
 
-CREATE TABLE evaluation
-(
-    id_evaluation integer primary key autoincrement,
-    ref_user_id     integer,
-    id_evaluator    varchar,
-    desc_evaluator  varchar not null,
-    date            timestamp,
-    vote            integer not null,
+INSERT INTO config (id, value)
+VALUES ('expiry', null);
 
-    foreign key (ref_user_id) references users (id)
-)
+INSERT INTO config (id, value)
+VALUES ('rolesUnavailable', null);
+
+create table evaluation (
+	id_evaluation integer primary key autoincrement,
+	ref_user_id integer
+		references users,
+	id_evaluator varchar not null,
+	desc_evaluator varchar not null,
+	date integer,
+	vote integer not null,
+	foreign key (ref_user_id) references users (id)
+);

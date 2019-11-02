@@ -131,7 +131,7 @@ class Database {
 	}
 
 	public function getEvaluation(int $userId) {
-		$stmt = $this->db->prepare("SELECT * FROM evaluation WHERE ref_user_id = :id");
+		$stmt = $this->db->prepare("SELECT id_evaluation, ref_user_id, id_evaluator, desc_evaluator, date, vote FROM evaluation WHERE ref_user_id = :id");
 		$stmt->bindValue(':id', $userId, SQLITE3_INTEGER);
 		$result = $stmt->execute();
 		if($result instanceof SQLite3Result) {
@@ -160,7 +160,7 @@ class Database {
 		$stmt->bindValue(':id_user', $userId, SQLITE3_INTEGER);
 		$stmt->bindValue(':id_eval', $idEvaluator, SQLITE3_TEXT);
 		$stmt->bindValue(':desc_eval', $descEvaluator, SQLITE3_TEXT);
-		$stmt->bindValue(':time', time() * 1000, SQLITE3_INTEGER);
+		$stmt->bindValue(':time', time(), SQLITE3_INTEGER);
 		$stmt->bindValue(':vote', $vote, SQLITE3_INTEGER);
 		$result = $stmt->execute();
 		if($result === false) {
@@ -360,8 +360,7 @@ class Database {
 		if($row['interview'] === null) {
 			$interview->when = null;
 		} else {
-			$dt = new DateTime('now', new DateTimeZone('Europe/Rome'));
-			$dt->setTimestamp((int) $row['interview']);
+			$dt = $this->timestampToTime((int) $row['interview']);
 			$interview->when = $dt;
 		}
 		$interview->questions = $row['questions'];
@@ -417,8 +416,7 @@ class Database {
 			if($row['interview'] === null) {
 				$when = null;
 			} else {
-				$dt = new DateTime('now', $dtz);
-				$dt->setTimestamp((int) $row['interview']);
+				$dt = $this->timestampToTime((int) $row['interview'], $dtz);
 				$when = $dt;
 			}
 
@@ -445,8 +443,7 @@ class Database {
 		$compact = [];
 
 		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
-			$dt = new DateTime('now', $dtz);
-			$dt->setTimestamp((int) $row['interview']);
+			$dt = $this->timestampToTime((int) $row['interview'], $dtz);
 
 			if(!isset($compact[$row['interviewer']])) {
 				$compact[$row['interviewer']] = [];
@@ -461,5 +458,22 @@ class Database {
 		}
 
 		return $compact;
+	}
+
+	/** @noinspection PhpDocMissingThrowsInspection */
+	/**
+	 * @param int $timestamp Unix Timestamp
+	 *
+	 * @param DateTimeZone|null $dtz Timezone, null for default
+	 *
+	 * @return DateTime
+	 */
+	private function timestampToTime(int $timestamp, ?DateTimeZone $dtz = null): DateTime {
+		$dtz = $dtz ?? new DateTimeZone('Europe/Rome');
+		/** @noinspection PhpUnhandledExceptionInspection */
+		$dt = new DateTime('now', $dtz);
+		$dt->setTimestamp($timestamp);
+
+		return $dt;
 	}
 }
