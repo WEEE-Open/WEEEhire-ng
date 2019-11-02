@@ -73,7 +73,7 @@ require_once 'stars.php';
 		<?php foreach($evaluations as $evaluation): ?>
 			<tr>
 				<td><?= sprintf(__('%s (%s)'), $evaluation['name_evaluator'], $evaluation['id_evaluator']) ?></td>
-				<td class="align-middle"><?= $evaluation['vote'] ?>&nbsp;</td>
+				<td class="align-middle"><?= $evaluation['vote'] ?>&nbsp;<?= stars($evaluation['vote']) ?></td>
 				<td><?= date('Y-m-d H:i', $evaluation['date']) ?></td>
 				<td>
 					<form method="post">
