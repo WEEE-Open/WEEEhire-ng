@@ -156,7 +156,8 @@ if(isset($_GET['id'])) {
 			'edit'        => isset($_GET['edit']),
 			'recruiters'  => $ldap->getRecruiters(),
 			'evaluations' => $evaluations,
-			'uid'         => $_SESSION['uid']
+			'uid'         => $_SESSION['uid'],
+			'cn'          => $_SESSION['cn']
 		]);
 	exit;
 } else {
