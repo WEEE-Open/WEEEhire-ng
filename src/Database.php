@@ -26,7 +26,7 @@ class Database {
 	public function addUser(User $user): array {
 		$token = bin2hex(random_bytes(10));
 
-		$stmt = $this->db->prepare('INSERT INTO users (token, name, surname, degreecourse, year, matricola, area, letter, submitted, hold) VALUES (:token, :namep, :surname, :degreecourse, :yearp, :matricola, :area, :letter, :submitted, :hold)');
+		$stmt = $this->db->prepare('INSERT INTO users (token, name, surname, degreecourse, year, matricola, area, letter, submitted) VALUES (:token, :namep, :surname, :degreecourse, :yearp, :matricola, :area, :letter, :submitted)');
 		$stmt->bindValue(':token', password_hash($token, PASSWORD_DEFAULT), SQLITE3_TEXT);
 		$stmt->bindValue(':namep', $user->name, SQLITE3_TEXT);
 		$stmt->bindValue(':surname', $user->surname, SQLITE3_TEXT);
@@ -36,7 +36,6 @@ class Database {
 		$stmt->bindValue(':area', $user->area, SQLITE3_TEXT);
 		$stmt->bindValue(':letter', $user->letter, SQLITE3_TEXT);
 		$stmt->bindValue(':submitted', $user->submitted);
-		$stmt->bindValue(':hold', $user->hold);
 		if(!$stmt->execute()) {
 			if($this->db->lastErrorCode() === 19 && stristr($this->db->lastErrorMsg(), 'matricola')) {
 				throw new DuplicateUserException();
