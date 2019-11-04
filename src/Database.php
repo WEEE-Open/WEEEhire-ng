@@ -255,7 +255,7 @@ class Database {
 		}
 	}
 
-	public function setHold(int $id, bool $hold) {
+	public function setHold(int $id, int $hold) {
 		$stmt = $this->db->prepare('UPDATE users SET hold = :hold WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 		$stmt->bindValue(':hold', $hold, SQLITE3_INTEGER);
