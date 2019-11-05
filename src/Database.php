@@ -344,7 +344,7 @@ class Database {
 
 
 	public function getInterview(string $id): ?Interview {
-		$stmt = $this->db->prepare('SELECT interview, interviewer, interviewertg, notes AS questions, answers, interviewstatus FROM users WHERE id = :id LIMIT 1');
+		$stmt = $this->db->prepare('SELECT interview, interviewer, hold, interviewertg, notes AS questions, answers, interviewstatus FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if($result === false) {
@@ -358,6 +358,7 @@ class Database {
 		$interview = new Interview();
 		$interview->id = (int) $id;
 		$interview->recruiter = $row['interviewer'];
+		$interview->hold = $row['hold'];
 		$interview->recruitertg = $row['interviewertg'];
 		if($row['interview'] === null) {
 			$interview->when = null;
