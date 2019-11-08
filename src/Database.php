@@ -26,7 +26,7 @@ class Database {
 	public function addUser(User $user): array {
 		$token = bin2hex(random_bytes(10));
 
-		$stmt = $this->db->prepare('INSERT INTO users (token, name, surname, degreecourse, year, matricola, area, letter, submitted, hold) VALUES (:token, :namep, :surname, :degreecourse, :yearp, :matricola, :area, :letter, :submitted, :hold)');
+		$stmt = $this->db->prepare('INSERT INTO users (token, name, surname, degreecourse, year, matricola, area, letter, submitted) VALUES (:token, :namep, :surname, :degreecourse, :yearp, :matricola, :area, :letter, :submitted)');
 		$stmt->bindValue(':token', password_hash($token, PASSWORD_DEFAULT), SQLITE3_TEXT);
 		$stmt->bindValue(':namep', $user->name, SQLITE3_TEXT);
 		$stmt->bindValue(':surname', $user->surname, SQLITE3_TEXT);
@@ -36,7 +36,6 @@ class Database {
 		$stmt->bindValue(':area', $user->area, SQLITE3_TEXT);
 		$stmt->bindValue(':letter', $user->letter, SQLITE3_TEXT);
 		$stmt->bindValue(':submitted', $user->submitted);
-		$stmt->bindValue(':hold', $user->hold);
 		if(!$stmt->execute()) {
 			if($this->db->lastErrorCode() === 19 && stristr($this->db->lastErrorMsg(), 'matricola')) {
 				throw new DuplicateUserException();
@@ -256,7 +255,7 @@ class Database {
 		}
 	}
 
-	public function setHold(int $id, bool $hold) {
+	public function setHold(int $id, int $hold) {
 		$stmt = $this->db->prepare('UPDATE users SET hold = :hold WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 		$stmt->bindValue(':hold', $hold, SQLITE3_INTEGER);
@@ -345,7 +344,7 @@ class Database {
 
 
 	public function getInterview(string $id): ?Interview {
-		$stmt = $this->db->prepare('SELECT interview, interviewer, interviewertg, notes AS questions, answers, interviewstatus FROM users WHERE id = :id LIMIT 1');
+		$stmt = $this->db->prepare('SELECT interview, interviewer, hold, interviewertg, notes AS questions, answers, interviewstatus FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if($result === false) {
@@ -359,6 +358,7 @@ class Database {
 		$interview = new Interview();
 		$interview->id = (int) $id;
 		$interview->recruiter = $row['interviewer'];
+		$interview->hold = $row['hold'];
 		$interview->recruitertg = $row['interviewertg'];
 		if($row['interview'] === null) {
 			$interview->when = null;
@@ -413,7 +413,7 @@ class Database {
 
 	public function getAllInterviewsForTable() {
 		$dtz = new DateTimeZone('Europe/Rome');
-		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, interviewstatus, IFNULL(LENGTH(notes), 0) as ql, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname ASC, name ASC');
+		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, hold, interviewstatus, IFNULL(LENGTH(notes), 0) as ql, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname ASC, name ASC');
 		$compact = [];
 		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			if($row['interview'] === null) {
@@ -428,12 +428,13 @@ class Database {
 				'name'            => $row['name'] . ' ' . $row['surname'],
 				'area'            => $row['area'],
 				'interviewer'     => $row['interviewer'],
+				'hold'            => $row['hold'],
 				'recruiter'       => $row['recruiter'],
 				'interviewstatus' => $row['interviewstatus'] === null ? null : (bool) $row['interviewstatus'],
 				'questions'       => (bool) $row['ql'],
 				'answers'         => (bool) $row['al'],
 				'when'            => $when,
-				'invite'          => (bool) $row['il'],
+				'invite'          => (bool) $row['il']
 			];
 		}
 

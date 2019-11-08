@@ -54,6 +54,9 @@ $prevdate = null;
 		if($int['questions']) {
 			$statusCell .= ' ❓';
 		}
+		if($int['hold']) {
+			$statusCell .= ' 🔒';
+		}
 		if($int['answers']) {
 			$statusCell .= ' ❗️';
 		}
@@ -70,8 +73,11 @@ $prevdate = null;
 		} else {
 			if($int['interviewstatus'] === true) {
 				$toinvite++;
+			} elseif($int['hold']) {
+				$trcolor = 'class="table-warning"';
+			} else {
+				$trcolor = '';
 			}
-			$trcolor = '';
 		}
 
 		if($date !== $prevdate) {

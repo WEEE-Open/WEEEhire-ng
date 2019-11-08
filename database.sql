@@ -19,7 +19,7 @@ create table users (
 	invitelink text,
 	notes text,
 	interview int,
-	hold int,
+	hold boolean not null default 0,
 	interviewer text,
 	interviewertg text,
 	interviewstatus int,

@@ -103,6 +103,13 @@ $this->layout('base', ['title' => $title]);
 		</div>
 		<div class="form-group text-center">
 			<?php if($interview->status === null && $interview->recruiter !== null && $interview->when !== null): ?>
+				<?php if($interview->hold): ?>
+					<button name="popHold" value="true" type="submit"
+							class="btn btn-info"><?=__('Togli dalla lista d\'attesa')?></button>
+				<?php else: ?>
+					<button name="pushHold" value="true" type="submit"
+							class="btn btn-info"><?=__('Metti in lista d\'attesa')?></button>
+				<?php endif; ?>
 				<button name="approve" value="true" type="submit"
 						class="btn btn-success"><?=__('Colloquio passato')?></button>
 				<button name="reject" value="true" type="submit"

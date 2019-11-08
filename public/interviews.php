@@ -87,7 +87,7 @@ if(isset($_GET['id'])) {
 		} elseif(isset($_POST['unsetinterview'])) {
 			$db->setInterviewSchedule($interview->id, null, null, null);
 			$changed = true;
-		} elseif(isset($_POST['approve']) || isset($_POST['reject']) || isset($_POST['save']) || isset($_POST['limbo'])) {
+		} elseif(isset($_POST['approve']) || isset($_POST['reject']) || isset($_POST['save']) || isset($_POST['limbo']) || isset($_POST['pushHold']) || isset($_POST['popHold'])) {
 			$db->setInterviewData($interview->id, $_POST['questions'] ?? null, $_POST['answers'] ?? null);
 			if(isset($_POST['approve'])) {
 				$db->setInterviewStatus($interview->id, true);
@@ -95,6 +95,10 @@ if(isset($_GET['id'])) {
 				$db->setInterviewStatus($interview->id, false);
 			} elseif(isset($_POST['limbo'])) {
 				$db->setInterviewStatus($interview->id, null);
+			} elseif(isset($_POST['pushHold'])) {
+				$db->setHold($interview->id, 1);
+			} elseif(isset($_POST['popHold'])) {
+				$db->setHold($interview->id, 0);
 			}
 			$changed = true;
 		}
