@@ -455,7 +455,7 @@ msgstr ""
 "If you don't know something, what do you do to learn it yourself, "
 "usually? You can give us some examples as well."
 
-#: templates/form.php:179 templates/form.php:195
+#: templates/form.php:179 templates/form.php:195 templates/form.php:218
 msgid ""
 "Se hai mai usato Linux, parlane liberamente: su tutti i computer che "
 "ripariamo installiamo Linux."
@@ -472,7 +472,7 @@ msgstr ""
 "have any other hobby or interests other than repairing computers."
 
 #: templates/form.php:181 templates/form.php:189 templates/form.php:197
-#: templates/form.php:205 templates/form.php:212
+#: templates/form.php:205 templates/form.php:212 templates/form.php:221
 msgid ""
 "Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti "
 "sembra rilevante dire."
@@ -535,7 +535,7 @@ msgstr ""
 "to say \"for the ... exam I've created a program that does ...\" or "
 "\"I've made a website for the bakery near my house\"."
 
-#: templates/form.php:193
+#: templates/form.php:193 templates/form.php:217
 msgid ""
 "Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire "
 "tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack "
@@ -558,7 +558,7 @@ msgstr ""
 "turbofresa and bot specifically) is written in PHP or Python. What do you "
 "think of these programming languages and the code of these projects?"
 
-#: templates/form.php:196
+#: templates/form.php:196 templates/form.php:220
 msgid ""
 "Menziona anche quanto tempo potresti dedicare alle attività in team e se fai "
 "altro di interessante nel tempo libero oltre a digitare codice."
@@ -635,6 +635,25 @@ msgid ""
 msgstr ""
 "Mention how much time you have for team activities, too, and if you "
 "have any other hobby or interests."
+
+#: templates/form.php:215
+msgid ""
+"Descrivi qualsiasi tua esperienza nel programmare in Python, specialmente "
+"Python 3, e se hai un account su Github non esitare a condividerlo nella "
+"tua lettera!"
+msgstr ""
+"Describe any prior experience you have in coding in Python, especially "
+"Python 3, and don't hesitate sharing your Github account in your letter "
+"if you have one!"
+
+#: templates/form.php:216
+msgid ""
+"Potresti menzionare se hai mai usato virtual environments, collaborato "
+"con qualcuno su un progetto software, o se sai scrivere in altri linguaggi. "
+msgstr ""
+"You could mention if you have ever used virtual environments, if you have ever "
+"collaborated with someone else on a software project, or if you can code in "
+"other programming languages."
 
 #: templates/form.php:215
 msgid "Stupiscici."

@@ -214,8 +214,10 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-Python">
 					<p><?=__('Descrivi qualsiasi tua esperienza nel programmare in Python, specialmente Python 3, e se hai un account su Github non esitare a condividerlo nella tua lettera!')?></p>
 					<p><?=__('Potresti menzionare se hai mai usato virtual environments, collaborato con qualcuno su un progetto software, o se sai scrivere in altri linguaggi.')?></p>
+					<p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
+					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
 					<p><?=__('Se dovessi spiegare in due righe cosa fa il team, cosa diresti?')?></p>
-					<p><?=__('Indica anche quanto tempo potresti dedicare a queste attività e se hai qualche altro interesse.')?></p>
+					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Altro">
