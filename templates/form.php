@@ -196,6 +196,14 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
+				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-PHP">
+					<p><?=__('Parla di qualsiasi tua esperienza nello scrivere software in PHP. Va bene anche "per l\'esame di ... ho creato un programma che fa ..." o "ho fatto il sito web per la panetteria all\'angolo". Puoi anche menzionare se conosci altri linguaggi o hai mai lavorato a progetti collaborativi.') ?></p>
+					<p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
+					<p><?=__('Osserva attentamente i principali progetti PHP del team: <a href="https://github.com/WEEE-Open/tarallo" target="_blank">Tarallo</a>, <a href="https://github.com/WEEE-Open/WEEEHire-ng" target="_blank">WEEEHire</a> e <a href="https://github.com/WEEE-Open/crauto" target="_blank">crauto</a>. Cosa ne pensi del codice di questi progetti?' )?></p>
+					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
+					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
+					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
+				</div>
 				<div class="form-text d-none" id="mlet-explain-Riuso-creativo">
 					<p><?=__('Non tutti i computer che ci arrivano sono riparabili, ma vorremmo comunque minimizzare la quantità di materiale che finisce nel bidone.')?></p>
 					<p><?=__('Se hai manualità e/o esperienze nel riuso creativo e/o making è il momento di dirlo.')?></p>
