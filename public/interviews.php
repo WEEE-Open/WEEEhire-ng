@@ -11,28 +11,7 @@ require '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.ph
 
 $template = Template::create();
 
-if(defined('TEST_MODE') && TEST_MODE) {
-	error_log('Test mode, bypassing authentication');
-	if(session_status() === PHP_SESSION_NONE) {
-		session_start();
-	}
-	$_SESSION['uid'] = 'test.test';
-	$_SESSION['cn'] = 'Test Administrator';
-	$_SESSION['groups'] = ['Admin', 'Foo', 'Bar'];
-	$_SESSION['isAdmin'] = true;
-} else {
-	if(!Utils::sessionValid()) {
-		if(session_status() === PHP_SESSION_NONE) {
-			// We need to write
-			session_start();
-		}
-		$_SESSION['previousPage'] = $_SERVER['REQUEST_URI'];
-		$_SESSION['needsAuth'] = true;
-		http_response_code(303);
-		header('Location: /auth.php');
-		exit;
-	}
-}
+Utils::requireAdmin();
 
 $db = new Database();
 if(isset($_GET['id'])) {

@@ -73,4 +73,34 @@ class Utils {
 
 		return $enabled;
 	}
+
+	/**
+	 * Users must be admins beyond this point.
+	 * If they aren't, this method will redirect them to the authentication page.
+	 * If TEST_MODE is defined, the check is bypassed and example data is returned, instead.
+	 */
+	public static function requireAdmin() {
+		if(defined('TEST_MODE') && TEST_MODE) {
+			error_log('Test mode, bypassing authentication');
+			if(session_status() === PHP_SESSION_NONE) {
+				session_start();
+			}
+			$_SESSION['uid'] = 'test.test';
+			$_SESSION['cn'] = 'Test Administrator';
+			$_SESSION['groups'] = ['Admin', 'Foo', 'Bar'];
+			$_SESSION['isAdmin'] = true;
+		} else {
+			if(!Utils::sessionValid()) {
+				if(session_status() === PHP_SESSION_NONE) {
+					// We need to write
+					session_start();
+				}
+				$_SESSION['previousPage'] = $_SERVER['REQUEST_URI'];
+				$_SESSION['needsAuth'] = true;
+				http_response_code(303);
+				header('Location: /auth.php');
+				exit;
+			}
+		}
+	}
 }
