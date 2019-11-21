@@ -5,6 +5,8 @@ namespace WEEEOpen\WEEEHire;
 require '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 require '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 
+// Perform SLO
+
 use Jumbojett\OpenIDConnectClient;
 
 session_start();
@@ -21,7 +23,7 @@ if(isset($_SESSION['id_token'])) {
 
 // Destroy the session and cookie
 $params = session_get_cookie_params();
-setcookie(session_name(), '', time() - 42000,
+setcookie(session_name(), '', 1,
 	$params["path"], $params["domain"],
 	$params["secure"], $params["httponly"]
 );

@@ -18,46 +18,49 @@ $db = new Database();
 $error = null;
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
+	// Form submission
+	$changed = false;
 	if(isset($_POST['noexpiry'])) {
+		// Unset form expiry
 		$db->unsetConfigValue('expiry');
-		http_response_code(303);
-		header('Location: /settings.php');
-		exit;
+		$changed = true;
 	} elseif(isset($_POST['expiry'])) {
+		// Set form expiry
 		try {
 			$expiryNew = new DateTime($_POST['expiry'], new DateTimeZone('Europe/Rome'));
 			$db->setConfigValue('expiry', (string) $expiryNew->getTimestamp());
-			http_response_code(303);
-			header('Location: /settings.php');
-			exit;
+			$changed = true;
 		} catch(Exception $e) {
 			$error = $e->getMessage();
 		}
+	} elseif(isset($_POST['rolesReset'])) {
+		// Unset unavailable roles
+		$db->unsetConfigValue('rolesUnavailable');
+		$changed = true;
+	} elseif(isset($_POST['roles'])) {
+		// Set available roles
+		$rolesRule = implode('|', $_POST['roles']);
+		$db->setConfigValue('rolesUnavailable', $rolesRule);
+		$changed = true;
+	}
+
+	if($changed) {
+		// This is a pattern: https://en.wikipedia.org/wiki/Post/Redirect/Get
+		http_response_code(303);
+		// $_SERVER['REQUEST_URI'] is already url encoded
+		$url = Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => null]);
+		header("Location: $url");
+		exit;
 	}
 }
 
 $expiry = $db->getConfigValue('expiry');
 $rolesUnvailable = $db->getConfigValue('rolesUnavailable');
 
+// Get the timestamp in correct format
 if($expiry !== null) {
 	/** @noinspection PhpUnhandledExceptionInspection */
-	$expiryTemp = new DateTime('now', new DateTimeZone('Europe/Rome'));
-	$expiry = $expiryTemp->setTimestamp($expiry);
-}
-
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-	if(isset($_POST['rolesReset'])) {
-		$db->unsetConfigValue('rolesUnavailable');
-		http_response_code(303);
-		header('Location: ' . $_SERVER['REQUEST_URI']);
-		exit();
-	} elseif(isset($_POST['roles'])) {
-		$rolesRule = implode('|', $_POST['roles']);
-		$db->setConfigValue('rolesUnavailable', $rolesRule);
-		http_response_code(303);
-		header('Location: ' . $_SERVER['REQUEST_URI']);
-		exit();
-	}
+	$expiry = (new DateTime('now', new DateTimeZone('Europe/Rome')))->setTimestamp($expiry);
 }
 
 echo $template->render('settings',

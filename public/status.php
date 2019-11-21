@@ -4,12 +4,7 @@ namespace WEEEOpen\WEEEHire;
 
 require '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-//$user = new User();
-//$user->submitted = 1424143211;
-//$user->published = false;
-//$user->status = null;
-//$user->recruiter = 'That Dude';
-//$user->recruitertg = 'test';
+// Page for candidates to see their own status (approved/rejected)
 
 $template = Template::create();
 
@@ -37,6 +32,7 @@ try {
 }
 
 if(isset($_GET['download'])) {
+	// GDPR data download button
 	$attributes = (array) $user;
 	$downloadable = [
 		'name',
@@ -47,6 +43,7 @@ if(isset($_GET['download'])) {
 		'area',
 		'letter'
 	];
+	// Filter out other attributes
 	$attributes = array_intersect_key($attributes, array_combine($downloadable, $downloadable));
 
 	header('Content-Type: application/json');
@@ -56,9 +53,10 @@ if(isset($_GET['download'])) {
 	echo json_encode($attributes, JSON_PRETTY_PRINT);
 	exit;
 } elseif(isset($_GET['delete'])) {
+	// Delete button
 	try {
 		$db->deleteUser($id);
-		http_response_code(302);
+		http_response_code(303);
 		header('Location: /');
 		exit;
 	} catch(DatabaseException $e) {
