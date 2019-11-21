@@ -78,7 +78,7 @@ require_once 'stars.php';
 				<td>
 					<form method="post">
 						<input type="hidden" name="id_evaluation" value="<?= $evaluation['id_evaluation'] ?>" />
-						<button type="submit" name="deleted" class="btn btn-outline-danger btn-sm"><?= __('Elimina 🗑') ?></button>
+						<button type="submit" name="unvote" class="btn btn-outline-danger btn-sm"><?= __('Elimina 🗑') ?></button>
 					</form>
 				</td>
 			</tr>
@@ -100,7 +100,7 @@ require_once 'stars.php';
 							</select>
 						</div>
 						<div class="col-4">
-							<button type="submit" name="voted" class="btn btn-outline-primary"><?=__('Vota')?></button>
+							<button type="submit" name="vote" class="btn btn-outline-primary"><?=__('Vota')?></button>
 						</div>
 					</div>
 				</form>

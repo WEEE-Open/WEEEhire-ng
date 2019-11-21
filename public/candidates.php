@@ -11,7 +11,10 @@ $template = Template::create();
 Utils::requireAdmin();
 
 $db = new Database();
+
 if(isset($_GET['id'])) {
+	// candidates.php?id=... => page with details on a single candidate
+
 	$ldap = new Ldap(WEEEHIRE_LDAP_URL, WEEEHIRE_LDAP_BIND_DN, WEEEHIRE_LDAP_PASSWORD, WEEEHIRE_LDAP_USERS_DN,
 		WEEEHIRE_LDAP_INVITES_DN, WEEEHIRE_LDAP_STARTTLS);
 	$id = (int) $_GET['id'];
@@ -23,11 +26,11 @@ if(isset($_GET['id'])) {
 		exit;
 	}
 
+	// A form has been submitted
 	if($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$changed = false;
+		// Most buttons also update notes (so we can write "seems good" and press "approve")
 		$notes = $_POST['notes'] ?? '';
-
-		// These HAVE to be in mutual exclusion, or you have to check $changed in "sequential" ifs
 
 		if(isset($_POST['edit'])) {
 			// If all data is present, this method will update $user so it only has to be stored in the database
@@ -39,9 +42,38 @@ if(isset($_GET['id'])) {
 		} elseif(isset($_POST['save'])) {
 			$db->saveNotes($id, $notes);
 			$changed = true;
+		} elseif(isset($_POST['vote']) && isset($_POST["id_evaluation"])) {
+			$db->setEvaluation($id, $_SESSION['uid'], $_SESSION['cn'], $_POST['vote']);
+			header('Location: ' . $_SERVER['REQUEST_URI']);
+			exit();
+		} elseif(isset($_POST['unvote']) && isset($_POST["id_evaluation"])) {
+			$db->removeEvaluation($_POST["id_evaluation"]);
+			header('Location: ' . $_SERVER['REQUEST_URI']);
+			exit();
 		} else {
-			if(!$user->published) {
-				// Not published, and...
+			if($user->published) {
+				// Only for published evaluations
+				if(isset($_POST['approvefromhold'])) {
+					// Unpublish so we can choose a recruiter
+					$db->setPublished($id, false);
+					$db->setStatus($id, true, $_SESSION['cn'] ?? null);
+					// Leave on hold (so the application cannot be deleted)
+					//$db->setHold($id, false);
+					// Should have already been false
+					$db->setEmailed($id, false);
+					$db->saveNotes($id, $notes);
+					$changed = true;
+				} elseif(isset($_POST['holdon'])) {
+					$db->saveNotes($id, $notes);
+					$db->setHold($id, true);
+					$changed = true;
+				} elseif(isset($_POST['holdoff'])) {
+					$db->saveNotes($id, $notes);
+					$db->setHold($id, false);
+					$changed = true;
+				}
+			} else {
+				// Only for not published evaluations
 				if(isset($_POST['approve'])) {
 					$db->setStatus($id, true, $_SESSION['cn'] ?? null);
 					$db->saveNotes($id, $notes);
@@ -84,63 +116,35 @@ if(isset($_GET['id'])) {
 					$db->setPublished($id, true);
 					$changed = true;
 				}
-			} else {
-				if(isset($_POST['approvefromhold'])) {
-					$db->setStatus($id, true, $_SESSION['cn'] ?? null);
-					// Leave on hold (so the application cannot be deleted)
-					//$db->setHold($id, false);
-					// Unpublish so we can choose a recruiter
-					$db->setPublished($id, false);
-					// Should have already been false
-					$db->setEmailed($id, false);
-					$db->saveNotes($id, $notes);
-					$changed = true;
-				} elseif(isset($_POST['holdon'])) {
-					$db->saveNotes($id, $notes);
-					$db->setHold($id, true);
-					$changed = true;
-				} elseif(isset($_POST['holdoff'])) {
-					$db->saveNotes($id, $notes);
-					$db->setHold($id, false);
-					$changed = true;
-				}
+			}
+
+			if($changed) {
+				// This is a pattern: https://en.wikipedia.org/wiki/Post/Redirect/Get
+				http_response_code(303);
+				// $_SERVER['REQUEST_URI'] is already url encoded
+				$url = Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => null]);
+				header("Location: $url");
+				exit;
 			}
 		}
-		if($changed) {
-			http_response_code(303);
-			// $_SERVER['REQUEST_URI'] is already url encoded
-			$url = Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => null]);
-			header("Location: $url");
-			exit;
-		}
-	}
+	} // "if this is a POST request"
 
-	if(isset($_POST['voted']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-		$db->setEvaluation($id, $_SESSION['uid'], $_SESSION['cn'], $_POST['vote']);
-		header('Location: ' . $_SERVER['REQUEST_URI']);
-		exit();
-	}
-
-	if(isset($_POST['deleted']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-		$db->removeEvaluation($_POST["id_evaluation"]);
-		header('Location: ' . $_SERVER['REQUEST_URI']);
-		exit();
-	}
-
-	$evaluations = $db->getEvaluation($id);
-
+	// Render the page
 	echo $template->render('candidate',
 		[
 			'user'        => $user,
-			'edit'        => isset($_GET['edit']),
+			'edit'        => isset($_GET['edit']),  // candidates.php?id=123&edit, allows editing of personal data
 			'recruiters'  => $ldap->getRecruiters(),
-			'evaluations' => $evaluations,
+			'evaluations' => $db->getEvaluation($id),
 			'uid'         => $_SESSION['uid'],
 			'cn'          => $_SESSION['cn']
 		]);
 	exit;
+
 } else {
+	// no ?id=... parameter => render the page with a candidates list
 	if($_SERVER['REQUEST_METHOD'] === 'POST') {
+		// This is a form submission
 		if(isset($_POST['publishallrejected'])) {
 			$db->publishRejected();
 			http_response_code(303);
