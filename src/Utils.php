@@ -6,6 +6,14 @@ namespace WEEEOpen\WEEEHire;
 
 // Same as the good ol' functions.php...
 class Utils {
+	/**
+	 * Add or remove query parameters from a URL
+	 *
+	 * @param string $url Current URL, may contain query parameters
+	 * @param array $parameters Parameters to modify. Key is name, value is the value or null to delete it. Other parameters left untouched.
+	 *
+	 * @return string resulting URL
+	 */
 	public static function appendQueryParametersToRelativeUrl(string $url, array $parameters): string {
 		$queryString = parse_url($url, PHP_URL_QUERY);
 		if($queryString === null) {
@@ -28,6 +36,14 @@ class Utils {
 		return "$url?$newQuery";
 	}
 
+	/**
+	 * Obtain the polito email address from an ID number (matricola).
+	 * They are different if the ID number starts with "s" or "d".
+	 *
+	 * @param string $matricola ID number
+	 *
+	 * @return string Email address
+	 */
 	public static function politoMail(string $matricola): string {
 		$first = strtolower(substr($matricola, 0, 1));
 		if($first === 'd') {
@@ -37,7 +53,12 @@ class Utils {
 		}
 	}
 
-	public static function sessionValid(): bool {
+	/**
+	 * Is the current session valid, according to the ID token?
+	 *
+	 * @return bool valid or not
+	 */
+	private static function sessionValid(): bool {
 		$valid = true;
 		if(session_status() === PHP_SESSION_NONE) {
 			session_start();
@@ -64,6 +85,11 @@ class Utils {
 		return $valid;
 	}
 
+	/**
+	 * Is APCu installed, configured and enabled?
+	 *
+	 * @return bool Available or not
+	 */
 	public static function hasApcu() {
 		// Yes one is apcu and the other apc...
 		$enabled = extension_loaded('apcu') && boolval(ini_get('apc.enabled'));
@@ -76,7 +102,7 @@ class Utils {
 
 	/**
 	 * Users must be admins beyond this point.
-	 * If they aren't, this method will redirect them to the authentication page.
+	 * If they aren't, this method will redirect them to the authentication page and terminates the entire PHP script.
 	 * If TEST_MODE is defined, the check is bypassed and example data is returned, instead.
 	 */
 	public static function requireAdmin() {

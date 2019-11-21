@@ -9,6 +9,13 @@ use PhpMyAdmin\MoTranslator\Loader;
 class Template {
 	const allowedLocales = ['en-us', 'it-it'];
 
+	/**
+	 * Prepare the template engine and configure Motranslator if no session is available
+	 *
+	 * @param string $locale Template locale (language)
+	 *
+	 * @return Engine Plates template engine
+	 */
 	public static function createWithoutSession(string $locale): Engine {
 		Loader::loadFunctions();
 
@@ -23,6 +30,11 @@ class Template {
 		return $engine;
 	}
 
+	/**
+	 * Prepare the template engine and configure Motranslator
+	 *
+	 * @return Engine Plates template engine
+	 */
 	public static function create(): Engine {
 		Loader::loadFunctions();
 
@@ -37,6 +49,12 @@ class Template {
 		return $engine;
 	}
 
+	/**
+	 * Get locale (language) from session.
+	 * If none is set, negotiate and set it.
+	 *
+	 * @return string
+	 */
 	private static function getLocale(): string {
 		// Must be here, or $_SESSION is not available
 		session_start();
@@ -51,7 +69,11 @@ class Template {
 		return $locale;
 	}
 
-
+	/**
+	 * Get locale (language) from request headers and negotiation.
+	 *
+	 * @return string Negotiated locale
+	 */
 	private static function getLocaleNotCached(): string {
 		if(!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
 			return 'en-us';

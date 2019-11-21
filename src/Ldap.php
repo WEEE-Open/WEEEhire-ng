@@ -36,6 +36,11 @@ class Ldap {
 		}
 	}
 
+	/**
+	 * Get all available recruiters
+	 *
+	 * @return array Array of arrays, each one with recruiter name as element 0 and recruiter Telegram nickname as 1
+	 */
 	public function getRecruiters(): array {
 		if(TEST_MODE) {
 			error_log('Test mode enabled, returning sample data');
@@ -96,7 +101,7 @@ class Ldap {
 	 * @param User $user User to invite
 	 *
 	 * @return string The invite URL
-	 * @throws Exception
+	 * @throws Exception When entropy is too low
 	 */
 	public function createInvite(User $user): string {
 		$inviteCode = strtoupper(bin2hex(random_bytes(12)));

@@ -18,7 +18,9 @@ class Database {
 	}
 
 	/**
-	 * @param User $user
+	 * Insert a new User into the database
+	 *
+	 * @param User $user The user
 	 *
 	 * @return array ID and token, in this order
 	 * @throws Exception If random token cannot be generated
@@ -48,6 +50,13 @@ class Database {
 		return [$id, $token];
 	}
 
+	/**
+	 * Get a User from the database
+	 *
+	 * @param string $id User ID
+	 *
+	 * @return User|null User or null if not found
+	 */
 	public function getUser(string $id): ?User {
 		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status, hold, recruiter, recruitertg, submitted, notes, emailed, invitelink FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
@@ -92,6 +101,13 @@ class Database {
 		return $user;
 	}
 
+	/**
+	 * Get a value from the config table
+	 *
+	 * @param string $option Key for the value
+	 *
+	 * @return null|string Value
+	 */
 	public function getConfigValue(string $option) {
 		$stmt = $this->db->prepare("SELECT value FROM config WHERE id = :id");
 		$stmt->bindValue(':id', $option, SQLITE3_TEXT);
@@ -110,6 +126,11 @@ class Database {
 		}
 	}
 
+	/**
+	 * Delete a value from the config table
+	 *
+	 * @param string $option Key for the value
+	 */
 	public function unsetConfigValue(string $option) {
 		$stmt = $this->db->prepare('UPDATE config SET value = null WHERE id = :id');
 		$stmt->bindValue(':id', $option, SQLITE3_TEXT);
@@ -119,6 +140,12 @@ class Database {
 		}
 	}
 
+	/**
+	 * Set a value in the config table
+	 *
+	 * @param string $option Key for the value
+	 * @param string $value Value to set
+	 */
 	public function setConfigValue(string $option, string $value) {
 		$stmt = $this->db->prepare('UPDATE config SET value = :value WHERE id = :id');
 		$stmt->bindValue(':value', $value, SQLITE3_TEXT);
@@ -129,6 +156,13 @@ class Database {
 		}
 	}
 
+	/**
+	 * Get evaluation (votes) for a candidate
+	 *
+	 * @param int $userId User ID
+	 *
+	 * @return array Array of associative arrays, one for each vote
+	 */
 	public function getEvaluation(int $userId) {
 		$stmt = $this->db->prepare("SELECT id_evaluation, ref_user_id, id_evaluator, desc_evaluator, date, vote FROM evaluation WHERE ref_user_id = :id");
 		$stmt->bindValue(':id', $userId, SQLITE3_INTEGER);
@@ -154,6 +188,14 @@ class Database {
 		}
 	}
 
+	/**
+	 * Set evaluation for a candidate, by a recruiter
+	 *
+	 * @param int $userId User ID
+	 * @param string $idEvaluator ID of the evaluator/recruiter (LDAP uid attribute)
+	 * @param string $descEvaluator Evaluator/recruiter description (LDAP cn attribute, aka full name)
+	 * @param int $vote Vote
+	 */
 	public function setEvaluation(int $userId, string $idEvaluator, string $descEvaluator, int $vote) {
 		$stmt = $this->db->prepare("INSERT INTO evaluation (ref_user_id, id_evaluator, desc_evaluator, date, vote) VALUES (:id_user, :id_eval, :desc_eval, :time, :vote)");
 		$stmt->bindValue(':id_user', $userId, SQLITE3_INTEGER);
@@ -167,6 +209,11 @@ class Database {
 		}
 	}
 
+	/**
+	 * Remove an evaluation done by a recruiter for a candidate
+	 *
+	 * @param int $id Evaluation ID
+	 */
 	public function removeEvaluation(int $id) {
 		$stmt = $this->db->prepare("DELETE FROM evaluation WHERE id_evaluation = :id");
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -176,6 +223,14 @@ class Database {
 		}
 	}
 
+	/**
+	 * Check that a token is valid
+	 *
+	 * @param int $id User ID
+	 * @param string $token Token
+	 *
+	 * @return bool Valid or not
+	 */
 	public function validateToken(int $id, string $token): bool {
 		$stmt = $this->db->prepare('SELECT token FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -190,6 +245,11 @@ class Database {
 		}
 	}
 
+	/**
+	 * Completely delete a user
+	 *
+	 * @param int $id User ID
+	 */
 	public function deleteUser(int $id) {
 		$stmt = $this->db->prepare('DELETE FROM users WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -199,6 +259,11 @@ class Database {
 		}
 	}
 
+	/**
+	 * Get all users for the candidates table
+	 *
+	 * @return array Array of associative arrays
+	 */
 	public function getAllUsersForTable() {
 		$votes = $this->getAllEvaluationsAverage();
 
@@ -222,6 +287,12 @@ class Database {
 		return $compact;
 	}
 
+	/**
+	 * Save notes.
+	 *
+	 * @param int $id User ID
+	 * @param string $notes Notes
+	 */
 	public function saveNotes(int $id, string $notes) {
 		$stmt = $this->db->prepare('UPDATE users SET notes = :notes WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -236,6 +307,13 @@ class Database {
 		}
 	}
 
+	/**
+	 * Set candidate status
+	 *
+	 * @param int $id User ID
+	 * @param bool|null $status True for approved, False for rejected, null to unset
+	 * @param string|null $recruiter Recruiter that made this difficult choice
+	 */
 	public function setStatus(int $id, ?bool $status, ?string $recruiter) {
 		$stmt = $this->db->prepare('UPDATE users SET status = :statusp, recruiter = :recruiter WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -255,6 +333,12 @@ class Database {
 		}
 	}
 
+	/**
+	 * Set the "hold" status of candidates (waiting list)
+	 *
+	 * @param int $id User ID
+	 * @param bool $hold True to put on hold, false to not put on hold
+	 */
 	public function setHold(int $id, bool $hold) {
 		$stmt = $this->db->prepare('UPDATE users SET hold = :hold WHERE id = :id');
 		$stmt->bindValue(':id', (int) $id, SQLITE3_INTEGER);
@@ -265,6 +349,13 @@ class Database {
 		}
 	}
 
+	/**
+	 * Set if status is published and visible or not
+	 *
+	 * @param int $id User ID
+	 * @param bool $published True for published and visible, false for not published (only admins can see it)
+	 * @see setStatus
+	 */
 	public function setPublished(int $id, bool $published) {
 		$stmt = $this->db->prepare('UPDATE users SET published = :pub WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -275,6 +366,13 @@ class Database {
 		}
 	}
 
+	/**
+	 * Set recruiter for a user
+	 *
+	 * @param int $id User ID
+	 * @param string $name Recruiter full name
+	 * @param string $tgid Recruiter Telegram nickname
+	 */
 	public function setRecruiter(int $id, string $name, string $tgid) {
 		$stmt = $this->db->prepare('UPDATE users SET recruiter = :recruiter, recruitertg = :tgid WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -286,6 +384,12 @@ class Database {
 		}
 	}
 
+	/**
+	 * Set invite link for a candidate. Use after generating such a link.
+	 *
+	 * @param int $id User ID
+	 * @param string $invite Invite link
+	 */
 	public function setInviteLink(int $id, string $invite) {
 		$stmt = $this->db->prepare('UPDATE users SET invitelink = :invite WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -296,6 +400,12 @@ class Database {
 		}
 	}
 
+	/**
+	 * Set candidate as "emailed" or not, when approved.
+	 *
+	 * @param int $id User ID
+	 * @param bool $emailed The email has been sent or not
+	 */
 	public function setEmailed(int $id, bool $emailed) {
 		$stmt = $this->db->prepare('UPDATE users SET emailed = :emailed WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -306,6 +416,11 @@ class Database {
 		}
 	}
 
+	/**
+	 * Update candidates personal information
+	 *
+	 * @param User|null $user User, the ID is taken from there
+	 */
 	public function updateUser(?User $user) {
 		$stmt = $this->db->prepare('UPDATE users SET name = :namep, surname = :surname, degreecourse = :degreecourse, year = :yearp, matricola = :matricola, area = :area, letter = :letter WHERE id = :id');
 		$stmt->bindValue(':id', $user->id, SQLITE3_INTEGER);
@@ -322,6 +437,9 @@ class Database {
 		}
 	}
 
+	/**
+	 * Publish all rejected candidates
+	 */
 	public function publishRejected() {
 		$result = $this->db->query('UPDATE users SET published = 1 WHERE status = 0');
 		if($result === false) {
@@ -329,6 +447,12 @@ class Database {
 		}
 	}
 
+	/**
+	 * Delete candidates older than X days, if they are published
+	 *
+	 * @param int $days Days
+	 * @param bool $deleteHold Also delete candidates put on hold (default false)
+	 */
 	public function deleteOlderThan(int $days, bool $deleteHold = false) {
 		if($deleteHold) {
 			$stmt = $this->db->prepare("DELETE FROM users WHERE published = 1 AND strftime('%s','now') - submitted >= :diff");
@@ -342,7 +466,13 @@ class Database {
 		}
 	}
 
-
+	/**
+	 * Get details on a single interview
+	 *
+	 * @param string $id User ID
+	 *
+	 * @return Interview|null Interview or null if user does not exist
+	 */
 	public function getInterview(string $id): ?Interview {
 		$stmt = $this->db->prepare('SELECT interview, interviewer, hold, interviewertg, notes AS questions, answers, interviewstatus FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
@@ -373,6 +503,14 @@ class Database {
 		return $interview;
 	}
 
+	/**
+	 * Set date and time for an interview
+	 *
+	 * @param int $id User ID
+	 * @param string|null $recruiter Recruiter full name
+	 * @param string|null $recruitertg Recruiter Telegram nickname
+	 * @param DateTime|null $when When the interview is scheduled
+	 */
 	public function setInterviewSchedule(int $id, ?string $recruiter, ?string $recruitertg, ?DateTime $when) {
 		$stmt = $this->db->prepare('UPDATE users SET interview = :interview, interviewer = :interviewer, interviewertg = :interviewertg WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -386,6 +524,13 @@ class Database {
 		}
 	}
 
+	/**
+	 * Set data for an interview
+	 *
+	 * @param int $id User ID
+	 * @param string|null $questions Questions to ask and notes
+	 * @param string|null $answers Answers given by the candidate and comments
+	 */
 	public function setInterviewData(int $id, ?string $questions, ?string $answers) {
 		$stmt = $this->db->prepare('UPDATE users SET notes = :q, answers = :a WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -397,6 +542,12 @@ class Database {
 		}
 	}
 
+	/**
+	 * Set interview status. Yeah.
+	 *
+	 * @param int $id User ID
+	 * @param bool|null $status True for approved, false for rejected, null to unset
+	 */
 	public function setInterviewStatus(int $id, ?bool $status) {
 		$stmt = $this->db->prepare('UPDATE users SET interviewstatus = :statusp WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -411,6 +562,11 @@ class Database {
 		}
 	}
 
+	/**
+	 * Get all interviews for the tables in the interview page
+	 *
+	 * @return array Array of associative arrays
+	 */
 	public function getAllInterviewsForTable() {
 		$dtz = new DateTimeZone('Europe/Rome');
 		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, hold, interviewstatus, IFNULL(LENGTH(notes), 0) as ql, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname ASC, name ASC');
@@ -441,6 +597,11 @@ class Database {
 		return $compact;
 	}
 
+	/**
+	 * Get all assigned (to a recruiter) interviews for the tables in the interview page
+	 *
+	 * @return array Array of associative arrays
+	 */
 	public function getAllAssignedInterviewsForTable() {
 		$dtz = new DateTimeZone('Europe/Rome');
 		$result = $this->db->query('SELECT id, name, surname, area, interviewer, interview, interviewstatus AS status FROM users WHERE status >= 1 AND published >= 1 AND interviewer IS NOT NULL and interview IS NOT NULL ORDER BY interviewer ASC, interview ASC, surname ASC, name ASC');
@@ -466,8 +627,9 @@ class Database {
 
 	/** @noinspection PhpDocMissingThrowsInspection */
 	/**
-	 * @param int $timestamp Unix Timestamp
+	 * Convert timestamp to a DateTime
 	 *
+	 * @param int $timestamp Unix Timestamp
 	 * @param DateTimeZone|null $dtz Timezone, null for default
 	 *
 	 * @return DateTime
@@ -481,6 +643,11 @@ class Database {
 		return $dt;
 	}
 
+	/**
+	 * Get evaluations for all users, averaged
+	 *
+	 * @return array Array with "User ID => evaluation", evaluation is a float
+	 */
 	private function getAllEvaluationsAverage() {
 		$result = $this->db->query('SELECT ref_user_id AS id, AVG(vote) AS vote FROM evaluation GROUP BY ref_user_id');
 

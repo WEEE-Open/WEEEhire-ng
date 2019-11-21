@@ -48,6 +48,13 @@ class User {
 	 */
 	public $hold;
 
+	/**
+	 * Create User from POST data.
+	 *
+	 * @param array $post $_POST
+	 *
+	 * @return bool True if all attributes are available, false otherwise
+	 */
 	public function fromPost(array $post) {
 		$attrs = ['name', 'surname', 'degreecourse', 'year', 'matricola', 'area', 'letter'];
 		foreach($attrs as $attr) {
