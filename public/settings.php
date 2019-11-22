@@ -48,8 +48,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 		// This is a pattern: https://en.wikipedia.org/wiki/Post/Redirect/Get
 		http_response_code(303);
 		// $_SERVER['REQUEST_URI'] is already url encoded
-		$url = Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => null]);
-		header("Location: $url");
+		header('Location: ' . $_SERVER['REQUEST_URI']);
 		exit;
 	}
 }

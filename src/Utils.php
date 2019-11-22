@@ -32,8 +32,11 @@ class Utils {
 			}
 		}
 		$newQuery = http_build_query($query);
-
-		return "$url?$newQuery";
+		if($newQuery === '') {
+			return $url;
+		} else {
+			return "$url?$newQuery";
+		}
 	}
 
 	/**
