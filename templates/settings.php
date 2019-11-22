@@ -2,6 +2,7 @@
 /** @var $myname string */
 /** @var $myuser string */
 /** @var $expiry String */
+/** @var $sendMail String */
 /** @var $rolesUnavailable String */
 
 $this->layout('base', ['title' => __('Opzioni WEEEHire')]);
@@ -88,6 +89,28 @@ if($rolesUnavailable === null) {
 					<button type="submit" class="btn btn-primary mb-md-0 mb-2"><?=__('Conferma')?></button>
 					<button type="submit" class="btn btn-warning" name="rolesReset" value="true"><?=__('Rendi tutti disponibili')?></button>
 				</div>
+			</div>
+		</div>
+	</form>
+	<hr>
+	<h4 class="mb-3"><i><?=__('Invia email a noi quando arriva una nuova candidatura')?></i></h4>
+	<form method="post">
+		<div class="form-group row">
+			<div class="col-12">
+			<?php if($sendMail): ?>
+				<p><?=sprintf(__('Viene inviata un\'email a %s ogni volta che riceviamo una nuova candidatura.'), WEEEHIRE_EMAIL_FALLBACK) ?></p>
+			<?php else: ?>
+				<p><?=__('Non riceviamo notifiche per le nuove candidature.')?></p>
+			<?php endif; ?>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-12">
+			<?php if($sendMail): ?>
+				<button type="submit" class="btn btn-outline-danger" name="notifyEmail" value="false"><?=__('Disattiva email')?></button>
+			<?php else: ?>
+				<button type="submit" class="btn btn-outline-success" name="notifyEmail" value="true"><?=__('Attiva email')?></button>
+			<?php endif; ?>
 			</div>
 		</div>
 	</form>

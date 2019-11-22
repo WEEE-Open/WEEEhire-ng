@@ -74,11 +74,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 		echo $template->render('form', ['error' => 'wtf']);
 		exit;
 	}
+	// Prepare for redirect
 	http_response_code(303);
 	$query = http_build_query(['id' => $id, 'token' => $token]);
 	header("Location: /status.php?$query");
+
+	// Send confirmation email to candidate
 	Email::sendMail(Utils::politoMail($user->matricola), $template->render('confirm_email', ['subject' => true]),
 		$template->render('confirm_email', ['link' => WEEEHIRE_SELF_LINK . "/status.php?$query", 'subject' => false]));
+
+	// Send email to us
+	if((int) $db->getConfigValue('notifyEmail') !== 0) {
+		Email::sendMail(WEEEHIRE_EMAIL_FALLBACK, 'Nuova candidatura - ' . $user->area,
+			$template->render('notification_email',
+				['user' => $user, 'link' => WEEEHIRE_SELF_LINK . "/candidates.php?id=$id"]));
+	}
 	exit;
 }
 

@@ -42,6 +42,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$rolesRule = implode('|', $_POST['roles']);
 		$db->setConfigValue('rolesUnavailable', $rolesRule);
 		$changed = true;
+	} elseif(isset($_POST['notifyEmail'])) {
+		if($_POST['notifyEmail'] === 'false') {
+			$email = '0';
+		} else {
+			$email = '1';
+		}
+		$db->setConfigValue('notifyEmail', $email);
+		$changed = true;
 	}
 
 	if($changed) {
@@ -54,7 +62,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $expiry = $db->getConfigValue('expiry');
-$rolesUnvailable = $db->getConfigValue('rolesUnavailable');
 
 // Get the timestamp in correct format
 if($expiry !== null) {
@@ -68,5 +75,6 @@ echo $template->render('settings',
 		'myname'           => $_SESSION['cn'],
 		'expiry'           => $expiry,
 		'error'            => $error,
-		'rolesUnavailable' => $rolesUnvailable
+		'sendMail'         => (int) $db->getConfigValue('notifyEmail'),
+		'rolesUnavailable' => $db->getConfigValue('rolesUnavailable')
 	]);
