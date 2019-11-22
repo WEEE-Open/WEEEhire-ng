@@ -100,7 +100,7 @@ require_once 'stars.php';
 							</select>
 						</div>
 						<div class="col-4">
-							<button type="submit" name="vote" class="btn btn-outline-primary"><?=__('Vota')?></button>
+							<button type="submit" name="voteButton" value="true" class="btn btn-outline-primary"><?=__('Vota')?></button>
 						</div>
 					</div>
 				</form>

@@ -42,7 +42,7 @@ if(isset($_GET['id'])) {
 		} elseif(isset($_POST['save'])) {
 			$db->saveNotes($id, $notes);
 			$changed = true;
-		} elseif(isset($_POST['vote']) && isset($_POST["id_evaluation"])) {
+		} elseif(isset($_POST['voteButton']) && isset($_POST['vote'])) {
 			$db->setEvaluation($id, $_SESSION['uid'], $_SESSION['cn'], $_POST['vote']);
 			header('Location: ' . $_SERVER['REQUEST_URI']);
 			exit();
