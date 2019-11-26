@@ -6,6 +6,7 @@ $saluti1 = ['Ciao persone,', 'Welà gente,', 'Hey persone,', 'Ciao,', 'Buongiorn
 $saluti2 = [
 	'- Il WEEEHire',
 	"Cordiali saluti,\nWEEEHire",
+	"Cordiali ciaoni,\nWEEEHire",
 	'Statemi bene',
 	'Ciaone',
 	"Cordialmente vostro,\nWEEEHire",
