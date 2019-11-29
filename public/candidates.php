@@ -44,12 +44,10 @@ if(isset($_GET['id'])) {
 			$changed = true;
 		} elseif(isset($_POST['voteButton']) && isset($_POST['vote'])) {
 			$db->setEvaluation($id, $_SESSION['uid'], $_SESSION['cn'], $_POST['vote']);
-			header('Location: ' . $_SERVER['REQUEST_URI']);
-			exit();
+			$changed = true;
 		} elseif(isset($_POST['unvote']) && isset($_POST["id_evaluation"])) {
 			$db->removeEvaluation($_POST["id_evaluation"]);
-			header('Location: ' . $_SERVER['REQUEST_URI']);
-			exit();
+			$changed = true;
 		} else {
 			if($user->published) {
 				// Only for published evaluations
@@ -117,15 +115,14 @@ if(isset($_GET['id'])) {
 					$changed = true;
 				}
 			}
-
-			if($changed) {
-				// This is a pattern: https://en.wikipedia.org/wiki/Post/Redirect/Get
-				http_response_code(303);
-				// $_SERVER['REQUEST_URI'] is already url encoded
-				$url = Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => null]);
-				header("Location: $url");
-				exit;
-			}
+		}
+		if($changed) {
+			// This is a pattern: https://en.wikipedia.org/wiki/Post/Redirect/Get
+			http_response_code(303);
+			// $_SERVER['REQUEST_URI'] is already url encoded
+			$url = Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => null]);
+			header("Location: $url");
+			exit;
 		}
 	} // "if this is a POST request"
 
