@@ -15,11 +15,8 @@ $saluti2 = [
 
 $rand1 = mt_rand(0, count($saluti1) - 1);
 $rand2 = mt_rand(0, count($saluti2) - 1);
-?>
 
-<?=$saluti1[$rand1]?>
-
-c'è una nuova candidatura per l'area <?=$user->area?>.
-Andate a valutarla: <?=$link?>
-
-<?=$saluti2[$rand2]?>
+echo "$saluti1[$rand1]\r\n\r\n";
+echo "c'è una nuova candidatura per l'area $user->area.\r\n";
+echo "Andate a valutarla: $link\r\n\r\n";
+echo $saluti2[$rand2];
