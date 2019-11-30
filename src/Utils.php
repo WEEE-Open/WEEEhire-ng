@@ -132,4 +132,9 @@ class Utils {
 			}
 		}
 	}
+
+
+	public static function endsWith(string $haystack, string $needle): bool {
+		return substr($haystack, -strlen($needle)) === $needle;
+	}
 }

@@ -31,6 +31,13 @@ class Email {
 			$mail->setFrom('noreply@join.weeeopen.it', 'WEEE Open');
 			$mail->addAddress($to);
 
+			// Quirks mode! That mail server converts 8bit to quoted-printable, which is not a problem.
+			// Unless it has to forward the email to another address, then the DKIM validation fails and nothing is
+			// forwarded. Let's hope that this prevents the mail server from needlessly tampering with the content.
+			if(Utils::endsWith(strtolower($to), '@polito.it')) {
+				$mail->Encoding = PHPMailer::ENCODING_QUOTED_PRINTABLE;
+			}
+
 			$mail->isHTML(false);
 			$mail->Subject = $subject;
 			$mail->Body = $body;
