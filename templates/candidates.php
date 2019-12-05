@@ -33,13 +33,19 @@ require_once 'stars.php';
 		if($user['status'] === null) {
 			$tobe++;
 			$statusCell = "<a href=\"/candidates.php?id=${user['id']}\">" . __('Da decidere') . '</a>';
+			$tdcolor = '';
 		} else {
+			if($user['status'] !== null) {
+				$topublish++;
+			}
 			if($user['status'] === true) {
 				$approved++;
 				$statusCell = $user['published'] ? __('Approvata, pubblicata') : '<b>' . __('Approvata, da pubblicare') . '</b>';
+				$tdcolor = 'class="table-success"';
 			} else {
 				$rejected++;
 				$statusCell = $user['published'] ? __('Rifiutata, pubblicata') : '<b>' . __('Rifiutata, da pubblicare') . '</b>';
+				$tdcolor = 'class="table-danger"';
 			}
 		}
 		if($user['notes']) {
@@ -48,24 +54,16 @@ require_once 'stars.php';
 		if($user['hold']) {
 			$statusCell .= ' 🔒';
 		}
-		if($user['status'] === true) {
-			$tdcolor = 'class="table-success"';
-		} elseif($user['status'] === false) {
-			$tdcolor = 'class="table-danger"';
-		} else {
-			$tdcolor = '';
-		}
+
+		// Expand cell color to the whole line if published
 		if($user['published']) {
-			$published++;
 			$trcolor = $tdcolor;
 		} else {
-			if($user['status'] !== null) {
-				$topublish++;
-			} elseif($user['hold']) {
-				$trcolor = 'class="table-warning"';
-			} else {
-				$trcolor = '';
-			}
+			$trcolor = '';
+		}
+		if($user['hold']) {
+			// Ovveride
+			$tdcolor = 'class="table-warning"';
 		}
 		?>
 		<tr <?=$trcolor?>>
