@@ -69,7 +69,7 @@ require_once 'stars.php';
 		<tr <?=$trcolor?>>
 			<td><a href="/candidates.php?id=<?=$user['id']?>"><?=$this->e($user['name'])?></a></td>
 			<td><?=$this->e($user['area'])?></td>
-			<td><?=$user['evaluation'] === null ? '' : sprintf('%3.1f',
+			<td class="stars"><?=$user['evaluation'] === null ? '' : sprintf('%3.1f',
 						$user['evaluation']) . '&nbsp;' . stars($user['evaluation'])?></td>
 			<td><?=$date?></td>
 			<td><?=$this->e($user['recruiter'])?></td>

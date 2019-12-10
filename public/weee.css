@@ -38,6 +38,10 @@
 	margin-bottom: 1rem;
 }
 
+.stars {
+	white-space: nowrap;
+}
+
 .star-color {
 	color: #FC0;
 }
