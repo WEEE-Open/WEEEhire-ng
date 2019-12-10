@@ -48,72 +48,66 @@ if(isset($_GET['id'])) {
 		} elseif(isset($_POST['unvote']) && isset($_POST["id_evaluation"])) {
 			$db->removeEvaluation($_POST["id_evaluation"]);
 			$changed = true;
-		} else {
-			if($user->published) {
-				// Only for published evaluations
-				if(isset($_POST['approvefromhold'])) {
-					// Unpublish so we can choose a recruiter
-					$db->setPublished($id, false);
-					$db->setStatus($id, true, $_SESSION['cn'] ?? null);
-					// Leave on hold (so the application cannot be deleted)
-					//$db->setHold($id, false);
-					// Should have already been false
-					$db->setEmailed($id, false);
-					$db->saveNotes($id, $notes);
-					$changed = true;
-				} elseif(isset($_POST['holdon'])) {
-					$db->saveNotes($id, $notes);
-					$db->setHold($id, true);
-					$changed = true;
-				} elseif(isset($_POST['holdoff'])) {
-					$db->saveNotes($id, $notes);
-					$db->setHold($id, false);
-					$changed = true;
+		} if(isset($_POST['approvefromhold'])) {
+			$db->saveNotes($id, $notes);
+			// Unpublish so we can choose a recruiter
+			$db->setPublished($id, false);
+			$db->setStatus($id, true, $_SESSION['cn'] ?? null);
+			$db->setEmailed($id, false);
+			// Leave on hold (so the application cannot be deleted)
+			//$db->setHold($id, false);
+			$changed = true;
+		} elseif(isset($_POST['holdon'])) {
+			$db->saveNotes($id, $notes);
+			$db->setHold($id, true);
+			$changed = true;
+		} elseif(isset($_POST['holdoff'])) {
+			$db->saveNotes($id, $notes);
+			$db->setHold($id, false);
+			$changed = true;
+		} elseif(!$user->published) {
+			// Only for not published evaluations
+			if(isset($_POST['approve'])) {
+				$db->setStatus($id, true, $_SESSION['cn'] ?? null);
+				$db->saveNotes($id, $notes);
+				$changed = true;
+			} elseif(isset($_POST['reject'])) {
+				$db->setStatus($id, false, $_SESSION['cn'] ?? null);
+				$db->saveNotes($id, $notes);
+				$changed = true;
+			} elseif($user->status !== null && isset($_POST['limbo'])) {
+				$db->setStatus($id, null, null);
+				$db->saveNotes($id, $notes);
+				$changed = true;
+			} elseif(($user->status === false || $user->hold) && isset($_POST['publishnow'])) {
+				$db->setPublished($id, true);
+				$db->saveNotes($id, $notes);
+				$changed = true;
+			} elseif($user->status === true && isset($_POST['publishnow']) && !$user->emailed) {
+				$email = $_POST['email'] ?? '';
+				$subject = $_POST['subject'] ?? '';
+				$recruiter = $_POST['recruiter'] ?? '';
+				if(strlen($email) <= 0) {
+					http_response_code(400);
+					echo $template->render('error', ['message' => 'Write an email']);
+					exit;
 				}
-			} else {
-				// Only for not published evaluations
-				if(isset($_POST['approve'])) {
-					$db->setStatus($id, true, $_SESSION['cn'] ?? null);
-					$db->saveNotes($id, $notes);
-					$changed = true;
-				} elseif(isset($_POST['reject'])) {
-					$db->setStatus($id, false, $_SESSION['cn'] ?? null);
-					$db->saveNotes($id, $notes);
-					$changed = true;
-				} elseif($user->status !== null && isset($_POST['limbo'])) {
-					$db->setStatus($id, null, null);
-					$db->saveNotes($id, $notes);
-					$changed = true;
-				} elseif($user->status === false && isset($_POST['publishnow'])) {
-					$db->setPublished($id, true);
-					$db->saveNotes($id, $notes);
-					$changed = true;
-				} elseif($user->status === true && isset($_POST['publishnow']) && !$user->emailed) {
-					$email = $_POST['email'] ?? '';
-					$subject = $_POST['subject'] ?? '';
-					$recruiter = $_POST['recruiter'] ?? '';
-					if(strlen($email) <= 0) {
-						http_response_code(400);
-						echo $template->render('error', ['message' => 'Write an email']);
-						exit;
-					}
-					if(strlen($subject) <= 0) {
-						http_response_code(400);
-						echo $template->render('error', ['message' => 'Write a subject line']);
-						exit;
-					}
-					if(strlen($recruiter) <= 0 || strpos($recruiter, '|') === false) {
-						http_response_code(400);
-						echo $template->render('error', ['message' => 'Select a recruiter']);
-						exit;
-					}
-					$recruiter = explode('|', $recruiter, 2);
-					$db->setRecruiter($id, $recruiter[1], $recruiter[0]);
-					Email::sendMail(Utils::politoMail($user->matricola), $subject, $email);
-					$db->setEmailed($id, true);
-					$db->setPublished($id, true);
-					$changed = true;
+				if(strlen($subject) <= 0) {
+					http_response_code(400);
+					echo $template->render('error', ['message' => 'Write a subject line']);
+					exit;
 				}
+				if(strlen($recruiter) <= 0 || strpos($recruiter, '|') === false) {
+					http_response_code(400);
+					echo $template->render('error', ['message' => 'Select a recruiter']);
+					exit;
+				}
+				$recruiter = explode('|', $recruiter, 2);
+				$db->setRecruiter($id, $recruiter[1], $recruiter[0]);
+				Email::sendMail(Utils::politoMail($user->matricola), $subject, $email);
+				$db->setEmailed($id, true);
+				$db->setPublished($id, true);
+				$changed = true;
 			}
 		}
 		if($changed) {

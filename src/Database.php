@@ -87,6 +87,7 @@ class Database {
 				'recruitertg',
 				'submitted',
 				'notes',
+				'visiblenotes',
 				'emailed',
 				'invitelink'
 			] as $attr

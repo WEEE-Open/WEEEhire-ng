@@ -18,6 +18,7 @@ create table users (
 	recruitertg text,
 	invitelink text,
 	notes text,
+	visiblenotes text default NULL,
 	interview int,
 	hold boolean not null default 0,
 	interviewer text,

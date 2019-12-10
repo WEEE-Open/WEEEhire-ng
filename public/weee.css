@@ -28,6 +28,13 @@
 	background-color: #FC6464;
 }
 
+.status-postponed {
+	font-size: 2.2em;
+	border-radius: 0.2em;
+	padding: 0.5em;
+	background-color: #fac864;
+}
+
 .space-above {
 	margin-top: 2em;
 }
@@ -36,6 +43,21 @@
 	padding: .5rem 0;
 	border-bottom: 0.1rem solid #00983a;
 	margin-bottom: 1rem;
+}
+
+.candidates-hold td, td.candidates-hold {
+	border-color: #fac864;
+	background-color: #ffeeba;
+}
+
+.candidates-approved td, td.candidates-approved {
+	border-color: #8fd19e;
+	background-color: #c3e6cb;
+}
+
+.candidates-rejected td, td.candidates-rejected {
+	border-color: #ed969e;
+	background-color: #f5c6cb;
 }
 
 .stars {

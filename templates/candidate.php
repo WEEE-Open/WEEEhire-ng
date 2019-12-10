@@ -117,30 +117,29 @@ require_once 'stars.php';
 					class="form-control"><?=$this->e($user->notes)?></textarea>
 		</div>
 		<div class="form-group text-center">
-			<?php if(!$user->published): ?>
-				<?php if($user->status !== null): ?>
-					<button name="limbo" value="true" type="submit"
-							class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
-					<?php if($user->status === false): ?>
-						<button name="publishnow" value="true" type="submit"
-								class="btn btn-primary"><?=__('Pubblica')?></button>
-					<?php endif ?>
-				<?php else: ?>
+			<?php if(!$user->published && !$user->hold): ?>
+				<?php if($user->status === null): ?>
 					<button name="approve" value="true" type="submit"
 							class="btn btn-success"><?=__('Approva candidatura')?></button>
 					<button name="reject" value="true" type="submit"
 							class="btn btn-danger"><?=__('Rifiuta candidatura')?></button>
-				<?php endif ?>
-			<?php elseif($user->published && $user->status === false): ?>
-				<?php if($user->hold): ?>
-					<button name="approvefromhold" value="true" type="submit"
-							class="btn btn-success"><?=__('Approva candidatura')?></button>
-					<button name="holdoff" value="true" type="submit"
-							class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
 				<?php else: ?>
-					<button name="holdon" value="true" type="submit"
-							class="btn btn-secondary"><?=__('Metti in lista d\'attesa')?></button>
+					<button name="limbo" value="true" type="submit"
+							class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
 				<?php endif ?>
+				<?php if($user->status === false || $user->hold): ?>
+					<button name="publishnow" value="true" type="submit"
+							class="btn btn-primary"><?=__('Pubblica')?></button>
+				<?php endif ?>
+			<?php endif ?>
+			<?php if($user->hold): ?>
+				<button name="holdoff" value="true" type="submit"
+						class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
+				<button name="approvefromhold" value="true" type="submit"
+						class="btn btn-success"><?=__('Approva candidatura')?></button>
+			<?php else: ?>
+				<button name="holdon" value="true" type="submit"
+						class="btn btn-secondary"><?=__('Metti in lista d\'attesa')?></button>
 			<?php endif ?>
 			<button name="save" value="true" type="submit"
 					class="btn btn-outline-primary"><?=__('Salva note')?></button>

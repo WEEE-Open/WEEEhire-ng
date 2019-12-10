@@ -41,14 +41,15 @@ require_once 'stars.php';
 			if($user['status'] === true) {
 				$approved++;
 				$statusCell = $user['published'] ? __('Approvata, pubblicata') : '<b>' . __('Approvata, da pubblicare') . '</b>';
-				$tdcolor = 'class="table-success"';
+				$tdcolor = 'class="candidates-approved"';
 			} else {
 				$rejected++;
 				$statusCell = $user['published'] ? __('Rifiutata, pubblicata') : '<b>' . __('Rifiutata, da pubblicare') . '</b>';
-				$tdcolor = 'class="table-danger"';
+				$tdcolor = 'class="candidates-rejected"';
 			}
 		}
 		if($user['notes']) {
+			// TODO: make this "there are notes *by me*"
 			$statusCell .= ' 📝';
 		}
 		if($user['hold']) {
@@ -63,7 +64,7 @@ require_once 'stars.php';
 		}
 		if($user['hold']) {
 			// Ovveride
-			$tdcolor = 'class="table-warning"';
+			$trcolor = 'class="candidates-hold"';
 		}
 		?>
 		<tr <?=$trcolor?>>
