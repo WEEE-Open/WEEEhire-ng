@@ -82,26 +82,31 @@ class User {
 		return true;
 	}
 
-	public function getCandidateStatus(): bool {
-		if($this->published) {
-			if($this->status === true) {
+	public function getCandidateStatus(): int {
+		return $this->computeCandidateStatus($this->published, $this->status, $this->hold);
+	}
+
+	public static function computeCandidateStatus(bool $published, ?bool $status, bool $hold): int {
+		if($published) {
+			if($status === true) {
 				return self::STATUS_PUBLISHED_APPROVED;
-			} elseif($this->status === false && $this->hold === false) {
+			} elseif($status === false && $hold === false) {
 				return self::STATUS_PUBLISHED_REJECTED;
-			} elseif($this->status === false && $this->hold === true) {
+			} elseif($status === false && $hold === true) {
 				return self::STATUS_PUBLISHED_REJECTED_HOLD;
-			} elseif($this->status === null && $this->hold === true) {
+			} elseif($status === null && $hold === true) {
 				return self::STATUS_PUBLISHED_HOLD;
 			}
 		} else {
-			if($this->status === true) {
+			if($status === true) {
 				return self::STATUS_NEW_APPROVED;
-			} elseif($this->status === false) {
+			} elseif($status === false) {
 				return self::STATUS_NEW_REJECTED;
-			} elseif($this->hold === true) {
+			} elseif($hold === true) {
 				return self::STATUS_NEW_HOLD;
 			}
 		}
+
 		return self::STATUS_NEW;
 	}
 }

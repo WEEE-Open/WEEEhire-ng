@@ -9,6 +9,7 @@ $rejected = 0;
 $tobe = 0;
 $topublish = 0;
 $published = 0;
+$hold = 0;
 require_once 'stars.php';
 ?>
 
@@ -28,43 +29,67 @@ require_once 'stars.php';
 	</thead>
 	<tbody>
 	<?php foreach($users as $user):
+		/** @var \WEEEOpen\WEEEHire\User $user */
 		$date = date('Y-m-d H:i', $user['submitted']);
 		$total++;
-		if($user['status'] === null) {
-			$tobe++;
-			$statusCell = "<a href=\"/candidates.php?id=${user['id']}\">" . __('Da decidere') . '</a>';
-			$tdcolor = '';
-		} else {
-			if($user['status'] !== null) {
-				$topublish++;
-			}
-			if($user['status'] === true) {
+		$status = WEEEOpen\WEEEHire\User::computeCandidateStatus($user['published'], $user['status'], $user['hold']);
+		$trcolor = '';
+		switch($status) {
+			case \WEEEOpen\WEEEHire\User::STATUS_NEW:
+				$tobe++;
+				$statusCell = "<a href=\"/candidates.php?id=${user['id']}\">" . __('Da decidere') . '</a>';
+				$tdcolor = '';
+				break;
+			case \WEEEOpen\WEEEHire\User::STATUS_NEW_APPROVED:
 				$approved++;
-				$statusCell = $user['published'] ? __('Approvata, pubblicata') : '<b>' . __('Approvata, da pubblicare') . '</b>';
+				$topublish++;
+				$statusCell = '<b>' . __('Approvata, da pubblicare') . '</b>';
 				$tdcolor = 'class="candidates-approved"';
-			} else {
+				break;
+			case \WEEEOpen\WEEEHire\User::STATUS_NEW_REJECTED:
 				$rejected++;
-				$statusCell = $user['published'] ? __('Rifiutata, pubblicata') : '<b>' . __('Rifiutata, da pubblicare') . '</b>';
+				$topublish++;
+				$statusCell = '<b>' . __('Rifiutata, da pubblicare') . '</b>';
 				$tdcolor = 'class="candidates-rejected"';
-			}
+				break;
+			case \WEEEOpen\WEEEHire\User::STATUS_NEW_HOLD:
+				$hold++;
+				$topublish++;
+				$statusCell = "<a href=\"/candidates.php?id=${user['id']}\">" . __('In lista d\'attesa') . '</a>';
+				$tdcolor = 'class="candidates-hold"';
+				break;
+			case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_APPROVED:
+				$approved++;
+				$published++;
+				$statusCell = __('Approvata, pubblicata');
+				$tdcolor = $trcolor = 'class="candidates-approved"';
+				break;
+			case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED:
+				$rejected++;
+				$published++;
+				$statusCell = __('Rifiutata, pubblicata');
+				$tdcolor = $trcolor = 'class="candidates-rejected"';
+				break;
+			case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD:
+				$hold++;
+				$published++;
+				$statusCell = "<a href=\"/candidates.php?id=${user['id']}\">" . __('In lista d\'attesa, pubblicata') . '</a>';
+				$tdcolor = $trcolor = 'class="candidates-hold"';
+				break;
+			case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED_HOLD:
+				$rejected++;
+				$hold++;
+				$statusCell = __('Rifiutata, pubblicata e in lista d\'attesa');
+				$tdcolor = 'class="candidates-rejected"';
+				$trcolor = 'class="candidates-hold"';
+				break;
 		}
 		if($user['notes']) {
-			// TODO: make this "there are notes *by me*"
+			// TODO: make this "there are notes *by me*" (there's an issue open)
 			$statusCell .= ' 📝';
 		}
 		if($user['hold']) {
 			$statusCell .= ' 🔒';
-		}
-
-		// Expand cell color to the whole line if published
-		if($user['published']) {
-			$trcolor = $tdcolor;
-		} else {
-			$trcolor = '';
-		}
-		if($user['hold']) {
-			// Ovveride
-			$trcolor = 'class="candidates-hold"';
 		}
 		?>
 		<tr <?=$trcolor?>>

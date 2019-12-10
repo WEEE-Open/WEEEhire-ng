@@ -95,6 +95,7 @@ class Database {
 			$user->$attr = $row[$attr];
 		}
 		$user->published = (bool) $user->published;
+		$user->hold = (bool) $user->hold;
 		$user->emailed = (bool) $user->emailed;
 		$user->status = $user->status === null ? null : (bool) $user->status;
 		$user->invitelink = $user->invitelink === null ? null : $user->invitelink;

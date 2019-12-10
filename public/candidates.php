@@ -28,62 +28,42 @@ if(isset($_GET['id'])) {
 
 	// A form has been submitted
 	if($_SERVER['REQUEST_METHOD'] === 'POST') {
-		$changed = false;
 		// Most buttons also update notes (so we can write "seems good" and press "approve")
 		$notes = $_POST['notes'] ?? '';
+		$status = $user->getCandidateStatus();
 
 		if(isset($_POST['edit'])) {
 			// If all data is present, this method will update $user so it only has to be stored in the database
 			if($user->fromPost($_POST)) {
 				// Store it
 				$db->updateUser($user);
-				$changed = true;
 			}
 		} elseif(isset($_POST['save'])) {
+			// This button is always available
 			$db->saveNotes($id, $notes);
-			$changed = true;
 		} elseif(isset($_POST['voteButton']) && isset($_POST['vote'])) {
+			// This button is always available
 			$db->setEvaluation($id, $_SESSION['uid'], $_SESSION['cn'], $_POST['vote']);
-			$changed = true;
 		} elseif(isset($_POST['unvote']) && isset($_POST["id_evaluation"])) {
+			// This button is always available
 			$db->removeEvaluation($_POST["id_evaluation"]);
-			$changed = true;
-		} if(isset($_POST['approvefromhold'])) {
-			$db->saveNotes($id, $notes);
-			// Unpublish so we can choose a recruiter
-			$db->setPublished($id, false);
-			$db->setStatus($id, true, $_SESSION['cn'] ?? null);
-			$db->setEmailed($id, false);
-			// Leave on hold (so the application cannot be deleted)
-			//$db->setHold($id, false);
-			$changed = true;
-		} elseif(isset($_POST['holdon'])) {
-			$db->saveNotes($id, $notes);
-			$db->setHold($id, true);
-			$changed = true;
-		} elseif(isset($_POST['holdoff'])) {
-			$db->saveNotes($id, $notes);
-			$db->setHold($id, false);
-			$changed = true;
-		} elseif(!$user->published) {
-			// Only for not published evaluations
-			if(isset($_POST['approve'])) {
+		} elseif(isset($_POST['approve'])) {
+			if($status === User::STATUS_NEW) {
 				$db->setStatus($id, true, $_SESSION['cn'] ?? null);
 				$db->saveNotes($id, $notes);
-				$changed = true;
-			} elseif(isset($_POST['reject'])) {
+			}
+		} elseif(isset($_POST['reject'])) {
+			if($status === User::STATUS_NEW || $status === User::STATUS_PUBLISHED_HOLD) {
 				$db->setStatus($id, false, $_SESSION['cn'] ?? null);
 				$db->saveNotes($id, $notes);
-				$changed = true;
-			} elseif($user->status !== null && isset($_POST['limbo'])) {
+			}
+		} elseif(isset($_POST['limbo'])) {
+			if($status === User::STATUS_NEW_REJECTED || $status === User::STATUS_NEW_APPROVED) {
 				$db->setStatus($id, null, null);
 				$db->saveNotes($id, $notes);
-				$changed = true;
-			} elseif(($user->status === false || $user->hold) && isset($_POST['publishnow'])) {
-				$db->setPublished($id, true);
-				$db->saveNotes($id, $notes);
-				$changed = true;
-			} elseif($user->status === true && isset($_POST['publishnow']) && !$user->emailed) {
+			}
+		} elseif(isset($_POST['publishnow'])) {
+			if($status === User::STATUS_NEW_APPROVED) {
 				$email = $_POST['email'] ?? '';
 				$subject = $_POST['subject'] ?? '';
 				$recruiter = $_POST['recruiter'] ?? '';
@@ -107,30 +87,57 @@ if(isset($_GET['id'])) {
 				Email::sendMail(Utils::politoMail($user->matricola), $subject, $email);
 				$db->setEmailed($id, true);
 				$db->setPublished($id, true);
-				$changed = true;
+			} elseif($status === User::STATUS_NEW_REJECTED) {
+				$db->setPublished($id, true);
+				$db->saveNotes($id, $notes);
+			} elseif($status === User::STATUS_NEW_HOLD) {
+				// TODO: send mail
+				$db->setPublished($id, true);
+				$db->saveNotes($id, $notes);
+			}
+		} elseif(isset($_POST['approvefromhold'])) {
+			if($status === User::STATUS_PUBLISHED_HOLD) {
+				$db->saveNotes($id, $notes);
+				// Unpublish so we can choose a recruiter
+				// The end result should be STATUS_NEW_APPROVED
+				$db->setPublished($id, false);
+				$db->setStatus($id, true, $_SESSION['cn'] ?? null);
+				$db->setEmailed($id, false);
+				// Leave on hold (so the application cannot be deleted)
+				//$db->setHold($id, false);
+			}
+		} elseif(isset($_POST['holdon'])) {
+			if($status === User::STATUS_NEW || $status === User::STATUS_PUBLISHED_REJECTED) {
+				$db->saveNotes($id, $notes);
+				$db->setHold($id, true);
+			}
+		} elseif(isset($_POST['holdoff'])) {
+			if($status === User::STATUS_NEW_HOLD || $status === User::STATUS_PUBLISHED_REJECTED_HOLD) {
+				$db->saveNotes($id, $notes);
+				$db->setHold($id, false);
 			}
 		}
-		if($changed) {
-			// This is a pattern: https://en.wikipedia.org/wiki/Post/Redirect/Get
-			http_response_code(303);
-			// $_SERVER['REQUEST_URI'] is already url encoded
-			$url = Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => null]);
-			header("Location: $url");
-			exit;
-		}
-	} // "if this is a POST request"
 
-	// Render the page
-	echo $template->render('candidate',
-		[
-			'user'        => $user,
-			'edit'        => isset($_GET['edit']),  // candidates.php?id=123&edit, allows editing of personal data
-			'recruiters'  => $ldap->getRecruiters(),
-			'evaluations' => $db->getEvaluation($id),
-			'uid'         => $_SESSION['uid'],
-			'cn'          => $_SESSION['cn']
-		]);
+	// TODO: is it really necessary to have $changed?
+	// This is a pattern: https://en.wikipedia.org/wiki/Post/Redirect/Get
+	http_response_code(303);
+	// $_SERVER['REQUEST_URI'] is already url encoded
+	$url = Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => null]);
+	header("Location: $url");
 	exit;
+} // "if this is a POST request"
+
+// Render the page
+echo $template->render('candidate',
+	[
+		'user'        => $user,
+		'edit'        => isset($_GET['edit']),  // candidates.php?id=123&edit, allows editing of personal data
+		'recruiters'  => $ldap->getRecruiters(),
+		'evaluations' => $db->getEvaluation($id),
+		'uid'         => $_SESSION['uid'],
+		'cn'          => $_SESSION['cn']
+	]);
+exit;
 
 } else {
 	// no ?id=... parameter => render the page with a candidates list

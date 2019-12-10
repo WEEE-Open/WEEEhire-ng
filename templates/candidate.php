@@ -120,8 +120,8 @@ foreach($evaluations as $evaluation) {
 				class="form-control"><?=$this->e($user->notes)?></textarea>
 	</div>
 	<div class="form-group text-center">
-		<?php switch($user->getCandidateStatus()): ?>
-		<?php default:
+		<?php switch($user->getCandidateStatus()):
+		default:
 		case \WEEEOpen\WEEEHire\User::STATUS_NEW: ?>
 			<button name="approve" value="true" type="submit"
 					class="btn btn-success"><?=__('Approva candidatura')?></button>
@@ -152,7 +152,7 @@ foreach($evaluations as $evaluation) {
 			case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED: ?>
 			<button name="holdon" value="true" type="submit"
 					class="btn btn-secondary"><?=__('Metti in lista d\'attesa')?></button>
-				<?php break;
+			<?php break;
 		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED_HOLD: ?>
 			<button name="holdoff" value="true" type="submit"
 					class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
@@ -164,9 +164,8 @@ foreach($evaluations as $evaluation) {
 						class="btn btn-danger"><?=__('Rifiuta candidatura')?></button>
 			<?php break;
 		endswitch; ?>
-		<button name="holdoff" value="true" type="submit"
-				class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
-
+	</div>
+	<div class="form-group text-center">
 		<button name="save" value="true" type="submit"
 				class="btn btn-outline-primary"><?=__('Salva note')?></button>
 		<a class="btn btn-outline-secondary"
