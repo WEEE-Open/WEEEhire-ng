@@ -37,55 +37,57 @@ require_once 'stars.php';
 <?=$this->fetch('userinfo', ['user' => $user, 'edit' => $edit, 'evaluations' => $evaluations, 'uid' => $uid])?>
 
 <?php if(!$edit):
-	$total = 0;
-	foreach($evaluations as $evaluation) {
-		$total += $evaluation['vote'];
+$total = 0;
+foreach($evaluations as $evaluation) {
+	$total += $evaluation['vote'];
+}
+if(count($evaluations) > 0) {
+	$avg = round($total / count($evaluations), 2);
+}
+$voted = false;
+foreach($evaluations as $evaluation) {
+	if($evaluation['id_evaluator'] === $uid) {
+		$voted = true;
+		break;
 	}
-	if(count($evaluations) > 0) {
-		$avg = round($total / count($evaluations), 2);
-	}
-	$voted = false;
-	foreach($evaluations as $evaluation) {
-		if($evaluation['id_evaluator'] === $uid) {
-			$voted = true;
-			break;
-		}
-	}
-	?>
-	<div class="row">
-		<div class="col"><h4><?=__('Valutazioni')?></h4></div>
-		<?php if(count($evaluations) === 0): ?>
-			<div class="col"></div>
-		<?php else: ?>
-			<div class="col"><p class="text-right"><?=sprintf(__('Valutazione:&nbsp;%s&nbsp;%s'), $avg, stars($avg)) ?></p></div>
-		<?php endif ?>
-	</div>
-	<table class="table table-striped">
-		<thead>
+}
+?>
+<div class="row">
+	<div class="col"><h4><?=__('Valutazioni')?></h4></div>
+	<?php if(count($evaluations) === 0): ?>
+		<div class="col"></div>
+	<?php else: ?>
+		<div class="col"><p class="text-right"><?=sprintf(__('Valutazione:&nbsp;%s&nbsp;%s'), $avg, stars($avg))?></p>
+		</div>
+	<?php endif ?>
+</div>
+<table class="table table-striped">
+	<thead>
+	<tr>
+		<th scope="col"><?=__('Nome valutatore')?></th>
+		<th scope="col"><?=__('Voto')?></th>
+		<th scope="col"><?=__('Data')?></th>
+		<th scope="col"><?=__('Azioni')?></th>
+	</tr>
+	</thead>
+	<tbody>
+	<?php foreach($evaluations as $evaluation): ?>
 		<tr>
-			<th scope="col"><?=__('Nome valutatore')?></th>
-			<th scope="col"><?=__('Voto')?></th>
-			<th scope="col"><?=__('Data')?></th>
-			<th scope="col"><?=__('Azioni')?></th>
+			<td><?=sprintf(__('%s (%s)'), $evaluation['name_evaluator'], $evaluation['id_evaluator'])?></td>
+			<td class="align-middle"><?=$evaluation['vote']?>&nbsp;<?=stars($evaluation['vote'])?></td>
+			<td><?=date('Y-m-d H:i', $evaluation['date'])?></td>
+			<td>
+				<form method="post">
+					<input type="hidden" name="id_evaluation" value="<?=$evaluation['id_evaluation']?>" />
+					<button type="submit" name="unvote"
+							class="btn btn-outline-danger btn-sm"><?=__('Elimina 🗑')?></button>
+				</form>
+			</td>
 		</tr>
-		</thead>
-		<tbody>
-		<?php foreach($evaluations as $evaluation): ?>
-			<tr>
-				<td><?= sprintf(__('%s (%s)'), $evaluation['name_evaluator'], $evaluation['id_evaluator']) ?></td>
-				<td class="align-middle"><?= $evaluation['vote'] ?>&nbsp;<?= stars($evaluation['vote']) ?></td>
-				<td><?= date('Y-m-d H:i', $evaluation['date']) ?></td>
-				<td>
-					<form method="post">
-						<input type="hidden" name="id_evaluation" value="<?= $evaluation['id_evaluation'] ?>" />
-						<button type="submit" name="unvote" class="btn btn-outline-danger btn-sm"><?= __('Elimina 🗑') ?></button>
-					</form>
-				</td>
-			</tr>
-		<?php endforeach; ?>
-		<?php if(!$voted): ?>
+	<?php endforeach; ?>
+	<?php if(!$voted): ?>
 		<tr>
-			<td><?= sprintf(__('%s (%s)'), $cn, $uid) ?></td>
+			<td><?=sprintf(__('%s (%s)'), $cn, $uid)?></td>
 			<td colspan="3">
 				<form method="post">
 					<div class="form-row row">
@@ -100,54 +102,78 @@ require_once 'stars.php';
 							</select>
 						</div>
 						<div class="col-4">
-							<button type="submit" name="voteButton" value="true" class="btn btn-outline-primary"><?=__('Vota')?></button>
+							<button type="submit" name="voteButton" value="true"
+									class="btn btn-outline-primary"><?=__('Vota')?></button>
 						</div>
 					</div>
 				</form>
 			</td>
 		</tr>
-		<?php endif; ?>
-		</tbody>
-	</table>
+	<?php endif; ?>
+	</tbody>
+</table>
 
-	<form method="post">
-		<div class="form-group">
-			<label for="notes"><b><?=__('Note')?></b></label>
-			<textarea id="notes" name="notes" cols="40" rows="3"
-					class="form-control"><?=$this->e($user->notes)?></textarea>
-		</div>
-		<div class="form-group text-center">
-			<?php if(!$user->published && !$user->hold): ?>
-				<?php if($user->status === null): ?>
-					<button name="approve" value="true" type="submit"
-							class="btn btn-success"><?=__('Approva candidatura')?></button>
-					<button name="reject" value="true" type="submit"
-							class="btn btn-danger"><?=__('Rifiuta candidatura')?></button>
-				<?php else: ?>
-					<button name="limbo" value="true" type="submit"
-							class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
-				<?php endif ?>
-				<?php if($user->status === false || $user->hold): ?>
-					<button name="publishnow" value="true" type="submit"
-							class="btn btn-primary"><?=__('Pubblica')?></button>
-				<?php endif ?>
-			<?php endif ?>
-			<?php if($user->hold): ?>
-				<button name="holdoff" value="true" type="submit"
-						class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
-				<button name="approvefromhold" value="true" type="submit"
-						class="btn btn-success"><?=__('Approva candidatura')?></button>
-			<?php else: ?>
-				<button name="holdon" value="true" type="submit"
-						class="btn btn-secondary"><?=__('Metti in lista d\'attesa')?></button>
-			<?php endif ?>
-			<button name="save" value="true" type="submit"
-					class="btn btn-outline-primary"><?=__('Salva note')?></button>
-			<a class="btn btn-outline-secondary"
-					href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'],
-						['edit' => 'true']))?>"><?=__('Modifica dati')?></a>
-		</div>
-	</form>
+<form method="post">
+	<div class="form-group">
+		<label for="notes"><b><?=__('Note')?></b></label>
+		<textarea id="notes" name="notes" cols="40" rows="3"
+				class="form-control"><?=$this->e($user->notes)?></textarea>
+	</div>
+	<div class="form-group text-center">
+		<?php switch($user->getCandidateStatus()): ?>
+		<?php default:
+		case \WEEEOpen\WEEEHire\User::STATUS_NEW: ?>
+			<button name="approve" value="true" type="submit"
+					class="btn btn-success"><?=__('Approva candidatura')?></button>
+			<button name="reject" value="true" type="submit"
+					class="btn btn-danger"><?=__('Rifiuta candidatura')?></button>
+			<button name="holdon" value="true" type="submit"
+					class="btn btn-secondary"><?=__('Metti in lista d\'attesa')?></button>
+			<?php break;
+		case \WEEEOpen\WEEEHire\User::STATUS_NEW_APPROVED: ?>
+			<button name="limbo" value="true" type="submit"
+					class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
+			<?php break;
+		case \WEEEOpen\WEEEHire\User::STATUS_NEW_REJECTED: ?>
+			<button name="publishnow" value="true" type="submit"
+					class="btn btn-primary"><?=__('Pubblica')?></button>
+			<button name="limbo" value="true" type="submit"
+					class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
+			<?php break;
+		case \WEEEOpen\WEEEHire\User::STATUS_NEW_HOLD: ?>
+		<!-- TODO: add stuff for email, remove "publish now" (or leave it to skip the email) -->
+			<button name="publishnow" value="true" type="submit"
+					class="btn btn-primary"><?=__('Pubblica')?></button>
+			<button name="holdoff" value="true" type="submit"
+					class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
+			<?php break;
+		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_APPROVED: ?>
+			<?php break;
+			case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED: ?>
+			<button name="holdon" value="true" type="submit"
+					class="btn btn-secondary"><?=__('Metti in lista d\'attesa')?></button>
+				<?php break;
+		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED_HOLD: ?>
+			<button name="holdoff" value="true" type="submit"
+					class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
+			<?php break;
+		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD: ?>
+			<button name="approvefromhold" value="true" type="submit"
+					class="btn btn-success"><?=__('Approva candidatura')?></button>
+			<button name="reject" value="true" type="submit"
+						class="btn btn-danger"><?=__('Rifiuta candidatura')?></button>
+			<?php break;
+		endswitch; ?>
+		<button name="holdoff" value="true" type="submit"
+				class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
+
+		<button name="save" value="true" type="submit"
+				class="btn btn-outline-primary"><?=__('Salva note')?></button>
+		<a class="btn btn-outline-secondary"
+				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'],
+					['edit' => 'true']))?>"><?=__('Modifica dati')?></a>
+	</div>
+</form>
 <?php endif ?>
 <?php if(!$edit && !$user->emailed && $user->status === true): ?>
 	<form method="post">

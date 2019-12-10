@@ -5,6 +5,15 @@ namespace WEEEOpen\WEEEHire;
 
 
 class User {
+	const STATUS_NEW = 0;
+	const STATUS_NEW_APPROVED = 1;
+	const STATUS_NEW_REJECTED = 2;
+	const STATUS_NEW_HOLD = 3;
+	const STATUS_PUBLISHED_APPROVED = 4;
+	const STATUS_PUBLISHED_REJECTED = 5;
+	const STATUS_PUBLISHED_HOLD = 6;
+	const STATUS_PUBLISHED_REJECTED_HOLD = 7;
+
 	public $id;
 
 	public $name;
@@ -47,6 +56,10 @@ class User {
 	 * @var $hold int Hold for the future
 	 */
 	public $hold;
+	/**
+	 * @var $hold|null text Why were you rejected/put on hold
+	 */
+	public $visiblenotes;
 
 	/**
 	 * Create User from POST data.
@@ -67,5 +80,28 @@ class User {
 		}
 
 		return true;
+	}
+
+	public function getCandidateStatus(): bool {
+		if($this->published) {
+			if($this->status === true) {
+				return self::STATUS_PUBLISHED_APPROVED;
+			} elseif($this->status === false && $this->hold === false) {
+				return self::STATUS_PUBLISHED_REJECTED;
+			} elseif($this->status === false && $this->hold === true) {
+				return self::STATUS_PUBLISHED_REJECTED_HOLD;
+			} elseif($this->status === null && $this->hold === true) {
+				return self::STATUS_PUBLISHED_HOLD;
+			}
+		} else {
+			if($this->status === true) {
+				return self::STATUS_NEW_APPROVED;
+			} elseif($this->status === false) {
+				return self::STATUS_NEW_REJECTED;
+			} elseif($this->hold === true) {
+				return self::STATUS_NEW_HOLD;
+			}
+		}
+		return self::STATUS_NEW;
 	}
 }
