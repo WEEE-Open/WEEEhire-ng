@@ -7,3 +7,4 @@ resources/locale/*/LC_MESSAGES/*.mo
 messages.pot
 messages.po~
 *.exe
+.phpunit.result.cache
