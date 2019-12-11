@@ -44,7 +44,7 @@ class Template {
 			__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'locale');
 		//_bind_textdomain_codeset('messages', 'UTF-8');
 
-		$engine = new Engine('..' . DIRECTORY_SEPARATOR . 'templates');
+		$engine = new Engine(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates');
 
 		return $engine;
 	}
