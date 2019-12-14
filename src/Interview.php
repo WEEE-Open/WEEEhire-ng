@@ -29,4 +29,5 @@ class Interview {
 	 * @var $answers string|null
 	 */
 	public $answers;
+	public $hold;
 }

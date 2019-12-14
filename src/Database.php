@@ -30,13 +30,7 @@ class Database {
 
 		$stmt = $this->db->prepare('INSERT INTO users (token, name, surname, degreecourse, year, matricola, area, letter, submitted) VALUES (:token, :namep, :surname, :degreecourse, :yearp, :matricola, :area, :letter, :submitted)');
 		$stmt->bindValue(':token', password_hash($token, PASSWORD_DEFAULT), SQLITE3_TEXT);
-		$stmt->bindValue(':namep', $user->name, SQLITE3_TEXT);
-		$stmt->bindValue(':surname', $user->surname, SQLITE3_TEXT);
-		$stmt->bindValue(':degreecourse', $user->degreecourse, SQLITE3_TEXT);
-		$stmt->bindValue(':yearp', $user->year, SQLITE3_TEXT);
-		$stmt->bindValue(':matricola', $user->matricola, SQLITE3_TEXT);
-		$stmt->bindValue(':area', $user->area, SQLITE3_TEXT);
-		$stmt->bindValue(':letter', $user->letter, SQLITE3_TEXT);
+		$this->bindUserParameters($user, $stmt);
 		$stmt->bindValue(':submitted', $user->submitted);
 		if(!$stmt->execute()) {
 			if($this->db->lastErrorCode() === 19 && stristr($this->db->lastErrorMsg(), 'matricola')) {
@@ -58,7 +52,7 @@ class Database {
 	 * @return User|null User or null if not found
 	 */
 	public function getUser(string $id): ?User {
-		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status, hold, recruiter, recruitertg, submitted, notes, emailed, invitelink FROM users WHERE id = :id LIMIT 1');
+		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status, hold, recruiter, recruitertg, submitted, notes, emailed, invitelink, visiblenotes FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if($result === false) {
@@ -421,18 +415,11 @@ class Database {
 	/**
 	 * Update candidates personal information
 	 *
-	 * @param User|null $user User, the ID is taken from there
+	 * @param User $user User, the ID is taken from there
 	 */
-	public function updateUser(?User $user) {
+	public function updateUser(User $user) {
 		$stmt = $this->db->prepare('UPDATE users SET name = :namep, surname = :surname, degreecourse = :degreecourse, year = :yearp, matricola = :matricola, area = :area, letter = :letter WHERE id = :id');
-		$stmt->bindValue(':id', $user->id, SQLITE3_INTEGER);
-		$stmt->bindValue(':namep', $user->name, SQLITE3_TEXT);
-		$stmt->bindValue(':surname', $user->surname, SQLITE3_TEXT);
-		$stmt->bindValue(':degreecourse', $user->degreecourse, SQLITE3_TEXT);
-		$stmt->bindValue(':yearp', $user->year, SQLITE3_TEXT);
-		$stmt->bindValue(':matricola', $user->matricola, SQLITE3_TEXT);
-		$stmt->bindValue(':area', $user->area, SQLITE3_TEXT);
-		$stmt->bindValue(':letter', $user->letter, SQLITE3_TEXT);
+		$this->bindUserParameters($user, $stmt);
 		$result = $stmt->execute();
 		if($result === false) {
 			throw new DatabaseException();
@@ -571,7 +558,7 @@ class Database {
 	 */
 	public function getAllInterviewsForTable() {
 		$dtz = new DateTimeZone('Europe/Rome');
-		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, hold, interviewstatus, IFNULL(LENGTH(notes), 0) as ql, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname ASC, name ASC');
+		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, hold, interviewstatus, IFNULL(LENGTH(notes), 0) as ql, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname, name');
 		$compact = [];
 		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			if($row['interview'] === null) {
@@ -606,7 +593,7 @@ class Database {
 	 */
 	public function getAllAssignedInterviewsForTable() {
 		$dtz = new DateTimeZone('Europe/Rome');
-		$result = $this->db->query('SELECT id, name, surname, area, interviewer, interview, interviewstatus AS status FROM users WHERE status >= 1 AND published >= 1 AND interviewer IS NOT NULL and interview IS NOT NULL ORDER BY interviewer ASC, interview ASC, surname ASC, name ASC');
+		$result = $this->db->query('SELECT id, name, surname, area, interviewer, interview, interviewstatus AS status FROM users WHERE status >= 1 AND published >= 1 AND interviewer IS NOT NULL and interview IS NOT NULL ORDER BY interviewer, interview, surname, name');
 		$compact = [];
 
 		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
@@ -659,5 +646,20 @@ class Database {
 		}
 
 		return $averages;
+	}
+
+	/**
+	 * @param User|null $user
+	 * @param \SQLite3Stmt $stmt
+	 */
+	private function bindUserParameters(?User $user, \SQLite3Stmt $stmt): void {
+		$stmt->bindValue(':id', $user->id, SQLITE3_INTEGER);
+		$stmt->bindValue(':namep', $user->name, SQLITE3_TEXT);
+		$stmt->bindValue(':surname', $user->surname, SQLITE3_TEXT);
+		$stmt->bindValue(':degreecourse', $user->degreecourse, SQLITE3_TEXT);
+		$stmt->bindValue(':yearp', $user->year, SQLITE3_TEXT);
+		$stmt->bindValue(':matricola', $user->matricola, SQLITE3_TEXT);
+		$stmt->bindValue(':area', $user->area, SQLITE3_TEXT);
+		$stmt->bindValue(':letter', $user->letter, SQLITE3_TEXT);
 	}
 }
