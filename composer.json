@@ -13,7 +13,9 @@
     "phpmyadmin/motranslator": "^4.0",
     "willdurand/negotiation": "^2.3",
     "ext-sqlite3": "*",
-    "phpmailer/phpmailer": "^6.1"
+    "phpmailer/phpmailer": "^6.1",
+    "zendframework/zend-diactoros": "^2.2",
+    "zendframework/zend-httphandlerrunner": "^1.1"
   },
   "suggest": {
     "ext-apcu": "Caches LDAP results avoiding continuous lookups"
