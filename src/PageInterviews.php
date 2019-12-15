@@ -14,7 +14,7 @@ use Zend\Diactoros\Response\RedirectResponse;
 class PageInterviews implements RequestHandlerInterface {
 	public function handle(ServerRequestInterface $request): ResponseInterface {
 
-		$template = Template::create();
+		$template = Template::create((string) $request->getUri());
 
 		Utils::requireAdmin();
 
@@ -46,7 +46,7 @@ class PageInterviews implements RequestHandlerInterface {
 
 			// A form has been submitted
 			if($request->getMethod() === 'POST') {
-				$POST = $request->getParsedBody();
+				$POST = $request->getQueryParams();
 				$changed = false;
 
 				if(isset($POST['edit'])) {

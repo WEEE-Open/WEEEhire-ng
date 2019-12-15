@@ -1,5 +1,7 @@
-<?php /** @noinspection PhpFullyQualifiedNameUsageInspection */
+<?php
+/** @noinspection PhpFullyQualifiedNameUsageInspection */
 /** @var $user \WEEEOpen\WEEEHire\User */
+/** @var string $globalRequestUri */
 $this->layout('base', ['title' => __('Stato della richiesta')])
 ?>
 <div class="text-center">
@@ -31,10 +33,10 @@ $this->layout('base', ['title' => __('Stato della richiesta')])
 <?php endif ?>
 <div class="text-center space-above">
 	<a id="remove" class="btn btn-danger mb-2"
-			href="<?=$this->e(WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'],
+			href="<?=$this->e(WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri,
 				['delete' => 'true']))?>"><?=__('Elimina candidatura')?></a>
 	<a id="download" class="btn btn-primary mb-2"
-			href="<?=$this->e(WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'],
+			href="<?=$this->e(WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri,
 				['download' => 'true']))?>"><?=__('Scarica tutti i miei dati')?></a>
 </div>
 <div class="text-center">

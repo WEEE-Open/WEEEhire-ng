@@ -13,11 +13,12 @@ use Zend\Diactoros\Response\RedirectResponse;
 
 class PageForm implements RequestHandlerInterface {
 	public function handle(ServerRequestInterface $request): ResponseInterface {
-		$template = Template::create();
+		$template = Template::create((string) $request->getUri());
 
 		$db = new Database();
 
 		$expiry = $db->getConfigValue('expiry');
+		$rolesUnvailable = $db->getConfigValue('rolesUnavailable');
 
 		// Get from DB -> if "unixtime.now >= expiry date" then candidate_close : else show the form
 		if($expiry !== null && time() >= $expiry) {
@@ -25,14 +26,14 @@ class PageForm implements RequestHandlerInterface {
 		}
 
 		if($request->getMethod() === 'POST') {
-			$POST = $request->getParsedBody();
+			$POST = $request->getQueryParams();
 			$checkboxes = [
 				'mandatorycheckbox_0',
 				'mandatorycheckbox_1',
 			];
 			foreach($checkboxes as $attr) {
 				if(!isset($POST[$attr]) || $POST[$attr] !== 'true') {
-					return new HtmlResponse($template->render('form', ['error' => 'consent']), 400);
+					return new HtmlResponse($template->render('form', ['error' => 'consent', 'rolesUnavailable' => $rolesUnvailable]), 400);
 				}
 			}
 
@@ -50,23 +51,23 @@ class PageForm implements RequestHandlerInterface {
 				if(isset($POST[$attr])) {
 					$user->$attr = $POST[$attr];
 				} else {
-					return new HtmlResponse($template->render('form', ['error' => 'form']), 400);
+					return new HtmlResponse($template->render('form', ['error' => 'form', 'rolesUnavailable' => $rolesUnvailable]), 400);
 				}
 			}
 			$user->submitted = time();
 			$user->matricola = strtolower($user->matricola);
 			if(preg_match('#^[sd]\d+$#', $user->matricola) !== 1) {
-				return new HtmlResponse($template->render('form', ['error' => 'form']), 400);
+				return new HtmlResponse($template->render('form', ['error' => 'form', 'rolesUnavailable' => $rolesUnvailable]), 400);
 			}
 
 			try {
 				list($id, $token) = $db->addUser($user);
 			} catch(DuplicateUserException $e) {
-				return new HtmlResponse($template->render('form', ['error' => 'duplicate']), 400);
+				return new HtmlResponse($template->render('form', ['error' => 'duplicate', 'rolesUnavailable' => $rolesUnvailable]), 400);
 			} catch(DatabaseException $e) {
-				return new HtmlResponse($template->render('form', ['error' => 'database']), 500);
+				return new HtmlResponse($template->render('form', ['error' => 'database', 'rolesUnavailable' => $rolesUnvailable]), 500);
 			} catch(Exception $e) {
-				return new HtmlResponse($template->render('form', ['error' => 'wtf']), 500);
+				return new HtmlResponse($template->render('form', ['error' => 'wtf', 'rolesUnavailable' => $rolesUnvailable]), 500);
 			}
 
 			$query = http_build_query(['id' => $id, 'token' => $token]);
@@ -84,8 +85,6 @@ class PageForm implements RequestHandlerInterface {
 
 			return new RedirectResponse("/status.php?$query", 303);
 		}
-
-		$rolesUnvailable = $db->getConfigValue('rolesUnavailable');
 
 		return new HtmlResponse($template->render('form', ['rolesUnavailable' => $rolesUnvailable]));
 	}

@@ -5,6 +5,7 @@
 /** @var $evaluations string[][] */
 /** @var $uid string */
 /** @var $cn string */
+/** @var string $globalRequestUri */
 
 $titleShort = sprintf(__('%s %s (%s)'), $this->e($user->name), $this->e($user->surname), $this->e($user->matricola));
 $title = sprintf(__('%s - Candidatura'), $titleShort);
@@ -169,7 +170,7 @@ foreach($evaluations as $evaluation) {
 		<button name="save" value="true" type="submit"
 				class="btn btn-outline-primary"><?=__('Salva note')?></button>
 		<a class="btn btn-outline-secondary"
-				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'],
+				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri,
 					['edit' => 'true']))?>"><?=__('Modifica dati')?></a>
 	</div>
 </form>

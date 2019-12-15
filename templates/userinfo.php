@@ -1,6 +1,7 @@
 <?php
 /** @var $user WEEEOpen\WEEEhire\User */
 /** @var $edit bool */
+/** @var string $globalRequestUri */
 if(isset($edit) && $edit) {
 	$readonly = '';
 } else {
@@ -54,7 +55,7 @@ if(isset($edit) && $edit) {
 		<div class="form-group">
 			<button type="submit" name="edit" value="true" class="btn btn-primary"><?=__('Aggiorna dati')?></button>
 			<a class="btn btn-secondary"
-					href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'],
+					href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri,
 						['edit' => null]))?>"><?=__('Annulla')?></a>
 		</div>
 	<?php endif ?>

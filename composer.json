@@ -26,7 +26,8 @@
   },
   "autoload": {
     "psr-4": {
-      "WEEEOpen\\WEEEHire\\": "src/"
+      "WEEEOpen\\WEEEHire\\": "src/",
+      "WEEEOpen\\WEEEHire\\tests\\": "tests/"
     }
   }
 }

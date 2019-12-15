@@ -13,10 +13,11 @@ class Template {
 	 * Prepare the template engine and configure Motranslator if no session is available
 	 *
 	 * @param string $locale Template locale (language)
+	 * @param string $uri Request URI, needed by almost every template
 	 *
 	 * @return Engine Plates template engine
 	 */
-	public static function createWithoutSession(string $locale): Engine {
+	public static function createWithoutSession(string $locale, string $uri): Engine {
 		Loader::loadFunctions();
 
 		_setlocale(LC_MESSAGES, $locale);
@@ -26,6 +27,7 @@ class Template {
 		//_bind_textdomain_codeset('messages', 'UTF-8');
 
 		$engine = new Engine('..' . DIRECTORY_SEPARATOR . 'templates');
+		$engine->addData(['globalRequestUri' => $uri]);
 
 		return $engine;
 	}
@@ -33,9 +35,11 @@ class Template {
 	/**
 	 * Prepare the template engine and configure Motranslator
 	 *
+	 * @param string $uri Request URI, needed by almost every template
+	 *
 	 * @return Engine Plates template engine
 	 */
-	public static function create(): Engine {
+	public static function create(string $uri): Engine {
 		Loader::loadFunctions();
 
 		_setlocale(LC_MESSAGES, self::getLocale());
@@ -45,6 +49,7 @@ class Template {
 		//_bind_textdomain_codeset('messages', 'UTF-8');
 
 		$engine = new Engine(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates');
+		$engine->addData(['globalRequestUri' => $uri]);
 
 		return $engine;
 	}

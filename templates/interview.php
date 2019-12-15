@@ -3,6 +3,8 @@
 /** @var $interview WEEEOpen\WEEEhire\Interview */
 /** @var $edit bool */
 /** @var $recruiters string[][] */
+/** @var string $globalRequestUri */
+
 $titleShort = sprintf(__('%s %s (%s)'), $this->e($user->name), $this->e($user->surname), $this->e($user->matricola));
 $title = sprintf(__('%s - Colloquio'), $titleShort);
 $this->layout('base', ['title' => $title]);
@@ -87,7 +89,7 @@ $this->layout('base', ['title' => $title]);
 <?php if(!$edit): ?>
 	<div class="form-group">
 		<a class="btn btn-outline-secondary"
-				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'],
+				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri,
 					['edit' => 'true']))?>"><?=__('Modifica dati')?></a>
 	</div>
 	<form method="post">

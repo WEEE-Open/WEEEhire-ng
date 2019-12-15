@@ -12,5 +12,5 @@ if(isset($_GET['l']) && in_array($_GET['l'], Template::allowedLocales)) {
 	$locale = Template::allowedLocales[0];
 }
 
-$template = Template::createWithoutSession($locale);
+$template = Template::createWithoutSession($locale, $_SERVER['REQUEST_URI']);
 echo $template->render('logout');

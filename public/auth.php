@@ -9,7 +9,7 @@ use Jumbojett\OpenIDConnectClientException;
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 
-$template = Template::create();
+$template = Template::create($_SERVER['REQUEST_URI']);
 
 if(session_status() === PHP_SESSION_NONE) {
 	session_start();
