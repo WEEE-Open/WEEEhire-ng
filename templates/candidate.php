@@ -28,6 +28,10 @@ require_once 'stars.php';
 	<div class="alert alert-danger" role="alert">
 		<?=__('Candidatura rifiutata')?>
 	</div>
+<?php elseif($user->status === null && $user->hold === true): ?>
+	<div class="alert alert-warning" role="alert">
+		<?=__('Candidatura rimandata')?>
+	</div>
 <?php endif ?>
 <?php if($user->published): ?>
 	<div class="alert alert-info" role="alert">
