@@ -13,7 +13,7 @@ $this->layout('base', ['title' => __('Stato della richiesta')])
 	<?php elseif($user->published && $user->status === false): ?>
 		<h2 class="status-rejected"><?=__('Domanda respinta')?></h2>
 	<?php elseif($user->published && $user->hold === true): ?>
-		<h2 class="status-postponed"><?=__('Richiesta rinviata')?></h2>
+		<h2 class="status-postponed"><?=__('Richiesta sospesa')?></h2>
 	<?php else: ?>
 		<h2 class="status-waiting"><?=__('Valutazione in corso')?></h2>
 		<p><?=__('Salva questa pagina nei preferiti e torna a controllare lo stato più avanti.')?></p>
