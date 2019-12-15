@@ -1,10 +1,12 @@
 <?php
 
-namespace WEEEOpen\WEEEHire;
+namespace WEEEOpen\WEEEHire\tests;
 
 use PHPUnit\Framework\TestCase;
+use SQLite3;
+use WEEEOpen\WEEEHire\Database;
 
-class PagesTest extends TestCase {
+abstract class PagesTest extends TestCase {
 	public static function setUpBeforeClass(): void {
 		// Ensure that the form is open
 		require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
@@ -19,24 +21,15 @@ class PagesTest extends TestCase {
 	}
 
 	protected function setUp(): void {
-		session_start();
+		if(session_status() !== PHP_SESSION_ACTIVE) {
+			session_start();
+		}
 		$_SESSION['locale'] = 'it-it';
 		session_write_close();
-	}
-
-	/**
-	 * @covers \WEEEOpen\WEEEHire\User
-	 */
-	public function testIndex() {
-		$_SERVER['REQUEST_URI'] = '/';
-
-		ob_start();
-		require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'index.php';
-		$output = ob_get_clean();
-
-		$this->assertStringContainsStringIgnoringCase('WEEE Open', $output);
-		$this->assertStringContainsStringIgnoringCase('weee.png', $output);
-		$this->assertStringContainsStringIgnoringCase('Inizia', $output);
-		$this->assertStringContainsStringIgnoringCase('Begin', $output);
+		$db = new SQLite3(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'weeehire.db', SQLITE3_OPEN_READWRITE);
+		/** @noinspection SqlWithoutWhere */
+		$db->exec("DELETE FROM evaluation");
+		/** @noinspection SqlWithoutWhere */
+		$db->exec("DELETE FROM users");
 	}
 }
