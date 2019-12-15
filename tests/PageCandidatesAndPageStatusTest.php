@@ -50,14 +50,8 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 		}
 
 		// Candidates page
-		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'GET', 'REQUEST_URI' => '/candidates.php'], [], [], [], []);
-		$response = (new PageCandidates())->handle($request);
-		$this->assertEquals(200, $response->getStatusCode(), '200 OK');
+		$response = $this->assertCandidatesPageContains(['1 da valutare']);
 		$this->assertStringContainsString('Test Test', $response->getBody());
-		$this->assertStringContainsStringIgnoringCase('1 da valutare', $response->getBody());
-		if(session_status() === PHP_SESSION_ACTIVE) {
-			session_write_close();
-		}
 
 		return [$id, $token];
 	}
@@ -66,13 +60,9 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 		$this->addCandidate();
 		$this->addCandidate('s2', 'Test', 'DellaProva');
 
-		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'GET', 'REQUEST_URI' => '/candidates.php'], [], [], [], []);
-		$response = (new PageCandidates())->handle($request);
-
-		$this->assertEquals(200, $response->getStatusCode(), '200 OK');
+		$response = $this->assertCandidatesPageContains(['2 da valutare']);
 		$this->assertStringContainsString('Test Test', $response->getBody());
 		$this->assertStringContainsString('Test DellaProva', $response->getBody());
-		$this->assertStringContainsStringIgnoringCase('2 da valutare', $response->getBody());
 	}
 
 	public function testApproved() {
@@ -87,7 +77,6 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 
 		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'GET', 'REQUEST_URI' => '/candidates.php'], ['id' => $id], [], [], []);
 		$response = (new PageCandidates())->handle($request);
-
 		$this->assertEquals(200, $response->getStatusCode(), '200 OK');
 		$this->assertStringContainsString('Test', $response->getBody());
 		$this->assertStringContainsStringIgnoringCase('rimanda nel limbo', $response->getBody());
@@ -100,6 +89,11 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 
 		// Status page
 		$this->assertStatusPageWait($id, $token);
+
+		// Candidates list
+		$response = $this->assertCandidatesPageContains(['0 da valutare', '1 approvato', '1 da pubblicare']);
+		$this->assertStringContainsString('Test Test', $response->getBody());
+
 		return [$id, $token];
 	}
 
@@ -127,6 +121,10 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 
 		// Status page
 		$this->assertStatusPageWait($id, $token);
+
+		// Candidates list
+		$response = $this->assertCandidatesPageContains(['1 da valutare', '0 approvati', '0 da pubblicare']);
+		$this->assertStringContainsString('Test Test', $response->getBody());
 	}
 
 	public function testRejected() {
@@ -153,6 +151,9 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 
 		$this->assertStatusPageWait($id, $token);
 
+		$response = $this->assertCandidatesPageContains(['0 da valutare', '0 approvati', '1 rifiutato', '1 da pubblicare']);
+		$this->assertStringContainsString('Test Test', $response->getBody());
+
 		// Now publish it!
 		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/candidates.php'], ['id' => $id], ['publishnow' => 'true', 'notes' => 'notes example uroh7reith8aet6Yoish'], [], []);
 		$response = (new PageCandidates())->handle($request);
@@ -174,6 +175,9 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 		}
 
 		$this->assertStatusPageRejected($id, $token);
+
+		$response = $this->assertCandidatesPageContains(['0 da valutare', '0 approvati', '1 rifiutato', '0 da pubblicare']);
+		$this->assertStringContainsString('Test Test', $response->getBody());
 
 		return [$id, $token];
 	}
@@ -252,5 +256,19 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 		if(session_status() === PHP_SESSION_ACTIVE) {
 			session_write_close();
 		}
+	}
+
+	private function assertCandidatesPageContains(array $what) {
+		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'GET', 'REQUEST_URI' => '/candidates.php'],
+			[], [], [], []);
+		$response = (new PageCandidates())->handle($request);
+		if(session_status() === PHP_SESSION_ACTIVE) {
+			session_write_close();
+		}
+		$this->assertEquals(200, $response->getStatusCode(), '200 OK');
+		foreach($what as $string) {
+			$this->assertStringContainsString($string, $response->getBody());
+		}
+		return $response;
 	}
 }
