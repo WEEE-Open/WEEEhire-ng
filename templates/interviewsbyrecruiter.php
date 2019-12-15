@@ -12,9 +12,11 @@ $prevdate = null;
 
 <h1><?=__('Recruiter')?></h1>
 
+<div class="row">
 <?php
 foreach($interviews as $interviewer => $ints) {
-	echo '<h4 class="col-md-9 col-lg-6 mx-auto">' . $this->e($interviewer) . '</h4><ul class="list-group list-group-flush col-md-9 col-lg-6 mx-auto mb-3">';
+	echo '<div class="col-lg-6 mb-3">';
+	echo '<h4>' . $this->e($interviewer) . '</h4><ul class="list-group list-group-flush">';
 	$prevdate = null;
 	foreach($ints as $int) {
 		$date = $int['when']->format('Y-m-d');
@@ -45,5 +47,7 @@ foreach($interviews as $interviewer => $ints) {
 		<?php
 	}
 	echo '</ul>';
+	echo '</div>';
 }
 ?>
+</div>
