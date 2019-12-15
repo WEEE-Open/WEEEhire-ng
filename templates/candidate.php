@@ -120,10 +120,18 @@ foreach($evaluations as $evaluation) {
 		<textarea id="notes" name="notes" cols="40" rows="3"
 				class="form-control"><?=$this->e($user->notes)?></textarea>
 	</div>
+	<?php $status = $user->getCandidateStatus(); ?>
+	<?php if($status === \WEEEOpen\WEEEHire\User::STATUS_NEW_HOLD || $status === \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED_HOLD || $status === \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD): ?>
+	<div class="form-group">
+		<label for="visiblenotes"><b><?=__('Motivazioni (visibili alla persona interessata)')?></b></label>
+		<textarea id="visiblenotes" name="visiblenotes" cols="40" rows="3"
+				class="form-control"><?=$this->e($user->visiblenotes)?></textarea>
+	</div>
+	<?php endif ?>
 	<div class="form-group text-center">
-		<?php switch($user->getCandidateStatus()):
+		<?php switch($status):
 		default:
-		case \WEEEOpen\WEEEHire\User::STATUS_NEW: ?>
+		case \WEEEOpen\WEEEHire\User::STATUS_NEW:?>
 			<button name="approve" value="true" type="submit"
 					class="btn btn-success"><?=__('Approva candidatura')?></button>
 			<button name="reject" value="true" type="submit"
@@ -147,6 +155,8 @@ foreach($evaluations as $evaluation) {
 					class="btn btn-primary"><?=__('Pubblica')?></button>
 			<button name="holdoff" value="true" type="submit"
 					class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
+			<button name="savevisiblenotes" value="true" type="submit"
+					class="btn btn-outline-primary"><?=__('Salva motivazioni')?></button>
 			<?php break;
 		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_APPROVED: ?>
 			<?php break;
@@ -157,12 +167,16 @@ foreach($evaluations as $evaluation) {
 		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED_HOLD: ?>
 			<button name="holdoff" value="true" type="submit"
 					class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
+			<button name="savevisiblenotes" value="true" type="submit"
+					class="btn btn-outline-warning"><?=__('Salva motivazioni')?></button>
 			<?php break;
 		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD: ?>
 			<button name="approvefromhold" value="true" type="submit"
 					class="btn btn-success"><?=__('Approva candidatura')?></button>
 			<button name="reject" value="true" type="submit"
-						class="btn btn-danger"><?=__('Rifiuta candidatura')?></button>
+						class="btn btn-danger"><?=__('Rifiuta candidatura definitivamente')?></button>
+			<button name="savevisiblenotes" value="true" type="submit"
+					class="btn btn-outline-warning"><?=__('Salva motivazioni')?></button>
 			<?php break;
 		endswitch; ?>
 	</div>

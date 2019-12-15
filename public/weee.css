@@ -67,3 +67,7 @@
 .star-color {
 	color: #FC0;
 }
+
+#reason span {
+	font-weight: bold;
+}

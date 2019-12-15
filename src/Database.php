@@ -305,6 +305,26 @@ class Database {
 	}
 
 	/**
+	 * Save the visible notes.
+	 *
+	 * @param int $id User ID
+	 * @param string $notes Notes
+	 */
+	public function saveVisibleNotes(int $id, string $notes) {
+		$stmt = $this->db->prepare('UPDATE users SET visiblenotes = :notes WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		if($notes === '') {
+			$stmt->bindValue(':notes', null, SQLITE3_NULL);
+		} else {
+			$stmt->bindValue(':notes', $notes, SQLITE3_TEXT);
+		}
+		$result = $stmt->execute();
+		if($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	/**
 	 * Set candidate status
 	 *
 	 * @param int $id User ID

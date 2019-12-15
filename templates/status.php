@@ -26,9 +26,8 @@ $this->layout('base', ['title' => __('Stato della richiesta')])
 	<?php endif ?>
 </div>
 <?php if($user->published && $user->status !== true && $user->visiblenotes !== null): ?>
-<div>
-	<h3><?=__('Motivazioni')?></h3>
-	<p><?= $this->e($user->visiblenotes) ?></p>
+<div class="text-center" id="reason">
+	<p><span><?=__('Motivazioni:')?> </span><?= $this->e($user->visiblenotes) ?></p>
 </div>
 <?php endif ?>
 <div class="text-center space-above">

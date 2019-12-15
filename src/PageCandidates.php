@@ -79,10 +79,12 @@ class PageCandidates implements RequestHandlerInterface {
 							return new HtmlResponse($template->render('error', ['message' => 'Write an email']), 400);
 						}
 						if(strlen($subject) <= 0) {
-							return new HtmlResponse($template->render('error', ['message' => 'Write a subject line']), 400);
+							return new HtmlResponse($template->render('error', ['message' => 'Write a subject line']),
+								400);
 						}
 						if(strlen($recruiter) <= 0 || strpos($recruiter, '|') === false) {
-							return new HtmlResponse($template->render('error', ['message' => 'Select a recruiter']), 400);
+							return new HtmlResponse($template->render('error', ['message' => 'Select a recruiter']),
+								400);
 						}
 						$recruiter = explode('|', $recruiter, 2);
 						$db->setRecruiter($id, $recruiter[1], $recruiter[0]);
@@ -94,8 +96,13 @@ class PageCandidates implements RequestHandlerInterface {
 						$db->saveNotes($id, $notes);
 					} elseif($status === User::STATUS_NEW_HOLD) {
 						// TODO: send mail
+						$db->saveVisibleNotes($id, $POST['visiblenotes']);
 						$db->setPublished($id, true);
 						$db->saveNotes($id, $notes);
+					}
+				} elseif(isset($POST['savevisiblenotes'])) {
+					if($status === User::STATUS_PUBLISHED_HOLD || $status === User::STATUS_PUBLISHED_REJECTED_HOLD || $status === User::STATUS_NEW_HOLD) {
+						$db->saveVisibleNotes($id, $POST['visiblenotes']);
 					}
 				} elseif(isset($POST['approvefromhold'])) {
 					if($status === User::STATUS_PUBLISHED_HOLD) {
