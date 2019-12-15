@@ -32,7 +32,8 @@ class Database {
 		$stmt->bindValue(':token', password_hash($token, PASSWORD_DEFAULT), SQLITE3_TEXT);
 		$this->bindUserParameters($user, $stmt);
 		$stmt->bindValue(':submitted', $user->submitted);
-		if(!$stmt->execute()) {
+		// @ because it prints a warning and causes PHPUnit to complain
+		if(!@$stmt->execute()) {
 			if($this->db->lastErrorCode() === 19 && stristr($this->db->lastErrorMsg(), 'matricola')) {
 				throw new DuplicateUserException();
 			} else {

@@ -13,6 +13,7 @@ abstract class PagesTest extends TestCase {
 		$db = new Database();
 		$db->unsetConfigValue('expiry');
 		$db->unsetConfigValue('rolesUnavailable');
+		$db->unsetConfigValue('notifyEmail');
 	}
 
 	protected function assertPreConditions(): void {

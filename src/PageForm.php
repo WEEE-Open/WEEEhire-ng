@@ -22,7 +22,11 @@ class PageForm implements RequestHandlerInterface {
 
 		// Get from DB -> if "unixtime.now >= expiry date" then candidate_close : else show the form
 		if($expiry !== null && time() >= $expiry) {
-			return new HtmlResponse($template->render('candidate_close'));
+			if($request->getMethod() === 'POST') {
+				return new HtmlResponse($template->render('candidate_close'), 400);
+			} else {
+				return new HtmlResponse($template->render('candidate_close'));
+			}
 		}
 
 		if($request->getMethod() === 'POST') {
@@ -48,7 +52,7 @@ class PageForm implements RequestHandlerInterface {
 			];
 			$user = new User();
 			foreach($attrs as $attr) {
-				if(isset($POST[$attr])) {
+				if(isset($POST[$attr]) && $POST[$attr] !== '') {
 					$user->$attr = $POST[$attr];
 				} else {
 					return new HtmlResponse($template->render('form', ['error' => 'form', 'rolesUnavailable' => $rolesUnvailable]), 400);
