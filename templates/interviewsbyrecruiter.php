@@ -40,9 +40,9 @@ foreach($interviews as $interviewer => $ints) {
 		}
 		?>
 		<li class="list-group-item d-flex justify-content-between align-items-center <?=$statusClass?>">
-			<span><?=sprintf(__('<a href="interviews.php?id=%d">%s</a> (%s)'), $int['id'], $this->e($int['name']),
+			<span><?=sprintf(__('<a href="interviews.php?id=%d">%s</a> (%s)'), $this->e($int['id']), $this->e($int['name']),
 					$this->e($int['area']))?></span>
-			<span class="badge badge-secondary badge-pill"><?=$time?></span>
+			<a class="badge badge-primary" href="/interviews.php?id=<?=$this->e($int['id'])?>&download"><?=$time?></a>
 		</li>
 		<?php
 	}

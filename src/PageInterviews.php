@@ -8,8 +8,10 @@ use DateTimeZone;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Sabre\VObject\Component\VCalendar;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Diactoros\Response\TextResponse;
 
 class PageInterviews implements RequestHandlerInterface {
 	public function handle(ServerRequestInterface $request): ResponseInterface {
@@ -26,6 +28,52 @@ class PageInterviews implements RequestHandlerInterface {
 			$id = (int) $GET['id'];
 			$user = $db->getUser($id);
 			$interview = $db->getInterview($id);
+
+			// Download button
+			if(isset($GET['download'])) {
+				if($user === null) {
+					return new TextResponse('User not found', 404);
+				}
+				if($interview->when === null) {
+					return new TextResponse('Interview not scheduled', 404);
+				}
+
+				$ical = new VCalendar([
+					'VEVENT' => [
+						'SUMMARY' => "Colloquio con $user->name $user->surname",
+						'UID' => $user->id,
+						'DTSTART' => $interview->when,
+						'DTEND' => $interview->when->add(new \DateInterval('P30M')),
+						'DESCRIPTION' => "Colloquio per $user->area.\n\nNote:\n$user->notes",
+					]
+				]);
+				/** @noinspection PhpUndefinedFieldInspection */
+				/** @noinspection PhpMethodParametersCountMismatchInspection */
+				$ical->VEVENT->add(
+					'URL',
+					Utils::appendQueryParametersToRelativeUrl($request->getUri(), ['download' => null]),
+					[
+						'VALUE' => 'URI',
+					]
+				);
+				/** @noinspection PhpUndefinedFieldInspection */
+				/** @noinspection PhpMethodParametersCountMismatchInspection */
+				$ical->VEVENT->add(
+					'ORGANIZER',
+					'https://t.me/' . $interview->recruitertg,
+					[
+						'CN' => $interview->recruiter,
+					]
+				);
+
+				$headers = [
+					'Content-Type' => 'text/calendar; charset=utf-8',
+					'Content-Description' => 'File Transfer',
+					'Content-Disposition' => "attachment; filename=\"colloquio $user->name $user->surname.ics\"",
+				];
+
+				return new TextResponse($ical->serialize(), 200, $headers);
+			}
 
 			// No user?
 			if($user === null) {
@@ -98,7 +146,7 @@ class PageInterviews implements RequestHandlerInterface {
 
 				if($changed) {
 					// This is a pattern: https://en.wikipedia.org/wiki/Post/Redirect/Get
-					$uri = Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => null]);
+					$uri = Utils::appendQueryParametersToRelativeUrl($request->getUri(), ['edit' => null]);
 					return new RedirectResponse($uri, 303);
 				}
 			}

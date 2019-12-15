@@ -15,7 +15,8 @@
     "ext-sqlite3": "*",
     "phpmailer/phpmailer": "^6.1",
     "zendframework/zend-diactoros": "^2.2",
-    "zendframework/zend-httphandlerrunner": "^1.1"
+    "zendframework/zend-httphandlerrunner": "^1.1",
+    "sabre/vobject": "^4.0"
   },
   "suggest": {
     "ext-apcu": "Caches LDAP results avoiding continuous lookups"

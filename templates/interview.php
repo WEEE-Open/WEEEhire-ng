@@ -33,9 +33,9 @@ $this->layout('base', ['title' => $title]);
 	</div>
 <?php else: ?>
 	<div class="alert alert-info" role="alert">
-		<?=sprintf(__('Colloquio fissato per il %s alle %s con <a href="https://t.me/%s">%s</a>'),
+		<?=sprintf(__('Colloquio fissato per il %s alle %s con <a href="https://t.me/%s">%s</a>. <a href="%s">🗓 Aggiungi al calendario.</a>'),
 			$interview->when->format('Y-m-d'), $interview->when->format('H:i'), $interview->recruitertg,
-			$interview->recruiter)?>
+			$interview->recruiter, $this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri, ['download' => 'true'])))?>
 	</div>
 <?php endif ?>
 
