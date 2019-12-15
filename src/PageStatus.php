@@ -49,7 +49,6 @@ class PageStatus implements RequestHandlerInterface {
 			// Filter out other attributes
 			$attributes = array_intersect_key($attributes, array_combine($downloadable, $downloadable));
 
-			header('Content-Type: application/json');
 			$headers = [
 				'Content-Transfer-Encoding' => 'Binary',
 				'Content-Description' => 'File Transfer',
