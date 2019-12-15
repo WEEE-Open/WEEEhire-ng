@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-15 18:20+0100\n"
-"PO-Revision-Date: 2019-12-15 18:21+0100\n"
+"POT-Creation-Date: 2019-12-15 20:28+0100\n"
+"PO-Revision-Date: 2019-12-15 20:28+0100\n"
 "Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
 "Language-Team: Italian <>\n"
 "Language: en-us\n"
@@ -836,9 +836,11 @@ msgstr "Interview to be scheduled"
 #: templates/interview.php:36
 #, php-format
 msgid ""
-"Colloquio fissato per il %s alle %s con <a href=\"https://t.me/%s\">%s</a>"
+"Colloquio fissato per il %s alle %s con <a href=\"https://t.me/%s\">%s</a>. "
+"<a href=\"%s\">🗓 Aggiungi al calendario.</a>"
 msgstr ""
-"Interview scheduled for %s at %s with <a href=\"https://t.me/%s\">%s</a>"
+"Interview scheduled for %s at %s with <a href=\"https://t.me/%s\">%s</a>. "
+"<a href=\"%s\">🗓 Add to calendar.</a>"
 
 #: templates/interview.php:72 templates/interviews.php:26
 msgid "Ora"
@@ -872,12 +874,12 @@ msgstr "Interview failed"
 msgid "Salva"
 msgstr "Save"
 
-#: templates/interviewsbyrecruiter.php:35 templates/interviews.php:87
+#: templates/interviewsbyrecruiter.php:37 templates/interviews.php:87
 #, php-format
 msgid "Giorno %s (%s)"
 msgstr "%s (%s)"
 
-#: templates/interviewsbyrecruiter.php:41
+#: templates/interviewsbyrecruiter.php:43
 #, php-format
 msgid "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
 msgstr "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
