@@ -56,7 +56,7 @@ cp config/config-example.php config/config.php
 nano config/config.php
 msgfmt resources/locale/en-us/LC_MESSAGES/messages.po --output-file=resources/locale/en-us/LC_MESSAGES/messages.mo
 chown o-r weeehire.db  # Optional, prevent other users from reading the database
-composer install --optimize-autoloader  # The optimization is not required but a nice touch
+composer install --no-dev --optimize-autoloader  # The optimization is not required but a nice touch
 ```
 
 and a real web server is needed. The root directory is `public`, no need to serve files outside that directory.

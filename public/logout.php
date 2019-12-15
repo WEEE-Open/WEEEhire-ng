@@ -8,6 +8,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'confi
 // Perform SLO
 
 use Jumbojett\OpenIDConnectClient;
+use Zend\Diactoros\Uri;
 
 session_start();
 
