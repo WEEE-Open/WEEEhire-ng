@@ -13,7 +13,7 @@ use Zend\Diactoros\Response\RedirectResponse;
 
 class PageForm implements RequestHandlerInterface {
 	public function handle(ServerRequestInterface $request): ResponseInterface {
-		$template = Template::create((string) $request->getUri());
+		$template = Template::create($request->getUri());
 
 		$db = new Database();
 
@@ -30,7 +30,7 @@ class PageForm implements RequestHandlerInterface {
 		}
 
 		if($request->getMethod() === 'POST') {
-			$POST = $request->getQueryParams();
+			$POST = $request->getParsedBody();
 			$checkboxes = [
 				'mandatorycheckbox_0',
 				'mandatorycheckbox_1',

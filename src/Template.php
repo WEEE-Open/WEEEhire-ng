@@ -5,6 +5,7 @@ namespace WEEEOpen\WEEEHire;
 use League\Plates\Engine;
 use Negotiation\LanguageNegotiator;
 use PhpMyAdmin\MoTranslator\Loader;
+use Psr\Http\Message\UriInterface;
 
 class Template {
 	const allowedLocales = ['en-us', 'it-it'];
@@ -13,11 +14,11 @@ class Template {
 	 * Prepare the template engine and configure Motranslator if no session is available
 	 *
 	 * @param string $locale Template locale (language)
-	 * @param string $uri Request URI, needed by almost every template
+	 * @param UriInterface $uri Request URI, needed by almost every template
 	 *
 	 * @return Engine Plates template engine
 	 */
-	public static function createWithoutSession(string $locale, string $uri): Engine {
+	public static function createWithoutSession(string $locale, UriInterface $uri): Engine {
 		Loader::loadFunctions();
 
 		_setlocale(LC_MESSAGES, $locale);
@@ -35,11 +36,11 @@ class Template {
 	/**
 	 * Prepare the template engine and configure Motranslator
 	 *
-	 * @param string $uri Request URI, needed by almost every template
+	 * @param UriInterface $uri Request URI, needed by almost every template
 	 *
 	 * @return Engine Plates template engine
 	 */
-	public static function create(string $uri): Engine {
+	public static function create(UriInterface $uri): Engine {
 		Loader::loadFunctions();
 
 		_setlocale(LC_MESSAGES, self::getLocale());

@@ -1,7 +1,7 @@
 <?php
 /** @noinspection PhpFullyQualifiedNameUsageInspection */
 /** @var $user \WEEEOpen\WEEEHire\User */
-/** @var string $globalRequestUri */
+/** @var \Psr\Http\Message\UriInterface $globalRequestUri */
 $this->layout('base', ['title' => __('Stato della richiesta')])
 ?>
 <div class="text-center">

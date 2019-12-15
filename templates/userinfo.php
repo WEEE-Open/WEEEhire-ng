@@ -1,7 +1,7 @@
 <?php
 /** @var $user WEEEOpen\WEEEhire\User */
 /** @var $edit bool */
-/** @var string $globalRequestUri */
+/** @var \Psr\Http\Message\UriInterface $globalRequestUri */
 if(isset($edit) && $edit) {
 	$readonly = '';
 } else {

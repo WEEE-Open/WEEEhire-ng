@@ -15,7 +15,7 @@ class PageStatus implements RequestHandlerInterface {
 	public function handle(ServerRequestInterface $request): ResponseInterface {
 		// Page for candidates to see their own status (approved/rejected)
 
-		$template = Template::create((string) $request->getUri());
+		$template = Template::create($request->getUri());
 		$GET = $request->getQueryParams();
 		if(!$GET['id'] || !$GET['token']) {
 			return new HtmlResponse($template->render('error', ['message' => 'Missing id or token']), 400);

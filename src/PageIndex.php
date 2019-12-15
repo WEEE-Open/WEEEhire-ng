@@ -10,7 +10,7 @@ use Zend\Diactoros\Response\HtmlResponse;
 
 class PageIndex implements RequestHandlerInterface {
 	public function handle(ServerRequestInterface $request): ResponseInterface {
-		$template = Template::create((string) $request->getUri());
+		$template = Template::create($request->getUri());
 
 		$db = new Database();
 

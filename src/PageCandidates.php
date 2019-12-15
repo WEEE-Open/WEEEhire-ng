@@ -13,7 +13,7 @@ use Zend\Diactoros\Response\RedirectResponse;
 class PageCandidates implements RequestHandlerInterface {
 	public function handle(ServerRequestInterface $request): ResponseInterface {
 
-		$template = Template::create((string) $request->getUri());
+		$template = Template::create($request->getUri());
 
 		Utils::requireAdmin();
 
@@ -35,7 +35,7 @@ class PageCandidates implements RequestHandlerInterface {
 
 			// A form has been submitted
 			if($request->getMethod() === 'POST') {
-				$POST = $request->getQueryParams();
+				$POST = $request->getParsedBody();
 				// Most buttons also update notes (so we can write "seems good" and press "approve")
 				$notes = $POST['notes'] ?? '';
 				$status = $user->getCandidateStatus();
@@ -122,9 +122,8 @@ class PageCandidates implements RequestHandlerInterface {
 
 				// TODO: is it really necessary to have $changed?
 				// This is a pattern: https://en.wikipedia.org/wiki/Post/Redirect/Get
-				// $_SERVER['REQUEST_URI'] is already url encoded
-				$url = Utils::appendQueryParametersToRelativeUrl($_SERVER['REQUEST_URI'], ['edit' => null]);
-				return new RedirectResponse($url, 303);
+				$uri = Utils::appendQueryParametersToRelativeUrl($request->getUri(), ['edit' => null]);
+				return new RedirectResponse($uri, 303);
 			} // "if this is a POST request"
 
 			// Render the page
@@ -141,7 +140,7 @@ class PageCandidates implements RequestHandlerInterface {
 		} else {
 			// no ?id=... parameter => render the page with a candidates list
 			if($request->getMethod() === 'POST') {
-				$POST = $request->getQueryParams();
+				$POST = $request->getParsedBody();
 				// This is a form submission
 				if(isset($POST['publishallrejected'])) {
 					$db->publishRejected();

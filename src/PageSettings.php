@@ -15,7 +15,7 @@ use Zend\Diactoros\Response\RedirectResponse;
 
 class PageSettings implements RequestHandlerInterface {
 	public function handle(ServerRequestInterface $request): ResponseInterface {
-		$template = Template::create((string) $request->getUri());
+		$template = Template::create($request->getUri());
 
 		Utils::requireAdmin();
 
@@ -24,7 +24,7 @@ class PageSettings implements RequestHandlerInterface {
 		$error = null;
 
 		if($request->getMethod() === 'POST') {
-			$POST = $request->getQueryParams();
+			$POST = $request->getParsedBody();
 			// Form submission
 			$changed = false;
 			if(isset($POST['noexpiry'])) {

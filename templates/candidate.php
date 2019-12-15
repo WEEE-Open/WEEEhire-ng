@@ -5,7 +5,7 @@
 /** @var $evaluations string[][] */
 /** @var $uid string */
 /** @var $cn string */
-/** @var string $globalRequestUri */
+/** @var \Psr\Http\Message\UriInterface $globalRequestUri */
 
 $titleShort = sprintf(__('%s %s (%s)'), $this->e($user->name), $this->e($user->surname), $this->e($user->matricola));
 $title = sprintf(__('%s - Candidatura'), $titleShort);

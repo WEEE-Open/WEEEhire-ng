@@ -1,7 +1,7 @@
 <?php
 /* @var $isAdmin bool */
 /* @var $authenticated bool */
-/** @var string $globalRequestUri */
+/** @var \Psr\Http\Message\UriInterface $globalRequestUri */
 ?>
 <nav class="navbar navbar-expand-sm top">
 	<div class="container">

@@ -5,25 +5,20 @@ namespace WEEEOpen\WEEEHire;
 
 
 // Same as the good ol' functions.php...
+use Psr\Http\Message\UriInterface;
+
 class Utils {
 	/**
 	 * Add or remove query parameters from a URL
 	 *
-	 * @param string $url Current URL, may contain query parameters
+	 * @param UriInterface $uri Current URI, may contain query parameters
 	 * @param array $parameters Parameters to modify. Key is name, value is the value or null to delete it. Other parameters left untouched.
 	 *
 	 * @return string resulting URL
 	 */
-	public static function appendQueryParametersToRelativeUrl(string $url, array $parameters): string {
-		$queryString = parse_url($url, PHP_URL_QUERY);
-		if($queryString === null) {
-			$query = [];
-		} else {
-			// Remove query parameters from URL
-			$url = str_replace('?' . $queryString, '', $url);
-			// Split them
-			parse_str($queryString, $query);
-		}
+	public static function appendQueryParametersToRelativeUrl(UriInterface $uri, array $parameters): string {
+		parse_str($uri->getQuery(), $query);
+		$query = $query ?? [];
 		foreach($parameters as $param => $value) {
 			if($value === null) {
 				unset($query[$param]);
@@ -32,11 +27,7 @@ class Utils {
 			}
 		}
 		$newQuery = http_build_query($query);
-		if($newQuery === '') {
-			return $url;
-		} else {
-			return "$url?$newQuery";
-		}
+		return $uri->withQuery($newQuery);
 	}
 
 	/**
