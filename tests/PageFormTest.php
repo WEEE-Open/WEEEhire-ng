@@ -30,7 +30,7 @@ class PageFormTest extends PagesTest {
 	 * @covers \WEEEOpen\WEEEHire\PageForm
 	 */
 	public function testFormSubmission() {
-		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [
+		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [], [
 			'name' => 'Test',
 			'surname' => 'Test',
 			'degreecourse' => 'Communications And Computer Networks Engineering',
@@ -40,7 +40,7 @@ class PageFormTest extends PagesTest {
 			'letter' => 'asddasasdasd',
 			'mandatorycheckbox_1' => 'true',
 			'mandatorycheckbox_0' => 'true',
-		], [], [], []);
+		], [], []);
 		$response = (new PageForm())->handle($request);
 
 		$this->assertEquals(303, $response->getStatusCode(), 'Redirect to another page');
@@ -64,7 +64,7 @@ class PageFormTest extends PagesTest {
 	 * @covers \WEEEOpen\WEEEHire\PageForm
 	 */
 	public function testFormSubmissionMissingField() {
-		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [
+		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [], [
 			'name' => 'Test',
 			// missing surname
 			'degreecourse' => 'Communications And Computer Networks Engineering',
@@ -74,7 +74,7 @@ class PageFormTest extends PagesTest {
 			'letter' => 'asddasasdasd',
 			'mandatorycheckbox_1' => 'true',
 			'mandatorycheckbox_0' => 'true',
-		], [], [], []);
+		], [], []);
 		$response = (new PageForm())->handle($request);
 
 		$this->assertEquals(400, $response->getStatusCode(), 'Bad request');
@@ -86,7 +86,7 @@ class PageFormTest extends PagesTest {
 	 * @covers \WEEEOpen\WEEEHire\PageForm
 	 */
 	public function testFormSubmissionMissingCheckbox0() {
-		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [
+		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [], [
 			'name' => 'Test',
 			'surname' => 'Test',
 			'degreecourse' => 'Communications And Computer Networks Engineering',
@@ -95,7 +95,7 @@ class PageFormTest extends PagesTest {
 			'area' => 'Sviluppo software PHP',
 			'letter' => 'asddasasdasd',
 			'mandatorycheckbox_1' => 'true',
-		], [], [], []);
+		], [], []);
 		$response = (new PageForm())->handle($request);
 
 		$this->assertEquals(400, $response->getStatusCode(), 'Bad request');
@@ -106,7 +106,7 @@ class PageFormTest extends PagesTest {
 	 * @covers \WEEEOpen\WEEEHire\PageForm
 	 */
 	public function testFormSubmissionMissingCheckbox1() {
-		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [
+		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [], [
 			'name' => 'Test',
 			'surname' => 'Test',
 			'degreecourse' => 'Communications And Computer Networks Engineering',
@@ -115,7 +115,7 @@ class PageFormTest extends PagesTest {
 			'area' => 'Sviluppo software PHP',
 			'letter' => 'asddasasdasd',
 			'mandatorycheckbox_0' => 'true',
-		], [], [], []);
+		], [], []);
 		$response = (new PageForm())->handle($request);
 
 		$this->assertEquals(400, $response->getStatusCode(), 'Bad request');
@@ -126,7 +126,7 @@ class PageFormTest extends PagesTest {
 	 * @covers \WEEEOpen\WEEEHire\PageForm
 	 */
 	public function testFormSubmissionEmptyField() {
-		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [
+		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [], [
 			'name' => 'Test',
 			'surname' => '',
 			'degreecourse' => 'Communications And Computer Networks Engineering',
@@ -136,7 +136,7 @@ class PageFormTest extends PagesTest {
 			'letter' => 'asddasasdasd',
 			'mandatorycheckbox_0' => 'true',
 			'mandatorycheckbox_1' => 'true',
-		], [], [], []);
+		], [], []);
 		$response = (new PageForm())->handle($request);
 
 		$this->assertEquals(400, $response->getStatusCode(), 'Bad request');
@@ -147,7 +147,7 @@ class PageFormTest extends PagesTest {
 	 * @covers \WEEEOpen\WEEEHire\PageForm
 	 */
 	public function testFormSubmissionInvalidMatricola() {
-		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [
+		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [], [
 			'name' => 'Test',
 			'surname' => 'Test',
 			'degreecourse' => 'Communications And Computer Networks Engineering',
@@ -157,7 +157,7 @@ class PageFormTest extends PagesTest {
 			'letter' => 'asddasasdasd',
 			'mandatorycheckbox_0' => 'true',
 			'mandatorycheckbox_1' => 'true',
-		], [], [], []);
+		], [], []);
 		$response = (new PageForm())->handle($request);
 
 		$this->assertEquals(400, $response->getStatusCode(), 'Bad request');
@@ -174,7 +174,7 @@ class PageFormTest extends PagesTest {
 			session_write_close();
 		}
 
-		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [
+		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [], [
 			'name' => 'Test2',
 			'surname' => 'Test2',
 			'degreecourse' => 'Communications And Computer Networks Engineering',
@@ -184,7 +184,7 @@ class PageFormTest extends PagesTest {
 			'letter' => 'boh',
 			'mandatorycheckbox_1' => 'true',
 			'mandatorycheckbox_0' => 'true',
-		], [], [], []);
+		], [], []);
 		$response = (new PageForm())->handle($request);
 
 		$this->assertEquals(400, $response->getStatusCode(), 'Bad request');
