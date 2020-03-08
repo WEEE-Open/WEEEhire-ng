@@ -5,6 +5,7 @@ $this->layout('base', ['title' => 'WEEElcome']) ?>
 
 <h1><?=__('Entra in WEEE Open')?></h1>
 <p><?=__('Compila il questionario per fare richiesta di ammissione in team. Premi il bottone qui sotto per iniziare.')?></p>
+<?php $this->insert('covid') ?>
 <div class="col-md-12 text-center">
 	<?php if($_SESSION['locale'] === 'en-us'): ?>
 		<a class="btn btn-lg btn-primary the-button" href="form.php">Begin (in English)</a><a class="btn btn-lg btn-outline-secondary the-button" href="language.php?l=it-it&from=<?=rawurlencode('/form.php')?>">Inizia (in italiano)</a>

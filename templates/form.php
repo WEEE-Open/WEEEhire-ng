@@ -38,6 +38,9 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			?>
 		</div>
 	<?php endif ?>
+
+	<?php $this->insert('covid') ?>
+
 	<form method="post">
 		<div class="form-group row">
 			<label for="name" class="col-md-2 col-lg-1 col-form-label"><?=__('Nome')?></label>
