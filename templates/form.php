@@ -276,8 +276,6 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 	}
 
 	updateHints();
-	let checkboxes = document.querySelectorAll(".mandatory-checkbox");
-	let submit = document.getElementById("submit-btn");
 
 	function dottorandize() {
 		if(document.getElementById('year').value === 'Dottorato') {
