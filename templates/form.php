@@ -38,6 +38,9 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			?>
 		</div>
 	<?php endif ?>
+
+	<?php $this->insert('covid') ?>
+
 	<form method="post">
 		<div class="form-group row">
 			<label for="name" class="col-md-2 col-lg-1 col-form-label"><?=__('Nome')?></label>
@@ -196,6 +199,14 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
+				<div class="form-text d-none" id="mlet-explain-Sysadmin">
+					<p><?=__('Il team ha alcuni server Linux con delle web app e dei software di SSO. La maggior parte della configurazione è automatizzata con Ansible.') ?></p>
+					<p><?=__('I server hanno bisogno di ordinaria manutenzione (installare aggiornamenti e simili) e, talvolta, di modificare la configurazione di alcuni software.')?></p>
+					<p><?=__('Se hai già esperienza con queste cose, ottimo, ma il minimo richiesto è non spaventarsi davanti a un terminale Linux.')?></p>
+					<p><?=__('Ci serve più che altro una persona cauta e attenta, che legga con cura il manuale e i messaggi prima di fare danni. Se la sei e vuoi mettere le mani in pasta su dei server, dicci qualcosa su di te e che esperienza hai con Linux, con i server o con l\'informatica in generale.')?></p>
+					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre ad amminstrare server.')?></p>
+					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
+				</div>
 				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-Python">
 					<p><?=__('Descrivi qualsiasi tua esperienza nel programmare in Python, specialmente Python 3, e se hai un account su Github non esitare a condividerlo nella tua lettera!')?></p>
 					<p><?=__('Potresti menzionare se hai mai usato virtual environments, collaborato con qualcuno su un progetto software, o se sai scrivere in altri linguaggi.')?></p>
@@ -273,8 +284,6 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 	}
 
 	updateHints();
-	let checkboxes = document.querySelectorAll(".mandatory-checkbox");
-	let submit = document.getElementById("submit-btn");
 
 	function dottorandize() {
 		if(document.getElementById('year').value === 'Dottorato') {

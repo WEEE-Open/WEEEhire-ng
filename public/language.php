@@ -32,8 +32,6 @@ if(isset($_GET['from'])) {
 		header("Location: $url");
 		exit(0);
 	}
-} else {
-	// No location parameter
-	header('Location: /');
 }
-
+// No location parameter
+header('Location: /');
