@@ -25,7 +25,7 @@ abstract class PagesTest extends TestCase {
 		if(session_status() !== PHP_SESSION_ACTIVE) {
 			session_start();
 		}
-		$_SESSION['locale'] = 'it-it';
+		$_SESSION['locale'] = 'it-IT';
 		session_write_close();
 		$db = new SQLite3(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'weeehire.db', SQLITE3_OPEN_READWRITE);
 		/** @noinspection SqlWithoutWhere */

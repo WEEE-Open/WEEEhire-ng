@@ -19,7 +19,7 @@ $oidc = new OpenIDConnectClient(WEEEHIRE_OIDC_ISSUER, WEEEHIRE_OIDC_CLIENT_KEY, 
 if(isset($_SESSION['id_token'])) {
 	// We'll need these for the logout
 	$token = $_SESSION['id_token'];
-	$locale = $_SESSION['locale'] ?? 'en-us';
+	$locale = $_SESSION['locale'] ?? 'en-US';
 }
 
 // Destroy the session and cookie

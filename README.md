@@ -8,7 +8,7 @@ Manage applications to the team.
 sqlite3 weeehire.db < database.sql
 cp config/config-example.php config/config.php
 nano config/config.php  # Optional, the defaults are good for a test instance but not for production
-msgfmt resources/locale/en-us/LC_MESSAGES/messages.po --output-file=resources/locale/en-us/LC_MESSAGES/messages.mo
+msgfmt resources/locale/en-US/LC_MESSAGES/messages.po --output-file=resources/locale/en-US/LC_MESSAGES/messages.mo
 composer install
 php -S [::]:8777 public
 ```
@@ -32,19 +32,13 @@ WEEEHire will print some warnings to stderr if APCu is not enabled.
 ```bash
 # Generate the master .pot file
 xgettext -k__ -k_ngettext:1,2 --from-code utf-8 templates/*.php -o messages.pot
-# Merge it into other .po files (en-us only, right now)
-msgmerge --update resources/locale/en-us/LC_MESSAGES/messages.po messages.pot
+# Merge it into other .po files (en-US only, right now)
+msgmerge --update resources/locale/en-US/LC_MESSAGES/messages.po messages.pot
 # Create the .mo file
-msgfmt resources/locale/en-us/LC_MESSAGES/messages.po --output-file=resources/locale/en-us/LC_MESSAGES/messages.mo
+msgfmt resources/locale/en-US/LC_MESSAGES/messages.po --output-file=resources/locale/en-US/LC_MESSAGES/messages.mo
 ```
 
 And done.
-
-> Why en-us instead of en-US?
-
-`willdurand/negotiation` negotiates en-us even if supported languages includes en-US for some reason.
-It works, but motranslator skips some checks and parsing because it is a non-standard format.
-Getting the negotiator to negotiate en-US would be nice.
 
 ## Production deployment
 
@@ -54,7 +48,7 @@ Basically the same as development:
 sqlite3 weeehire.db < database.sql
 cp config/config-example.php config/config.php
 nano config/config.php
-msgfmt resources/locale/en-us/LC_MESSAGES/messages.po --output-file=resources/locale/en-us/LC_MESSAGES/messages.mo
+msgfmt resources/locale/en-US/LC_MESSAGES/messages.po --output-file=resources/locale/en-US/LC_MESSAGES/messages.mo
 chown o-r weeehire.db  # Optional, prevent other users from reading the database
 composer install --no-dev --optimize-autoloader  # The optimization is not required but a nice touch
 ```

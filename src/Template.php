@@ -8,7 +8,7 @@ use PhpMyAdmin\MoTranslator\Loader;
 use Psr\Http\Message\UriInterface;
 
 class Template {
-	const allowedLocales = ['en-us', 'it-it'];
+	const allowedLocales = ['en-US', 'it-IT'];
 
 	/**
 	 * Prepare the template engine and configure Motranslator if no session is available
@@ -82,7 +82,7 @@ class Template {
 	 */
 	private static function getLocaleNotCached(): string {
 		if(!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-			return 'en-us';
+			return 'en-US';
 		}
 
 		$negotiator = new LanguageNegotiator();
@@ -92,6 +92,12 @@ class Template {
 		$bestLanguage = $negotiator->getBest($_SERVER['HTTP_ACCEPT_LANGUAGE'], $priorities);
 
 		/** @noinspection PhpUndefinedMethodInspection */
-		return $bestLanguage->getType();
+		$lowercaseLocale = $bestLanguage->getType();
+		if(strlen($lowercaseLocale) == 5 && $lowercaseLocale[2] == '-') {
+			// gettext (or motranslator) expects the part after the dash to be uppercase
+			return substr($lowercaseLocale, 0, 3) . strtoupper(substr($lowercaseLocale, 3));
+		} else {
+			return $lowercaseLocale;
+		}
 	}
 }

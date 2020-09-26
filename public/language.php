@@ -11,8 +11,8 @@ if(!isset($_GET['l'])) {
 
 switch($_GET['l']) {
 	// Set a language
-	case 'it-it':
-	case 'en-us':
+	case 'it-IT':
+	case 'en-US':
 		session_start();
 		$_SESSION['locale'] = $_GET['l'];
 		session_write_close();
