@@ -185,7 +185,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Elettronica">
 					<p><?= __('Uno degli obiettivi del team è la progettazione di strumenti elettronici per la diagnostica a basso livello e il riuso dell\'hardware recuperato.') ?></p>
-					<p><?=__('Qual è il tuo rapporto con il mondo dell\'elettronica ? Ti interessa di più l\'elettronica digitale o analogica (specialmente di potenza) o ti interessano entrambe?') ?></p>
+					<p><?=__('Qual è il tuo rapporto con il mondo dell\'elettronica? Ti interessa di più l\'elettronica digitale o analogica (specialmente di potenza) o ti interessano entrambe?') ?></p>
 					<p><?=__('Se hai mai realizzato qualche circuito o progetto oltre a quelli nei laboratori didattici, parlane con riferimento anche al metodo con cui è stato realizzato (breadboard, millefori, circuito stampato, componenti through-hole o SMD, etc...).')?></p>
 					<p><?=__('Indica anche se hai dimestichezza con qualche software di Electronic Design Automation (progettazione, simulazione, test e verifica, etc...).') ?></p>
 					<p><?=__('Menziona anche quanto tempo potresti dedicare al team e se fai qualcos\'altro di interessante nel tempo libero oltre a progettare circuiti.') ?></p>
@@ -201,10 +201,10 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Sysadmin">
 					<p><?=__('Il team ha alcuni server Linux con delle web app e dei software di SSO. La maggior parte della configurazione è automatizzata con Ansible.') ?></p>
-					<p><?=__('I server hanno bisogno di ordinaria manutenzione (installare aggiornamenti e simili) e, talvolta, di modificare la configurazione di alcuni software.')?></p>
+					<p><?=__('I server hanno bisogno di ordinaria manutenzione (installare aggiornamenti e simili). Inoltre alcuni software andrebbero containerizzati.')?></p>
 					<p><?=__('Se hai già esperienza con queste cose, ottimo, ma il minimo richiesto è non spaventarsi davanti a un terminale Linux.')?></p>
 					<p><?=__('Ci serve più che altro una persona cauta e attenta, che legga con cura il manuale e i messaggi prima di fare danni. Se la sei e vuoi mettere le mani in pasta su dei server, dicci qualcosa su di te e che esperienza hai con Linux, con i server o con l\'informatica in generale.')?></p>
-					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre ad amminstrare server.')?></p>
+					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre ad amministrare server.')?></p>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-Python">
@@ -216,9 +216,9 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-PHP">
+					<p><?=__('I principali progetti PHP del team sono <a href="https://github.com/WEEE-Open/tarallo" target="_blank">Tarallo</a>, <a href="https://github.com/WEEE-Open/WEEEHire-ng" target="_blank">WEEEHire</a> e <a href="https://github.com/WEEE-Open/crauto" target="_blank">crauto</a>, puoi darci già un\'occhiata per sapere a cosa vai incontro.')?></p>
 					<p><?=__('Parla di qualsiasi tua esperienza nello scrivere software in PHP. Va bene anche "per l\'esame di ... ho creato un programma che fa ..." o "ho fatto il sito web per la panetteria all\'angolo". Puoi anche menzionare se conosci altri linguaggi o hai mai lavorato a progetti collaborativi.') ?></p>
 					<p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
-					<p><?=__('Osserva attentamente i principali progetti PHP del team: <a href="https://github.com/WEEE-Open/tarallo" target="_blank">Tarallo</a>, <a href="https://github.com/WEEE-Open/WEEEHire-ng" target="_blank">WEEEHire</a> e <a href="https://github.com/WEEE-Open/crauto" target="_blank">crauto</a>. Cosa ne pensi del codice di questi progetti?')?></p>
 					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
 					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
