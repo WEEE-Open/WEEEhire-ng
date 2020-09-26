@@ -9,9 +9,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Sabre\VObject\Component\VCalendar;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Diactoros\Response\TextResponse;
+use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\RedirectResponse;
+use Laminas\Diactoros\Response\TextResponse;
 
 class PageInterviews implements RequestHandlerInterface {
 	public function handle(ServerRequestInterface $request): ResponseInterface {

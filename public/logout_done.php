@@ -2,7 +2,7 @@
 
 namespace WEEEOpen\WEEEHire;
 
-use Zend\Diactoros\Uri;
+use Laminas\Diactoros\Uri;
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 

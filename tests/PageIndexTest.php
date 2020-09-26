@@ -5,7 +5,7 @@ namespace WEEEOpen\WEEEHire\tests;
 
 
 use WEEEOpen\WEEEHire\PageIndex;
-use Zend\Diactoros\ServerRequestFactory;
+use Laminas\Diactoros\ServerRequestFactory;
 
 class PageIndexTest extends PagesTest {
 

@@ -7,8 +7,8 @@ namespace WEEEOpen\WEEEHire;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\RedirectResponse;
+use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\RedirectResponse;
 
 class PageCandidates implements RequestHandlerInterface {
 	public function handle(ServerRequestInterface $request): ResponseInterface {

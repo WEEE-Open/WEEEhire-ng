@@ -6,7 +6,7 @@ namespace WEEEOpen\WEEEHire\tests;
 
 use WEEEOpen\WEEEHire\Database;
 use WEEEOpen\WEEEHire\PageForm;
-use Zend\Diactoros\ServerRequestFactory;
+use Laminas\Diactoros\ServerRequestFactory;
 
 class PageFormTest extends PagesTest {
 

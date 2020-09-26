@@ -7,9 +7,9 @@ namespace WEEEOpen\WEEEHire;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\JsonResponse;
-use Zend\Diactoros\Response\RedirectResponse;
+use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\JsonResponse;
+use Laminas\Diactoros\Response\RedirectResponse;
 
 class PageStatus implements RequestHandlerInterface {
 	public function handle(ServerRequestInterface $request): ResponseInterface {

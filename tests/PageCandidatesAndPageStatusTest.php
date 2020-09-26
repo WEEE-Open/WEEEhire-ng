@@ -8,7 +8,7 @@ use WEEEOpen\WEEEHire\Database;
 use WEEEOpen\WEEEHire\PageCandidates;
 use WEEEOpen\WEEEHire\PageStatus;
 use WEEEOpen\WEEEHire\User;
-use Zend\Diactoros\ServerRequestFactory;
+use Laminas\Diactoros\ServerRequestFactory;
 
 class PageCandidatesAndPageStatusTest extends PagesTest {
 	private function addCandidate(string $id = 's1', string $name = 'Test', string $surname = 'Test') {
