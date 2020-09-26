@@ -2,7 +2,18 @@
 /** @var $link string */
 /** @var $user \WEEEOpen\WEEEHire\User */
 
-$saluti1 = ['Ciao persone,', 'Welà gente,', 'Hey persone,', 'Ciao,', 'Buongiornissimo,', 'Hi,'];
+$saluti1 = [
+	'Ciao persone,',
+	'Welà gente,',
+	'Hey persone,',
+	'Carissimi,',
+	'Ciao,',
+	'Buongiornissimo,',
+	'Hi,',
+	'Uelà bella gente,',
+	'Salve,',
+	'Buonsalve,',
+];
 $saluti2 = [
 	'- Il WEEEHire',
 	"Cordiali saluti,\nWEEEHire",
