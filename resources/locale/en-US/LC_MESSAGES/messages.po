@@ -1,13 +1,13 @@
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) 2020 WEEE Open
+# This file is distributed under the same license as the WEEEHire package.
 #
 # quel_tale <lvps@users.noreply.github.com>, 2019, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-26 22:41+0200\n"
-"PO-Revision-Date: 2020-09-26 22:47+0200\n"
+"POT-Creation-Date: 2020-09-27 11:12+0200\n"
+"PO-Revision-Date: 2020-09-27 11:16+0200\n"
 "Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
 "Language-Team: Italian <>\n"
 "Language: en-US\n"
@@ -351,28 +351,31 @@ msgstr "The WEEEHire software on behalf of WEEE Open Team"
 
 #: templates/covid.php:2
 msgid ""
-"A causa dell'emergenza coronavirus COVID-19, tutte le attività del team "
-"all'interno del Politecnico sono sospese fino alla data in cui riprenderanno "
-"regolarmente le lezioni."
+"Da Ottobre 2020 <strong>le attività del team sono riprese</strong>, anche in "
+"presenza, con delle limitazioni sul numero massimo di persone in laboratorio."
 msgstr ""
-"Due to the ongoing coronavirus COVID-19 emergency, all team activities at "
-"Politecnico are suspended, until the date when lectures will resume normally."
+"Starting from October 2020 <strong>team activities have resumed</strong>,"
+" also "
+"in person, with some limitations on the maximum number of people present in"
+" the lab."
 
 #: templates/covid.php:3
 msgid ""
-"Puoi comunque candidarti per alcune posizioni: sosterrai l'eventuale "
-"colloquio da remoto, oppure appena le attività riprenderanno."
+"Pertanto non sappiamo ancora se riusciremo ad aprire le candidature per il "
+"ruolo <strong>riparazione hardware</strong>: se ti interessa quello, torna a "
+"controllare tra qualche giorno. Questo messaggio verrà aggiornato in caso di "
+"cambiamenti."
 msgstr ""
-"You can still apply to some positions: interviews will be held remotely, or "
-"as soon as activities resume."
+"For this reason we don't know yet if we'll be able to open applications for "
+"the <strong>hardware repair</strong> role: if you're interested, come back "
+"in a few days. This message will be updated."
 
 #: templates/covid.php:4
 msgid ""
-"Per i ruoli che prevedono la <b>possibilità di lavorare da remoto (sysadmin, "
-"designer, programmatori)</b> potrai comunque svolgere attività da casa."
+"Tutti gli altri ruoli invece consentono di svolgere attività da casa, del "
+"tutto o in parte."
 msgstr ""
-"For roles that <b>allow remote work (sysadmins, designers, programmers)</b> "
-"you can carry out activities from home."
+"All other roles allow you to participated from home, entirely or partially."
 
 #: templates/day.php:5
 msgid "Lunedì"
@@ -718,11 +721,11 @@ msgid ""
 "github.com/WEEE-Open/crauto\" target=\"_blank\">crauto</a>, puoi darci già "
 "un'occhiata per sapere a cosa vai incontro."
 msgstr ""
-"Our main PHP projects are <a href=\"https://github.com/"
-"WEEE-Open/tarallo\" target=\"_blank\">Tarallo</a>, <a href=\"https://github."
-"com/WEEE-Open/WEEEHire-ng\" target=\"_blank\">WEEEHire</a> and <a href="
-"\"https://github.com/WEEE-Open/crauto\" target=\"_blank\">crauto</a>, you can "
-"have a look so you know what you're going to work on."
+"Our main PHP projects are <a href=\"https://github.com/WEEE-Open/tarallo\" "
+"target=\"_blank\">Tarallo</a>, <a href=\"https://github.com/WEEE-Open/"
+"WEEEHire-ng\" target=\"_blank\">WEEEHire</a> and <a href=\"https://github."
+"com/WEEE-Open/crauto\" target=\"_blank\">crauto</a>, you can have a look so "
+"you know what you're going to work on."
 
 #: templates/form.php:220
 msgid ""
@@ -1181,6 +1184,30 @@ msgstr "Update info"
 #: templates/userinfo.php:59
 msgid "Annulla"
 msgstr "Cancel"
+
+#~ msgid ""
+#~ "A causa dell'emergenza coronavirus COVID-19, tutte le attività del team "
+#~ "all'interno del Politecnico sono sospese fino alla data in cui "
+#~ "riprenderanno regolarmente le lezioni."
+#~ msgstr ""
+#~ "Due to the ongoing coronavirus COVID-19 emergency, all team activities at "
+#~ "Politecnico are suspended, until the date when lectures will resume "
+#~ "normally."
+
+#~ msgid ""
+#~ "Puoi comunque candidarti per alcune posizioni: sosterrai l'eventuale "
+#~ "colloquio da remoto, oppure appena le attività riprenderanno."
+#~ msgstr ""
+#~ "You can still apply to some positions: interviews will be held remotely, "
+#~ "or as soon as activities resume."
+
+#~ msgid ""
+#~ "Per i ruoli che prevedono la <b>possibilità di lavorare da remoto "
+#~ "(sysadmin, designer, programmatori)</b> potrai comunque svolgere attività "
+#~ "da casa."
+#~ msgstr ""
+#~ "For roles that <b>allow remote work (sysadmins, designers, programmers)</"
+#~ "b> you can carry out activities from home."
 
 #~ msgid ""
 #~ "Modifica scadenza candidature e altri parametri di configurazione WEEEHire"
