@@ -32,10 +32,10 @@ WEEEHire will print some warnings to stderr if APCu is not enabled.
 ```bash
 # Generate the master .pot file
 xgettext -k__ -k_ngettext:1,2 --from-code utf-8 templates/*.php -o messages.pot
-# Translate strings, e.g. with
-lokalize resources/locale/en-US/LC_MESSAGES/messages.po &
 # Merge it into other .po files (en-US only, right now)
 msgmerge --update resources/locale/en-US/LC_MESSAGES/messages.po messages.pot
+# Translate strings, e.g. with
+lokalize resources/locale/en-US/LC_MESSAGES/messages.po &
 # Create the .mo file
 msgfmt resources/locale/en-US/LC_MESSAGES/messages.po --output-file=resources/locale/en-US/LC_MESSAGES/messages.mo
 ```
