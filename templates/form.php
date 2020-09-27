@@ -191,14 +191,6 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Menziona anche quanto tempo potresti dedicare al team e se fai qualcos\'altro di interessante nel tempo libero oltre a progettare circuiti.') ?></p>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
-				<div class="form-text d-none" id="mlet-explain-Sviluppo-software">
-					<p><?=__('Parla di qualsiasi tua esperienza nello scrivere software. Va bene anche "per l\'esame di ... ho creato un programma che fa ..." o "ho fatto il sito web per la panetteria all\'angolo".') ?></p>
-					<p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
-					<p><?=__('La <a href="https://github.com/weee-open" target="_blank">maggior parte del software realizzato in team</a> (osserva in particolare Tarallo, peracotta, turbofresa e bot) è in PHP o Python. Cosa ne pensi di quei linguaggi e del codice di quei progetti?')?></p>
-					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
-					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
-					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
-				</div>
 				<div class="form-text d-none" id="mlet-explain-Sysadmin">
 					<p><?=__('Il team ha alcuni server Linux con delle web app e dei software di SSO. La maggior parte della configurazione è automatizzata con Ansible.') ?></p>
 					<p><?=__('I server hanno bisogno di ordinaria manutenzione (installare aggiornamenti e simili). Inoltre alcuni software andrebbero containerizzati.')?></p>
@@ -236,6 +228,21 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Menziona anche i risultati raggiunti con tali attività promozionali, se possibile.')?></p>
 					<p><?=__('Se dovessi spiegare in due righe cosa fa il team, cosa diresti?')?></p>
 					<p><?=__('Indica anche quanto tempo potresti dedicare a queste attività e se hai qualche altro interesse.')?></p>
+					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
+				</div>
+				<div class="form-text d-none" id="mlet-explain-Creazione-di-contenuti-digitali">
+					<p><?=__('Come ogni team abbiamo un\'immagine e ci servono persone in gamba per curarla e mantenerla. In particolare, abbiamo bisogno di:')?></p>
+					<ul>
+						<li><?=__('Loghi e immagini personalizzate da usare come sfondi, icone e simili sui computer riparati')?></li>
+						<li><?=__('Design grafici per manifesti, biglietti da visita e personalizzazioni dei case dei computer riparati')?>
+						<li><?=__('Persone che abbiano dimestichezza con la videocamera, l\'editing video e la cinematografia per realizzare tutorial e vlog da caricare sul nuovo canale YouTube del team')?></li>
+						<li><?=__('Persone che gestiscano le nostre pagine social (su cui carichiamo aggiornamenti inerenti alle nostre attività) o che curino i contenuti multimediali (foto e video) che carichiamo')?></li>
+						<li><?=__('Un musicista o deejay che possa creare un jingle per il team ;)')?></li>
+					</ul>
+					<p><?=__('Se <strong>almeno una</strong>, o più di una, di queste attività di interessano, questo è il ruolo adatto.')?></p>
+					<p><?=__('Parla di qualsiasi esperienza artistica, inclusi progetti personali (anche piccoli) o esami sostenuti.')?></p>
+					<p><?=__('Se vuoi mostrarci alcuni dei tuoi lavori passati, abbozzi, concepts o hai idee su come migliorare il volto del team, non esitare!')?></p>
+					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero.')?></p>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Altro">
