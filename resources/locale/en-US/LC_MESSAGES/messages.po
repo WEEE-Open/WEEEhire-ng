@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-27 12:16+0200\n"
-"PO-Revision-Date: 2020-09-27 12:25+0200\n"
+"POT-Creation-Date: 2020-09-30 22:23+0200\n"
+"PO-Revision-Date: 2020-09-30 22:24+0200\n"
 "Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
 "Language-Team: Italian <>\n"
 "Language: en-US\n"
@@ -182,29 +182,33 @@ msgstr "Save notes"
 msgid "Modifica dati"
 msgstr "Edit info"
 
-#: templates/candidate.php:219
+#: templates/candidate.php:224
+msgid "Template"
+msgstr "Template"
+
+#: templates/candidate.php:236
 msgid "Oggetto"
 msgstr "Subject"
 
-#: templates/candidate.php:229
+#: templates/candidate.php:242
 msgid "Email"
 msgstr "Email"
 
-#: templates/candidate.php:234
+#: templates/candidate.php:247
 msgid "Pubblica e manda email"
 msgstr "Publish and send email"
 
-#: templates/candidate.php:295
+#: templates/candidate.php:333
 #, php-format
 msgid "Mail inviata da %s"
 msgstr "Mail sent by %s"
 
-#: templates/candidate.php:302 templates/interview.php:129
+#: templates/candidate.php:340 templates/interview.php:129
 #, php-format
 msgid "Link d'invito: %s"
 msgstr "Invite link: %s"
 
-#: templates/candidate.php:307 templates/interview.php:134
+#: templates/candidate.php:345 templates/interview.php:134
 msgid "Genera link d'invito"
 msgstr "Generate an invite link"
 
@@ -807,8 +811,8 @@ msgid ""
 "Design grafici per manifesti, biglietti da visita e personalizzazioni dei "
 "case dei computer riparati"
 msgstr ""
-"Graphic designs for posters, business cards and case "
-"customizations for our repaired computers"
+"Graphic designs for posters, business cards and case customizations for our "
+"repaired computers"
 
 #: templates/form.php:238
 msgid ""

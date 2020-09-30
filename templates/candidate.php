@@ -221,7 +221,7 @@ foreach($evaluations as $evaluation) {
 				<button class="btn btn-outline-secondary" id="email-en-btn">en-US</button>
 			</div>
 			<div class="col-md-10">
-			<select aria-label="Template" class="custom-select" id="email-custom-select" onchange="templatize()">
+			<select aria-label="<?=__('Template')?>" class="custom-select" id="email-custom-select" onchange="templatize()">
 				<option value="default" selected>Email standard</option>
 				<option value="programmer">Programmatore</option>
 				<!--                  <option value="repairs" disabled>Riparatore</option>-->
@@ -313,7 +313,7 @@ Potremmo chiederti di fare un breve esercizio di programmazione. Prepara il tuo 
 			    'en-US': {
 			        'default': "",
 			        'programmer': `
-We may ask you to do some live coding. Bring your own favourite IDE or text editor!`,
+We may ask you to do some live coding. Prepare your own favourite IDE or text editor!`,
 			    },
 			};
 
