@@ -10,7 +10,7 @@ cp config/config-example.php config/config.php
 nano config/config.php  # Optional, the defaults are good for a test instance but not for production
 msgfmt resources/locale/en-US/LC_MESSAGES/messages.po --output-file=resources/locale/en-US/LC_MESSAGES/messages.mo
 composer install
-php -S [::]:8777 public
+php -S [::]:8777 -t public
 ```
 
 Done. Browse to `[::]:8777` and have fun.
