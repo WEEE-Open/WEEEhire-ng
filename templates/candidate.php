@@ -216,26 +216,27 @@ foreach($evaluations as $evaluation) {
 			</select>
 		</div>
 		<div class="form-group row">
-			<label class="col-md-2 col-lg-1 col-form-label" for="subject"><b><?=__('Oggetto')?></b></label>
-			<div class="col-md-6 col-lg-7">
-				<input type="text" id="subject" name="subject" class="form-control" required>
-			</div>
-			<div class="col-md-2 col-lg-2 text-right">
+			<div class="col-md-2">
 				<button class="btn btn-outline-secondary" id="email-it-btn">it-IT</button>
 				<button class="btn btn-outline-secondary" id="email-en-btn">en-US</button>
 			</div>
-			<div class="col-md-2 col-lg-2">
-			    <!-- TODO: add EN translations -->
-			    <select class="custom-select" id="email-custom-select" onchange="templatize()">
-                  <option value="default" selected>Email standard</option>
-                  <option value="programmer">Programmatore</option>
-                  <option value="repairs" disabled>Riparatore</option>
-                  <option value="electronics" disabled>Elettronico</option>
-                  <option value="sysadmin" disabled>Sysadmin</option>
-                  <option value="digital-creator" disabled>Crezione contenuti digitali</option>
-                  <option value="creative-reuse" disabled>Riuso creativo</option>
-                </select>
-            </div>
+			<div class="col-md-10">
+			<select aria-label="Template" class="custom-select" id="email-custom-select" onchange="templatize()">
+				<option value="default" selected>Email standard</option>
+				<option value="programmer">Programmatore</option>
+				<!--                  <option value="repairs" disabled>Riparatore</option>-->
+				<!--                  <option value="electronics" disabled>Elettronico</option>-->
+				<!--                  <option value="sysadmin" disabled>Sysadmin</option>-->
+				<!--                  <option value="digital-creator" disabled>Crezione contenuti digitali</option>-->
+				<!--                  <option value="creative-reuse" disabled>Riuso creativo</option>-->
+			</select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-md-2 col-lg-1 col-form-label" for="subject"><b><?=__('Oggetto')?></b></label>
+			<div class="col-md-10 col-lg-11">
+				<input type="text" id="subject" name="subject" class="form-control" required>
+			</div>
 		</div>
 		<div class="form-group">
 			<label for="email"><b><?=__('Email')?></b></label>
@@ -305,14 +306,14 @@ Team WEEE Open`
 
 			const customEmailText = {
 			    'it-IT': {
-			        'default': "",
-			        'programmer': "
-Potremmo chiederti di fare un breve esercizio di programmazione. Ricordati il tuo ambiente di sviluppo o editor di testo preferito!",
+				    'default': "",
+				    'programmer': `
+Potremmo chiederti di fare un breve esercizio di programmazione. Prepara il tuo ambiente di sviluppo o editor di testo preferito!`,
 			    },
 			    'en-US': {
 			        'default': "",
-			        'programmer': "
-We may ask you to do some live coding. Bring your own favourite IDE or text editor!",
+			        'programmer': `
+We may ask you to do some live coding. Bring your own favourite IDE or text editor!`,
 			    },
 			};
 
