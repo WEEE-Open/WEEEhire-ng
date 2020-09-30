@@ -77,10 +77,9 @@ require_once 'stars.php';
 				$tdcolor = $trcolor = 'class="candidates-hold"';
 				break;
 		}
-		if($user['notes']) {
-			// TODO: make this "there are notes *by me*" (there's an issue open)
-			$statusCell .= ' 📝';
-		}
+//		if($user['notes']) {
+//			$statusCell .= ' 📝';
+//		}
 		if($user['hold']) {
 			$statusCell .= ' 🔒';
 		}
