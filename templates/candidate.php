@@ -217,13 +217,25 @@ foreach($evaluations as $evaluation) {
 		</div>
 		<div class="form-group row">
 			<label class="col-md-2 col-lg-1 col-form-label" for="subject"><b><?=__('Oggetto')?></b></label>
-			<div class="col-md-8 col-lg-9">
+			<div class="col-md-6 col-lg-7">
 				<input type="text" id="subject" name="subject" class="form-control" required>
 			</div>
-			<div class="col-md-2 text-right">
+			<div class="col-md-2 col-lg-2 text-right">
 				<button class="btn btn-outline-secondary" id="email-it-btn">it-IT</button>
 				<button class="btn btn-outline-secondary" id="email-en-btn">en-US</button>
 			</div>
+			<div class="col-md-2 col-lg-2">
+			    <!-- TODO: add EN translations -->
+			    <select class="custom-select" id="email-custom-select">
+                  <option value="default" selected>Email standard</option>
+                  <option value="programmer">Programmatore</option>
+                  <option value="repairs" disabled>Riparatore</option>
+                  <option value="electronics" disabled>Elettronico</option>
+                  <option value="sysadmin" disabled>Sysadmin</option>
+                  <option value="digital-creator" disabled>Crezione contenuti digitali</option>
+                  <option value="creative-reuse" disabled>Riuso creativo</option>
+                </select>
+            </div>
 		</div>
 		<div class="form-group">
 			<label for="email"><b><?=__('Email')?></b></label>
