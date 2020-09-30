@@ -217,13 +217,25 @@ foreach($evaluations as $evaluation) {
 		</div>
 		<div class="form-group row">
 			<label class="col-md-2 col-lg-1 col-form-label" for="subject"><b><?=__('Oggetto')?></b></label>
-			<div class="col-md-8 col-lg-9">
+			<div class="col-md-6 col-lg-7">
 				<input type="text" id="subject" name="subject" class="form-control" required>
 			</div>
-			<div class="col-md-2 text-right">
+			<div class="col-md-2 col-lg-2 text-right">
 				<button class="btn btn-outline-secondary" id="email-it-btn">it-IT</button>
 				<button class="btn btn-outline-secondary" id="email-en-btn">en-US</button>
 			</div>
+			<div class="col-md-2 col-lg-2">
+			    <!-- TODO: add EN translations -->
+			    <select class="custom-select" id="email-custom-select" onchange="templatize()">
+                  <option value="default" selected>Email standard</option>
+                  <option value="programmer">Programmatore</option>
+                  <option value="repairs" disabled>Riparatore</option>
+                  <option value="electronics" disabled>Elettronico</option>
+                  <option value="sysadmin" disabled>Sysadmin</option>
+                  <option value="digital-creator" disabled>Crezione contenuti digitali</option>
+                  <option value="creative-reuse" disabled>Riuso creativo</option>
+                </select>
+            </div>
 		</div>
 		<div class="form-group">
 			<label for="email"><b><?=__('Email')?></b></label>
@@ -259,31 +271,56 @@ foreach($evaluations as $evaluation) {
 			let recruiter_split = recruiter.value.split('|', 2);
 			let name = recruiter_split[1];
 			let telegram = recruiter_split[0];
-			if(lang === 'it-IT') {
-				subject.value = 'Colloquio per Team WEEE Open';
-				mail.value = `Ciao ${firstname},
+			let emailVariant = document.getElementById('email-custom-select').value;
+
+			// awful code formatting --> good email formatting
+			const defaultEmailText = {
+			    'it-IT': {
+			        'subject': 'Colloquio per Team WEEE Open',
+			        'beginning': `Ciao ${firstname},
 
 Ci fa piacere il tuo interesse per il nostro progetto!
 Abbiamo valutato la tua candidatura e ora vorremmo scambiare due parole in maniera più diretta con te, sia per discutere delle attività che potresti svolgere nel Team, sia in modo che tu possa farci domande, se vuoi.
-Poiché utilizziamo Telegram per coordinare tutte le attività del team, ti chiedo di contattarmi lì: il mio username è @${telegram}, scrivimi pure.
+Poiché utilizziamo Telegram per coordinare tutte le attività del team, ti chiedo di contattarmi lì: il mio username è @${telegram}, scrivimi pure.`,
+                    'end': `
 
 A presto,
 ${name}
-Team WEEE Open
-`;
-			} else if(lang === 'en-US') {
-				subject.value = 'Interview for WEEE Open Team';
-				mail.value = `Hi ${firstname},
+Team WEEE Open`
+			    },
+			    'en-US': {
+			        'subject': 'Interview for WEEE Open Team',
+			        'beginning': `Hi ${firstname},
 
 We are glad that you are interested in our project!
 We read your application and we would like to meet you in person to discuss about the activities that you could do within the Team, and to let you ask some questions if you have any.
-Since we use Telegram for all the communications between team members, I'd like you to contact me there: my username is @${telegram}.
+Since we use Telegram for all the communications between team members, I'd like you to contact me there: my username is @${telegram}.`,
+                    'end': `
 
 See you soon,
 ${name}
-Team WEEE Open
-`;
-			}
+Team WEEE Open`
+			    },
+			};
+
+			const customEmailText = {
+			    'it-IT': {
+			        'default': "",
+			        'programmer': "
+Potremmo chiederti di fare un breve esercizio di programmazione. Ricordati il tuo ambiente di sviluppo o editor di testo preferito!",
+			    },
+			    'en-US': {
+			        'default': "",
+			        'programmer': "
+We may ask you to do some live coding. Bring your own favourite IDE or text editor!",
+			    },
+			};
+
+            subject.value = defaultEmailText[lang]['subject'];
+            mail.value = defaultEmailText[lang]['beginning'];
+            mail.value += customEmailText[lang][emailVariant];
+            mail.value += defaultEmailText[lang]['end'];
+
 			mail.dispatchEvent(new Event('input'));
 		}
 
