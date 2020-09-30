@@ -91,6 +91,11 @@ class Template {
 
 		$bestLanguage = $negotiator->getBest($_SERVER['HTTP_ACCEPT_LANGUAGE'], $priorities);
 
+		// If the browser provides en-GB, LanguageNegotiator chooses NULL...
+		if($bestLanguage === NULL) {
+			return 'en-US';
+		}
+
 		/** @noinspection PhpUndefinedMethodInspection */
 		$lowercaseLocale = $bestLanguage->getType();
 		if(strlen($lowercaseLocale) == 5 && $lowercaseLocale[2] == '-') {
