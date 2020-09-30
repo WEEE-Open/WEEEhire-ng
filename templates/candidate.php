@@ -124,6 +124,13 @@ foreach($evaluations as $evaluation) {
 		<textarea id="notes" name="notes" cols="40" rows="3"
 				class="form-control"><?=$this->e($user->notes)?></textarea>
 	</div>
+	<div class="form-group text-center">
+		<button name="save" value="true" type="submit"
+				class="btn btn-outline-primary"><?=__('Salva note')?></button>
+		<a class="btn btn-outline-secondary"
+				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri,
+					['edit' => 'true']))?>"><?=__('Modifica dati')?></a>
+	</div>
 	<?php $status = $user->getCandidateStatus(); ?>
 	<?php if($status === \WEEEOpen\WEEEHire\User::STATUS_NEW_HOLD || $status === \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD): ?>
 	<div class="form-group">
@@ -177,13 +184,6 @@ foreach($evaluations as $evaluation) {
 					class="btn btn-outline-warning"><?=__('Salva motivazioni')?></button>
 			<?php break;
 		endswitch; ?>
-	</div>
-	<div class="form-group text-center">
-		<button name="save" value="true" type="submit"
-				class="btn btn-outline-primary"><?=__('Salva note')?></button>
-		<a class="btn btn-outline-secondary"
-				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri,
-					['edit' => 'true']))?>"><?=__('Modifica dati')?></a>
 	</div>
 </form>
 <?php endif ?>
