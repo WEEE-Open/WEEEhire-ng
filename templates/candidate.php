@@ -125,7 +125,7 @@ foreach($evaluations as $evaluation) {
 				class="form-control"><?=$this->e($user->notes)?></textarea>
 	</div>
 	<?php $status = $user->getCandidateStatus(); ?>
-	<?php if($status === \WEEEOpen\WEEEHire\User::STATUS_NEW_HOLD || $status === \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED_HOLD || $status === \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD): ?>
+	<?php if($status === \WEEEOpen\WEEEHire\User::STATUS_NEW_HOLD || $status === \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD): ?>
 	<div class="form-group">
 		<label for="visiblenotes"><b><?=__('Motivazioni (visibili alla persona interessata)')?></b></label>
 		<textarea id="visiblenotes" name="visiblenotes" cols="40" rows="3"
@@ -167,12 +167,6 @@ foreach($evaluations as $evaluation) {
 			case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED: ?>
 			<button name="holdon" value="true" type="submit"
 					class="btn btn-secondary"><?=__('Metti in lista d\'attesa')?></button>
-			<?php break;
-		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED_HOLD: ?>
-			<button name="holdoff" value="true" type="submit"
-					class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
-			<button name="savevisiblenotes" value="true" type="submit"
-					class="btn btn-outline-warning"><?=__('Salva motivazioni')?></button>
 			<?php break;
 		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD: ?>
 			<button name="approvefromhold" value="true" type="submit"

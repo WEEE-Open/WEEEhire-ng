@@ -101,7 +101,7 @@ class PageCandidates implements RequestHandlerInterface {
 						$db->saveNotes($id, $notes);
 					}
 				} elseif(isset($POST['savevisiblenotes'])) {
-					if($status === User::STATUS_PUBLISHED_HOLD || $status === User::STATUS_PUBLISHED_REJECTED_HOLD || $status === User::STATUS_NEW_HOLD) {
+					if($status === User::STATUS_PUBLISHED_HOLD || $status === User::STATUS_NEW_HOLD) {
 						$db->saveVisibleNotes($id, $POST['visiblenotes']);
 					}
 				} elseif(isset($POST['approvefromhold'])) {
@@ -121,7 +121,7 @@ class PageCandidates implements RequestHandlerInterface {
 						$db->setHold($id, true);
 					}
 				} elseif(isset($POST['holdoff'])) {
-					if($status === User::STATUS_NEW_HOLD || $status === User::STATUS_PUBLISHED_REJECTED_HOLD) {
+					if($status === User::STATUS_NEW_HOLD) {
 						$db->saveNotes($id, $notes);
 						$db->setHold($id, false);
 					}

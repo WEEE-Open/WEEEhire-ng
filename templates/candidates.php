@@ -76,13 +76,6 @@ require_once 'stars.php';
 				$statusCell = "<a href=\"/candidates.php?id=${user['id']}\">" . __('In lista d\'attesa, pubblicata') . '</a>';
 				$tdcolor = $trcolor = 'class="candidates-hold"';
 				break;
-			case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED_HOLD:
-				$rejected++;
-				$hold++;
-				$statusCell = __('Rifiutata, pubblicata e in lista d\'attesa');
-				$tdcolor = 'class="candidates-rejected"';
-				$trcolor = 'class="candidates-hold"';
-				break;
 		}
 		if($user['notes']) {
 			// TODO: make this "there are notes *by me*" (there's an issue open)
