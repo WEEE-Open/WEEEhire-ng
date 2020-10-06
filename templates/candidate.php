@@ -71,7 +71,7 @@ foreach($evaluations as $evaluation) {
 	<tr>
 		<th scope="col"><?=__('Nome valutatore')?></th>
 		<th scope="col"><?=__('Voto')?></th>
-		<th scope="col"><?=__('Data')?></th>
+		<th scope="col" class="d-none d-md-table-cell"><?=__('Data')?></th>
 		<th scope="col"><?=__('Azioni')?></th>
 	</tr>
 	</thead>
@@ -80,7 +80,7 @@ foreach($evaluations as $evaluation) {
 		<tr>
 			<td><?=sprintf(__('%s (%s)'), $evaluation['name_evaluator'], $evaluation['id_evaluator'])?></td>
 			<td class="align-middle"><?=$evaluation['vote']?>&nbsp;<?=stars($evaluation['vote'])?></td>
-			<td><?=date('Y-m-d H:i', $evaluation['date'])?></td>
+			<td class="d-none d-md-table-cell"><?=date('Y-m-d H:i', $evaluation['date'])?></td>
 			<td>
 				<form method="post">
 					<input type="hidden" name="id_evaluation" value="<?=$evaluation['id_evaluation']?>" />
