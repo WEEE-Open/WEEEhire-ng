@@ -162,7 +162,7 @@ class PageCandidates implements RequestHandlerInterface {
 				}
 			}
 
-			$users = $db->getallusersfortable($_SESSION['cn'], $_SESSION['uid']);
+			$users = $db->getallusersfortable($_SESSION['uid']);
 			return new HtmlResponse($template->render('candidates', ['users' => $users, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]));
 		}
 	}

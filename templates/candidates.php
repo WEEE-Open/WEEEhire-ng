@@ -77,11 +77,15 @@ require_once 'stars.php';
 				$tdcolor = $trcolor = 'class="candidates-hold"';
 				break;
 		}
-//		if($user['notes']) {
-//			$statusCell .= ' 📝';
-//		}
+		$statusCellIcons = '';
+		if($user['myvote'] !== null) {
+			$statusCellIcons .= '<span class="fas fa-star text-dark"></span>';
+		}
 		if($user['hold']) {
-			$statusCell .= ' 🔒';
+			$statusCellIcons .= '<span class="fas fa-lock text-dark"></span>';
+		}
+		if($statusCellIcons !== '') {
+			$statusCell .= '&nbsp;' . $statusCellIcons;
 		}
 		?>
 		<tr <?=$trcolor?>>

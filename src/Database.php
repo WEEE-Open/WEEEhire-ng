@@ -259,12 +259,18 @@ class Database {
 	/**
 	 * Get all users for the candidates table
 	 *
+	 * @param string $username Evaluator username
+	 *
 	 * @return array Array of associative arrays
 	 */
-	public function getAllUsersForTable() {
+	public function getAllUsersForTable(string $username) {
 		$votes = $this->getAllEvaluationsAverage();
 
-		$result = $this->db->query('SELECT id, name, surname, area, recruiter, published, status, submitted, hold, IFNULL(LENGTH(notes), 0) as notesl FROM users ORDER BY submitted DESC');
+		$result = $this->db->query('SELECT id, name, surname, area, recruiter, published, status, submitted, hold, evaluation.vote AS myvote
+FROM users
+LEFT JOIN evaluation ON ref_user_id=id
+WHERE evaluation.id_evaluator=\'test.test\' OR myvote IS NULL 
+ORDER BY submitted DESC');
 		$compact = [];
 		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			$compact[] = [
@@ -273,8 +279,8 @@ class Database {
 				'area'       => $row['area'],
 				'recruiter'  => $row['recruiter'],
 				'hold'       => (bool) $row['hold'],
-				'notes'      => (bool) $row['notesl'],
 				'published'  => (bool) $row['published'],
+				'myvote'     => $row['myvote'] === null ? null : (int) $row['myvote'],
 				'status'     => $row['status'] === null ? null : (bool) $row['status'],
 				'submitted'  => $row['submitted'],
 				'evaluation' => $votes[$row['id']] ?? null,
