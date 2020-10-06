@@ -266,11 +266,13 @@ class Database {
 	public function getAllUsersForTable(string $username) {
 		$votes = $this->getAllEvaluationsAverage();
 
-		$result = $this->db->query('SELECT id, name, surname, area, recruiter, published, status, submitted, hold, evaluation.vote AS myvote
+		$stmt = $this->db->prepare('SELECT id, name, surname, area, recruiter, published, status, submitted, hold, evaluation.vote AS myvote
 FROM users
-LEFT JOIN evaluation ON ref_user_id=id
-WHERE evaluation.id_evaluator=\'test.test\' OR myvote IS NULL 
+LEFT JOIN evaluation ON ref_user_id=id AND evaluation.id_evaluator=:user
 ORDER BY submitted DESC');
+		$stmt->bindValue(':user', $username, SQLITE3_TEXT);
+		$result = $stmt->execute();
+
 		$compact = [];
 		while($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			$compact[] = [
