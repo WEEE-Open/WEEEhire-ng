@@ -126,8 +126,8 @@ foreach($evaluations as $evaluation) {
 	</div>
 	<div class="form-group text-center">
 		<button name="save" value="true" type="submit"
-				class="btn btn-outline-primary"><?=__('Salva note')?></button>
-		<a class="btn btn-outline-secondary"
+				class="btn btn-outline-primary my-1 mx-1"><?=__('Salva note')?></button>
+		<a class="btn btn-outline-secondary my-1 mx-1"
 				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri,
 					['edit' => 'true']))?>"><?=__('Modifica dati')?></a>
 	</div>
@@ -144,44 +144,44 @@ foreach($evaluations as $evaluation) {
 		default:
 		case \WEEEOpen\WEEEHire\User::STATUS_NEW:?>
 			<button name="approve" value="true" type="submit"
-					class="btn btn-success"><?=__('Approva candidatura')?></button>
+					class="btn btn-success my-1 mx-1"><?=__('Approva candidatura')?></button>
 			<button name="reject" value="true" type="submit"
-					class="btn btn-danger"><?=__('Rifiuta candidatura')?></button>
+					class="btn btn-danger my-1 mx-1"><?=__('Rifiuta candidatura')?></button>
 			<button name="holdon" value="true" type="submit"
-					class="btn btn-secondary"><?=__('Metti in lista d\'attesa')?></button>
+					class="btn btn-secondary my-1 mx-1"><?=__('Metti in lista d\'attesa')?></button>
 			<?php break;
 		case \WEEEOpen\WEEEHire\User::STATUS_NEW_APPROVED: ?>
 			<button name="limbo" value="true" type="submit"
-					class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
+					class="btn btn-warning my-1 mx-1"><?=__('Rimanda nel limbo')?></button>
 			<?php break;
 		case \WEEEOpen\WEEEHire\User::STATUS_NEW_REJECTED: ?>
 			<button name="publishnow" value="true" type="submit"
-					class="btn btn-primary"><?=__('Pubblica')?></button>
+					class="btn btn-primary my-1 mx-1"><?=__('Pubblica')?></button>
 			<button name="limbo" value="true" type="submit"
-					class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
+					class="btn btn-warning my-1 mx-1"><?=__('Rimanda nel limbo')?></button>
 			<?php break;
 		case \WEEEOpen\WEEEHire\User::STATUS_NEW_HOLD: ?>
 		<!-- TODO: add stuff for email, remove "publish now" (or leave it to skip the email) -->
 			<button name="publishnow" value="true" type="submit"
-					class="btn btn-primary"><?=__('Pubblica')?></button>
+					class="btn btn-primary my-1 mx-1"><?=__('Pubblica')?></button>
 			<button name="holdoff" value="true" type="submit"
-					class="btn btn-secondary"><?=__('Togli dalla lista d\'attesa')?></button>
+					class="btn btn-secondary my-1 mx-1"><?=__('Togli dalla lista d\'attesa')?></button>
 			<button name="savevisiblenotes" value="true" type="submit"
-					class="btn btn-outline-primary"><?=__('Salva motivazioni')?></button>
+					class="btn btn-outline-primary my-1 mx-1"><?=__('Salva motivazioni')?></button>
 			<?php break;
 		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_APPROVED: ?>
 			<?php break;
 			case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED: ?>
 			<button name="holdon" value="true" type="submit"
-					class="btn btn-secondary"><?=__('Metti in lista d\'attesa')?></button>
+					class="btn btn-secondary my-1 mx-1"><?=__('Metti in lista d\'attesa')?></button>
 			<?php break;
 		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD: ?>
 			<button name="approvefromhold" value="true" type="submit"
-					class="btn btn-success"><?=__('Approva candidatura')?></button>
+					class="btn btn-success my-1 mx-1"><?=__('Approva candidatura')?></button>
 			<button name="reject" value="true" type="submit"
-						class="btn btn-danger"><?=__('Rifiuta candidatura definitivamente')?></button>
+						class="btn btn-danger my-1 mx-1"><?=__('Rifiuta candidatura definitivamente')?></button>
 			<button name="savevisiblenotes" value="true" type="submit"
-					class="btn btn-outline-warning"><?=__('Salva motivazioni')?></button>
+					class="btn btn-outline-warning my-1 mx-1"><?=__('Salva motivazioni')?></button>
 			<?php break;
 		endswitch; ?>
 	</div>
@@ -209,21 +209,24 @@ foreach($evaluations as $evaluation) {
 				<?php endif ?>
 			</select>
 		</div>
-		<div class="form-group row">
-			<div class="col-md-2">
-				<button class="btn btn-outline-secondary" id="email-it-btn">it-IT</button>
-				<button class="btn btn-outline-secondary" id="email-en-btn">en-US</button>
-			</div>
-			<div class="col-md-10">
-			<select aria-label="<?=__('Template')?>" class="custom-select" id="email-custom-select" onchange="templatize()">
-				<option value="default" selected>Email standard</option>
-				<option value="programmer">Programmatore</option>
-				<!--                  <option value="repairs" disabled>Riparatore</option>-->
-				<!--                  <option value="electronics" disabled>Elettronico</option>-->
-				<!--                  <option value="sysadmin" disabled>Sysadmin</option>-->
-				<!--                  <option value="digital-creator" disabled>Crezione contenuti digitali</option>-->
-				<!--                  <option value="creative-reuse" disabled>Riuso creativo</option>-->
-			</select>
+		<div class="form-group">
+			<label><?=__('Lingua e template')?></label>
+			<div class="row">
+				<div class="col-md-3 col-lg-2">
+					<button class="btn btn-outline-secondary mr-1 mb-2 mr-md-0 mb-md-0" id="email-it-btn">it-IT</button>
+					<button class="btn btn-outline-secondary mb-2 mb-md-0" id="email-en-btn">en-US</button>
+				</div>
+				<div class="col-md-9 col-lg-10">
+				<select aria-label="<?=__('Template')?>" class="custom-select" id="email-custom-select" onchange="templatize()">
+					<option value="default" selected>Email standard</option>
+					<option value="programmer">Programmatore</option>
+					<!--                  <option value="repairs" disabled>Riparatore</option>-->
+					<!--                  <option value="electronics" disabled>Elettronico</option>-->
+					<!--                  <option value="sysadmin" disabled>Sysadmin</option>-->
+					<!--                  <option value="digital-creator" disabled>Crezione contenuti digitali</option>-->
+					<!--                  <option value="creative-reuse" disabled>Riuso creativo</option>-->
+				</select>
+				</div>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -238,7 +241,7 @@ foreach($evaluations as $evaluation) {
 		</div>
 		<div class="form-group text-center">
 			<button name="publishnow" value="true" type="submit"
-					class="btn btn-primary"><?=__('Pubblica e manda email')?></button>
+					class="btn btn-primary my-1 mx-1"><?=__('Pubblica e manda email')?></button>
 		</div>
 	</form>
 	<script>
