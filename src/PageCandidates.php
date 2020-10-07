@@ -63,6 +63,7 @@ class PageCandidates implements RequestHandlerInterface {
 				} elseif(isset($POST['reject'])) {
 					if($status === User::STATUS_NEW || $status === User::STATUS_PUBLISHED_HOLD) {
 						$db->setStatus($id, false, $_SESSION['cn'] ?? null);
+						$db->setHold($id, false); // Remove hold or it will mess up the status (#41)
 						$db->saveNotes($id, $notes);
 					}
 				} elseif(isset($POST['limbo'])) {
@@ -112,8 +113,7 @@ class PageCandidates implements RequestHandlerInterface {
 						$db->setPublished($id, false);
 						$db->setStatus($id, true, $_SESSION['cn'] ?? null);
 						$db->setEmailed($id, false);
-						// Leave on hold (so the application cannot be deleted)
-						//$db->setHold($id, false);
+						$db->setHold($id, false); // Remove hold or it will mess up the status (#41)
 					}
 				} elseif(isset($POST['holdon'])) {
 					if($status === User::STATUS_NEW || $status === User::STATUS_PUBLISHED_REJECTED) {
