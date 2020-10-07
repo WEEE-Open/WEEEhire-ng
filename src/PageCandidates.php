@@ -58,18 +58,15 @@ class PageCandidates implements RequestHandlerInterface {
 				} elseif(isset($POST['approve'])) {
 					if($status === User::STATUS_NEW) {
 						$db->setStatus($id, true, $_SESSION['cn'] ?? null);
-						$db->saveNotes($id, $notes);
 					}
 				} elseif(isset($POST['reject'])) {
 					if($status === User::STATUS_NEW || $status === User::STATUS_PUBLISHED_HOLD) {
 						$db->setStatus($id, false, $_SESSION['cn'] ?? null);
 						$db->setHold($id, false); // Remove hold or it will mess up the status (#41)
-						$db->saveNotes($id, $notes);
 					}
 				} elseif(isset($POST['limbo'])) {
 					if($status === User::STATUS_NEW_REJECTED || $status === User::STATUS_NEW_APPROVED) {
 						$db->setStatus($id, null, null);
-						$db->saveNotes($id, $notes);
 					}
 				} elseif(isset($POST['publishnow'])) {
 					if($status === User::STATUS_NEW_APPROVED) {
@@ -94,12 +91,10 @@ class PageCandidates implements RequestHandlerInterface {
 						$db->setPublished($id, true);
 					} elseif($status === User::STATUS_NEW_REJECTED) {
 						$db->setPublished($id, true);
-						$db->saveNotes($id, $notes);
 					} elseif($status === User::STATUS_NEW_HOLD) {
 						// TODO: send mail
 						$db->saveVisibleNotes($id, $POST['visiblenotes']);
 						$db->setPublished($id, true);
-						$db->saveNotes($id, $notes);
 					}
 				} elseif(isset($POST['savevisiblenotes'])) {
 					if($status === User::STATUS_PUBLISHED_HOLD || $status === User::STATUS_NEW_HOLD) {
@@ -107,7 +102,6 @@ class PageCandidates implements RequestHandlerInterface {
 					}
 				} elseif(isset($POST['approvefromhold'])) {
 					if($status === User::STATUS_PUBLISHED_HOLD) {
-						$db->saveNotes($id, $notes);
 						// Unpublish so we can choose a recruiter
 						// The end result should be STATUS_NEW_APPROVED
 						$db->setPublished($id, false);
@@ -117,12 +111,10 @@ class PageCandidates implements RequestHandlerInterface {
 					}
 				} elseif(isset($POST['holdon'])) {
 					if($status === User::STATUS_NEW || $status === User::STATUS_PUBLISHED_REJECTED) {
-						$db->saveNotes($id, $notes);
 						$db->setHold($id, true);
 					}
 				} elseif(isset($POST['holdoff'])) {
 					if($status === User::STATUS_NEW_HOLD) {
-						$db->saveNotes($id, $notes);
 						$db->setHold($id, false);
 					}
 				}
