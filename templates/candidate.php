@@ -119,6 +119,12 @@ foreach($evaluations as $evaluation) {
 </table>
 
 <form method="post">
+<!--	<div class="form-group text-center row mx-0">-->
+<!--		<button name="goprevvote" value="true" type="submit" class="btn btn-outline-primary btn-block col-lg-3 col-12 my-1"><span class="fas fa-arrow-circle-left"></span>&nbsp;--><?//=__('Precedente da valutare')?><!--</button>-->
+<!--		<button name="goprev" value="true" type="submit" class="btn btn-outline-secondary btn-block col-lg-3 col-6 my-1"><span class="fas fa-arrow-circle-left"></span>&nbsp;--><?//=__('Precedente')?><!--</button>-->
+<!--		<button name="gonext" value="true" type="submit" class="btn btn-outline-secondary btn-block col-lg-3 col-6 my-1">--><?//=__('Successivo')?><!--&nbsp;<span class="fas fa-arrow-circle-right"></span></button>-->
+<!--		<button name="gonextvote" value="true" type="submit" class="btn btn-outline-primary btn-block col-lg-3 col-12 my-1">--><?//=__('Successivo da valutare')?><!--&nbsp;<span class="fas fa-arrow-circle-right"></span></button>-->
+<!--	</div>-->
 	<div class="form-group">
 		<label for="notes"><b><?=__('Note')?></b></label>
 		<textarea id="notes" name="notes" cols="40" rows="3"
