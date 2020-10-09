@@ -273,7 +273,8 @@ foreach($evaluations as $evaluation) {
 				return;
 			}
 			let recruiter_split = recruiter.value.split('|', 2);
-			let name = recruiter_split[1];
+			// remove nickname between "" from email signature
+			let name = recruiter_split[1].split(' ').filter(str => !str.includes('"')).join(" ");
 			let telegram = recruiter_split[0];
 			let emailVariant = document.getElementById('email-custom-select').value;
 
