@@ -67,9 +67,9 @@ class PageInterviews implements RequestHandlerInterface {
 				);
 
 				$headers = [
-					//'Content-Type' => 'text/calendar; charset=utf-8',
-					//'Content-Description' => 'File Transfer',
-					//'Content-Disposition' => "attachment; filename=\"colloquio $user->name $user->surname.ics\"",
+					'Content-Type' => 'text/calendar; charset=utf-8',
+					'Content-Description' => 'File Transfer',
+					'Content-Disposition' => "attachment; filename=\"colloquio $user->name $user->surname.ics\"",
 				];
 
 				return new TextResponse($ical->serialize(), 200, $headers);
