@@ -2,7 +2,7 @@
 /** @var $interviews \DateTime[][]|string[][] */
 /** @var $myname string */
 /** @var $myuser string */
-$this->layout('base', ['title' => __('Candidati')]);
+$this->layout('base', ['title' => __('Candidati'), 'fontAwesome' => true]);
 $total = 0;
 $approved = 0;
 $rejected = 0;
@@ -51,14 +51,15 @@ $prevdate = null;
 				$statusCell = __('Colloquio fallito');
 			}
 		}
-		if($int['questions']) {
-			$statusCell .= ' ❓';
-		}
+		$statusCellIcons = '';
 		if($int['hold']) {
-			$statusCell .= ' 🔒';
+			$statusCellIcons .= '<span class="fas fa-lock text-dark"></span>';
 		}
 		if($int['answers']) {
-			$statusCell .= ' ❗️';
+			$statusCellIcons .= '<span class="fas fa-inbox text-dark"></span>';
+		}
+		if($statusCellIcons !== '') {
+			$statusCell .= '&nbsp;' . $statusCellIcons;
 		}
 		if($int['interviewstatus'] === true) {
 			$tdcolor = 'class="table-success"';
