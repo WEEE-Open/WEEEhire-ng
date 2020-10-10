@@ -9,8 +9,8 @@
 			<img src="weee.png" height="69" class="img-fluid" alt="WEEE Open">
 		</a>
 		<div class="ml-auto">
-			<a href="language.php?l=en-US&from=<?=rawurlencode($globalRequestUri->getPath())?>">en</a>&nbsp;-&nbsp;<a
-					href="language.php?l=it-IT&from=<?=rawurlencode($globalRequestUri->getPath())?>">it</a>
+			<a href="language.php?l=en-US&amp;from=<?=rawurlencode($globalRequestUri->getPath())?>">en</a>&nbsp;-&nbsp;<a
+					href="language.php?l=it-IT&amp;from=<?=rawurlencode($globalRequestUri->getPath())?>">it</a>
 		</div>
 	</div>
 </nav>
