@@ -84,7 +84,7 @@ $prevdate = null;
 		if($date !== $prevdate) {
 			$prevdate = $date;
 			?>
-			<tr class="table-secondary">
+			<tr class="table-secondary days text-dark">
 				<td colspan="5"><?=sprintf(__('Giorno %s (%s)'), $date,
 						$this->fetch('day', ['day' => $int['when']->format('N')]))?></td>
 			</tr>
