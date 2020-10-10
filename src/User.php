@@ -24,6 +24,8 @@ class User {
 	public $area;
 	public $letter;
 
+	public $notes;
+
 	/**
 	 * @var $published bool Result published or not
 	 */
