@@ -43,7 +43,7 @@ class PageInterviews implements RequestHandlerInterface {
 						'SUMMARY' => "Colloquio con $user->name $user->surname",
 						'UID' => $user->id,
 						'DTSTART' => $interview->when,
-						'DTEND' => $interview->when->add(new \DateInterval('P30M')),
+						'DTEND' => (clone $interview->when)->add(new \DateInterval('PT30M')),
 						'DESCRIPTION' => "Colloquio per $user->area.\n\nNote:\n$user->notes",
 					]
 				]);
@@ -67,9 +67,9 @@ class PageInterviews implements RequestHandlerInterface {
 				);
 
 				$headers = [
-					'Content-Type' => 'text/calendar; charset=utf-8',
-					'Content-Description' => 'File Transfer',
-					'Content-Disposition' => "attachment; filename=\"colloquio $user->name $user->surname.ics\"",
+					//'Content-Type' => 'text/calendar; charset=utf-8',
+					//'Content-Description' => 'File Transfer',
+					//'Content-Disposition' => "attachment; filename=\"colloquio $user->name $user->surname.ics\"",
 				];
 
 				return new TextResponse($ical->serialize(), 200, $headers);
