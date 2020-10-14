@@ -226,9 +226,9 @@ foreach($evaluations as $evaluation) {
 				<select aria-label="<?=__('Template')?>" class="custom-select" id="email-custom-select" onchange="templatize()">
 					<option value="default" selected>Email standard</option>
 					<option value="programmer">Programmatore</option>
+                    <option value="sysadmin">Sysadmin</option>
 					<!--                  <option value="repairs" disabled>Riparatore</option>-->
 					<!--                  <option value="electronics" disabled>Elettronico</option>-->
-					<!--                  <option value="sysadmin" disabled>Sysadmin</option>-->
 					<!--                  <option value="digital-creator" disabled>Crezione contenuti digitali</option>-->
 					<!--                  <option value="creative-reuse" disabled>Riuso creativo</option>-->
 				</select>
@@ -313,11 +313,15 @@ Team WEEE Open`
 				    'default': "",
 				    'programmer': `
 Potremmo chiederti di fare un breve esercizio di programmazione. Prepara il tuo ambiente di sviluppo o editor di testo preferito!`,
+                    'sysadmin': `
+Potremmo chiederti di svolgere qualche esercizio da terminale, ricorda di averne uno pronto!`
 			    },
 			    'en-US': {
 			        'default': "",
 			        'programmer': `
 We may ask you to do some live coding. Prepare your own favourite IDE or text editor!`,
+                    'sysadmin': `
+We may ask you to do some terminal exercises, remember to have one ready!`
 			    },
 			};
 
