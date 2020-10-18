@@ -3,6 +3,8 @@ FROM nginx:latest
 # Install fundamental packages
 RUN apt update
 RUN apt install -y\
+	sqlite3 \
+	gettext \
         composer \
         php \
         php-cli \

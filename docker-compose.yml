@@ -18,8 +18,8 @@ services:
       - "$PWD/tests:/var/www/html/tests"
       - "$PWD/config:/var/www/html/config"
 
-      # Built database
-      - "$PWD/weeehire.db:/var/www/html/weeehire.db"
+      # Database SQL file
+      - "$PWD/database.sql:/var/www/html/database.sql"
 
       # Configuration + scripts
       - "$PWD/nginx-config/nginx.conf:/etc/nginx/nginx.conf"
