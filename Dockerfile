@@ -37,8 +37,7 @@ COPY composer.json /var/www/html/composer.json
 WORKDIR /var/www/html
 RUN composer install --no-dev --optimize-autoloader 
 
-# Create mountpoint for database file
-RUN touch weeehire.db
+RUN sed -i 's/exec \"\$@\"/echo \"NGINX started: listening on http\:\/\/localhost\:80\"\nexec \"\$@\"/g' /docker-entrypoint.sh
 
 # Launch services in reload.sh script
 COPY ./nginx-config/reload.sh /bin/reload.sh
