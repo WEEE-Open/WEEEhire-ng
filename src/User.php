@@ -12,7 +12,11 @@ class User {
 	const STATUS_PUBLISHED_APPROVED = 4;
 	const STATUS_PUBLISHED_REJECTED = 5;
 	const STATUS_PUBLISHED_HOLD = 6;
-	const STATUS_PUBLISHED_REJECTED_HOLD = 7;
+
+	const STATUS_INTERVIEW_NEW = 4;
+	const STATUS_INTERVIEW_APPROVED = 8;
+	const STATUS_INTERVIEW_REJECTED = 9;
+	const STATUS_INTERVIEW_HOLD = 10;
 
 	public $id;
 
@@ -94,8 +98,6 @@ class User {
 				return self::STATUS_PUBLISHED_APPROVED;
 			} elseif($status === false && $hold === false) {
 				return self::STATUS_PUBLISHED_REJECTED;
-			} elseif($status === false && $hold === true) {
-				return self::STATUS_PUBLISHED_REJECTED_HOLD;
 			} elseif($status === null && $hold === true) {
 				return self::STATUS_PUBLISHED_HOLD;
 			}
@@ -110,5 +112,19 @@ class User {
 		}
 
 		return self::STATUS_NEW;
+	}
+
+	public static function computeCandidateInterviewStatus(?bool $interviewPassed, bool $hold): int {
+		if($interviewPassed === true) {
+			return self::STATUS_INTERVIEW_APPROVED;
+		} else if($interviewPassed === false) {
+			return self::STATUS_INTERVIEW_REJECTED;
+		} else {
+			if($hold) {
+				return self::STATUS_INTERVIEW_HOLD;
+			}
+		}
+
+		return self::STATUS_INTERVIEW_NEW;
 	}
 }

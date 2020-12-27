@@ -39,7 +39,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 		</div>
 	<?php endif ?>
 
-	<?php $this->insert('covid') ?>
+	<?php //$this->insert('covid') ?>
 
 	<form method="post">
 		<div class="form-group row">
@@ -167,7 +167,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 		</div>
 		<?php if(count($roles) > 0): ?>
 		<div class="form-group">
-			<p><small><?= __('Al momento alcune aree del team sono al completo, è possibile candidarsi solo nelle aree selezionabili dall\'elenco.') ?></small></p>
+			<p><small><?= __('Al momento alcune aree del team sono al completo, è possibile candidarsi solo nelle aree selezionabili dall\'elenco. In futuro le aree disponibili potrebbero cambiare senza preavviso.') ?></small></p>
 		</div>
 		<?php endif; ?>
 		<div class="form-group">
