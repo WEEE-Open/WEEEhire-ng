@@ -218,7 +218,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
                 <div class="form-text d-none" id="mlet-explain-Sviluppo-software-JavaScript">
                     <p><?=__('Il progetto in JavaScript principale del team al momento è <a href="https://github.com/WEEE-Open/softweeere" target="_blank">il SoftWEEEre</a>, una piattaforma dove poter provare il software prodotto dal nostro team nel browser.')?></p>
                     <p><?=__('In particolare, vorremmo aggiungere nella seconda versione (che trovi sul <a href="https://github.com/WEEE-Open/softweeere/tree/dev" target="_blank">branch dev</a> del repository) la possibilità di gestire internamente sul server i container Docker dentro cui girano i software del team, già preconfezionati sotto forma di Docker images.')?></p>
-                    <p><?=__('Parla di qualsiasi tua esperienza riguardante l\'utilizzo di JavaScript (frontend, backend, app NodeJS) o di Docker.')?></p>
+                    <p><?=__('Parla di qualsiasi tua esperienza riguardante l\'utilizzo di JavaScript (frontend, backend, app NodeJS) o di Docker. Conosci altri linguaggi che usiamo in team, come Python, PHP e Bash, o altri ancora? Menzionali pure!')?></p>
                     <p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
                     <p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
                     <p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
