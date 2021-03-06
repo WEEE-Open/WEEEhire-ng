@@ -11,7 +11,7 @@
     "ext-mbstring": "*",
     "ext-json": "*",
     "phpmyadmin/motranslator": "^4.0",
-    "willdurand/negotiation": "^2.3",
+    "willdurand/negotiation": "^3.0",
     "ext-sqlite3": "*",
     "phpmailer/phpmailer": "^6.1",
     "laminas/laminas-diactoros": "^2.2",
@@ -20,6 +20,11 @@
   },
   "suggest": {
     "ext-apcu": "Caches LDAP results avoiding continuous lookups"
+  },
+  "config": {
+    "platform": {
+      "php": "7.3"
+    }
   },
   "require-dev": {
     "pds/skeleton": "~1.0",
