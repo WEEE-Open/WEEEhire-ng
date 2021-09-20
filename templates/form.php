@@ -174,7 +174,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			<label for="letter"><b><?=__('Lettera motivazionale')?></b></label>
 			<div id="mlet-explain">
 				<div class="form-text" id="mlet-explain-">
-					<p><?= __('Seleziona l\'area del team che più ti interessa e qui compariranno delle linee guida su cosa scrivere.') ?></p>
+					<p><?=__('Seleziona l\'area del team che più ti interessa e qui compariranno delle linee guida su cosa scrivere.') ?></p>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Riparazione-hardware">
 					<p><?=__('Descrivi qualsiasi tua esperienza di riparazione di computer (fissi o portatili), o assemblaggio, o saldatura di componenti elettronici.')?></p>
@@ -184,7 +184,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Elettronica">
-					<p><?= __('Uno degli obiettivi del team è la progettazione di strumenti elettronici per la diagnostica a basso livello e il riuso dell\'hardware recuperato.') ?></p>
+					<p><?=__('Uno degli obiettivi del team è la progettazione di strumenti elettronici per la diagnostica a basso livello e il riuso dell\'hardware recuperato.') ?></p>
 					<p><?=__('Qual è il tuo rapporto con il mondo dell\'elettronica? Ti interessa di più l\'elettronica digitale o analogica (specialmente di potenza) o ti interessano entrambe?') ?></p>
 					<p><?=__('Se hai mai realizzato qualche circuito o progetto oltre a quelli nei laboratori didattici, parlane con riferimento anche al metodo con cui è stato realizzato (breadboard, millefori, circuito stampato, componenti through-hole o SMD, etc...).')?></p>
 					<p><?=__('Indica anche se hai dimestichezza con qualche software di Electronic Design Automation (progettazione, simulazione, test e verifica, etc...).') ?></p>
