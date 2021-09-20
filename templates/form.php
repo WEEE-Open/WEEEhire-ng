@@ -242,10 +242,11 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				<div class="form-text d-none" id="mlet-explain-Creazione-di-contenuti-digitali">
 					<p><?=__('Come ogni team abbiamo un\'immagine e ci servono persone in gamba per curarla e mantenerla. In particolare, abbiamo bisogno di:')?></p>
 					<ul>
-						<li><?=__('Loghi e immagini personalizzate da usare come sfondi, icone e simili sui computer riparati')?></li>
-						<li><?=__('Design grafici per manifesti, biglietti da visita e personalizzazioni dei case dei computer riparati')?>
-						<li><?=__('Persone che abbiano dimestichezza con la videocamera, l\'editing video e la cinematografia per realizzare tutorial e vlog da caricare sul nuovo canale YouTube del team')?></li>
-						<li><?=__('Persone che gestiscano le nostre pagine social (su cui carichiamo aggiornamenti inerenti alle nostre attività) o che curino i contenuti multimediali (foto e video) che carichiamo')?></li>
+						<li><?=__('Design di manifesti, infografiche, biglietti da visita')?></li>
+						<li><?=__('Elementi grafici per pagine web e social network')?>
+						<li><?=__('Sfondi, icone e immagini personalizzate per i nostri software')?></li>
+						<li><?=__('Redesign e modding dei case dei computer riparati')?></li>
+						<li><?=__('Persone che gestiscano le nostre pagine social o che curino i contenuti multimediali (foto e video) che carichiamo')?></li>
 						<li><?=__('Un musicista o deejay che possa creare un jingle per il team ;)')?></li>
 					</ul>
 					<p><?=__('Se <strong>almeno una</strong>, o più di una, di queste attività di interessano, questo è il ruolo adatto.')?></p>
