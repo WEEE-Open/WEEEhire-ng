@@ -4,6 +4,16 @@ Manage applications to the team.
 
 ## Local development
 
+The Docker container is still a work in progress. In the meantime, you can run locally.
+
+You will need:
+- PHP, any recent version, with sqlite extension enabled
+- Composer
+- sqlite3 executable to create an empty database
+- gettetxt (for msgfmt command)
+
+Then, run these commands:
+
 ```bash
 sqlite3 weeehire.db < database.sql
 cp config/config-example.php config/config.php
