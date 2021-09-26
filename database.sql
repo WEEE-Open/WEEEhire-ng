@@ -39,8 +39,7 @@ INSERT INTO config (id, value)
 VALUES ('expiry', null);
 
 INSERT INTO config (id, value)
-VALUES ('rolesUnavailable', null);
-VALUES ('notifyEmail', 0);
+VALUES ('rolesUnavailable', null), ('notifyEmail', 0);
 
 create table evaluation (
 	id_evaluation integer primary key autoincrement,
