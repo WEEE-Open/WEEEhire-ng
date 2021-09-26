@@ -1,29 +1,33 @@
-# Luca Errani: every folder in this project is mounted as a volume in order to avoid
-# re-building the entire container for each modification. By simply re-running the container
-# every modification will be added
+---
 version: '3.4'
 services:
-  nginx:
-    # Build from Dockerfile in this directory, network: host is used to enable 
-    # internet access during the build (probably a Ubuntu problem)
+  app:
+    image: weeehire-ng/app
     build:
-      context: .
-      network: host
+      context: ./
+      dockerfile: ./docker/app/Dockerfile
+      cache_from:
+        - weeehire-ng/app
     volumes:
       # Source directories
-      - "$PWD/public:/var/www/html/public"
-      - "$PWD/resources:/var/www/html/resources"
-      - "$PWD/src:/var/www/html/src"
-      - "$PWD/templates:/var/www/html/templates"
-      - "$PWD/tests:/var/www/html/tests"
-      - "$PWD/config:/var/www/html/config"
-
+      - ./public:/var/www/html/public
+      - ./resources:/var/www/html/resources
+      - ./src:/var/www/html/src
+      - ./templates:/var/www/html/templates
+      - ./tests:/var/www/html/tests
+      - ./config:/var/www/html/config
       # Database SQL file
-      - "$PWD/weeehire.db:/var/www/html/weeehire.db"
+      - ./weeehire.db:/var/www/html/weeehire.db
 
-      # Configuration + scripts
-      - "$PWD/nginx-config/nginx.conf:/etc/nginx/nginx.conf"
-      - "$PWD/nginx-config/fpm.conf:/etc/php/7.3/fpm/pool.d/www.conf"
+  web:
+    image: weeehire-ng/web
+    build:
+      context: ./
+      dockerfile: ./docker/web/Dockerfile
+    volumes:
+      - ./docker/web/nginx.conf:/etc/nginx/nginx.conf
+      - ./public:/var/www/html/public
     ports: 
-      - "80:80"
-    
+      - "8081:80"
+    depends_on:
+      - app
