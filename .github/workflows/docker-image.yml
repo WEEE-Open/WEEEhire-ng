@@ -25,6 +25,9 @@ jobs:
           username: ${{secrets.DOCKER_USERNAME}}
           password: ${{secrets.DOCKER_PASSWORD}}
 
+    - name: Copy default config from example
+      run: cp config/config-example.php config/config.php
+
     - name: Prefix image names with our custom registry domain
       run: |
         sed -i 's#image: weeehire-ng/app#image: ${{secrets.DOCKER_REGISTRY}}/weeehire-ng/app#g' docker-compose.yml
