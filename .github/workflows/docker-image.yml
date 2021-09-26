@@ -25,8 +25,13 @@ jobs:
           username: ${{secrets.DOCKER_USERNAME}}
           password: ${{secrets.DOCKER_PASSWORD}}
 
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_REGISTRY}}/weeehire-ng:latest
+    - name: Prefix image names with our custom registry domain
+      run: |
+        sed -i 's#image: weeehire-ng/app#image: ${{secrets.DOCKER_REGISTRY}}/weeehire-ng/app#g' docker-compose.yml
+        sed -i 's#image: weeehire-ng/web#image: ${{secrets.DOCKER_REGISTRY}}/weeehire-ng/web#g' docker-compose.yml
+
+    - name: Build the Docker images
+      run: docker-compose build --pull
 
     - name: Push the Docker Image to our custom registry
-      run: docker push ${{secrets.DOCKER_REGISTRY}}/weeehire-ng:latest
+      run: docker-compose push
