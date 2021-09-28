@@ -240,14 +240,13 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Creazione-di-contenuti-digitali">
-					<p><?=__('Come ogni team abbiamo un\'immagine e ci servono persone in gamba per curarla e mantenerla. In particolare, abbiamo bisogno di:')?></p>
+					<p><?=__('Sprigiona la tua vena creativa entrando nel nostro team! Abbiamo bisogno di figure che si occupino di realizzare:')?></p>
 					<ul>
 						<li><?=__('Design di manifesti, infografiche, biglietti da visita')?></li>
 						<li><?=__('Elementi grafici per pagine web e social network')?>
 						<li><?=__('Sfondi, icone e immagini personalizzate per i nostri software')?></li>
 						<li><?=__('Redesign e modding dei case dei computer riparati')?></li>
-						<li><?=__('Persone che gestiscano le nostre pagine social o che curino i contenuti multimediali (foto e video) che carichiamo')?></li>
-						<li><?=__('Un musicista o deejay che possa creare un jingle per il team ;)')?></li>
+						<li><?=__('Jingle e motivi musicali per i nostri video')?></li>
 					</ul>
 					<p><?=__('Se <strong>almeno una</strong>, o più di una, di queste attività di interessano, questo è il ruolo adatto.')?></p>
 					<p><?=__('Parla di qualsiasi esperienza artistica, inclusi progetti personali (anche piccoli) o esami sostenuti.')?></p>
