@@ -243,7 +243,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Sprigiona la tua vena creativa entrando nel nostro team! Abbiamo bisogno di figure che si occupino di realizzare:')?></p>
 					<ul>
 						<li><?=__('Design di manifesti, infografiche, biglietti da visita')?></li>
-						<li><?=__('Elementi grafici per pagine web e social network')?>
+						<li><?=__('Elementi grafici per pagine web e social network')?></li>
 						<li><?=__('Sfondi, icone e immagini personalizzate per i nostri software')?></li>
 						<li><?=__('Redesign e modding dei case dei computer riparati')?></li>
 						<li><?=__('Jingle e motivi musicali per i nostri video')?></li>
