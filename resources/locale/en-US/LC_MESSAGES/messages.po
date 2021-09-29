@@ -2,20 +2,21 @@
 # This file is distributed under the same license as the WEEEHire package.
 #
 # quel_tale <lvps@users.noreply.github.com>, 2019, 2020, 2021.
+# Zubyte <28754230+Zubyte@users.noreply.github.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-20 21:04+0200\n"
-"PO-Revision-Date: 2021-09-20 21:08+0200\n"
-"Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
+"POT-Creation-Date: 2021-09-29 01:51+0200\n"
+"PO-Revision-Date: 2021-09-29 02:50+0200\n"
+"Last-Translator: Zubyte <28754230+Zubyte@users.noreply.github.com>\n"
 "Language-Team: Italian <>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.04.1\n"
+"X-Generator: Lokalize 21.08.1\n"
 
 #: templates/adminnavbar.php:7
 #, php-format
@@ -553,7 +554,7 @@ msgstr ""
 
 #: templates/form.php:184 templates/form.php:192 templates/form.php:200
 #: templates/form.php:208 templates/form.php:216 templates/form.php:225
-#: templates/form.php:233 templates/form.php:240 templates/form.php:256
+#: templates/form.php:233 templates/form.php:251 templates/form.php:266
 msgid ""
 "Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti "
 "sembra rilevante dire."
@@ -622,8 +623,8 @@ msgid ""
 "lavoro non manca mai."
 msgstr ""
 "There is new software to install and configure, containers to improve and "
-"routine maintenance to perform (installing updates), there is always work "
-"to do."
+"routine maintenance to perform (installing updates), there is always work to "
+"do."
 
 #: templates/form.php:197
 msgid ""
@@ -640,11 +641,10 @@ msgid ""
 "vuoi mettere le mani in pasta su dei server, dicci qualcosa su di te e che "
 "esperienza hai con Linux, con i server o con l'informatica in generale."
 msgstr ""
-"It's more important that you are a precise person that accurately reads the"
-" manual "
-"and (error) messages before running commands. If you are one and you want "
-"to get down to server administration, tell us something about yourself and "
-"your experience with Linux, servers or computers in general."
+"It's more important that you are a precise person that accurately reads the "
+"manual and (error) messages before running commands. If you are one and you "
+"want to get down to server administration, tell us something about yourself "
+"and your experience with Linux, servers or computers in general."
 
 #: templates/form.php:199
 msgid ""
@@ -711,17 +711,17 @@ msgid ""
 "web in generale. Va bene anche \"per l'esame di ... ho creato un programma "
 "che fa ...\" o \"ho fatto il sito web per la panetteria all'angolo\"."
 msgstr ""
-"Tell us about your experience developing software in PHP or for the web in"
-" general. "
-"It's also fine to say \"for the ... exam I've created a program that does"
-" ...\" or \"I've made "
-"a website for the bakery near my house\"."
+"Tell us about your experience developing software in PHP or for the web in "
+"general. It's also fine to say \"for the ... exam I've created a program "
+"that does ...\" or \"I've made a website for the bakery near my house\"."
 
 #: templates/form.php:213
 msgid ""
 "Puoi anche menzionare se conosci altri linguaggi di programmazione o hai mai "
 "partecipato ad altri progetti collaborativi."
 msgstr ""
+"You can also mention whether you know other programming languages or have"
+" ever participated to other collaborative projects."
 
 #: templates/form.php:219
 msgid ""
@@ -788,7 +788,7 @@ msgstr ""
 msgid "Accenna anche a che metodo seguiresti per progettare queste cose."
 msgstr "Point out which method you'd follow to develop these projects, too."
 
-#: templates/form.php:232 templates/form.php:255
+#: templates/form.php:232 templates/form.php:265
 msgid ""
 "Menziona anche quanto tempo potresti dedicare alle attività in team e se fai "
 "altro di interessante nel tempo libero."
@@ -798,6 +798,53 @@ msgstr ""
 
 #: templates/form.php:236
 msgid ""
+"Hai buone capacità di comunicazione e organizzazione, ti piace il nostro "
+"team e vuoi aiutarci a migliorare la nostra immagine? Questo è il posto che "
+"fa per te!"
+msgstr ""
+"Do you have good communication and organizational skills, you like our team"
+" and you want to help us improve our public image? This is the right place!"
+
+#: templates/form.php:237
+msgid "Cerchiamo qualcuno che possa svolgere le seguenti mansioni:"
+msgstr "We are looking for someone to perform the following tasks:"
+
+#: templates/form.php:239
+msgid "Scrittura e pubblicazione di post e storie per i nostri social"
+msgstr "Write and publish posts/stories for our social media"
+
+#: templates/form.php:240
+msgid "Programmazione temporale dei contenuti"
+msgstr "Organize temporal scheduling of contents"
+
+#: templates/form.php:241
+msgid "Definizione della strategia di comunicazione in generale"
+msgstr "Define the communication strategy in general"
+
+#: templates/form.php:242
+msgid "Brainstorming di idee per podcast e video tematici"
+msgstr "Come up with new ideas for podcasts and videos"
+
+#: templates/form.php:243
+msgid "Intrattenimento di rapporti con terzi, altre associazioni e ospiti"
+msgstr "Maintain relations with third parties, other associations and guests"
+
+#: templates/form.php:245
+msgid ""
+"Ti troverai a lavorare in sinergia con i creatori di contenuti digitali, che "
+"si occuperanno di produrre materiale grafico e video (o potrai occupartene "
+"tu stesso se ti va e ne sei capace)."
+msgstr ""
+"You will work together with digital content creators, who will provide"
+" graphic and video resources (or you can make them yourself, if you have the"
+" skills)."
+
+#: templates/form.php:246
+msgid "Ora parlaci di te."
+msgstr "Now tell us about yourself."
+
+#: templates/form.php:247
+msgid ""
 "Descrivi qualsiasi tua esperienza nel gestire pagine o profili (e.g. "
 "personali, di attività commerciali, di <i>meme</i> nonsense, etc...) sui "
 "social network, in particolare Facebook e Instagram."
@@ -806,7 +853,7 @@ msgstr ""
 "personal, business, of random <i>memes</i>, etc...) on social networks, in "
 "particular Facebook and Instagram."
 
-#: templates/form.php:237
+#: templates/form.php:248
 msgid ""
 "Menziona anche i risultati raggiunti con tali attività promozionali, se "
 "possibile."
@@ -814,13 +861,13 @@ msgstr ""
 "Mention also the results you achieved with such promotional activities, if "
 "you can."
 
-#: templates/form.php:238
+#: templates/form.php:249
 msgid "Se dovessi spiegare in due righe cosa fa il team, cosa diresti?"
 msgstr ""
 "If you had to explain in a few lines what does the team do, what would you "
 "write?"
 
-#: templates/form.php:239
+#: templates/form.php:250
 msgid ""
 "Indica anche quanto tempo potresti dedicare a queste attività e se hai "
 "qualche altro interesse."
@@ -828,43 +875,35 @@ msgstr ""
 "Mention how much time you have for team activities, too, and if you have any "
 "other hobby or interests."
 
-#: templates/form.php:243
+#: templates/form.php:254
 msgid ""
-"Come ogni team abbiamo un'immagine e ci servono persone in gamba per curarla "
-"e mantenerla. In particolare, abbiamo bisogno di:"
+"Sprigiona la tua vena creativa entrando nel nostro team! Abbiamo bisogno di "
+"figure che si occupino di realizzare:"
 msgstr ""
-"Like every team we have a public image and we need people to care for it. In "
-"particular, we need:"
+"Unleash your inner creativity by joining our team! We are looking for people"
+" that will produce:"
 
-#: templates/form.php:245
+#: templates/form.php:256
 msgid "Design di manifesti, infografiche, biglietti da visita"
 msgstr "Designs for posters, infographics, business cards"
 
-#: templates/form.php:246
+#: templates/form.php:257
 msgid "Elementi grafici per pagine web e social network"
 msgstr "Graphic elements for web pages and social networks"
 
-#: templates/form.php:247
+#: templates/form.php:258
 msgid "Sfondi, icone e immagini personalizzate per i nostri software"
 msgstr "Backgrounds, icons and custom images for our software"
 
-#: templates/form.php:248
+#: templates/form.php:259
 msgid "Redesign e modding dei case dei computer riparati"
 msgstr "Redesigns and modding of repaired computer cases"
 
-#: templates/form.php:249
-msgid ""
-"Persone che gestiscano le nostre pagine social o che curino i contenuti "
-"multimediali (foto e video) che carichiamo"
-msgstr ""
-"People to manage our social network pages or to prepare multimedia contents "
-"(photos and videos) for them"
+#: templates/form.php:260
+msgid "Jingle e motivi musicali per i nostri video"
+msgstr "Jingles and music for our videos"
 
-#: templates/form.php:250
-msgid "Un musicista o deejay che possa creare un jingle per il team ;)"
-msgstr "A musician or DJ to make a jingle for the team ;)"
-
-#: templates/form.php:252
+#: templates/form.php:262
 msgid ""
 "Se <strong>almeno una</strong>, o più di una, di queste attività di "
 "interessano, questo è il ruolo adatto."
@@ -872,7 +911,7 @@ msgstr ""
 "If you're interested in <strong>at least one</strong>, or more than one, of "
 "these activities, this is the role for you."
 
-#: templates/form.php:253
+#: templates/form.php:263
 msgid ""
 "Parla di qualsiasi esperienza artistica, inclusi progetti personali (anche "
 "piccoli) o esami sostenuti."
@@ -880,7 +919,7 @@ msgstr ""
 "Tell us about any experience you have with arts, including personal projects "
 "(even small ones) or exams."
 
-#: templates/form.php:254
+#: templates/form.php:264
 msgid ""
 "Se vuoi mostrarci alcuni dei tuoi lavori passati, abbozzi, concepts o hai "
 "idee su come migliorare il volto del team, non esitare!"
@@ -889,11 +928,11 @@ msgstr ""
 "have any idea on how to improve the teams public \"face\", do not hesitate "
 "and tell us!"
 
-#: templates/form.php:259
+#: templates/form.php:269
 msgid "Stupiscici."
 msgstr "Surprise us."
 
-#: templates/form.php:267
+#: templates/form.php:277
 #, php-format
 msgid ""
 "Dovresti leggere le <a href=\"%s\">Informazioni sul trattamento dei dati "
@@ -903,13 +942,13 @@ msgstr ""
 "You should read our <a href=\"%s\">Privacy policy</a> and at least skim over "
 "the <a href=\"%s\">Join the team</a> page on our website before applying."
 
-#: templates/form.php:273
+#: templates/form.php:283
 msgid ""
 "Ho letto le Informazioni sul trattamento dei dati personali e accetto le "
 "condizioni lì delineate"
 msgstr "I read the Privacy Policy and accept its conditions"
 
-#: templates/form.php:279
+#: templates/form.php:289
 msgid ""
 "Dichiaro che tutte le informazioni inserite sono corrette e ho dato "
 "un'occhiata alla pagina \"Entra nel team\" sul sito"
@@ -917,7 +956,7 @@ msgstr ""
 "I declare that all the inserted information are correct and that I've at "
 "least skimmed the \"Join the team\" page on the website"
 
-#: templates/form.php:285
+#: templates/form.php:295
 msgid "Invia"
 msgstr "Send"
 
@@ -1123,14 +1162,18 @@ msgid "Sysadmin"
 msgstr "Sysadmin"
 
 #: templates/roles.php:10
+msgid "Comunicazione e social"
+msgstr "Communication and social media"
+
+#: templates/roles.php:11
 msgid "Creazione di contenuti digitali"
 msgstr "Digital content creation"
 
-#: templates/roles.php:11
+#: templates/roles.php:12
 msgid "Riuso creativo"
 msgstr "Creative Reuse"
 
-#: templates/roles.php:12
+#: templates/roles.php:13
 msgid "Altro"
 msgstr "Other"
 

@@ -232,7 +232,18 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero.')?></p>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
-				<div class="form-text d-none" id="mlet-explain-Pubbliche-relazioni">
+				<div class="form-text d-none" id="mlet-explain-Comunicazione-e-social">
+					<p><?=__('Hai buone capacità di comunicazione e organizzazione, ti piace il nostro team e vuoi aiutarci a migliorare la nostra immagine? Questo è il posto che fa per te!')?></p>
+					<p><?=__('Cerchiamo qualcuno che possa svolgere le seguenti mansioni:')?></p>
+					<ul>
+						<li><?=__('Scrittura e pubblicazione di post e storie per i nostri social')?></li>
+						<li><?=__('Programmazione temporale dei contenuti')?></li>
+						<li><?=__('Definizione della strategia di comunicazione in generale')?></li>
+						<li><?=__('Brainstorming di idee per podcast e video tematici')?></li>
+						<li><?=__('Intrattenimento di rapporti con terzi, altre associazioni e ospiti')?></li>
+					</ul>
+					<p><?=__('Ti troverai a lavorare in sinergia con i creatori di contenuti digitali, che si occuperanno di produrre materiale grafico e video (o potrai occupartene tu stesso se ti va e ne sei capace).')?></p>
+					<p><?=__('Ora parlaci di te.')?></p>
 					<p><?=__('Descrivi qualsiasi tua esperienza nel gestire pagine o profili (e.g. personali, di attività commerciali, di <i>meme</i> nonsense, etc...) sui social network, in particolare Facebook e Instagram.')?></p>
 					<p><?=__('Menziona anche i risultati raggiunti con tali attività promozionali, se possibile.')?></p>
 					<p><?=__('Se dovessi spiegare in due righe cosa fa il team, cosa diresti?')?></p>
@@ -240,14 +251,13 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Creazione-di-contenuti-digitali">
-					<p><?=__('Come ogni team abbiamo un\'immagine e ci servono persone in gamba per curarla e mantenerla. In particolare, abbiamo bisogno di:')?></p>
+					<p><?=__('Sprigiona la tua vena creativa entrando nel nostro team! Abbiamo bisogno di figure che si occupino di realizzare:')?></p>
 					<ul>
 						<li><?=__('Design di manifesti, infografiche, biglietti da visita')?></li>
-						<li><?=__('Elementi grafici per pagine web e social network')?>
+						<li><?=__('Elementi grafici per pagine web e social network')?></li>
 						<li><?=__('Sfondi, icone e immagini personalizzate per i nostri software')?></li>
 						<li><?=__('Redesign e modding dei case dei computer riparati')?></li>
-						<li><?=__('Persone che gestiscano le nostre pagine social o che curino i contenuti multimediali (foto e video) che carichiamo')?></li>
-						<li><?=__('Un musicista o deejay che possa creare un jingle per il team ;)')?></li>
+						<li><?=__('Jingle e motivi musicali per i nostri video')?></li>
 					</ul>
 					<p><?=__('Se <strong>almeno una</strong>, o più di una, di queste attività di interessano, questo è il ruolo adatto.')?></p>
 					<p><?=__('Parla di qualsiasi esperienza artistica, inclusi progetti personali (anche piccoli) o esami sostenuti.')?></p>
