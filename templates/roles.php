@@ -7,6 +7,7 @@ function getRoles() {
 		'Sviluppo software PHP'           => __('Sviluppo software PHP'),
 		'Sviluppo software JavaScript'    => __('Sviluppo software JavaScript'),
 		'Sysadmin'                        => __('Sysadmin'),
+		'Comunicazione e social'          => __('Comunicazione e social'),
 		'Creazione di contenuti digitali' => __('Creazione di contenuti digitali'),
 		'Riuso creativo'                  => __('Riuso creativo'),
 		'Altro'                           => __('Altro'),
