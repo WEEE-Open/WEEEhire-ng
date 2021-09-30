@@ -209,6 +209,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-PHP">
 					<p><?=__('I principali progetti PHP del team sono <a href="https://github.com/WEEE-Open/tarallo" target="_blank">Tarallo</a>, <a href="https://github.com/WEEE-Open/WEEEHire-ng" target="_blank">WEEEHire</a> e <a href="https://github.com/WEEE-Open/crauto" target="_blank">crauto</a>, puoi darci già un\'occhiata per sapere a cosa vai incontro.')?></p>
+					<p><?=__('Dal 2021-2022 abbiamo anche instaurato una collaborazione con gli sviluppatori del bot Telegram <a href="https://t.me/inginf_bot" target="_blank">inginf_bot</a>, per il nostro progetto di miglioramento della qualità della vita degli studenti.')?></p>
 					<p><?=__('Parla di qualsiasi tua esperienza nello scrivere software in PHP o per il web in generale. Va bene anche "per l\'esame di ... ho creato un programma che fa ..." o "ho fatto il sito web per la panetteria all\'angolo".') ?></p>
 					<p><?=__('Puoi anche menzionare se conosci altri linguaggi di programmazione o hai mai partecipato ad altri progetti collaborativi.')?></p>
 					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
