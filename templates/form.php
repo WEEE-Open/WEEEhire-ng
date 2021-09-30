@@ -232,6 +232,14 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero.')?></p>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
+				<div class="form-text d-none" id="mlet-explain-Machine-Learning-Engineer">
+                    <p><?=__('Dal 2021-2022, grazie all\'esperienza acquisita da alcuni membri del team in materia, e al lancio del nostro progetto di software per studenti, cerchiamo una figura che possa occuparsi della creazione di alcuni modelli volti a migliorare l\'esperienza utente delle piattaforme web che abbiamo intenzione di sviluppare, in particolare nell\'ambito del Natural Language Processing.')?></p>
+                    <p><?=__('Se hai delle conoscenze riguardo a qualcuno tra Python, PyTorch, Tensorflow, Keras, Jupyter Notebook e GitHub, stiamo cercando proprio te!')?></p>
+                    <p><?=__('Se in più sai ricercare paper scientifici su nuove tecnologie su ArXiv o simili, o hai intenzione di imparare a farlo, fantastico!') ?></p>
+                    <p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
+                    <p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a progettare intelligenze artificiali.')?></p>
+                    <p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire, e se hai già lavorato su qualche progetto non esitare a condividerne il link nella tua lettera!.')?></p>
+                </div>
 				<div class="form-text d-none" id="mlet-explain-Comunicazione-e-social">
 					<p><?=__('Hai buone capacità di comunicazione e organizzazione, ti piace il nostro team e vuoi aiutarci a migliorare la nostra immagine? Questo è il posto che fa per te!')?></p>
 					<p><?=__('Cerchiamo qualcuno che possa svolgere le seguenti mansioni:')?></p>
