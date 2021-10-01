@@ -105,8 +105,11 @@ class Ldap {
 	 */
 	public function createInvite(User $user): string {
 		$inviteCode = strtoupper(bin2hex(random_bytes(12)));
+		$normalizedName = Utils::normalizeCase($user->name);
+		$normalizedSurname = Utils::normalizeCase($user->surname);
+
 		$add = [
-			'cn'                      => $user->name . ' ' . $user->surname, // Mandatory attribute
+			'cn'                      => $normalizedName . ' ' . $normalizedSurname, // Mandatory attribute
 			'objectclass'             => [
 				'inviteCodeContainer',
 				'schacLinkageIdentifiers',
@@ -114,8 +117,8 @@ class Ldap {
 				'telegramAccount',
 				'weeeOpenPerson',
 			],
-			'givenname'               => $user->name,
-			'sn'                      => $user->surname,
+			'givenname'               => $normalizedName,
+			'sn'                      => $normalizedSurname,
 			'mail'                    => Utils::politoMail($user->matricola),
 			'schacpersonaluniquecode' => $user->matricola,
 			'degreecourse'            => $user->degreecourse

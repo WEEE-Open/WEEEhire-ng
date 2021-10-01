@@ -47,6 +47,15 @@ class Utils {
 		}
 	}
 
+	public static function normalizeCase(string $name): string {
+		// This is insensitive to other cultures where names are not capitalized,
+		// I'm sure, but it looks prettier...
+		if($name === strtoupper($name) || $name === strtolower($name)) {
+			return ucwords(strtolower($name), ' \'-');
+		}
+		return $name;
+	}
+
 	/**
 	 * Is the current session valid, according to the ID token?
 	 *
