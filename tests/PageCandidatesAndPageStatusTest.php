@@ -68,12 +68,15 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 	public function testApproved() {
 		list($id, $token) = $this->testNew();
 
-		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/candidates.php'], ['id' => $id], ['approve' => 'true', 'notes' => 'notes example os8mieh7saich4rohZ6E'], [], []);
+		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/candidates.php'], ['id' => $id], ['approve' => 'true'], [], []);
 		$response = (new PageCandidates())->handle($request);
 		$this->assertEquals(303, $response->getStatusCode(), 'Redirect to same page');
 		if(session_status() === PHP_SESSION_ACTIVE) {
 			session_write_close();
 		}
+
+		$theNote = 'notes example t6PH2lQl7XFNdRrSUebA';
+		$this->saveNotes($id, $theNote);
 
 		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'GET', 'REQUEST_URI' => '/candidates.php'], ['id' => $id], [], [], []);
 		$response = (new PageCandidates())->handle($request);
@@ -82,7 +85,7 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 		$this->assertStringContainsStringIgnoringCase('rimanda nel limbo', $response->getBody());
 		$this->assertStringContainsStringIgnoringCase('email', $response->getBody());
 		$this->assertStringContainsStringIgnoringCase('note', $response->getBody());
-		$this->assertStringContainsString('notes example os8mieh7saich4rohZ6E', $response->getBody());
+		$this->assertStringContainsString($theNote, $response->getBody());
 		if(session_status() === PHP_SESSION_ACTIVE) {
 			session_write_close();
 		}
@@ -100,12 +103,15 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 	public function testApprovedRevert() {
 		list($id, $token) = $this->testApproved();
 
-		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/candidates.php'], ['id' => $id], ['limbo' => 'true', 'notes' => 'notes example os8mieh7saich4rohZ6E'], [], []);
+		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/candidates.php'], ['id' => $id], ['limbo' => 'true'], [], []);
 		$response = (new PageCandidates())->handle($request);
 		$this->assertEquals(303, $response->getStatusCode(), 'Redirect to same page');
 		if(session_status() === PHP_SESSION_ACTIVE) {
 			session_write_close();
 		}
+
+		$theNote = 'notes example os8mieh7saich4rohZ6E';
+		$this->saveNotes($id, $theNote);
 
 		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'GET', 'REQUEST_URI' => '/candidates.php'], ['id' => $id], [], [], []);
 		$response = (new PageCandidates())->handle($request);
@@ -115,6 +121,7 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 		$this->assertStringContainsStringIgnoringCase('approva', $response->getBody());
 		$this->assertStringContainsStringIgnoringCase('rifiuta', $response->getBody());
 		$this->assertStringContainsStringIgnoringCase('note', $response->getBody());
+		$this->assertStringContainsString($theNote, $response->getBody());
 		if(session_status() === PHP_SESSION_ACTIVE) {
 			session_write_close();
 		}
@@ -130,12 +137,15 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 	public function testRejected() {
 		list($id, $token) = $this->addCandidate();
 
-		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/candidates.php'], ['id' => $id], ['reject' => 'true', 'notes' => 'notes example Aew9mahdohjee6chaese'], [], []);
+		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/candidates.php'], ['id' => $id], ['reject' => 'true'], [], []);
 		$response = (new PageCandidates())->handle($request);
 		$this->assertEquals(303, $response->getStatusCode(), 'Redirect to same page');
 		if(session_status() === PHP_SESSION_ACTIVE) {
 			session_write_close();
 		}
+
+		$theNote = 'notes example Aew9mahdohjee6chaese';
+		$this->saveNotes($id, $theNote);
 
 		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'GET', 'REQUEST_URI' => '/candidates.php'], ['id' => $id], [], [], []);
 		$response = (new PageCandidates())->handle($request);
@@ -144,7 +154,7 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 		$this->assertStringContainsStringIgnoringCase('rimanda nel limbo', $response->getBody());
 		$this->assertStringContainsStringIgnoringCase('pubblica', $response->getBody());
 		$this->assertStringContainsStringIgnoringCase('note', $response->getBody());
-		$this->assertStringContainsString('notes example Aew9mahdohjee6chaese', $response->getBody());
+		$this->assertStringContainsString($theNote, $response->getBody());
 		if(session_status() === PHP_SESSION_ACTIVE) {
 			session_write_close();
 		}
@@ -169,7 +179,7 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 		$this->assertStringContainsString('Risultati pubblicati', $response->getBody());
 		$this->assertStringContainsString('danger', $response->getBody());
 		$this->assertStringContainsStringIgnoringCase('note', $response->getBody());
-		$this->assertStringContainsString('notes example uroh7reith8aet6Yoish', $response->getBody());
+		$this->assertStringContainsString($theNote, $response->getBody());
 		if(session_status() === PHP_SESSION_ACTIVE) {
 			session_write_close();
 		}
@@ -270,5 +280,15 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 			$this->assertStringContainsString($string, $response->getBody());
 		}
 		return $response;
+	}
+
+	private function saveNotes($id, string $theNote) {
+		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/candidates.php'],
+			['id' => $id], ['save' => 'true', 'notes' => $theNote], [], []);
+		$response = (new PageCandidates())->handle($request);
+		$this->assertEquals(303, $response->getStatusCode(), 'Redirect to same page for notes');
+		if(session_status() === PHP_SESSION_ACTIVE) {
+			session_write_close();
+		}
 	}
 }
