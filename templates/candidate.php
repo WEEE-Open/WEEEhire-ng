@@ -66,7 +66,7 @@ foreach($evaluations as $evaluation) {
 		</div>
 	<?php endif ?>
 </div>
-<table class="table table-striped">
+<table id="votestable" class="table table-striped">
 	<thead>
 	<tr>
 		<th scope="col"><?=__('Nome valutatore')?></th>
@@ -77,7 +77,7 @@ foreach($evaluations as $evaluation) {
 	</thead>
 	<tbody>
 	<?php foreach($evaluations as $evaluation): ?>
-		<tr>
+		<tr class="voterow">
 			<td><?=sprintf(__('%s (%s)'), $evaluation['name_evaluator'], $evaluation['id_evaluator'])?></td>
 			<td class="align-middle"><?=$evaluation['vote']?>&nbsp;<?=stars($evaluation['vote'])?></td>
 			<td class="d-none d-md-table-cell"><?=date('Y-m-d H:i', $evaluation['date'])?></td>
@@ -91,7 +91,24 @@ foreach($evaluations as $evaluation) {
 		</tr>
 	<?php endforeach; ?>
 	<?php if(!$voted): ?>
-		<tr>
+		<tr id="showvotesbuttonrow">
+			<td colspan="4" class="text-center"><button id="showvotesbutton" class="btn btn-secondary">Show votes (spoiler)</button></td>
+		</tr>
+		<script>
+			"use strict";
+			let vt = document.getElementById("votestable");
+			for(let el of vt.querySelectorAll(".voterow")) {
+				el.classList.add("d-none");
+			}
+			document.getElementById("showvotesbutton").onclick = function() {
+				for(let el of vt.querySelectorAll(".voterow")) {
+					el.classList.remove("d-none");
+				}
+				let deleteme = document.getElementById("showvotesbuttonrow");
+				deleteme.parentNode.removeChild(deleteme);
+			}
+		</script>
+		<tr class="myvoterow">
 			<td><?=sprintf(__('%s (%s)'), $cn, $uid)?></td>
 			<td colspan="3">
 				<form method="post">
