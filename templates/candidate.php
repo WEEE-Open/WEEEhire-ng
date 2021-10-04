@@ -60,9 +60,9 @@ foreach($evaluations as $evaluation) {
 <div class="row">
 	<div class="col"><h4><?=__('Valutazioni')?></h4></div>
 	<?php if(count($evaluations) === 0): ?>
-		<div class="col"></div>
+		<div id="votesresult" class="col"></div>
 	<?php else: ?>
-		<div class="col"><p class="text-right"><?=sprintf(__('Valutazione:&nbsp;%s&nbsp;%s'), $avg, stars($avg))?></p>
+		<div id="votesresult" class="col"><p class="text-right"><?=sprintf(__('Valutazione:&nbsp;%s&nbsp;%s'), $avg, stars($avg))?></p>
 		</div>
 	<?php endif ?>
 </div>
@@ -97,13 +97,17 @@ foreach($evaluations as $evaluation) {
 		<script>
 			"use strict";
 			let vt = document.getElementById("votestable");
+			let vr = document.getElementById("votesresult");
 			for(let el of vt.querySelectorAll(".voterow")) {
 				el.classList.add("d-none");
 			}
+			vr.classList.add("d-none");
+
 			document.getElementById("showvotesbutton").onclick = function() {
 				for(let el of vt.querySelectorAll(".voterow")) {
 					el.classList.remove("d-none");
 				}
+				vr.classList.remove("d-none");
 				let deleteme = document.getElementById("showvotesbuttonrow");
 				deleteme.parentNode.removeChild(deleteme);
 			}
