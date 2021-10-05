@@ -92,7 +92,7 @@ foreach($evaluations as $evaluation) {
 	<?php endforeach; ?>
 	<?php if(!$voted): ?>
 		<tr id="showvotesbuttonrow">
-			<td colspan="4" class="text-center"><button id="showvotesbutton" class="btn btn-secondary">Show votes (spoiler)</button></td>
+			<td colspan="4" class="text-center"><button id="showvotesbutton" class="btn btn-secondary"><?= __('Mostra (spoiler!)') ?></button></td>
 		</tr>
 		<script>
 			"use strict";
