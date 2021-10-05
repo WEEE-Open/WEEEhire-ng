@@ -16,6 +16,7 @@ Then, run these commands:
 
 ```bash
 sqlite3 weeehire.db < database.sql
+sqlite3 weeehire.db < example-data.sql  # If you want some example data
 cp config/config-example.php config/config.php
 nano config/config.php  # Optional, the defaults are good for a test instance but not for production
 msgfmt resources/locale/en-US/LC_MESSAGES/messages.po --output-file=resources/locale/en-US/LC_MESSAGES/messages.mo
