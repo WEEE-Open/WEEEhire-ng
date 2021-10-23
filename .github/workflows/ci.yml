@@ -55,13 +55,7 @@ jobs:
         shell: bash
 
       - name: PHPCS linting
-        uses: thenabeel/action-phpcs@v8
-        with:
-          standard: phpcs.xml
-          files: "src/*,public/*,templates/*"
-          phpcs_path: vendor/bin/phpcs
-          scope: "${{ env.GITHUB_EVENT_NAME }}"
-          fail_on_warnings: true
+        run: vendor/bin/phpcs --report=summary src public templates
 
       - name: PHPUnit Tests
         run: vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-text
