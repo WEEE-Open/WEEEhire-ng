@@ -46,7 +46,7 @@ jobs:
 #          php_extensions: ldap mbstring json sqlite3
 
       - name: PHPCS linting
-        uses: chekalsky/phpcs-action@v1
+        uses: tinovyatkin/action-php-codesniffer@v1
         with:
           standard: phpcs.xml
           files: "*.php,*.js,*.css"
