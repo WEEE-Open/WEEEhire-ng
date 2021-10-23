@@ -1,11 +1,12 @@
 <?php
-/* @var $isAdmin bool */
-/* @var $authenticated bool */
+/** @var $isAdmin bool */
+/** @var $authenticated bool */
+/** @var string $logoHref */
 /** @var \Psr\Http\Message\UriInterface $globalRequestUri */
 ?>
 <nav class="navbar navbar-expand-sm top">
 	<div class="container">
-		<a class="navbar-brand mr-3" href="/">
+		<a class="navbar-brand mr-3" href="<?= $this->e($logoHref) ?>">
 			<img src="weee.png" height="69" class="img-fluid" alt="WEEE Open">
 		</a>
 		<div class="ml-auto">

@@ -1,5 +1,8 @@
 <?php
 /** @var string $title */
+/** @var bool $datatables */
+/** @var bool $fontAwesome */
+/** @var string $logoHref */
 ?><!doctype html>
 <html lang="<?=$_SESSION['locale']?>">
 <head>
@@ -20,7 +23,7 @@
 	<?php endif; ?>
 </head>
 <body>
-<?=$this->fetch('navbar')?>
+<?=$this->fetch('navbar', ['logoHref' => $logoHref ?? '/'])?>
 <div class="container">
 	<?=$this->section('content')?>
 </div>

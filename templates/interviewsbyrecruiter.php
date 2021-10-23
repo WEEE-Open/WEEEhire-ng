@@ -2,7 +2,7 @@
 /** @var $interviews \DateTime[][][]|string[][][] */
 /** @var $myname string */
 /** @var $myuser string */
-$this->layout('base', ['title' => __('Recruiter')]);
+$this->layout('base', ['title' => __('Recruiter'), 'logoHref' => 'interviews.php?byrecruiter=true']);
 
 $later = [];
 $prevdate = null;

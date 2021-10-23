@@ -2,7 +2,7 @@
 /** @var $interviews \DateTime[][]|string[][] */
 /** @var $myname string */
 /** @var $myuser string */
-$this->layout('base', ['title' => __('Candidati'), 'fontAwesome' => true]);
+$this->layout('base', ['title' => __('Candidati'), 'fontAwesome' => true, 'logoHref' => 'interviews.php']);
 $total = 0;
 $approved = 0;
 $rejected = 0;

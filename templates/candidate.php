@@ -9,7 +9,7 @@
 
 $titleShort = sprintf(__('%s %s (%s)'), $this->e($user->name), $this->e($user->surname), $this->e($user->matricola));
 $title = sprintf(__('%s - Candidatura'), $titleShort);
-$this->layout('base', ['title' => $title, 'fontAwesome' => true]);
+$this->layout('base', ['title' => $title, 'fontAwesome' => true, 'logoHref' => 'candidates.php']);
 require_once 'stars.php';
 ?>
 <nav aria-label="breadcrumb">

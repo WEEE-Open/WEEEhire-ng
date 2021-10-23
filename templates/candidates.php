@@ -2,7 +2,7 @@
 /** @var $users array */
 /** @var $myname string */
 /** @var $myuser string */
-$this->layout('base', ['title' => __('Candidati'), 'datatables' => true, 'fontAwesome' => true]);
+$this->layout('base', ['title' => __('Candidati'), 'datatables' => true, 'fontAwesome' => true, 'logoHref' => 'candidates.php']);
 $total = 0;
 $approved = 0;
 $rejected = 0;
