@@ -33,7 +33,7 @@ jobs:
 
       - name: Run msgfmt
         run: |
-          apt install gettext
+          sudo apt-get install gettext
           msgfmt resources/locale/en-US/LC_MESSAGES/messages.po --output-file=resources/locale/en-US/LC_MESSAGES/messages.mo
 
 #      - name: PHPUnit Tests
