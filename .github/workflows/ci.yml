@@ -29,5 +29,6 @@ jobs:
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v2
         with:
-          configuration: phpunit.xml
+          configuration: "${{ env.GITHUB_WORKSPACE }}/phpunit.xml"
           php_version: "${{ matrix.php }}"
+          php_extensions: ldap mbstring json sqlite3
