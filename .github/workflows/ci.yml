@@ -60,7 +60,7 @@ jobs:
           standard: phpcs.xml
           files: "src/*,public/*,templates/*"
           phpcs_path: vendor/bin/phpcs
-          scope: "${{ env.$GITHUB_EVENT_NAME }}"
+          scope: "${{ env.GITHUB_EVENT_NAME }}"
           fail_on_warnings: true
 
       - name: PHPUnit Tests
