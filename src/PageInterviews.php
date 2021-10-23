@@ -132,10 +132,13 @@ class PageInterviews implements RequestHandlerInterface {
 					$db->setInterviewData($interview->id, $POST['questions'] ?? null, $POST['answers'] ?? null);
 					if(isset($POST['approve'])) {
 						$db->setInterviewStatus($interview->id, true);
+						$db->setHold($interview->id, false);
 					} elseif(isset($POST['reject'])) {
 						$db->setInterviewStatus($interview->id, false);
+						$db->setHold($interview->id, false);
 					} elseif(isset($POST['limbo'])) {
 						$db->setInterviewStatus($interview->id, null);
+						$db->setHold($interview->id, false);
 					} elseif(isset($POST['pushHold'])) {
 						$db->setHold($interview->id, true);
 					} elseif(isset($POST['popHold'])) {
