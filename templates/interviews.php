@@ -32,6 +32,7 @@ $prevdate = null;
 	<?php
 	foreach($interviews as $int):
 		$total++;
+		$trcolor = '';
 		if($int['when'] === null) {
 			$toschedule++;
 			$later[] = $int;
@@ -41,13 +42,19 @@ $prevdate = null;
 		$date = $int['when']->format('Y-m-d');
 		$time = $int['when']->format('H:i');
 		if($int['interviewstatus'] === null) {
-			$statusCell = "<a href=\"/interviews.php?id=${int['id']}\">" . __('Da decidere') . '</a>';
+			$statusCell = __('Da decidere');
+			if($int['hold']) {
+				$statusCell = __('In lista d\'attesa');
+				$trcolor = 'class="table-warning"';
+			}
 		} else {
 			if($int['interviewstatus'] === true) {
 				$approved++;
-				$statusCell = $int['invite'] ? __('Colloquio passato, con link d\'invito') : "<a href=\"/interviews.php?id=${int['id']}\">" . __('Colloquio passato') . '</a>';
+				$trcolor = 'class="table-success"';
+				$statusCell = $int['invite'] ? __('Colloquio superato, con link d\'invito') : __('Colloquio superato');
 			} else {
 				$rejected++;
+				$trcolor = 'class="table-danger"';
 				$statusCell = __('Colloquio fallito');
 			}
 		}
@@ -61,24 +68,10 @@ $prevdate = null;
 		if($statusCellIcons !== '') {
 			$statusCell .= '&nbsp;' . $statusCellIcons;
 		}
-		if($int['interviewstatus'] === true) {
-			$tdcolor = 'class="table-success"';
-		} elseif($int['interviewstatus'] === false) {
-			$tdcolor = 'class="table-danger"';
-		} else {
-			$tdcolor = '';
-		}
 		if($int['invite']) {
 			$invited++;
-			$trcolor = $tdcolor;
-		} else {
-			if($int['interviewstatus'] === true) {
-				$toinvite++;
-			} elseif($int['hold']) {
-				$trcolor = 'class="table-warning"';
-			} else {
-				$trcolor = '';
-			}
+		} if($int['interviewstatus'] === true) {
+			$toinvite++;
 		}
 
 		if($date !== $prevdate) {
@@ -97,7 +90,7 @@ $prevdate = null;
 			<td><?=$this->e($int['area'])?></td>
 			<td><?=$time?></td>
 			<td><?=$this->e($int['interviewer'])?></td>
-			<td <?=$tdcolor?>><?=$statusCell?></td>
+			<td><?=$statusCell?></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>
