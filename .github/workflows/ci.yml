@@ -32,7 +32,9 @@ jobs:
         run: cp config/config-example.php config/config.php
 
       - name: Run msgfmt
-        run: msgfmt resources/locale/en-US/LC_MESSAGES/messages.po --output-file=resources/locale/en-US/LC_MESSAGES/messages.mo
+        run: |
+          apt install gettext
+          msgfmt resources/locale/en-US/LC_MESSAGES/messages.po --output-file=resources/locale/en-US/LC_MESSAGES/messages.mo
 
 #      - name: PHPUnit Tests
 #        uses: php-actions/phpunit@v2
