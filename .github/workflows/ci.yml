@@ -45,12 +45,16 @@ jobs:
 #          php_version: "${{ matrix.php }}"
 #          php_extensions: ldap mbstring json sqlite3
 
+      - name: Set PHPCS scope
+        run: echo "GITHUB_PHPCS_SCOPE=$([[ \"$GITHUB_EVENT_NAME\" -e \"pull_request\" ]] && echo \"blame\" || echo \"file\")" >> $GITHUB_ENV
+
       - name: PHPCS linting
-        uses: tinovyatkin/action-php-codesniffer@v1
+        uses: thenabeel/action-phpcs@v8
         with:
           standard: phpcs.xml
           files: "src/*,public/*,templates/*"
           phpcs_path: vendor/bin/phpcs
+          scope: "${{ env.$GITHUB_EVENT_NAME }}"
           fail_on_warnings: true
 
       - name: PHPUnit Tests
