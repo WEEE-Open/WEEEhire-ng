@@ -1,0 +1,29 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.3', '8.0', 'latest']
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+      - uses: php-actions/composer@v6
+
+      - name: Create Database
+        run: sqlite3 weeehire.db < database.sql
+
+      - name: PHPUnit Tests
+        uses: php-actions/phpunit@v2
+        with:
+          configuration: phpunit.xml
+          php_version: "${{ matrix.php }}"
