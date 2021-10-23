@@ -45,5 +45,13 @@ jobs:
 #          php_version: "${{ matrix.php }}"
 #          php_extensions: ldap mbstring json sqlite3
 
+      - name: PHPCS linting
+        uses: chekalsky/phpcs-action@v1
+        with:
+          standard: phpcs.xml
+          files: "*.php,*.js,*.css"
+          phpcs_path: vendor/bin/phpcs
+          fail_on_warnings: true
+
       - name: PHPUnit Tests
         run: vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-text
