@@ -45,15 +45,6 @@ jobs:
 #          php_version: "${{ matrix.php }}"
 #          php_extensions: ldap mbstring json sqlite3
 
-      - name: Set PHPCS scope
-        run: |
-          if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
-            echo "GITHUB_PHPCS_SCOPE=blame" >> $GITHUB_ENV
-          else
-            echo "GITHUB_PHPCS_SCOPE=file" >> $GITHUB_ENV
-          fi;
-        shell: bash
-
       - name: PHPCS linting
         run: vendor/bin/phpcs --report=summary src public templates
 

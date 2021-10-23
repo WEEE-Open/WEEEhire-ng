@@ -1,4 +1,4 @@
-name: CI
+name: Lint pull requests
 on:
   pull_request:
     paths:
