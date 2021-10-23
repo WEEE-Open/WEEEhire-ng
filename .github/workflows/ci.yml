@@ -49,7 +49,7 @@ jobs:
         uses: tinovyatkin/action-php-codesniffer@v1
         with:
           standard: phpcs.xml
-          files: "*.php,*.js,*.css"
+          files: "src/*,public/*,templates/*"
           phpcs_path: vendor/bin/phpcs
           fail_on_warnings: true
 
