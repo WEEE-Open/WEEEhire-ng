@@ -20,15 +20,22 @@ jobs:
       - name: Install dependencies
         uses: php-actions/composer@v6
         with:
-          php_version: "${{ matrix.php }}"
+          # If you use the PHPUnit action, uncomment this and comment php_extensions
+          # args: --ignore-platform-reqs
           php_extensions: ldap mbstring json sqlite3
+          php_version: "${{ matrix.php }}"
 
       - name: Create Database
         run: sqlite3 weeehire.db < database.sql
 
+#      - name: PHPUnit Tests
+#        uses: php-actions/phpunit@v2
+#        with:
+#          bootstrap: vendor/autoload.php
+#          configuration: "tests/phpunit.xml"
+#          args: --coverage-text
+#          php_version: "${{ matrix.php }}"
+#          php_extensions: ldap mbstring json sqlite3
+
       - name: PHPUnit Tests
-        uses: php-actions/phpunit@v2
-        with:
-          configuration: "${{ env.GITHUB_WORKSPACE }}/phpunit.xml"
-          php_version: "${{ matrix.php }}"
-          php_extensions: ldap mbstring json sqlite3
+        run: vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-text
