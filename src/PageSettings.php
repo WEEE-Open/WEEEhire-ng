@@ -1,8 +1,6 @@
 <?php
 
-
 namespace WEEEOpen\WEEEHire;
-
 
 use DateTime;
 use DateTimeZone;
@@ -13,8 +11,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 
-class PageSettings implements RequestHandlerInterface {
-	public function handle(ServerRequestInterface $request): ResponseInterface {
+class PageSettings implements RequestHandlerInterface
+{
+	public function handle(ServerRequestInterface $request): ResponseInterface
+	{
 		$template = Template::create($request->getUri());
 
 		Utils::requireAdmin();
@@ -23,34 +23,34 @@ class PageSettings implements RequestHandlerInterface {
 
 		$error = null;
 
-		if($request->getMethod() === 'POST') {
+		if ($request->getMethod() === 'POST') {
 			$POST = $request->getParsedBody();
 			// Form submission
 			$changed = false;
-			if(isset($POST['noexpiry'])) {
+			if (isset($POST['noexpiry'])) {
 				// Unset form expiry
 				$db->unsetConfigValue('expiry');
 				$changed = true;
-			} elseif(isset($POST['expiry'])) {
+			} elseif (isset($POST['expiry'])) {
 				// Set form expiry
 				try {
 					$expiryNew = new DateTime($POST['expiry'], new DateTimeZone('Europe/Rome'));
 					$db->setConfigValue('expiry', (string) $expiryNew->getTimestamp());
 					$changed = true;
-				} catch(Exception $e) {
+				} catch (Exception $e) {
 					$error = $e->getMessage();
 				}
-			} elseif(isset($POST['rolesReset'])) {
+			} elseif (isset($POST['rolesReset'])) {
 				// Unset unavailable roles
 				$db->unsetConfigValue('rolesUnavailable');
 				$changed = true;
-			} elseif(isset($POST['roles'])) {
+			} elseif (isset($POST['roles'])) {
 				// Set available roles
 				$rolesRule = implode('|', $POST['roles']);
 				$db->setConfigValue('rolesUnavailable', $rolesRule);
 				$changed = true;
-			} elseif(isset($POST['notifyEmail'])) {
-				if($POST['notifyEmail'] === 'false') {
+			} elseif (isset($POST['notifyEmail'])) {
+				if ($POST['notifyEmail'] === 'false') {
 					$email = '0';
 				} else {
 					$email = '1';
@@ -59,7 +59,7 @@ class PageSettings implements RequestHandlerInterface {
 				$changed = true;
 			}
 
-			if($changed) {
+			if ($changed) {
 				// This is a pattern: https://en.wikipedia.org/wiki/Post/Redirect/Get
 				// $_SERVER['REQUEST_URI'] is already url encoded
 				return new RedirectResponse($_SERVER['REQUEST_URI'], 303);
@@ -69,7 +69,7 @@ class PageSettings implements RequestHandlerInterface {
 		$expiry = $db->getConfigValue('expiry');
 
 		// Get the timestamp in correct format
-		if($expiry !== null) {
+		if ($expiry !== null) {
 			/** @noinspection PhpUnhandledExceptionInspection */
 			$expiry = (new DateTime('now', new DateTimeZone('Europe/Rome')))->setTimestamp($expiry);
 		}

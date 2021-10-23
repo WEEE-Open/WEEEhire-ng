@@ -1,4 +1,5 @@
 <?php
+
 /** @var $message string */
 $this->layout('base', ['title' => __('Errore')])
 ?>

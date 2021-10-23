@@ -7,13 +7,13 @@ $this->layout('base', ['title' => 'WEEElcome']) ?>
 <p><?=__('Compila il questionario per fare richiesta di ammissione in team. Premi il bottone qui sotto per iniziare.')?></p>
 <?php //$this->insert('covid') ?>
 <div class="col-md-12 text-center">
-	<?php if($_SESSION['locale'] === 'en-US'): ?>
+	<?php if ($_SESSION['locale'] === 'en-US') : ?>
 		<a class="btn btn-lg btn-primary the-button" href="form.php">Begin (in English)</a><a class="btn btn-lg btn-outline-secondary the-button" href="language.php?l=it-IT&from=<?=rawurlencode('/form.php')?>">Inizia (in italiano)</a>
-	<?php else: ?>
+	<?php else : ?>
 		<a class="btn btn-lg btn-primary the-button" href="form.php">Inizia (in italiano)</a><a class="btn btn-lg btn-outline-secondary the-button" href="language.php?l=en-US&from=<?=rawurlencode('/form.php')?>">Begin (in English)</a>
 	<?php endif; ?>
 </div>
-<?php if($expiry !== null): ?>
+<?php if ($expiry !== null) : ?>
 	<p id="timer"></p>
 	<script>
 		(function() {

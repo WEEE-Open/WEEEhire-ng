@@ -2,7 +2,7 @@
 /** @var $user WEEEOpen\WEEEhire\User */
 /** @var $edit bool */
 /** @var \Psr\Http\Message\UriInterface $globalRequestUri */
-if(isset($edit) && $edit) {
+if (isset($edit) && $edit) {
 	$readonly = '';
 } else {
 	$readonly = 'readonly';
@@ -51,12 +51,14 @@ if(isset($edit) && $edit) {
 		<textarea <?=$readonly?> id="letter" name="letter" cols="40" rows="5" required="required"
 				class="form-control"><?=$this->e($user->letter)?></textarea>
 	</div>
-	<?php if($edit): ?>
+	<?php if ($edit) : ?>
 		<div class="form-group">
 			<button type="submit" name="edit" value="true" class="btn btn-primary"><?=__('Aggiorna dati')?></button>
 			<a class="btn btn-secondary"
-					href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri,
-						['edit' => null]))?>"><?=__('Annulla')?></a>
+					href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl(
+						$globalRequestUri,
+						['edit' => null]
+					))?>"><?=__('Annulla')?></a>
 		</div>
 	<?php endif ?>
 </form>

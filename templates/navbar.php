@@ -1,4 +1,5 @@
 <?php
+
 /** @var $isAdmin bool */
 /** @var $authenticated bool */
 /** @var string $logoHref */

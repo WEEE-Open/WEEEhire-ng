@@ -1,13 +1,12 @@
 <?php
 
-
 namespace WEEEOpen\WEEEhire;
-
 
 use Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
-class Email {
+class Email
+{
 	/**
 	 * Send an email from noreply@join.weeeopen.it
 	 * If TEST_MODE is enabled, no email is sent and this method prints the contents on the console instead.
@@ -16,8 +15,9 @@ class Email {
 	 * @param string $subject Subject line
 	 * @param string $body Email body, plain text only
 	 */
-	public static function sendMail(string $to, string $subject, string $body) {
-		if(defined('TEST_MODE') && TEST_MODE) {
+	public static function sendMail(string $to, string $subject, string $body)
+	{
+		if (defined('TEST_MODE') && TEST_MODE) {
 			error_log("Test mode enabled, NOT sending email to $to, subject: $subject\nBody:\n$body");
 
 			return;
@@ -34,7 +34,7 @@ class Email {
 			// Quirks mode! That mail server converts 8bit to quoted-printable, which is not a problem.
 			// Unless it has to forward the email to another address, then the DKIM validation fails and nothing is
 			// forwarded. Let's hope that this prevents the mail server from needlessly tampering with the content.
-			if(Utils::endsWith(strtolower($to), '@polito.it')) {
+			if (Utils::endsWith(strtolower($to), '@polito.it')) {
 				$mail->Encoding = PHPMailer::ENCODING_QUOTED_PRINTABLE;
 			}
 
@@ -43,7 +43,7 @@ class Email {
 			$mail->Body = $body;
 
 			$mail->send();
-		} catch(Exception $e) {
+		} catch (Exception $e) {
 			throw new MailException();
 		}
 	}

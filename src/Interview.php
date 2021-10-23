@@ -1,10 +1,9 @@
 <?php
 
-
 namespace WEEEOpen\WEEEHire;
 
-
-class Interview {
+class Interview
+{
 	public $id;
 	/** @noinspection PhpFullyQualifiedNameUsageInspection */
 	/**

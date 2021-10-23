@@ -10,6 +10,7 @@
     <rule ref="PSR1"/>
     <rule ref="PSR12">
         <exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
+        <exclude name="Generic.Files.LineLength"/>
 <!--        <exclude name="Squiz.PHP.CommentedOutCode"/>-->
     </rule>
 

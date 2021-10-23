@@ -1,4 +1,5 @@
 <?php
+
 /** @var $link string */
 /** @var $user \WEEEOpen\WEEEHire\User */
 

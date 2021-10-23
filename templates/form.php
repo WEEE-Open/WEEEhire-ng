@@ -2,7 +2,7 @@
 
 /** @var string|null $rolesUnavailable */
 
-if($rolesUnavailable === null) {
+if ($rolesUnavailable === null) {
 	$roles = [];
 } else {
 	$roles = explode('|', $rolesUnavailable);
@@ -13,10 +13,10 @@ $allRoles = getRoles();
 $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 
 <div class="col-md-12">
-	<?php if(isset($error)): ?>
+	<?php if (isset($error)) : ?>
 		<div class="alert alert-danger">
 			<?php
-			switch($error) {
+			switch ($error) {
 				case 'form':
 					echo __('Riempi tutti i campi del form, per favore');
 					break;
@@ -24,15 +24,19 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					echo __('È necessario prestare il consenso per procedere');
 					break;
 				case 'db':
-					echo sprintf(__('Errore di connessione al database. Se il problema persiste, puoi contattarci all\'indirizzo %s'),
-						WEEEHIRE_EMAIL_FALLBACK);
+					echo sprintf(
+						__('Errore di connessione al database. Se il problema persiste, puoi contattarci all\'indirizzo %s'),
+						WEEEHIRE_EMAIL_FALLBACK
+					);
 					break;
 				case 'duplicate':
 					echo sprintf(__('Hai già inviato una candidatura con questa matricola. Puoi controllare la pagina con lo stato dal link che ti abbiamo mandato via email.'));
 					break;
 				default:
-					echo sprintf(__('Si è rotto qualcosa (o hai rotto qualcosa?) durante l\'invio. Puoi contattarci a %s e spiegarci cos\'è successo, se vuoi.'),
-						WEEEHIRE_EMAIL_FALLBACK);
+					echo sprintf(
+						__('Si è rotto qualcosa (o hai rotto qualcosa?) durante l\'invio. Puoi contattarci a %s e spiegarci cos\'è successo, se vuoi.'),
+						WEEEHIRE_EMAIL_FALLBACK
+					);
 					break;
 			}
 			?>
@@ -159,13 +163,13 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			<div class="col-md-5 col-lg-6">
 				<select id="area" name="area" required="required" class="form-control" onchange="updateHints()">
 					<option value selected disabled class="d-none"></option>
-					<?php foreach($allRoles as $value => $role): ?>
+					<?php foreach ($allRoles as $value => $role) : ?>
 						<option <?= isset($roles[$value]) ? 'disabled' : '' ?> value="<?= $this->e($value) ?>"><?= $this->e($role) ?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>
 		</div>
-		<?php if(count($roles) > 0): ?>
+		<?php if (count($roles) > 0) : ?>
 		<div class="form-group">
 			<p><small><?= __('Al momento alcune aree del team sono al completo, è possibile candidarsi solo nelle aree selezionabili dall\'elenco. In futuro le aree disponibili potrebbero cambiare senza preavviso.') ?></small></p>
 		</div>
@@ -217,14 +221,14 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
-                <div class="form-text d-none" id="mlet-explain-Sviluppo-software-JavaScript">
-                    <p><?=__('Dal 2021-2022 lanciamo un nuovo progetto per migliorare la qualità della vita degli studenti, per cui abbiamo instaurato una collaborazione con gli sviluppatori dell\'estensione per browser <a href="https://chrome.google.com/webstore/detail/politools/fbbjhoaakfhbggkegckmjafkffaofnkd?hl=it" target="_blank">PoliTools</a>, e vogliamo inoltre sviluppare alcune piattaforme web con vari scopi.')?></p>
-                    <p><?=__('Parla di qualsiasi tua esperienza riguardante l\'utilizzo di JavaScript (frontend - in particolare ReactJS e Angular -, backend, app NodeJS). Conosci altri linguaggi che usiamo in team, come Python, PHP e Bash, o altri ancora? Menzionali pure!')?></p>
-                    <p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
-                    <p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
-                    <p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
-                    <p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
-                </div>
+				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-JavaScript">
+					<p><?=__('Dal 2021-2022 lanciamo un nuovo progetto per migliorare la qualità della vita degli studenti, per cui abbiamo instaurato una collaborazione con gli sviluppatori dell\'estensione per browser <a href="https://chrome.google.com/webstore/detail/politools/fbbjhoaakfhbggkegckmjafkffaofnkd?hl=it" target="_blank">PoliTools</a>, e vogliamo inoltre sviluppare alcune piattaforme web con vari scopi.')?></p>
+					<p><?=__('Parla di qualsiasi tua esperienza riguardante l\'utilizzo di JavaScript (frontend - in particolare ReactJS e Angular -, backend, app NodeJS). Conosci altri linguaggi che usiamo in team, come Python, PHP e Bash, o altri ancora? Menzionali pure!')?></p>
+					<p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
+					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
+					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
+					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
+				</div>
 				<div class="form-text d-none" id="mlet-explain-Riuso-creativo">
 					<p><?=__('Non tutti i computer che ci arrivano sono riparabili, ma vorremmo comunque minimizzare la quantità di materiale che finisce nel bidone.')?></p>
 					<p><?=__('Se hai manualità e/o esperienze nel riuso creativo e/o making è il momento di dirlo.')?></p>
@@ -234,13 +238,13 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Machine-Learning-Engineer">
-                    <p><?=__('Dal 2021-2022, grazie all\'esperienza acquisita da alcuni membri del team in materia, e al lancio del nostro progetto di software per studenti, cerchiamo una figura che possa occuparsi della creazione di alcuni modelli volti a migliorare l\'esperienza utente delle piattaforme web che abbiamo intenzione di sviluppare, in particolare nell\'ambito del Natural Language Processing.')?></p>
-                    <p><?=__('Se hai delle conoscenze riguardo a qualcuno tra Python, PyTorch, Tensorflow, Keras, Jupyter Notebook e GitHub, stiamo cercando proprio te!')?></p>
-                    <p><?=__('Se in più sai ricercare paper scientifici su nuove tecnologie su ArXiv o simili, o hai intenzione di imparare a farlo, fantastico!') ?></p>
-                    <p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
-                    <p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a progettare intelligenze artificiali.')?></p>
-                    <p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire, e se hai già lavorato su qualche progetto non esitare a condividerne il link nella tua lettera!.')?></p>
-                </div>
+					<p><?=__('Dal 2021-2022, grazie all\'esperienza acquisita da alcuni membri del team in materia, e al lancio del nostro progetto di software per studenti, cerchiamo una figura che possa occuparsi della creazione di alcuni modelli volti a migliorare l\'esperienza utente delle piattaforme web che abbiamo intenzione di sviluppare, in particolare nell\'ambito del Natural Language Processing.')?></p>
+					<p><?=__('Se hai delle conoscenze riguardo a qualcuno tra Python, PyTorch, Tensorflow, Keras, Jupyter Notebook e GitHub, stiamo cercando proprio te!')?></p>
+					<p><?=__('Se in più sai ricercare paper scientifici su nuove tecnologie su ArXiv o simili, o hai intenzione di imparare a farlo, fantastico!') ?></p>
+					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
+					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a progettare intelligenze artificiali.')?></p>
+					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire, e se hai già lavorato su qualche progetto non esitare a condividerne il link nella tua lettera!.')?></p>
+				</div>
 				<div class="form-text d-none" id="mlet-explain-Comunicazione-e-social">
 					<p><?=__('Hai buone capacità di comunicazione e organizzazione, ti piace il nostro team e vuoi aiutarci a migliorare la nostra immagine? Questo è il posto che fa per te!')?></p>
 					<p><?=__('Cerchiamo qualcuno che possa svolgere le seguenti mansioni:')?></p>
@@ -283,8 +287,11 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 		<div class="form-group">
 			<div>
 				<span id="checkboxesHelpBlock"
-						class="form-text text-muted"><?=sprintf(__('Dovresti leggere le <a href="%s">Informazioni sul trattamento dei dati personali</a> e almeno dare un\'occhiata alla pagina <a href="%s">Entra nel team</a> sul nostro sito prima di candidarti.'),
-						'privacy.php', 'http://weeeopen.polito.it/entra-nel-team.html')?></a></span>
+						class="form-text text-muted"><?=sprintf(
+							__('Dovresti leggere le <a href="%s">Informazioni sul trattamento dei dati personali</a> e almeno dare un\'occhiata alla pagina <a href="%s">Entra nel team</a> sul nostro sito prima di candidarti.'),
+							'privacy.php',
+							'http://weeeopen.polito.it/entra-nel-team.html'
+						)?></a></span>
 				<div class="form-check">
 					<input name="mandatorycheckbox_1" id="mandatorycheckbox_0" type="checkbox" class="form-check-input"
 							value="true" aria-describedby="checkboxesHelpBlock" required="required">

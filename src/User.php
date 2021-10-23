@@ -1,22 +1,21 @@
 <?php
 
-
 namespace WEEEOpen\WEEEHire;
 
+class User
+{
+	public const STATUS_NEW = 0;
+	public const STATUS_NEW_APPROVED = 1;
+	public const STATUS_NEW_REJECTED = 2;
+	public const STATUS_NEW_HOLD = 3;
+	public const STATUS_PUBLISHED_APPROVED = 4;
+	public const STATUS_PUBLISHED_REJECTED = 5;
+	public const STATUS_PUBLISHED_HOLD = 6;
 
-class User {
-	const STATUS_NEW = 0;
-	const STATUS_NEW_APPROVED = 1;
-	const STATUS_NEW_REJECTED = 2;
-	const STATUS_NEW_HOLD = 3;
-	const STATUS_PUBLISHED_APPROVED = 4;
-	const STATUS_PUBLISHED_REJECTED = 5;
-	const STATUS_PUBLISHED_HOLD = 6;
-
-	const STATUS_INTERVIEW_NEW = 4;
-	const STATUS_INTERVIEW_APPROVED = 8;
-	const STATUS_INTERVIEW_REJECTED = 9;
-	const STATUS_INTERVIEW_HOLD = 10;
+	public const STATUS_INTERVIEW_NEW = 4;
+	public const STATUS_INTERVIEW_APPROVED = 8;
+	public const STATUS_INTERVIEW_REJECTED = 9;
+	public const STATUS_INTERVIEW_HOLD = 10;
 
 	public $id;
 
@@ -74,39 +73,42 @@ class User {
 	 *
 	 * @return bool True if all attributes are available, false otherwise
 	 */
-	public function fromPost(array $post) {
+	public function fromPost(array $post)
+	{
 		$attrs = ['name', 'surname', 'degreecourse', 'year', 'matricola', 'area', 'letter'];
-		foreach($attrs as $attr) {
-			if(!isset($post[$attr])) {
+		foreach ($attrs as $attr) {
+			if (!isset($post[$attr])) {
 				return false;
 			}
 		}
-		foreach($attrs as $attr) {
+		foreach ($attrs as $attr) {
 			$this->$attr = $post[$attr];
 		}
 
 		return true;
 	}
 
-	public function getCandidateStatus(): int {
+	public function getCandidateStatus(): int
+	{
 		return $this->computeCandidateStatus($this->published, $this->status, $this->hold);
 	}
 
-	public static function computeCandidateStatus(bool $published, ?bool $status, bool $hold): int {
-		if($published) {
-			if($status === true) {
+	public static function computeCandidateStatus(bool $published, ?bool $status, bool $hold): int
+	{
+		if ($published) {
+			if ($status === true) {
 				return self::STATUS_PUBLISHED_APPROVED;
-			} elseif($status === false && $hold === false) {
+			} elseif ($status === false && $hold === false) {
 				return self::STATUS_PUBLISHED_REJECTED;
-			} elseif($status === null && $hold === true) {
+			} elseif ($status === null && $hold === true) {
 				return self::STATUS_PUBLISHED_HOLD;
 			}
 		} else {
-			if($status === true) {
+			if ($status === true) {
 				return self::STATUS_NEW_APPROVED;
-			} elseif($status === false) {
+			} elseif ($status === false) {
 				return self::STATUS_NEW_REJECTED;
-			} elseif($hold === true) {
+			} elseif ($hold === true) {
 				return self::STATUS_NEW_HOLD;
 			}
 		}
@@ -114,13 +116,14 @@ class User {
 		return self::STATUS_NEW;
 	}
 
-	public static function computeCandidateInterviewStatus(?bool $interviewPassed, bool $hold): int {
-		if($interviewPassed === true) {
+	public static function computeCandidateInterviewStatus(?bool $interviewPassed, bool $hold): int
+	{
+		if ($interviewPassed === true) {
 			return self::STATUS_INTERVIEW_APPROVED;
-		} else if($interviewPassed === false) {
+		} elseif ($interviewPassed === false) {
 			return self::STATUS_INTERVIEW_REJECTED;
 		} else {
-			if($hold) {
+			if ($hold) {
 				return self::STATUS_INTERVIEW_HOLD;
 			}
 		}

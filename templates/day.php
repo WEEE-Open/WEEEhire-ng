@@ -1,6 +1,7 @@
 <?php
+
 /** @var string $day */
-switch($day) {
+switch ($day) {
 	case '1':
 		echo __('Lunedì');
 		break;

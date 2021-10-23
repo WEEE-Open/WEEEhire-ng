@@ -1,8 +1,6 @@
 <?php
 
-
 namespace WEEEOpen\WEEEHire;
-
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -11,13 +9,15 @@ use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 
-class PageStatus implements RequestHandlerInterface {
-	public function handle(ServerRequestInterface $request): ResponseInterface {
+class PageStatus implements RequestHandlerInterface
+{
+	public function handle(ServerRequestInterface $request): ResponseInterface
+	{
 		// Page for candidates to see their own status (approved/rejected)
 
 		$template = Template::create($request->getUri());
 		$GET = $request->getQueryParams();
-		if(!$GET['id'] || !$GET['token']) {
+		if (!$GET['id'] || !$GET['token']) {
 			return new HtmlResponse($template->render('error', ['message' => 'Missing id or token']), 400);
 		}
 
@@ -25,16 +25,16 @@ class PageStatus implements RequestHandlerInterface {
 
 		try {
 			$id = (int) $GET['id'];
-			if($db->validateToken($id, $GET['token'])) {
+			if ($db->validateToken($id, $GET['token'])) {
 				$user = $db->getUser($id);
 			} else {
 				return new HtmlResponse($template->render('error', ['message' => 'Invalid id or token']), 404);
 			}
-		} catch(DatabaseException $e) {
+		} catch (DatabaseException $e) {
 			return new HtmlResponse($template->render('error', ['message' => 'Database error']), 500);
 		}
 
-		if(isset($GET['download'])) {
+		if (isset($GET['download'])) {
 			// GDPR data download button
 			$attributes = (array) $user;
 			$downloadable = [
@@ -55,12 +55,12 @@ class PageStatus implements RequestHandlerInterface {
 				'Content-Disposition' => 'attachment; filename=weeehire.json',
 			];
 			return new JsonResponse($attributes, 200, $headers, JsonResponse::DEFAULT_JSON_FLAGS | JSON_PRETTY_PRINT);
-		} elseif(isset($GET['delete'])) {
+		} elseif (isset($GET['delete'])) {
 			// Delete button
 			try {
 				$db->deleteUser($id);
 				return new RedirectResponse('/', 303);
-			} catch(DatabaseException $e) {
+			} catch (DatabaseException $e) {
 				return new HtmlResponse($template->render('error', ['message' => 'Database error']), 500);
 			}
 		}

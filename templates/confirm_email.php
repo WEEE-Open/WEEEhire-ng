@@ -1,7 +1,8 @@
 <?php
+
 /** @var $link string */
 /** @var $subject bool */
-if($subject) {
+if ($subject) {
 	echo __('Candidatura in WEEE Open');
 } else {
 	echo __("Ciao!") . "\r\n";

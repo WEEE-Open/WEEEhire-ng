@@ -1,7 +1,11 @@
 <?php
+
 /** @var $users array */
 /** @var $myname string */
 /** @var $myuser string */
+
+use WEEEOpen\WEEEHire\User;
+
 $this->layout('base', ['title' => __('Candidati'), 'datatables' => true, 'fontAwesome' => true, 'logoHref' => 'candidates.php']);
 $total = 0;
 $approved = 0;
@@ -28,49 +32,51 @@ require_once 'stars.php';
 	</tr>
 	</thead>
 	<tbody>
-	<?php foreach($users as $user):
-		/** @var \WEEEOpen\WEEEHire\User $user */
+	<?php foreach ($users as $user) :
+		/** @var User $user */
 		$date = date('Y-m-d H:i', $user['submitted']);
 		$total++;
 		$status = WEEEOpen\WEEEHire\User::computeCandidateStatus($user['published'], $user['status'], $user['hold']);
 		$trcolor = '';
-		switch($status) {
-			case \WEEEOpen\WEEEHire\User::STATUS_NEW:
+		$tdcolor = '';
+		$statusCell = '';
+		switch ($status) {
+			case User::STATUS_NEW:
 				$tobe++;
 				$statusCell = "<a href=\"/candidates.php?id=${user['id']}\">" . __('Da decidere') . '</a>';
 				$tdcolor = '';
 				break;
-			case \WEEEOpen\WEEEHire\User::STATUS_NEW_APPROVED:
+			case User::STATUS_NEW_APPROVED:
 				$approved++;
 				$topublish++;
 				$statusCell = '<b>' . __('Approvata, da pubblicare') . '</b>';
 				$tdcolor = 'class="candidates-approved"';
 				break;
-			case \WEEEOpen\WEEEHire\User::STATUS_NEW_REJECTED:
+			case User::STATUS_NEW_REJECTED:
 				$rejected++;
 				$topublish++;
 				$statusCell = '<b>' . __('Rifiutata, da pubblicare') . '</b>';
 				$tdcolor = 'class="candidates-rejected"';
 				break;
-			case \WEEEOpen\WEEEHire\User::STATUS_NEW_HOLD:
+			case User::STATUS_NEW_HOLD:
 				$hold++;
 				$topublish++;
 				$statusCell = "<a href=\"/candidates.php?id=${user['id']}\">" . __('In lista d\'attesa') . '</a>';
 				$tdcolor = 'class="candidates-hold"';
 				break;
-			case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_APPROVED:
+			case User::STATUS_PUBLISHED_APPROVED:
 				$approved++;
 				$published++;
 				$statusCell = __('Approvata, pubblicata');
 				$tdcolor = $trcolor = 'class="candidates-approved"';
 				break;
-			case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED:
+			case User::STATUS_PUBLISHED_REJECTED:
 				$rejected++;
 				$published++;
 				$statusCell = __('Rifiutata, pubblicata');
 				$tdcolor = $trcolor = 'class="candidates-rejected"';
 				break;
-			case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD:
+			case User::STATUS_PUBLISHED_HOLD:
 				$hold++;
 				$published++;
 				$statusCell = "<a href=\"/candidates.php?id=${user['id']}\">" . __('In lista d\'attesa, pubblicata') . '</a>';
@@ -78,21 +84,20 @@ require_once 'stars.php';
 				break;
 		}
 		$statusCellIcons = '';
-		if($user['myvote'] !== null) {
+		if ($user['myvote'] !== null) {
 			$statusCellIcons .= '<span class="fas fa-star text-dark"></span>';
 		}
-		if($user['hold']) {
+		if ($user['hold']) {
 			$statusCellIcons .= '<span class="fas fa-lock text-dark"></span>';
 		}
-		if($statusCellIcons !== '') {
+		if ($statusCellIcons !== '') {
 			$statusCell .= '&nbsp;' . $statusCellIcons;
 		}
 		?>
 		<tr <?=$trcolor?>>
 			<td><a href="/candidates.php?id=<?=$user['id']?>"><?=$this->e($user['name'])?></a></td>
 			<td><?=$this->e($user['area'])?></td>
-			<td class="stars"><?=$user['evaluation'] === null ? '' : sprintf('%3.1f',
-						$user['evaluation']) . '&nbsp;' . stars($user['evaluation'])?></td>
+			<td class="stars"><?=$user['evaluation'] === null ? '' : sprintf('%3.1f', $user['evaluation']) . '&nbsp;' . stars($user['evaluation'])?></td>
 			<td><?=$date?></td>
 			<td><?=$this->e($user['recruiter'])?></td>
 			<td <?=$tdcolor?>><?=$statusCell?></td>
@@ -123,15 +128,10 @@ require_once 'stars.php';
 	</div>
 </form>
 <ul class="list-group mt-3">
-	<li class="list-group-item"><?=sprintf(_ngettext('%d candidato in totale', '%d candidati totali', $total),
-			$total);?></li>
-	<li class="list-group-item list-group-item-primary"><?=sprintf(_ngettext('%d da valutare', '%d da valutare', $tobe),
-			$tobe);?></li>
-	<li class="list-group-item list-group-item-success"><?=sprintf(_ngettext('%d approvato', '%d approvati', $approved),
-			$approved);?></li>
-	<li class="list-group-item list-group-item-danger"><?=sprintf(_ngettext('%d rifiutato', '%d rifiutati', $rejected),
-			$rejected);?></li>
-	<li class="list-group-item"><?=sprintf(_ngettext('%d da pubblicare', '%d da pubblicare', $topublish),
-			$topublish);?></li>
+	<li class="list-group-item"><?=sprintf(_ngettext('%d candidato in totale', '%d candidati totali', $total), $total);?></li>
+	<li class="list-group-item list-group-item-primary"><?=sprintf(_ngettext('%d da valutare', '%d da valutare', $tobe), $tobe);?></li>
+	<li class="list-group-item list-group-item-success"><?=sprintf(_ngettext('%d approvato', '%d approvati', $approved), $approved);?></li>
+	<li class="list-group-item list-group-item-danger"><?=sprintf(_ngettext('%d rifiutato', '%d rifiutati', $rejected), $rejected);?></li>
+	<li class="list-group-item"><?=sprintf(_ngettext('%d da pubblicare', '%d da pubblicare', $topublish), $topublish);?></li>
 	<li class="list-group-item"><?=sprintf(_ngettext('%d pubblicato', '%d pubblicati', $published), $published);?></li>
 </ul>

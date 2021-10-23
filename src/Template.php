@@ -7,8 +7,26 @@ use Negotiation\LanguageNegotiator;
 use PhpMyAdmin\MoTranslator\Loader;
 use Psr\Http\Message\UriInterface;
 
-class Template {
-	const allowedLocales = ['en-US', 'it-IT'];
+class Template
+{
+	private const SUPPORTED_LOCALES = ['en-US', 'it-IT'];
+
+
+	public static function getNormalizedLocale(string $locale): ?string
+	{
+		if (in_array($locale, self::SUPPORTED_LOCALES)) {
+			return $locale;
+		}
+		return null;
+	}
+
+	public static function getNormalizedLocaleOrDefault(string $locale): string
+	{
+		if (in_array($locale, self::SUPPORTED_LOCALES)) {
+			return $locale;
+		}
+		return $locale[0];
+	}
 
 	/**
 	 * Prepare the template engine and configure Motranslator if no session is available
@@ -18,13 +36,16 @@ class Template {
 	 *
 	 * @return Engine Plates template engine
 	 */
-	public static function createWithoutSession(string $locale, UriInterface $uri): Engine {
+	public static function createWithoutSession(string $locale, UriInterface $uri): Engine
+	{
 		Loader::loadFunctions();
 
 		_setlocale(LC_MESSAGES, $locale);
 		_textdomain('messages');
-		_bindtextdomain('messages',
-			__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'locale');
+		_bindtextdomain(
+			'messages',
+			__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'locale'
+		);
 		//_bind_textdomain_codeset('messages', 'UTF-8');
 
 		$engine = new Engine('..' . DIRECTORY_SEPARATOR . 'templates');
@@ -40,13 +61,16 @@ class Template {
 	 *
 	 * @return Engine Plates template engine
 	 */
-	public static function create(UriInterface $uri): Engine {
+	public static function create(UriInterface $uri): Engine
+	{
 		Loader::loadFunctions();
 
 		_setlocale(LC_MESSAGES, self::getLocale());
 		_textdomain('messages');
-		_bindtextdomain('messages',
-			__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'locale');
+		_bindtextdomain(
+			'messages',
+			__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'locale'
+		);
 		//_bind_textdomain_codeset('messages', 'UTF-8');
 
 		$engine = new Engine(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates');
@@ -61,10 +85,11 @@ class Template {
 	 *
 	 * @return string
 	 */
-	private static function getLocale(): string {
+	private static function getLocale(): string
+	{
 		// Must be here, or $_SESSION is not available
 		session_start();
-		if(isset($_SESSION['locale'])) {
+		if (isset($_SESSION['locale'])) {
 			return $_SESSION['locale'];
 		}
 
@@ -80,25 +105,26 @@ class Template {
 	 *
 	 * @return string Negotiated locale
 	 */
-	private static function getLocaleNotCached(): string {
-		if(!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+	private static function getLocaleNotCached(): string
+	{
+		if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
 			return 'en-US';
 		}
 
 		$negotiator = new LanguageNegotiator();
 
-		$priorities = self::allowedLocales;
+		$priorities = self::SUPPORTED_LOCALES;
 
 		$bestLanguage = $negotiator->getBest($_SERVER['HTTP_ACCEPT_LANGUAGE'], $priorities);
 
 		// If the browser provides en-GB, LanguageNegotiator chooses NULL...
-		if($bestLanguage === NULL) {
+		if ($bestLanguage === null) {
 			return 'en-US';
 		}
 
 		/** @noinspection PhpUndefinedMethodInspection */
 		$lowercaseLocale = $bestLanguage->getType();
-		if(strlen($lowercaseLocale) == 5 && $lowercaseLocale[2] == '-') {
+		if (strlen($lowercaseLocale) == 5 && $lowercaseLocale[2] == '-') {
 			// gettext (or motranslator) expects the part after the dash to be uppercase
 			return substr($lowercaseLocale, 0, 3) . strtoupper(substr($lowercaseLocale, 3));
 		} else {

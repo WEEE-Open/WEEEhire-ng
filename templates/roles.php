@@ -1,5 +1,7 @@
 <?php
-function getRoles() {
+
+function getRoles()
+{
 	return [
 		'Riparazione hardware'            => __('Riparazione hardware'),
 		'Elettronica'                     => __('Elettronica'),

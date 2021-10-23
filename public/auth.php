@@ -6,17 +6,16 @@ use Jumbojett\OpenIDConnectClient;
 use Jumbojett\OpenIDConnectClientException;
 use Laminas\Diactoros\Uri;
 
-
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 
 $template = Template::create(new Uri($_SERVER['REQUEST_URI']));
 
-if(session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE) {
 	session_start();
 }
 
-if(!isset($_SESSION['needsAuth']) || !$_SESSION['needsAuth']) {
+if (!isset($_SESSION['needsAuth']) || !$_SESSION['needsAuth']) {
 	http_response_code(303);
 	header('Location: /candidates.php');
 	exit;
@@ -43,17 +42,17 @@ try {
 	$_SESSION['id_token'] = $id_token;
 	$_SESSION['isAdmin'] = true;
 	$authorized = false;
-	foreach(WEEEHIRE_OIDC_ALLOWED_GROUPS as $group) {
-		if(in_array($group, $groups, true)) {
+	foreach (WEEEHIRE_OIDC_ALLOWED_GROUPS as $group) {
+		if (in_array($group, $groups, true)) {
 			$authorized = true;
 			break;
 		}
 	}
 
-	if($authorized) {
+	if ($authorized) {
 		$_SESSION['isAdmin'] = true;
 		http_response_code(303);
-		if(isset($_SESSION['previousPage'])) {
+		if (isset($_SESSION['previousPage'])) {
 			header('Location: ' . $_SESSION['previousPage']);
 		} else {
 			header('Location: /candidates.php');
@@ -63,7 +62,7 @@ try {
 		http_response_code(403);
 		echo $template->render('error', ['message' => 'You are not authorized to view this page.']);
 	}
-} catch(OpenIDConnectClientException $e) {
+} catch (OpenIDConnectClientException $e) {
 	error_log($e);
 	http_response_code(500);
 	echo $template->render('error', ['message' => 'Authentication failed']);
