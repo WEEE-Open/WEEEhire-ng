@@ -46,7 +46,13 @@ jobs:
 #          php_extensions: ldap mbstring json sqlite3
 
       - name: Set PHPCS scope
-        run: echo "GITHUB_PHPCS_SCOPE=$([[ \"$GITHUB_EVENT_NAME\" -e \"pull_request\" ]] && echo \"blame\" || echo \"file\")" >> $GITHUB_ENV
+        run: |
+          if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
+            echo "GITHUB_PHPCS_SCOPE=blame" >> $GITHUB_ENV
+          else
+            echo "GITHUB_PHPCS_SCOPE=file" >> $GITHUB_ENV
+          fi;
+        shell: bash
 
       - name: PHPCS linting
         uses: thenabeel/action-phpcs@v8
