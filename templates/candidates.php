@@ -97,7 +97,7 @@ require_once 'stars.php';
 		<tr <?=$trcolor?>>
 			<td><a href="/candidates.php?id=<?=$user['id']?>"><?=$this->e($user['name'])?></a></td>
 			<td><?=$this->e($user['area'])?></td>
-			<td class="stars"><?=$user['evaluation'] === null ? '' : sprintf('%3.1f', $user['evaluation']) . '&nbsp;' . stars($user['evaluation'])?></td>
+			<td class="stars <?= $user['myvote'] === null && $user['evaluation'] !== null ? 'notmine' : '' ?>"><?=$user['evaluation'] === null ? '' : sprintf('%3.1f', $user['evaluation']) . '&nbsp;' . stars($user['evaluation'])?></td>
 			<td><?=$date?></td>
 			<td><?=$this->e($user['recruiter'])?></td>
 			<td <?=$tdcolor?>><?=$statusCell?></td>
@@ -105,6 +105,49 @@ require_once 'stars.php';
 	<?php endforeach; ?>
 	</tbody>
 </table>
+<script>
+	(function(){
+		"use strict";
+		let table = document.getElementById("candidates");
+
+		let found = false;
+		let spoilers = [];
+		for(let stars of table.querySelectorAll("td.notmine")) {
+			let td = document.createElement("td");
+			let button = document.createElement("button");
+			button.classList.add("btn");
+			button.classList.add("btn-secondary");
+			button.classList.add("p-1");
+			button.classList.add("spoiler");
+			button.textContent = "<?= __('Mosta (spoiler!)') ?>";
+			td.appendChild(button);
+
+			spoilers.push(stars);
+			button.dataset.spoilerId = (spoilers.length - 1).toString();
+			stars.parentNode.insertBefore(td, stars);
+			stars.parentNode.removeChild(stars);
+
+			found = true;
+		}
+		if(found) {
+			table.addEventListener("click", function(ev) {
+				if(ev.target.tagName === "BUTTON" && ev.target.classList.contains("spoiler")) {
+					if(ev.target.dataset.spoilerId) {
+						let id = parseInt(ev.target.dataset.spoilerId)
+						if(!isNaN(id)) {
+							console.log(spoilers);
+							let stars = spoilers[id];
+							let td = ev.target.parentNode;
+							td.parentNode.insertBefore(stars, td);
+							td.parentNode.removeChild(td);
+						}
+					}
+				}
+			}, false);
+		}
+	})();
+</script>
+
 
 <form method="post">
 	<div class="form-row mt-3">
