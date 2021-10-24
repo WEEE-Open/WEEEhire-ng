@@ -7,7 +7,7 @@
 
 $titleShort = sprintf(__('%s %s (%s)'), $this->e($user->name), $this->e($user->surname), $this->e($user->matricola));
 $title = sprintf(__('%s - Colloquio'), $titleShort);
-$this->layout('base', ['title' => $title, 'logoHref' => 'interviews.php']);
+$this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 ?>
 
 <nav aria-label="breadcrumb">
