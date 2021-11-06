@@ -119,7 +119,7 @@ require_once 'stars.php';
 			button.classList.add("btn-secondary");
 			button.classList.add("p-1");
 			button.classList.add("spoiler");
-			button.textContent = "<?= __('Mosta (spoiler!)') ?>";
+			button.textContent = "<?=__('Mostra (spoiler!)')?>";
 			td.appendChild(button);
 
 			spoilers.push(stars);

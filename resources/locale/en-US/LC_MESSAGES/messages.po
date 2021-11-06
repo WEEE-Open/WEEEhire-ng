@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-23 19:39+0200\n"
+"POT-Creation-Date: 2021-11-07 00:04+0100\n"
 "PO-Revision-Date: 2021-10-23 19:39+0200\n"
 "Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
 "Language-Team: Italian <>\n"
@@ -51,20 +51,6 @@ msgstr "Logout"
 #: templates/base.php:12 templates/index.php:6
 msgid "Entra in WEEE Open"
 msgstr "Join WEEE Open"
-
-#: templates/candidate_close.php:3
-msgid "Spiacenti, le candidature sono chiuse!"
-msgstr "Sorry, applications are closed!"
-
-#: templates/candidate_close.php:5
-msgid "Candidature chiuse"
-msgstr "Applications are closed"
-
-#: templates/candidate_close.php:6
-msgid ""
-"Ci dispiace, ma le candidature in questo periodo sono chiuse. Riprova in "
-"futuro."
-msgstr "Sorry, but applications are closed right now. Try again in the future."
 
 #: templates/candidate.php:10 templates/interview.php:8
 #, php-format
@@ -128,7 +114,7 @@ msgstr "%s (%s)"
 msgid "Elimina 🗑"
 msgstr "Delete 🗑"
 
-#: templates/candidate.php:97
+#: templates/candidate.php:97 templates/candidates.php:122
 msgid "Mostra (spoiler!)"
 msgstr "Show (spoiler!)"
 
@@ -220,6 +206,20 @@ msgstr "Invite link: %s"
 msgid "Genera link d'invito"
 msgstr "Generate an invite link"
 
+#: templates/candidate_close.php:3
+msgid "Spiacenti, le candidature sono chiuse!"
+msgstr "Sorry, applications are closed!"
+
+#: templates/candidate_close.php:5
+msgid "Candidature chiuse"
+msgstr "Applications are closed"
+
+#: templates/candidate_close.php:6
+msgid ""
+"Ci dispiace, ma le candidature in questo periodo sono chiuse. Riprova in "
+"futuro."
+msgstr "Sorry, but applications are closed right now. Try again in the future."
+
 #: templates/candidates.php:26 templates/form.php:50
 #: templates/interviews.php:25 templates/interviews.php:102
 #: templates/userinfo.php:14
@@ -267,10 +267,6 @@ msgstr "Rejected, published"
 #: templates/candidates.php:82
 msgid "In lista d'attesa, pubblicata"
 msgstr "On hold, published"
-
-#: templates/candidates.php:122
-msgid "Mosta (spoiler!)"
-msgstr "Show (spoiler!)"
 
 #: templates/candidates.php:156
 msgid "Pubblica rifiutati"
@@ -1149,16 +1145,6 @@ msgstr "Interview failed"
 msgid "Salva"
 msgstr "Save"
 
-#: templates/interviewsbyrecruiter.php:38 templates/interviews.php:82
-#, php-format
-msgid "Giorno %s (%s)"
-msgstr "%s (%s)"
-
-#: templates/interviewsbyrecruiter.php:44
-#, php-format
-msgid "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
-msgstr "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
-
 #: templates/interviews.php:21
 msgid "Colloqui fissati"
 msgstr "Scheduled interviews"
@@ -1174,6 +1160,11 @@ msgstr "Interview passed, with invite link"
 #: templates/interviews.php:55
 msgid "Colloquio superato"
 msgstr "Interview passed"
+
+#: templates/interviews.php:82 templates/interviewsbyrecruiter.php:38
+#, php-format
+msgid "Giorno %s (%s)"
+msgstr "%s (%s)"
 
 #: templates/interviews.php:98
 msgid "Colloqui da fissare"
@@ -1217,6 +1208,11 @@ msgid "%d invitato"
 msgid_plural "%d invitati"
 msgstr[0] "%d invited"
 msgstr[1] "%d invited"
+
+#: templates/interviewsbyrecruiter.php:44
+#, php-format
+msgid "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
+msgstr "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
 
 #: templates/logout.php:6
 msgid "Logout completato"
@@ -1403,6 +1399,9 @@ msgstr "Update info"
 #: templates/userinfo.php:61
 msgid "Annulla"
 msgstr "Cancel"
+
+#~ msgid "Mosta (spoiler!)"
+#~ msgstr "Show (spoiler!)"
 
 #~ msgid "Show (spoiler!)"
 #~ msgstr "Show (spoiler!)"
