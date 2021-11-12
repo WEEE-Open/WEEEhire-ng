@@ -48,7 +48,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 	<form method="post">
 		<div class="form-group row">
 			<label for="name" class="col-md-2 col-lg-1 col-form-label"><?=__('Nome')?></label>
-			<div class="col-md-4 col-lg-5">
+			<div class="col-md-4 col-lg-4">
 				<input id="name" name="name" type="text" required="required" class="form-control">
 			</div>
 			<label for="surname" class="col-md-2 col-lg-1 col-form-label"><?=__('Cognome')?></label>
@@ -56,7 +56,20 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				<input id="surname" name="surname" type="text" required="required" class="form-control">
 			</div>
 		</div>
+
 		<div class="form-group row">
+			<label for="year" class="col-md-1 col-form-label"><?=__('Anno')?></label>
+			<div class="col-md-2 col-lg-4">
+				<select id="year" name="year" required="required" class="form-control" onchange="dottorandize()">
+					<option value selected disabled class="d-none"></option>
+					<option value="1º Triennale"><?=__('1º Triennale')?></option>
+					<option value="2º Triennale"><?=__('2º Triennale')?></option>
+					<option value="3º Triennale"><?=__('3º Triennale')?></option>
+					<option value="1º Magistrale"><?=__('1º Magistrale')?></option>
+					<option value="2º Magistrale"><?=__('2º Magistrale')?></option>
+					<option value="Dottorato"><?=__('Dottorato')?></option>
+				</select>
+			</div>
 			<label for="degreecourse" class="col-md-2 col-lg-1 col-form-label"><?=__('Corso di laurea')?></label>
 			<div class="col-md-7 col-lg-6">
 				<select id="degreecourse" name="degreecourse" required="required" class="form-control">
@@ -138,18 +151,6 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 						<option value="Dottorato in Storia Dell'architettura E Dell'urbanistica">Dottorato in Storia Dell'architettura E Dell'urbanistica</option>
 						<option value="Dottorato in Urban And Regional Development">Dottorato in Urban And Regional Development</option>
 					</optgroup>
-				</select>
-			</div>
-			<label for="year" class="col-md-1 col-form-label"><?=__('Anno')?></label>
-			<div class="col-md-2 col-lg-4">
-				<select id="year" name="year" required="required" class="form-control" onchange="dottorandize()">
-					<option value selected disabled class="d-none"></option>
-					<option value="1º Triennale"><?=__('1º Triennale')?></option>
-					<option value="2º Triennale"><?=__('2º Triennale')?></option>
-					<option value="3º Triennale"><?=__('3º Triennale')?></option>
-					<option value="1º Magistrale"><?=__('1º Magistrale')?></option>
-					<option value="2º Magistrale"><?=__('2º Magistrale')?></option>
-					<option value="Dottorato"><?=__('Dottorato')?></option>
 				</select>
 			</div>
 		</div>
@@ -337,4 +338,100 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 	}
 
 	dottorandize();
+
+	let yearSelector = document.getElementById("year");
+	let courseSelector = document.getElementById("degreecourse");
+    // array of objects for each courses
+	let selectOptions = [
+		{
+			bachelor: [
+				{
+					optgroup: "<?= __('Architettura e pianificazione urbanistica (L, LM)') ?>",
+					options: ["Architettura", "Pianificazione Territoriale, Urbanistica E Paesaggistico-ambientale"]
+				},
+				{
+					optgroup: "<?= __('Design (L, LM)') ?>",
+					options: ['Design E Comunicazione Visiva']
+				},
+                {
+					optgroup: "<?= __('Ingegneria (L, LM)') ?>",
+					options: ["Electronic And Communications Engineering", "Ingegneria Aerospaziale", "Ingegneria Biomedica", "Ingegneria Chimica E Alimentare", "Ingegneria Civile",
+                        "Ingegneria Dei Materiali", "Ingegneria Del Cinema E Dei Mezzi Di Comunicazione", "Ingegneria Dell'autoveicolo", "Automotive Engineering", "Ingegneria Della Produzione Industriale",
+                        "Ingegneria Edile", "Ingegneria Elettrica", "Ingegneria Elettronica", "Ingegneria Energetica", "Ingegneria Fisica", "Ingegneria Gestionale L-9",
+                            "Ingegneria Gestionale L-8", "Ingegneria Informatica", "Computer Engineering", "Ingegneria Meccanica", "Mechanical Engineering",
+                        "Ingegneria Per L'ambiente E Il Territorio", "Matematica Per L'ingegneria"]
+				}]
+		},
+		{
+			master:[
+				{
+					optgroup: "<?=__('Architettura e pianificazione urbanistica (L, LM)')?>",
+					options: ["Architettura Costruzione Citta'", "Architecture Construction City", "Architettura Per Il Patrimonio", "Architecture For Heritage",
+                            "Architettura Per La Sostenibilita'", "Architecture For Sustainability", "Automotive Engineering", "Communications And Computer Networks Engineering", "Data Science And Engineering",
+                            "Digital Skills For Sustainable Societal Transitions", "Economia Dell'ambiente, Della Cultura E Del Territorio", "Geografia E Scienze Territoriali",
+                            "Pianificazione Territoriale, Urbanistica E Paesaggistico-Ambientale", "Territorial, Urban, Environmental And Landscape Planning", "Progettazione Delle Aree Verdi E Del Paesaggio"]
+				},
+				{
+					optgroup: "<?=__('Design (L, LM)')?>",
+					options: ["Design Sistemico"]
+				},
+                {
+                    optgroup: "<?=__('Ingegneria (L, LM)')?>",
+                    options: ["ICT For Smart Societies", "Ingegneria Aerospaziale", "Ingegneria Biomedica", "Ingegneria Chimica E Dei Processi Sostenibili", "Ingegneria Civile",
+                              "Civil Engineering", "Ingegneria Dei Materiali", "Ingegneria Del Cinema E Dei Mezzi Di Comunicazione", "Ingegneria Della Produzione Industriale E Dell'innovazione Tecnologica",
+                              "Ingegneria Edile", "Building Engineering", "Ingegneria Elettrica", "Ingegneria Elettronica (Electronic Engineering)", "Electronic Engineering", "Ingegneria Energetica E Nucleare",
+                              "Energy And Nuclear Engineering", "Ingegneria Gestionale", "Engineering And Management", "Ingegneria Informatica (Computer Engineering)", "Computer Engineering",
+                              "Ingegneria Matematica", "Ingegneria Meccanica", "Mechanical Engineering", "Ingegneria Per L'ambiente E Il Territorio", "Environmental And Land Engineering",
+                              "Mechatronic Engineering", "Nanotechnologies For Icts", "Petroleum And Mining Engineering", "Physics Of Complex Systems (Fisica Dei Sistemi Complessi)",
+                              "Physics Of Complex Systems"]
+                }]
+		}
+	]
+
+	yearSelector.onchange = () => {
+		let val = yearSelector.options[yearSelector.selectedIndex].value;
+
+		// remove all child
+		courseSelector.textContent = '';
+
+        // to show first element blank
+        let option = document.createElement('option');
+        option.setAttribute('value', '');
+        option.appendChild(document.createTextNode(''));
+        courseSelector.appendChild(option);
+
+        // build inner HTML first iterate two courses then optgroup put every option to optgroup
+		selectOptions.forEach((degree, index) => {
+			if ( (val === '1º Triennale' || val === '2º Triennale' || val === '3º Triennale') && index === 0) {
+				degree.bachelor.forEach((singleOptgroup) => {
+                    buildOptions(singleOptgroup);
+                });
+			} else if ( (val === '1º Magistrale' || val === '2º Magistrale') && index === 1) {
+                degree.master.forEach((singleOptgroup) => {
+                    buildOptions(singleOptgroup);
+                });
+            }
+		});
+
+	};
+
+    // build inside of optgroup
+    function buildOptions( singleOptgroup ) {
+        let newOptgroup = document.createElement('optgroup');
+        newOptgroup.setAttribute('label', singleOptgroup.optgroup);
+
+        singleOptgroup.options.forEach((value) => {
+
+            let option = document.createElement('option');
+            option.setAttribute('value', value);
+            option.appendChild(document.createTextNode(value));
+            newOptgroup.appendChild(option);
+        });
+
+        courseSelector.appendChild(newOptgroup);
+    }
+
+
+
+
 </script>
