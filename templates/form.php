@@ -341,7 +341,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 
 	let yearSelector = document.getElementById("year");
 	let courseSelector = document.getElementById("degreecourse");
-    // array of objects for each courses
+	// array of objects for each courses
 	let selectOptions = [
 		{
 			bachelor: [
@@ -353,13 +353,13 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					optgroup: "<?= __('Design (L, LM)') ?>",
 					options: ['Design E Comunicazione Visiva']
 				},
-                {
+				{
 					optgroup: "<?= __('Ingegneria (L, LM)') ?>",
 					options: ["Electronic And Communications Engineering", "Ingegneria Aerospaziale", "Ingegneria Biomedica", "Ingegneria Chimica E Alimentare", "Ingegneria Civile",
-                        "Ingegneria Dei Materiali", "Ingegneria Del Cinema E Dei Mezzi Di Comunicazione", "Ingegneria Dell'autoveicolo", "Automotive Engineering", "Ingegneria Della Produzione Industriale",
-                        "Ingegneria Edile", "Ingegneria Elettrica", "Ingegneria Elettronica", "Ingegneria Energetica", "Ingegneria Fisica", "Ingegneria Gestionale L-9",
-                            "Ingegneria Gestionale L-8", "Ingegneria Informatica", "Computer Engineering", "Ingegneria Meccanica", "Mechanical Engineering",
-                        "Ingegneria Per L'ambiente E Il Territorio", "Matematica Per L'ingegneria"]
+						"Ingegneria Dei Materiali", "Ingegneria Del Cinema E Dei Mezzi Di Comunicazione", "Ingegneria Dell'autoveicolo", "Automotive Engineering", "Ingegneria Della Produzione Industriale",
+						"Ingegneria Edile", "Ingegneria Elettrica", "Ingegneria Elettronica", "Ingegneria Energetica", "Ingegneria Fisica", "Ingegneria Gestionale L-9",
+							"Ingegneria Gestionale L-8", "Ingegneria Informatica", "Computer Engineering", "Ingegneria Meccanica", "Mechanical Engineering",
+						"Ingegneria Per L'ambiente E Il Territorio", "Matematica Per L'ingegneria"]
 				}]
 		},
 		{
@@ -367,24 +367,24 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				{
 					optgroup: "<?=__('Architettura e pianificazione urbanistica (L, LM)')?>",
 					options: ["Architettura Costruzione Citta'", "Architecture Construction City", "Architettura Per Il Patrimonio", "Architecture For Heritage",
-                            "Architettura Per La Sostenibilita'", "Architecture For Sustainability", "Automotive Engineering", "Communications And Computer Networks Engineering", "Data Science And Engineering",
-                            "Digital Skills For Sustainable Societal Transitions", "Economia Dell'ambiente, Della Cultura E Del Territorio", "Geografia E Scienze Territoriali",
-                            "Pianificazione Territoriale, Urbanistica E Paesaggistico-Ambientale", "Territorial, Urban, Environmental And Landscape Planning", "Progettazione Delle Aree Verdi E Del Paesaggio"]
+							"Architettura Per La Sostenibilita'", "Architecture For Sustainability", "Automotive Engineering", "Communications And Computer Networks Engineering", "Data Science And Engineering",
+							"Digital Skills For Sustainable Societal Transitions", "Economia Dell'ambiente, Della Cultura E Del Territorio", "Geografia E Scienze Territoriali",
+							"Pianificazione Territoriale, Urbanistica E Paesaggistico-Ambientale", "Territorial, Urban, Environmental And Landscape Planning", "Progettazione Delle Aree Verdi E Del Paesaggio"]
 				},
 				{
 					optgroup: "<?=__('Design (L, LM)')?>",
 					options: ["Design Sistemico"]
 				},
-                {
-                    optgroup: "<?=__('Ingegneria (L, LM)')?>",
-                    options: ["ICT For Smart Societies", "Ingegneria Aerospaziale", "Ingegneria Biomedica", "Ingegneria Chimica E Dei Processi Sostenibili", "Ingegneria Civile",
-                              "Civil Engineering", "Ingegneria Dei Materiali", "Ingegneria Del Cinema E Dei Mezzi Di Comunicazione", "Ingegneria Della Produzione Industriale E Dell'innovazione Tecnologica",
-                              "Ingegneria Edile", "Building Engineering", "Ingegneria Elettrica", "Ingegneria Elettronica (Electronic Engineering)", "Electronic Engineering", "Ingegneria Energetica E Nucleare",
-                              "Energy And Nuclear Engineering", "Ingegneria Gestionale", "Engineering And Management", "Ingegneria Informatica (Computer Engineering)", "Computer Engineering",
-                              "Ingegneria Matematica", "Ingegneria Meccanica", "Mechanical Engineering", "Ingegneria Per L'ambiente E Il Territorio", "Environmental And Land Engineering",
-                              "Mechatronic Engineering", "Nanotechnologies For Icts", "Petroleum And Mining Engineering", "Physics Of Complex Systems (Fisica Dei Sistemi Complessi)",
-                              "Physics Of Complex Systems"]
-                }]
+				{
+					optgroup: "<?=__('Ingegneria (L, LM)')?>",
+					options: ["ICT For Smart Societies", "Ingegneria Aerospaziale", "Ingegneria Biomedica", "Ingegneria Chimica E Dei Processi Sostenibili", "Ingegneria Civile",
+							  "Civil Engineering", "Ingegneria Dei Materiali", "Ingegneria Del Cinema E Dei Mezzi Di Comunicazione", "Ingegneria Della Produzione Industriale E Dell'innovazione Tecnologica",
+							  "Ingegneria Edile", "Building Engineering", "Ingegneria Elettrica", "Ingegneria Elettronica (Electronic Engineering)", "Electronic Engineering", "Ingegneria Energetica E Nucleare",
+							  "Energy And Nuclear Engineering", "Ingegneria Gestionale", "Engineering And Management", "Ingegneria Informatica (Computer Engineering)", "Computer Engineering",
+							  "Ingegneria Matematica", "Ingegneria Meccanica", "Mechanical Engineering", "Ingegneria Per L'ambiente E Il Territorio", "Environmental And Land Engineering",
+							  "Mechatronic Engineering", "Nanotechnologies For Icts", "Petroleum And Mining Engineering", "Physics Of Complex Systems (Fisica Dei Sistemi Complessi)",
+							  "Physics Of Complex Systems"]
+				}]
 		}
 	]
 
@@ -394,42 +394,42 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 		// remove all child
 		courseSelector.textContent = '';
 
-        // to show first element blank
-        let option = document.createElement('option');
-        option.setAttribute('value', '');
-        option.appendChild(document.createTextNode(''));
-        courseSelector.appendChild(option);
+		// to show first element blank
+		let option = document.createElement('option');
+		option.setAttribute('value', '');
+		option.appendChild(document.createTextNode(''));
+		courseSelector.appendChild(option);
 
-        // build inner HTML first iterate two courses then optgroup put every option to optgroup
+		// build inner HTML first iterate two courses then optgroup put every option to optgroup
 		selectOptions.forEach((degree, index) => {
 			if ( (val === '1º Triennale' || val === '2º Triennale' || val === '3º Triennale') && index === 0) {
 				degree.bachelor.forEach((singleOptgroup) => {
-                    buildOptions(singleOptgroup);
-                });
+					buildOptions(singleOptgroup);
+				});
 			} else if ( (val === '1º Magistrale' || val === '2º Magistrale') && index === 1) {
-                degree.master.forEach((singleOptgroup) => {
-                    buildOptions(singleOptgroup);
-                });
-            }
+				degree.master.forEach((singleOptgroup) => {
+					buildOptions(singleOptgroup);
+				});
+			}
 		});
 
 	};
 
-    // build inside of optgroup
-    function buildOptions( singleOptgroup ) {
-        let newOptgroup = document.createElement('optgroup');
-        newOptgroup.setAttribute('label', singleOptgroup.optgroup);
+	// build inside of optgroup
+	function buildOptions( singleOptgroup ) {
+		let newOptgroup = document.createElement('optgroup');
+		newOptgroup.setAttribute('label', singleOptgroup.optgroup);
 
-        singleOptgroup.options.forEach((value) => {
+		singleOptgroup.options.forEach((value) => {
 
-            let option = document.createElement('option');
-            option.setAttribute('value', value);
-            option.appendChild(document.createTextNode(value));
-            newOptgroup.appendChild(option);
-        });
+			let option = document.createElement('option');
+			option.setAttribute('value', value);
+			option.appendChild(document.createTextNode(value));
+			newOptgroup.appendChild(option);
+		});
 
-        courseSelector.appendChild(newOptgroup);
-    }
+		courseSelector.appendChild(newOptgroup);
+	}
 
 
 
