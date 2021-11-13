@@ -45,8 +45,8 @@ jobs:
 #          php_version: "${{ matrix.php }}"
 #          php_extensions: ldap mbstring json sqlite3
 
-      - name: PHPCS linting
-        run: vendor/bin/phpcs --report=summary src public templates
+      - name: Linting
+        run: composer lint
 
-      - name: PHPUnit Tests
-        run: vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-text
+      - name: Run tests
+        run: composer test
