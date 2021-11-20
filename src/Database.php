@@ -7,6 +7,7 @@ use DateTimeZone;
 use Exception;
 use SQLite3;
 use SQLite3Result;
+
 use function Couchbase\defaultDecoder;
 
 class Database
@@ -326,34 +327,34 @@ ORDER BY submitted DESC');
 		}
 	}
 
-    /**
-     * Update note.
-     *
-     * @param int $id User ID
-     * @param string $note Notes
-     */
-    public function updateNote(int $id, string $note)
-    {
-        $stmt = $this->db->prepare('UPDATE notes SET note=:note, updated_at=:updated_at WHERE candidate_id=:id AND uid=:uid');
-        $uid = $_SESSION['uid'];
+	/**
+	 * Update note.
+	 *
+	 * @param int $id User ID
+	 * @param string $note Notes
+	 */
+	public function updateNote(int $id, string $note)
+	{
+		$stmt = $this->db->prepare('UPDATE notes SET note=:note, updated_at=:updated_at WHERE candidate_id=:id AND uid=:uid');
+		$uid = $_SESSION['uid'];
 
-        $stmt->bindValue(':uid', $uid, SQLITE3_TEXT);
-        $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
-        $stmt->bindValue(':updated_at', date('Y-m-d H:i:s'), SQLITE3_TEXT);
-        if ($note === '') {
-            $stmt->bindValue(':note', null, SQLITE3_NULL);
-        } else {
-            $stmt->bindValue(':note', $note, SQLITE3_TEXT);
-        }
-        $result = $stmt->execute();
-        if ($result === false) {
-            throw new DatabaseException();
-        }
-    }
+		$stmt->bindValue(':uid', $uid, SQLITE3_TEXT);
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		$stmt->bindValue(':updated_at', date('Y-m-d H:i:s'), SQLITE3_TEXT);
+		if ($note === '') {
+			$stmt->bindValue(':note', null, SQLITE3_NULL);
+		} else {
+			$stmt->bindValue(':note', $note, SQLITE3_TEXT);
+		}
+		$result = $stmt->execute();
+		if ($result === false) {
+			throw new DatabaseException();
+		}
+	}
 
 	/**
-     * Retrieve notes beside on candidate id
-     *
+	 * Retrieve notes beside on candidate id
+	 *
 	 * @param $candidateId
 	 * @return array
 	 */

@@ -143,41 +143,41 @@ require_once 'stars.php';
 </table>
 
 <!-- User can not note more than 1 time -->
-<?php $userNoted = false; ?>
+	<?php $userNoted = false; ?>
 <h4 class="mt-5"><?= __('Note') ?></h4>
 <div class="row">
-    <div class="col-md-2 border d-flex justify-content-center">
-        <p class="font-weight-bold"><?= __('Autore') ?></p>
-    </div>
-    <div class="col-md-6 border d-flex justify-content-center">
-        <p class="font-weight-bold"><?= __('Testo') ?></p>
-    </div>
-    <div class="col-md-2 border d-flex justify-content-center">
-        <p class="font-weight-bold"><?= __('Data') ?></p>
-    </div>
-    <div class="col-md-2 border d-flex justify-content-center">
-        <p class="font-weight-bold"><?= __('Azioni') ?></p>
-    </div>
+	<div class="col-md-2 border d-flex justify-content-center">
+		<p class="font-weight-bold"><?= __('Autore') ?></p>
+	</div>
+	<div class="col-md-6 border d-flex justify-content-center">
+		<p class="font-weight-bold"><?= __('Testo') ?></p>
+	</div>
+	<div class="col-md-2 border d-flex justify-content-center">
+		<p class="font-weight-bold"><?= __('Data') ?></p>
+	</div>
+	<div class="col-md-2 border d-flex justify-content-center">
+		<p class="font-weight-bold"><?= __('Azioni') ?></p>
+	</div>
 </div>
-<?php if (count($notes) > 0): ?>
-    <?php foreach ($notes as $note): ?>
-        <?php $userNoted = $_SESSION['uid'] == $note['uid'] ? true : false ?>
-            <form method="post">
-                <div class="row">
-                    <div class="col-md-2 border d-flex justify-content-center"><?= $note['uid'] ?></div>
-                    <div class="col-md-6 border" style="padding-left: 0; padding-right: 0;">
-                        <textarea class="form-control" name="note" cols="40" <?= $userNoted ? '' : 'disabled' ?>><?= $note['note'] ?></textarea>
-                    </div>
-                    <div class="col-md-2 border d-flex justify-content-center"><?= $note['updated_at'] ?></div>
-                    <div class="col-md-2 border d-flex justify-content-center p-2"><?=  $userNoted ? '<button class="btn btn-outline-primary ml-3" name="updateNote" value="true">Edit</button>' : '' ?></div>
-                </div>
-            </form>
-    <?php endforeach; ?>
-<?php else: ?>
-    <div class="row" style="background-color: #dee2e6;">
-        <div class="offset-md-5"></div><div class="col-md-2"><?= __('Nessuna nota') ?></div><div class="offset-md-5"></div>
-    </div>
-<?php endif; ?>
+	<?php if (count($notes) > 0) : ?>
+		<?php foreach ($notes as $note) : ?>
+			<?php $userNoted = $_SESSION['uid'] == $note['uid'] ? true : false ?>
+			<form method="post">
+				<div class="row">
+					<div class="col-md-2 border d-flex justify-content-center"><?= $note['uid'] ?></div>
+					<div class="col-md-6 border" style="padding-left: 0; padding-right: 0;">
+						<textarea class="form-control" name="note" cols="40" <?= $userNoted ? '' : 'disabled' ?>><?= $note['note'] ?></textarea>
+					</div>
+					<div class="col-md-2 border d-flex justify-content-center"><?= $note['updated_at'] ?></div>
+					<div class="col-md-2 border d-flex justify-content-center p-2"><?=  $userNoted ? '<button class="btn btn-outline-primary ml-3" name="updateNote" value="true">Edit</button>' : '' ?></div>
+				</div>
+			</form>
+		<?php endforeach; ?>
+	<?php else : ?>
+	<div class="row" style="background-color: #dee2e6;">
+		<div class="offset-md-5"></div><div class="col-md-2"><?= __('Nessuna nota') ?></div><div class="offset-md-5"></div>
+	</div>
+	<?php endif; ?>
 
 <form method="post" class="mt-3">
 <!--	<div class="form-group text-center row mx-0">-->
@@ -186,7 +186,7 @@ require_once 'stars.php';
 <!--		<button name="gonext" value="true" type="submit" class="btn btn-outline-secondary btn-block col-lg-3 col-6 my-1">=?=__('Successivo')&nbsp;<span class="fas fa-arrow-circle-right"></span></button>-->
 <!--		<button name="gonextvote" value="true" type="submit" class="btn btn-outline-primary btn-block col-lg-3 col-12 my-1">?=__('Successivo da valutare')&nbsp;<span class="fas fa-arrow-circle-right"></span></button>-->
 <!--	</div>-->
-    <?php if ( !$userNoted ): ?>
+	<?php if (!$userNoted) : ?>
 	<div class="form-group">
 		<label for="notes"><b><?= __('Aggiungi nota') ?></b></label>
 		<textarea id="notes" name="note" cols="40" rows="3"
@@ -195,10 +195,10 @@ require_once 'stars.php';
 	<div class="form-group text-center">
 		<button name="save" value="true" type="submit"
 				class="btn btn-outline-primary my-1 mx-1"><?=__('Salva note')?></button>
-        <?php else: ?>
-        <!-- open div bacause there is close div tag in below -->
-        <div class="form-group text-center">
-        <?php endif; ?>
+	<?php else : ?>
+		<!-- open div bacause there is close div tag in below -->
+		<div class="form-group text-center">
+	<?php endif; ?>
 		<a class="btn btn-outline-secondary my-1 mx-1"
 				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl(
 					$globalRequestUri,
