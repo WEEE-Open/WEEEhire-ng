@@ -7,6 +7,7 @@ use DateTimeZone;
 use Exception;
 use SQLite3;
 use SQLite3Result;
+use function Couchbase\defaultDecoder;
 
 class Database
 {
@@ -305,21 +306,76 @@ ORDER BY submitted DESC');
 	 * Save notes.
 	 *
 	 * @param int $id User ID
-	 * @param string $notes Notes
+	 * @param string $note Notes
 	 */
-	public function saveNotes(int $id, string $notes)
+	public function saveNotes(int $id, string $note)
 	{
-		$stmt = $this->db->prepare('UPDATE users SET notes = :notes WHERE id = :id');
+		$stmt = $this->db->prepare('INSERT INTO notes (uid, candidate_id, note) VALUES ( :uid, :id, :note )');
+		$uid = $_SESSION['uid'];
+
+		$stmt->bindValue(':uid', $uid, SQLITE3_TEXT);
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
-		if ($notes === '') {
-			$stmt->bindValue(':notes', null, SQLITE3_NULL);
+		if ($note === '') {
+			$stmt->bindValue(':note', null, SQLITE3_NULL);
 		} else {
-			$stmt->bindValue(':notes', $notes, SQLITE3_TEXT);
+			$stmt->bindValue(':note', $note, SQLITE3_TEXT);
 		}
 		$result = $stmt->execute();
 		if ($result === false) {
 			throw new DatabaseException();
 		}
+	}
+
+    /**
+     * Update note.
+     *
+     * @param int $id User ID
+     * @param string $note Notes
+     */
+    public function updateNote(int $id, string $note)
+    {
+        $stmt = $this->db->prepare('UPDATE notes SET note=:note, updated_at=:updated_at WHERE candidate_id=:id AND uid=:uid');
+        $uid = $_SESSION['uid'];
+
+        $stmt->bindValue(':uid', $uid, SQLITE3_TEXT);
+        $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+        $stmt->bindValue(':updated_at', date('Y-m-d H:i:s'), SQLITE3_TEXT);
+        if ($note === '') {
+            $stmt->bindValue(':note', null, SQLITE3_NULL);
+        } else {
+            $stmt->bindValue(':note', $note, SQLITE3_TEXT);
+        }
+        $result = $stmt->execute();
+        if ($result === false) {
+            throw new DatabaseException();
+        }
+    }
+
+	/**
+     * Retrieve notes beside on candidate id
+     *
+	 * @param $candidateId
+	 * @return array
+	 */
+	public function getNotesByCandidateId($candidateId)
+	{
+		$stmt = $this->db->prepare('SELECT * FROM notes WHERE candidate_id=:id');
+		$stmt->bindValue(':id', $candidateId, SQLITE3_INTEGER);
+		$result = $stmt->execute();
+
+		$compact = [];
+		while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+			$compact[] = [
+				'id'           => $row['id'],
+				'uid'          => $row['uid'],
+				'candidate_id' => $row['candidate_id'],
+				'note'         => $row['note'],
+				'created_at'   => $row['created_at'],
+				'updated_at'   => $row['updated_at']
+			];
+		}
+
+		return $compact;
 	}
 
 	/**
@@ -465,12 +521,12 @@ ORDER BY submitted DESC');
 	 */
 	public function updateUser(User $user)
 	{
-		$stmt = $this->db->prepare('UPDATE users SET name = :namep, surname = :surname, degreecourse = :degreecourse, year = :yearp, matricola = :matricola, area = :area, letter = :letter WHERE id = :id');
-		$this->bindUserParameters($user, $stmt);
-		$result = $stmt->execute();
-		if ($result === false) {
-			throw new DatabaseException();
-		}
+//		$stmt = $this->db->prepare('UPDATE users SET name = :namep, surname = :surname, degreecourse = :degreecourse, year = :yearp, matricola = :matricola, area = :area, letter = :letter WHERE id = :id');
+//		$this->bindUserParameters($user, $stmt);
+//		$result = $stmt->execute();
+//		if ($result === false) {
+//			throw new DatabaseException();
+//		}
 	}
 
 	/**

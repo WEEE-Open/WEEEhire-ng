@@ -43,7 +43,7 @@ class PageCandidates implements RequestHandlerInterface
 			if ($request->getMethod() === 'POST') {
 				$POST = $request->getParsedBody();
 				// Most buttons also update notes (so we can write "seems good" and press "approve")
-				$notes = $POST['notes'] ?? '';
+				$note = $POST['note'] ?? '';
 				$status = $user->getCandidateStatus();
 
 				if (isset($POST['edit'])) {
@@ -54,8 +54,11 @@ class PageCandidates implements RequestHandlerInterface
 					}
 				} elseif (isset($POST['save'])) {
 					// This button is always available
-					$db->saveNotes($id, $notes);
-				} elseif (isset($POST['voteButton']) && isset($POST['vote'])) {
+					$db->saveNotes($id, $note);
+				} elseif ( isset($POST['updateNote']) ) {
+                    // This button is always available
+                    $db->updateNote($id, $note);
+                } elseif (isset($POST['voteButton']) && isset($POST['vote'])) {
 					// This button is always available
 					$db->setEvaluation($id, $_SESSION['uid'], $_SESSION['cn'], $POST['vote']);
 				} elseif (isset($POST['unvote']) && isset($POST["id_evaluation"])) {
@@ -144,7 +147,8 @@ class PageCandidates implements RequestHandlerInterface
 					'recruiters'  => $ldap->getRecruiters(),
 					'evaluations' => $db->getEvaluation($id),
 					'uid'         => $_SESSION['uid'],
-					'cn'          => $_SESSION['cn']
+					'cn'          => $_SESSION['cn'],
+                    'notes'       => $db->getNotesByCandidateId($id)
 				]
 			);
 			return new HtmlResponse($page);

@@ -48,3 +48,13 @@ create table evaluation (
 	vote integer not null,
 	foreign key (ref_user_id) references users (id)
 );
+
+CREATE TABLE notes (
+   id INTEGER PRIMARY KEY autoincrement,
+   uid TEXT NOT NULL,
+   candidate_id INTEGER REFERENCES users,
+   note TEXT NOT NULL,
+   created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+   foreign key (candidate_id) references users (id)
+);
