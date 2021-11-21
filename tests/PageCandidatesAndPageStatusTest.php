@@ -284,7 +284,7 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 
 	private function saveNotes($id, string $theNote) {
 		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/candidates.php'],
-			['id' => $id], ['save' => 'true', 'notes' => $theNote], [], []);
+			['id' => $id], ['save' => 'true', 'note' => $theNote], [], []);
 		$response = (new PageCandidates())->handle($request);
 		$this->assertEquals(303, $response->getStatusCode(), 'Redirect to same page for notes');
 		if(session_status() === PHP_SESSION_ACTIVE) {
