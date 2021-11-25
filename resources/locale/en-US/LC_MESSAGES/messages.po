@@ -1400,6 +1400,22 @@ msgstr "Update info"
 msgid "Annulla"
 msgstr "Cancel"
 
+#: templates/candidate.php:150
+msgid "Autore"
+msgstr "Author"
+
+#: templates/candidate.php:153
+msgid "Testo"
+msgstr "Text"
+
+#: templates/candidate.php:179
+msgid "Nessuna nota"
+msgstr "No notes"
+
+#: templates/candidate.php:179
+msgid "Aggiungi nota"
+msgstr "Add note"
+
 #~ msgid "Mosta (spoiler!)"
 #~ msgstr "Show (spoiler!)"
 
