@@ -163,16 +163,16 @@ require_once 'stars.php';
 		<?php foreach ($notes as $note) : ?>
 			<?php $userNoted = $_SESSION['uid'] == $note['uid'] ? true : false ?>
 			<form method="post">
-				<div class="row mx-0">
-					<div class="col-12 col-md-6 mb-2 mb-md-1" style="padding-left: 0; padding-right: 0;">
+				<div class="row mx-0 mb-4">
+					<div class="col-12 col-md-6 mb-1" style="padding-left: 0; padding-right: 0;">
 						<?php if($userNoted): ?>
 							<textarea class="form-control" name="note" cols="40"><?= htmlspecialchars($note['note']) ?></textarea>
 						<?php else: ?>
 							<div class="p-2 border"><?= htmlspecialchars($note['note']) ?></div>
 						<?php endif; ?>
 					</div>
-					<div class="col col-md-2"><?= htmlspecialchars($note['uid']) ?></div>
-					<div class="col col-md-2"><?= $note['updated_at'] ?></div>
+					<div class="col pt-1 col-md-2"><?= htmlspecialchars($note['uid']) ?></div>
+					<div class="col pt-1 col-md-2"><?= $note['updated_at']->format('Y-m-d') ?> <small><?= $note['updated_at']->format('H:i') ?></small></div>
 					<div class="col col-md-2 pr-0 text-right text-md-left"><?php if($userNoted): ?><button class="btn btn-outline-primary my-1" name="updateNote" value="true"><?= __('Modifica') ?></button><?php endif; ?></div>
 				</div>
 			</form>

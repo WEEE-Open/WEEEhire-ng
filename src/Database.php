@@ -311,7 +311,7 @@ ORDER BY submitted DESC');
 	 */
 	public function saveNotes(int $id, string $note)
 	{
-		$stmt = $this->db->prepare('INSERT INTO notes (uid, candidate_id, note) VALUES ( :uid, :id, :note )');
+		$stmt = $this->db->prepare('INSERT INTO notes (uid, candidate_id, note, created_at, updated_at) VALUES ( :uid, :id, :note, :now1, :now2 )');
 		$uid = $_SESSION['uid'];
 
 		$stmt->bindValue(':uid', $uid, SQLITE3_TEXT);
@@ -321,6 +321,10 @@ ORDER BY submitted DESC');
 		} else {
 			$stmt->bindValue(':note', $note, SQLITE3_TEXT);
 		}
+
+		$stmt->bindValue(':now1', time(), SQLITE3_INTEGER);
+		$stmt->bindValue(':now2', time(), SQLITE3_INTEGER);
+
 		$result = $stmt->execute();
 		if ($result === false) {
 			throw new DatabaseException();
@@ -360,20 +364,16 @@ ORDER BY submitted DESC');
 	 */
 	public function getNotesByCandidateId($candidateId)
 	{
-		$stmt = $this->db->prepare('SELECT * FROM notes WHERE candidate_id = :id');
+		$stmt = $this->db->prepare('SELECT id, uid, candidate_id, note, created_at, updated_at FROM notes WHERE candidate_id = :id ORDER BY updated_at DESC');
 		$stmt->bindValue(':id', $candidateId, SQLITE3_INTEGER);
 		$result = $stmt->execute();
 
 		$compact = [];
+		$dtz = new DateTimeZone('Europe/Rome');
 		while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-			$compact[] = [
-				'id'           => $row['id'],
-				'uid'          => $row['uid'],
-				'candidate_id' => $row['candidate_id'],
-				'note'         => $row['note'],
-				'created_at'   => $row['created_at'],
-				'updated_at'   => $row['updated_at']
-			];
+			$row['updated_at'] = $this->timestampToTime((int) $row['updated_at'], $dtz);
+			$row['created_at'] = $this->timestampToTime((int) $row['created_at'], $dtz);
+			$compact[] = $row;
 		}
 
 		return $compact;
