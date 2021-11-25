@@ -435,16 +435,10 @@ We may ask you to do some terminal exercises, remember to have one ready!`
 	</div>
 <?php endif ?>
 <?php if (!$edit && $user->status === true) : ?>
-	<form method="post">
-		<?php if ($user->invitelink !== null) : ?>
-			<div class="alert alert-info" role="alert">
-				<?=sprintf(__('Link d\'invito: %s'), $user->invitelink);?>
-			</div>
-		<?php endif ?>
-		<div class="form-group text-center">
-			<button name="invite" value="true" type="submit"
-					class="btn btn-primary"><?=__('Genera link d\'invito')?></button>
+	<?php if ($user->invitelink !== null) : ?>
+		<div class="alert alert-info" role="alert">
+			<?=sprintf(__('Link d\'invito: %s'), $user->invitelink);?>
 		</div>
-	</form>
+	<?php endif ?>
 <?php endif ?>
 <script src="resize.js"></script>
