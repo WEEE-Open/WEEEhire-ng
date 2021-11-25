@@ -143,19 +143,19 @@ require_once 'stars.php';
 </table>
 
 <!-- User can not note more than 1 time -->
-	<?php $userNoted = false; ?>
+<?php $userNoted = false; ?>
 <h4 class="mt-5"><?= __('Note') ?></h4>
-<div class="row">
-	<div class="col-md-2 border d-flex justify-content-center">
-		<p class="font-weight-bold"><?= __('Autore') ?></p>
-	</div>
-	<div class="col-md-6 border d-flex justify-content-center">
+<div class="row mx-0 border-bottom">
+	<div class="col col-md-6 d-none d-md-block">
 		<p class="font-weight-bold"><?= __('Testo') ?></p>
 	</div>
-	<div class="col-md-2 border d-flex justify-content-center">
+	<div class="col col-md-2">
+		<p class="font-weight-bold"><?= __('Autore') ?></p>
+	</div>
+	<div class="col col-md-2">
 		<p class="font-weight-bold"><?= __('Data') ?></p>
 	</div>
-	<div class="col-md-2 border d-flex justify-content-center">
+	<div class="col col-md-2 text-right text-md-left">
 		<p class="font-weight-bold"><?= __('Azioni') ?></p>
 	</div>
 </div>
@@ -163,19 +163,23 @@ require_once 'stars.php';
 		<?php foreach ($notes as $note) : ?>
 			<?php $userNoted = $_SESSION['uid'] == $note['uid'] ? true : false ?>
 			<form method="post">
-				<div class="row">
-					<div class="col-md-2 border d-flex justify-content-center"><?= $note['uid'] ?></div>
-					<div class="col-md-6 border" style="padding-left: 0; padding-right: 0;">
-						<textarea class="form-control" name="note" cols="40" <?= $userNoted ? '' : 'disabled' ?>><?= $note['note'] ?></textarea>
+				<div class="row mx-0">
+					<div class="col-12 col-md-6 mb-2 mb-md-1" style="padding-left: 0; padding-right: 0;">
+						<?php if($userNoted): ?>
+							<textarea class="form-control" name="note" cols="40"><?= htmlspecialchars($note['note']) ?></textarea>
+						<?php else: ?>
+							<div class="p-2 border"><?= htmlspecialchars($note['note']) ?></div>
+						<?php endif; ?>
 					</div>
-					<div class="col-md-2 border d-flex justify-content-center"><?= $note['updated_at'] ?></div>
-					<div class="col-md-2 border d-flex justify-content-center p-2"><?=  $userNoted ? '<button class="btn btn-outline-primary ml-3" name="updateNote" value="true">Edit</button>' : '' ?></div>
+					<div class="col col-md-2"><?= htmlspecialchars($note['uid']) ?></div>
+					<div class="col col-md-2"><?= $note['updated_at'] ?></div>
+					<div class="col col-md-2 pr-0 text-right text-md-left"><?php if($userNoted): ?><button class="btn btn-outline-primary my-1" name="updateNote" value="true"><?= __('Modifica') ?></button><?php endif; ?></div>
 				</div>
 			</form>
 		<?php endforeach; ?>
 	<?php else : ?>
-	<div class="row" style="background-color: #dee2e6;">
-		<div class="offset-md-5"></div><div class="col-md-2"><?= __('Nessuna nota') ?></div><div class="offset-md-5"></div>
+	<div class="row mx-0">
+		<div class="col my-3 text-center"><?= __('Nessuna nota') ?></div>
 	</div>
 	<?php endif; ?>
 

@@ -360,7 +360,7 @@ ORDER BY submitted DESC');
 	 */
 	public function getNotesByCandidateId($candidateId)
 	{
-		$stmt = $this->db->prepare('SELECT * FROM notes WHERE candidate_id=:id');
+		$stmt = $this->db->prepare('SELECT * FROM notes WHERE candidate_id = :id');
 		$stmt->bindValue(':id', $candidateId, SQLITE3_INTEGER);
 		$result = $stmt->execute();
 
