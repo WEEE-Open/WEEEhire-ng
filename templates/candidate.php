@@ -180,12 +180,6 @@ require_once 'stars.php';
 	<?php endif; ?>
 
 <form method="post" class="mt-3">
-<!--	<div class="form-group text-center row mx-0">-->
-<!--		<button name="goprevvote" value="true" type="submit" class="btn btn-outline-primary btn-block col-lg-3 col-12 my-1"><span class="fas fa-arrow-circle-left"></span>&nbsp;?=__('Precedente da valutare')</button>-->
-<!--		<button name="goprev" value="true" type="submit" class="btn btn-outline-secondary btn-block col-lg-3 col-6 my-1"><span class="fas fa-arrow-circle-left"></span>&nbsp;?=__('Precedente')</button>-->
-<!--		<button name="gonext" value="true" type="submit" class="btn btn-outline-secondary btn-block col-lg-3 col-6 my-1">=?=__('Successivo')&nbsp;<span class="fas fa-arrow-circle-right"></span></button>-->
-<!--		<button name="gonextvote" value="true" type="submit" class="btn btn-outline-primary btn-block col-lg-3 col-12 my-1">?=__('Successivo da valutare')&nbsp;<span class="fas fa-arrow-circle-right"></span></button>-->
-<!--	</div>-->
 	<?php if (!$userNoted) : ?>
 	<div class="form-group">
 		<label for="notes"><b><?= __('Aggiungi nota') ?></b></label>
@@ -204,6 +198,15 @@ require_once 'stars.php';
 					$globalRequestUri,
 					['edit' => 'true']
 				))?>"><?=__('Modifica dati')?></a>
+	</div>
+	<div class="form-group text-center justify-content-center row">
+		<div class="btn-toolbar">
+			<a href="/candidates.php?id=<?= $user->prev_not_evaluated_user ?>" class="btn btn-outline-primary mr-1 ml-1 <?= $user->prev_not_evaluated_user == null ? 'disabled' : '' ?>"><span class="fas fa-arrow-circle-left"></span>&nbsp;<?=__('Precedente da valutare')?></a>
+			<a href="/candidates.php?id=<?= $user->prev_user ?>" class="btn btn-outline-secondary mr-1 ml-1 <?= $user->prev_user == null ? 'disabled' : '' ?>"><span class="fas fa-arrow-circle-left"></span>&nbsp;<?=__('Precedente')?></a>
+			<a href="/candidates.php?id=<?= $user->next_user ?>" class="btn btn-outline-secondary mr-1 ml-1 <?= $user->next_user == null ? 'disabled' : '' ?>"><?= __('Successivo') ?>&nbsp;<span class="fas fa-arrow-circle-right"></span></a>
+			<a href="/candidates.php?id=<?= $user->next_not_evaluated_user ?>" class="btn btn-outline-primary mr-1 ml-1 <?= $user->next_not_evaluated_user == null ? 'disabled' : '' ?>"><?= __('Successivo da valutare') ?>&nbsp;<span class="fas fa-arrow-circle-right"></span></a>
+		</div>
+
 	</div>
 	<?php $status = $user->getCandidateStatus(); ?>
 	<?php if ($status === \WEEEOpen\WEEEHire\User::STATUS_NEW_HOLD || $status === \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD) : ?>

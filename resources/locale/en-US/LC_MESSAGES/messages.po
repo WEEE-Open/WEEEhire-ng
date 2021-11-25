@@ -1416,6 +1416,24 @@ msgstr "No notes"
 msgid "Aggiungi nota"
 msgstr "Add note"
 
+#: templates/candidate.php:204
+msgid "Precedente da valutare"
+msgstr "Previous to be evaluated"
+
+#: templates/candidate.php:205
+msgid "Precedente"
+msgstr "Previous"
+
+#: templates/candidate.php:206
+msgid "Successivo"
+msgstr "Following"
+
+#: templates/candidate.php:207
+msgid "Successivo da valutare"
+msgstr "Next to be evaluated"
+
+
+
 #~ msgid "Mosta (spoiler!)"
 #~ msgstr "Show (spoiler!)"
 

@@ -76,3 +76,8 @@
 	padding-top: 0.25em;
 	padding-bottom: 0.25em;
 }
+
+a.disabled {
+	pointer-events: none;
+	cursor: default;
+}

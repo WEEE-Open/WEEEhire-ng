@@ -57,7 +57,39 @@ class Database
 	 */
 	public function getUser(string $id): ?User
 	{
-		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status, hold, recruiter, recruitertg, submitted, notes, emailed, invitelink, visiblenotes FROM users WHERE id = :id LIMIT 1');
+		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status,
+                                                 hold, recruiter, recruitertg, submitted, notes, emailed, invitelink, visiblenotes,
+                                                 (
+                                                    SELECT MAX(prev_users.id) 
+                                                    FROM users as prev_users
+                                                    WHERE prev_users.id < :id AND 
+                                                          prev_users.id NOT IN (
+                                                                                SELECT prev_evaluation.ref_user_id
+                                                                                FROM evaluation as prev_evaluation
+                                                                                WHERE prev_evaluation.ref_user_id < :id
+                                                                                )
+                                                 ) AS prev_not_evaluated_user,
+                                                 (
+                                                    SELECT MAX(prev_users.id)
+                                                    FROM users as prev_users
+                                                    WHERE prev_users.id < :id
+                                                 ) AS prev_user,
+                                                 (
+                                                    SELECT MIN(next_users.id)
+                                                    FROM users as next_users
+                                                    WHERE next_users.id > :id
+                                                 ) AS next_user,
+                                                 (
+                                                    SELECT MIN(next_users.id) 
+                                                    FROM users as next_users
+                                                    WHERE next_users.id > :id AND 
+                                                          next_users.id NOT IN (
+                                                                                SELECT next_evaluation.ref_user_id
+                                                                                FROM evaluation as next_evaluation
+                                                                                WHERE next_evaluation.ref_user_id > :id
+                                                                                )
+                                                 ) AS next_not_evaluated_user
+                                                 FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if ($result === false) {
@@ -88,7 +120,11 @@ class Database
 				'notes',
 				'visiblenotes',
 				'emailed',
-				'invitelink'
+				'invitelink',
+				'prev_user',
+				'next_user',
+				'prev_not_evaluated_user',
+				'next_not_evaluated_user'
 			] as $attr
 		) {
 			$user->$attr = $row[$attr];
