@@ -344,7 +344,7 @@ ORDER BY submitted DESC');
 
 		$stmt->bindValue(':uid', $uid, SQLITE3_TEXT);
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
-		$stmt->bindValue(':updated_at', date('Y-m-d H:i:s'), SQLITE3_TEXT);
+		$stmt->bindValue(':updated_at', time(), SQLITE3_INTEGER);
 		if ($note === '') {
 			$stmt->bindValue(':note', null, SQLITE3_NULL);
 		} else {
