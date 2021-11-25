@@ -143,7 +143,7 @@ require_once 'stars.php';
 </table>
 
 <!-- User can not note more than 1 time -->
-<?php $userNoted = false; ?>
+<?php $userNoted = false; $currentUserNoted = false; ?>
 <h4 class="mt-5"><?= __('Note') ?></h4>
 <div class="row mx-0 border-bottom">
 	<div class="col col-md-6 d-none d-md-block">
@@ -161,11 +161,11 @@ require_once 'stars.php';
 </div>
 	<?php if (count($notes) > 0) : ?>
 		<?php foreach ($notes as $note) : ?>
-			<?php $userNoted = $_SESSION['uid'] == $note['uid'] ? true : false ?>
+			<?php $currentUserNoted = $_SESSION['uid'] === $note['uid']; $userNoted = $userNoted || $currentUserNoted; ?>
 			<form method="post">
 				<div class="row mx-0 mb-4">
 					<div class="col-12 col-md-6 mb-1" style="padding-left: 0; padding-right: 0;">
-						<?php if($userNoted): ?>
+						<?php if($currentUserNoted): ?>
 							<textarea class="form-control" name="note" cols="40"><?= htmlspecialchars($note['note']) ?></textarea>
 						<?php else: ?>
 							<div class="p-2 border"><?= htmlspecialchars($note['note']) ?></div>
@@ -173,7 +173,7 @@ require_once 'stars.php';
 					</div>
 					<div class="col pt-1 col-md-2"><?= htmlspecialchars($note['uid']) ?></div>
 					<div class="col pt-1 col-md-2"><?= $note['updated_at']->format('Y-m-d') ?> <small><?= $note['updated_at']->format('H:i') ?></small></div>
-					<div class="col col-md-2 pr-0 text-right text-md-left"><?php if($userNoted): ?><button class="btn btn-outline-primary my-1" name="updateNote" value="true"><?= __('Modifica') ?></button><?php endif; ?></div>
+					<div class="col col-md-2 pr-0 text-right text-md-left"><?php if($currentUserNoted): ?><button class="btn btn-outline-primary my-1" name="updateNote" value="true"><?= __('Modifica') ?></button><?php endif; ?></div>
 				</div>
 			</form>
 		<?php endforeach; ?>
