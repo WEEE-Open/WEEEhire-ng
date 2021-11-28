@@ -143,39 +143,49 @@ require_once 'stars.php';
 </table>
 
 <!-- User can not note more than 1 time -->
-	<?php $userNoted = false; ?>
+	<?php $userNoted = false;
+	$currentUserNoted = false; ?>
 <h4 class="mt-5"><?= __('Note') ?></h4>
-<div class="row">
-	<div class="col-md-2 border d-flex justify-content-center">
-		<p class="font-weight-bold"><?= __('Autore') ?></p>
-	</div>
-	<div class="col-md-6 border d-flex justify-content-center">
+<div class="row mx-0 border-bottom">
+	<div class="col col-md-6 d-none d-md-block">
 		<p class="font-weight-bold"><?= __('Testo') ?></p>
 	</div>
-	<div class="col-md-2 border d-flex justify-content-center">
+	<div class="col col-md-2">
+		<p class="font-weight-bold"><?= __('Autore') ?></p>
+	</div>
+	<div class="col col-md-2">
 		<p class="font-weight-bold"><?= __('Data') ?></p>
 	</div>
-	<div class="col-md-2 border d-flex justify-content-center">
+	<div class="col col-md-2 text-right text-md-left">
 		<p class="font-weight-bold"><?= __('Azioni') ?></p>
 	</div>
 </div>
 	<?php if (count($notes) > 0) : ?>
 		<?php foreach ($notes as $note) : ?>
-			<?php $userNoted = $_SESSION['uid'] == $note['uid'] ? true : false ?>
+			<?php $currentUserNoted = $_SESSION['uid'] === $note['uid'];
+			$userNoted = $userNoted || $currentUserNoted; ?>
 			<form method="post">
-				<div class="row">
-					<div class="col-md-2 border d-flex justify-content-center"><?= $note['uid'] ?></div>
-					<div class="col-md-6 border" style="padding-left: 0; padding-right: 0;">
-						<textarea class="form-control" name="note" cols="40" <?= $userNoted ? '' : 'disabled' ?>><?= $note['note'] ?></textarea>
+				<div class="row mx-0 mb-4">
+					<div class="col-12 col-md-6 mb-1" style="padding-left: 0; padding-right: 0;">
+						<?php if ($currentUserNoted) : ?>
+							<textarea class="form-control" name="note" cols="40"><?= htmlspecialchars($note['note']) ?></textarea>
+						<?php else : ?>
+							<div class="p-2 border"><?= htmlspecialchars($note['note']) ?></div>
+						<?php endif; ?>
 					</div>
-					<div class="col-md-2 border d-flex justify-content-center"><?= $note['updated_at'] ?></div>
-					<div class="col-md-2 border d-flex justify-content-center p-2"><?=  $userNoted ? '<button class="btn btn-outline-primary ml-3" name="updateNote" value="true">Edit</button>' : '' ?></div>
+					<div class="col pt-1 col-md-2"><?= htmlspecialchars($note['uid']) ?></div>
+					<div class="col pt-1 col-md-2"><?= $note['updated_at']->format('Y-m-d') ?> <small><?= $note['updated_at']->format('H:i') ?></small></div>
+					<div class="col col-md-2 pr-0 text-right text-md-left">
+						<?php if ($currentUserNoted) : ?>
+							<button class="btn btn-outline-primary my-1" name="updateNote" value="true"><?= __('Modifica') ?></button>
+						<?php endif; ?>
+					</div>
 				</div>
 			</form>
 		<?php endforeach; ?>
 	<?php else : ?>
-	<div class="row" style="background-color: #dee2e6;">
-		<div class="offset-md-5"></div><div class="col-md-2"><?= __('Nessuna nota') ?></div><div class="offset-md-5"></div>
+	<div class="row mx-0">
+		<div class="col my-3 text-center"><?= __('Nessuna nota') ?></div>
 	</div>
 	<?php endif; ?>
 
@@ -428,16 +438,10 @@ We may ask you to do some terminal exercises, remember to have one ready!`
 	</div>
 <?php endif ?>
 <?php if (!$edit && $user->status === true) : ?>
-	<form method="post">
-		<?php if ($user->invitelink !== null) : ?>
-			<div class="alert alert-info" role="alert">
-				<?=sprintf(__('Link d\'invito: %s'), $user->invitelink);?>
-			</div>
-		<?php endif ?>
-		<div class="form-group text-center">
-			<button name="invite" value="true" type="submit"
-					class="btn btn-primary"><?=__('Genera link d\'invito')?></button>
+	<?php if ($user->invitelink !== null) : ?>
+		<div class="alert alert-info" role="alert">
+			<?=sprintf(__('Link d\'invito: %s'), $user->invitelink);?>
 		</div>
-	</form>
+	<?php endif ?>
 <?php endif ?>
 <script src="resize.js"></script>

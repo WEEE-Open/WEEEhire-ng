@@ -35,5 +35,11 @@
       "WEEEOpen\\WEEEHire\\": "src/",
       "WEEEOpen\\WEEEHire\\tests\\": "tests/"
     }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-text",
+    "lint": "vendor/bin/phpcs --report=summary src public templates",
+    "lintlong": "vendor/bin/phpcs src public templates",
+    "lintfix": "vendor/bin/phpcbf src public templates"
   }
 }
