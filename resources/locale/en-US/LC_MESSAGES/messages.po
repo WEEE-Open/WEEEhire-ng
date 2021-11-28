@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-25 23:33+0100\n"
-"PO-Revision-Date: 2021-11-25 23:33+0100\n"
+"POT-Creation-Date: 2021-11-28 20:59+0100\n"
+"PO-Revision-Date: 2021-11-28 20:58+0100\n"
 "Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
 "Language-Team: Italian <>\n"
 "Language: en_US\n"
@@ -34,7 +34,7 @@ msgstr "Candidates"
 msgid "Colloqui"
 msgstr "Interviews"
 
-#: templates/adminnavbar.php:13 templates/candidate.php:291
+#: templates/adminnavbar.php:13 templates/candidate.php:294
 #: templates/candidates.php:30 templates/interview.php:50
 #: templates/interviewsbyrecruiter.php:6 templates/interviewsbyrecruiter.php:14
 msgid "Recruiter"
@@ -157,82 +157,98 @@ msgstr "Edit"
 msgid "Nessuna nota"
 msgstr "No notes"
 
-#: templates/candidate.php:201
+#: templates/candidate.php:195
 msgid "Aggiungi nota"
 msgstr "Add note"
 
-#: templates/candidate.php:207
+#: templates/candidate.php:201
 msgid "Salva note"
 msgstr "Save notes"
 
-#: templates/candidate.php:216 templates/interview.php:101
+#: templates/candidate.php:210 templates/interview.php:101
 msgid "Modifica dati"
 msgstr "Edit info"
 
-#: templates/candidate.php:221
+#: templates/candidate.php:214
+msgid "Precedente da valutare"
+msgstr "Previous to be evaluated"
+
+#: templates/candidate.php:215
+msgid "Precedente"
+msgstr "Previous"
+
+#: templates/candidate.php:216
+msgid "Successivo"
+msgstr "Next"
+
+#: templates/candidate.php:217
+msgid "Successivo da valutare"
+msgstr "Next to be evaluated"
+
+#: templates/candidate.php:224
 msgid "Motivazioni (visibili alla persona interessata)"
 msgstr "Motivation (visible to this person)"
 
-#: templates/candidate.php:232 templates/candidate.php:277
+#: templates/candidate.php:235 templates/candidate.php:280
 msgid "Approva candidatura"
 msgstr "Approve"
 
-#: templates/candidate.php:234
+#: templates/candidate.php:237
 msgid "Rifiuta candidatura"
 msgstr "Reject"
 
-#: templates/candidate.php:236 templates/candidate.php:271
+#: templates/candidate.php:239 templates/candidate.php:274
 #: templates/interview.php:121
 msgid "Metti in lista d'attesa"
 msgstr "Put on hold"
 
-#: templates/candidate.php:242 templates/candidate.php:250
+#: templates/candidate.php:245 templates/candidate.php:253
 #: templates/interview.php:129
 msgid "Rimanda nel limbo"
 msgstr "Send back to limbo"
 
-#: templates/candidate.php:248 templates/candidate.php:257
+#: templates/candidate.php:251 templates/candidate.php:260
 msgid "Pubblica"
 msgstr "Publish"
 
-#: templates/candidate.php:259 templates/interview.php:118
+#: templates/candidate.php:262 templates/interview.php:118
 msgid "Togli dalla lista d'attesa"
 msgstr "Remove from hold"
 
-#: templates/candidate.php:261 templates/candidate.php:281
+#: templates/candidate.php:264 templates/candidate.php:284
 msgid "Salva motivazioni"
 msgstr "Save motivation"
 
-#: templates/candidate.php:279
+#: templates/candidate.php:282
 msgid "Rifiuta candidatura definitivamente"
 msgstr "Reject, at last"
 
-#: templates/candidate.php:312
+#: templates/candidate.php:315
 msgid "Lingua e template"
 msgstr "Language and template"
 
-#: templates/candidate.php:319
+#: templates/candidate.php:322
 msgid "Template"
 msgstr "Template"
 
-#: templates/candidate.php:332
+#: templates/candidate.php:335
 msgid "Oggetto"
 msgstr "Subject"
 
-#: templates/candidate.php:338
+#: templates/candidate.php:341
 msgid "Email"
 msgstr "Email"
 
-#: templates/candidate.php:343
+#: templates/candidate.php:346
 msgid "Pubblica e manda email"
 msgstr "Publish and send email"
 
-#: templates/candidate.php:434
+#: templates/candidate.php:437
 #, php-format
 msgid "Mail inviata da %s"
 msgstr "Mail sent by %s"
 
-#: templates/candidate.php:440 templates/interview.php:137
+#: templates/candidate.php:443 templates/interview.php:137
 #, php-format
 msgid "Link d'invito: %s"
 msgstr "Invite link: %s"
@@ -1420,38 +1436,6 @@ msgstr "Update info"
 #: templates/userinfo.php:61
 msgid "Annulla"
 msgstr "Cancel"
-
-#: templates/candidate.php:150
-msgid "Autore"
-msgstr "Author"
-
-#: templates/candidate.php:153
-msgid "Testo"
-msgstr "Text"
-
-#: templates/candidate.php:179
-msgid "Nessuna nota"
-msgstr "No notes"
-
-#: templates/candidate.php:179
-msgid "Aggiungi nota"
-msgstr "Add note"
-
-#: templates/candidate.php:204
-msgid "Precedente da valutare"
-msgstr "Previous to be evaluated"
-
-#: templates/candidate.php:205
-msgid "Precedente"
-msgstr "Previous"
-
-#: templates/candidate.php:206
-msgid "Successivo"
-msgstr "Following"
-
-#: templates/candidate.php:207
-msgid "Successivo da valutare"
-msgstr "Next to be evaluated"
 
 #~ msgid "Mosta (spoiler!)"
 #~ msgstr "Show (spoiler!)"
