@@ -127,7 +127,7 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 						<div class="col-md-6 border" style="padding-left: 0; padding-right: 0;">
 							<textarea class="form-control" name="note" cols="40" <?= $userNoted ? '' : 'disabled' ?>><?= $note['note'] ?></textarea>
 						</div>
-						<div class="col-md-2 border d-flex justify-content-center"><?= $note['updated_at'] ?></div>
+						<div class="col-md-2 border d-flex justify-content-center"><?= $note['updated_at']->format('Y-m-d') ?> <small><?= $note['updated_at']->format('H:i') ?></small></div>
 						<div class="col-md-2 border d-flex justify-content-center p-2"><?=  $userNoted ? '<button class="btn btn-outline-primary ml-3" name="updateNote" value="true">Edit</button>' : '' ?></div>
 					</div>
 				</form>
@@ -142,7 +142,7 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 		<div class="form-group">
 			<label for="note"><b><?= __('Aggiungi nota') ?></b></label>
 			<textarea id="note" name="note" cols="40" rows="3"
-					  class="form-control"><?=$this->e($user->notes)?></textarea>
+					  class="form-control" required><?=$this->e($user->notes)?></textarea>
 		</div>
 		<div class="form-group text-center">
 			<button name="saveNote" value="true" type="submit"
