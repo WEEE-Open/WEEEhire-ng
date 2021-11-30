@@ -4,6 +4,7 @@
 /** @var $edit bool */
 /** @var $recruiters string[][] */
 /** @var \Psr\Http\Message\UriInterface $globalRequestUri */
+/** @var array $notes */
 
 $titleShort = sprintf(__('%s %s (%s)'), $this->e($user->name), $this->e($user->surname), $this->e($user->matricola));
 $title = sprintf(__('%s - Colloquio'), $titleShort);
@@ -100,12 +101,54 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 					['edit' => 'true']
 				))?>"><?=__('Modifica dati')?></a>
 	</div>
-	<form method="post">
-		<div class="form-group">
-			<label for="questions"><?=__('Note e domande per il colloquio')?></label>
-			<textarea id="questions" name="questions" cols="40" rows="5"
-					class="form-control"><?=$this->e($interview->questions)?></textarea>
+	<?php $userNoted = false; ?>
+	<h5 class="mt-5"><?=__('Note e domande per il colloquio')?></h5>
+	<div class="row">
+		<div class="col-md-2 border d-flex justify-content-center">
+			<p class="font-weight-bold"><?= __('Autore') ?></p>
 		</div>
+		<div class="col-md-6 border d-flex justify-content-center">
+			<p class="font-weight-bold"><?= __('Testo') ?></p>
+		</div>
+		<div class="col-md-2 border d-flex justify-content-center">
+			<p class="font-weight-bold"><?= __('Data') ?></p>
+		</div>
+		<div class="col-md-2 border d-flex justify-content-center">
+			<p class="font-weight-bold"><?= __('Azioni') ?></p>
+		</div>
+	</div>
+	<div class="form-group">
+		<?php if (count($notes) > 0) : ?>
+			<?php foreach ($notes as $note) : ?>
+				<?php $userNoted = $_SESSION['uid'] == $note['uid'] ? true : false ?>
+				<form method="post">
+					<div class="row">
+						<div class="col-md-2 border d-flex justify-content-center"><?= $note['uid'] ?></div>
+						<div class="col-md-6 border" style="padding-left: 0; padding-right: 0;">
+							<textarea class="form-control" name="note" cols="40" <?= $userNoted ? '' : 'disabled' ?>><?= $note['note'] ?></textarea>
+						</div>
+						<div class="col-md-2 border d-flex justify-content-center"><?= $note['updated_at'] ?></div>
+						<div class="col-md-2 border d-flex justify-content-center p-2"><?=  $userNoted ? '<button class="btn btn-outline-primary ml-3" name="updateNote" value="true">Edit</button>' : '' ?></div>
+					</div>
+				</form>
+			<?php endforeach; ?>
+		<?php else : ?>
+			<div class="row" style="background-color: #dee2e6;">
+				<div class="offset-md-5"></div><div class="col-md-2"><?= __('Nessuna nota') ?></div><div class="offset-md-5"></div>
+			</div>
+		<?php endif; ?>
+	</div>
+	<form method="post" class="mt-3">
+		<div class="form-group">
+			<label for="note"><b><?= __('Aggiungi nota') ?></b></label>
+			<textarea id="note" name="note" cols="40" rows="3"
+					  class="form-control"><?=$this->e($user->notes)?></textarea>
+		</div>
+		<div class="form-group text-center">
+			<button name="saveNote" value="true" type="submit"
+					class="btn btn-outline-primary my-1 mx-1"><?=__('Salva note')?></button>
+		</div>
+	</form>
 		<div class="form-group">
 			<label for="answers"><?=__('Risposte e commenti vari post-colloquio')?></label>
 			<textarea id="answers" name="answers" cols="40" rows="10"

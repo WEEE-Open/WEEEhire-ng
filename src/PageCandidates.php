@@ -54,10 +54,10 @@ class PageCandidates implements RequestHandlerInterface
 					}
 				} elseif (isset($POST['save'])) {
 					// This button is always available
-					$db->saveNotes($id, $note);
+					$db->saveNotes($id, $note, 'candidate');
 				} elseif (isset($POST['updateNote'])) {
 					// This button is always available
-					$db->updateNote($id, $note);
+					$db->updateNote($id, $note, 'candidate');
 				} elseif (isset($POST['voteButton']) && isset($POST['vote'])) {
 					// This button is always available
 					$db->setEvaluation($id, $_SESSION['uid'], $_SESSION['cn'], $POST['vote']);
@@ -148,7 +148,7 @@ class PageCandidates implements RequestHandlerInterface
 					'evaluations' => $db->getEvaluation($id),
 					'uid'         => $_SESSION['uid'],
 					'cn'          => $_SESSION['cn'],
-					'notes'       => $db->getNotesByCandidateId($id)
+					'notes'       => $db->getNotesByCandidateId($id, 'candidate')
 				]
 			);
 			return new HtmlResponse($page);
