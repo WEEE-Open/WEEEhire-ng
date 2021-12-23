@@ -289,9 +289,9 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			<div>
 				<span id="checkboxesHelpBlock"
 						class="form-text text-muted"><?=sprintf(
-							__('Dovresti leggere le <a href="%s">Informazioni sul trattamento dei dati personali</a> e almeno dare un\'occhiata alla pagina <a href="%s">Entra nel team</a> sul nostro sito prima di candidarti.'),
+							__('Dovresti leggere le <a href="%s">Informazioni sul trattamento dei dati personali</a> e almeno dare un\'occhiata alla pagina <a href="%s">Attività</a> sul nostro sito prima di candidarti.'),
 							'privacy.php',
-							'http://weeeopen.polito.it/entra-nel-team.html'
+							__('https://weeeopen.polito.it/attivita/')
 						)?></a></span>
 				<div class="form-check">
 					<input name="mandatorycheckbox_1" id="mandatorycheckbox_0" type="checkbox" class="form-check-input"
