@@ -104,16 +104,16 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 
 	<h4 class="mt-5"><?= __('Note') ?></h4>
 	<?= $this->fetch('notes', ['notes' => $notes]); ?>
-<?php
+	<?php
 	$userNoted = false;
 	foreach ($notes as $note) {
 		$userNoted = $_SESSION['uid'] === $note['uid'];
-		if($userNoted) {
+		if ($userNoted) {
 			break;
 		}
 	}
-?>
-<?php if (!$userNoted) : ?>
+	?>
+	<?php if (!$userNoted) : ?>
 	<form method="post" class="mt-3">
 		<div class="form-group">
 			<label for="notes"><b><?= __('Aggiungi nota') ?></b></label>
@@ -125,7 +125,7 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 					class="btn btn-outline-primary my-1 mx-1"><?=__('Aggiungi nota')?></button>
 		</div>
 	</form>
-<?php endif; ?>
+	<?php endif; ?>
 	<form method="post">
 		<div class="form-group">
 			<label for="answers"><?=__('Commenti vari post-colloquio')?></label>

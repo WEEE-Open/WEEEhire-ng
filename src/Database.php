@@ -400,7 +400,7 @@ ORDER BY submitted DESC');
 	 */
 	public function updateNote(string $author, int $id, ?string $note)
 	{
-		if($note === null || $note === '') {
+		if ($note === null || $note === '') {
 			$stmt = $this->db->prepare('DELETE FROM notes WHERE candidate_id=:id AND uid=:uid');
 		} else {
 			$stmt = $this->db->prepare('UPDATE notes SET note=:note, updated_at=:updated_at WHERE candidate_id=:id AND uid=:uid');

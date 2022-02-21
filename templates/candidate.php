@@ -143,16 +143,16 @@ require_once 'stars.php';
 </table>
 
 <h4 class="mt-5"><?= __('Note') ?></h4>
-<?= $this->fetch('notes', ['notes' => $notes]); ?>
-<?php
+	<?= $this->fetch('notes', ['notes' => $notes]); ?>
+	<?php
 	$userNoted = false;
 	foreach ($notes as $note) {
 		$userNoted = $_SESSION['uid'] === $note['uid'];
-		if($userNoted) {
+		if ($userNoted) {
 			break;
 		}
 	}
-?>
+	?>
 
 <form method="post" class="mt-3">
 	<?php if (!$userNoted) : ?>
