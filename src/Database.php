@@ -58,37 +58,7 @@ class Database
 	public function getUser(string $id): ?User
 	{
 		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status,
-                                                 hold, recruiter, recruitertg, submitted, notes, emailed, invitelink, visiblenotes,
-                                                 (
-                                                    SELECT MAX(prev_users.id) 
-                                                    FROM users as prev_users
-                                                    WHERE prev_users.id < :id AND 
-                                                          prev_users.id NOT IN (
-                                                                                SELECT prev_evaluation.ref_user_id
-                                                                                FROM evaluation as prev_evaluation
-                                                                                WHERE prev_evaluation.ref_user_id < :id
-                                                                                )
-                                                 ) AS prev_not_evaluated_user,
-                                                 (
-                                                    SELECT MAX(prev_users.id)
-                                                    FROM users as prev_users
-                                                    WHERE prev_users.id < :id
-                                                 ) AS prev_user,
-                                                 (
-                                                    SELECT MIN(next_users.id)
-                                                    FROM users as next_users
-                                                    WHERE next_users.id > :id
-                                                 ) AS next_user,
-                                                 (
-                                                    SELECT MIN(next_users.id) 
-                                                    FROM users as next_users
-                                                    WHERE next_users.id > :id AND 
-                                                          next_users.id NOT IN (
-                                                                                SELECT next_evaluation.ref_user_id
-                                                                                FROM evaluation as next_evaluation
-                                                                                WHERE next_evaluation.ref_user_id > :id
-                                                                                )
-                                                 ) AS next_not_evaluated_user
+                                                 hold, recruiter, recruitertg, submitted, emailed, invitelink, visiblenotes
                                                  FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
@@ -117,14 +87,9 @@ class Database
 				'recruiter',
 				'recruitertg',
 				'submitted',
-				'notes',
 				'visiblenotes',
 				'emailed',
 				'invitelink',
-				'prev_user',
-				'next_user',
-				'prev_not_evaluated_user',
-				'next_not_evaluated_user'
 			] as $attr
 		) {
 			$user->$attr = $row[$attr];
@@ -134,6 +99,68 @@ class Database
 		$user->emailed = (bool) $user->emailed;
 		$user->status = $user->status === null ? null : (bool) $user->status;
 		$user->invitelink = $user->invitelink === null ? null : $user->invitelink;
+
+		return $user;
+	}
+
+	public function getPrevAndNextUser(User $user, string $myself): ?User
+	{
+		$id = $user->id;
+		$stmt = $this->db->prepare('SELECT
+                                                 (
+                                                    SELECT MAX(prev_users.id) 
+                                                    FROM users as prev_users
+                                                    WHERE prev_users.id < :id AND 
+                                                          prev_users.id NOT IN (
+                                                                                SELECT prev_evaluation.ref_user_id
+                                                                                FROM evaluation as prev_evaluation
+                                                                                WHERE prev_evaluation.ref_user_id < :id
+                                                                                AND prev_evaluation.id_evaluator = :self
+                                                                                )
+                                                 ) AS prev_not_evaluated_user,
+                                                 (
+                                                    SELECT MAX(prev_users.id)
+                                                    FROM users as prev_users
+                                                    WHERE prev_users.id < :id
+                                                 ) AS prev_user,
+                                                 (
+                                                    SELECT MIN(next_users.id)
+                                                    FROM users as next_users
+                                                    WHERE next_users.id > :id
+                                                 ) AS next_user,
+                                                 (
+                                                    SELECT MIN(next_users.id) 
+                                                    FROM users as next_users
+                                                    WHERE next_users.id > :id AND 
+                                                          next_users.id NOT IN (
+                                                                                SELECT next_evaluation.ref_user_id
+                                                                                FROM evaluation as next_evaluation
+                                                                                WHERE next_evaluation.ref_user_id > :id
+                                                                                AND next_evaluation.id_evaluator = :self
+                                                                                )
+                                                 ) AS next_not_evaluated_user
+                                                 FROM users WHERE id = :id LIMIT 1');
+		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
+		$stmt->bindValue(':self', $myself, SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if ($result === false) {
+			throw new DatabaseException();
+		}
+		$row = $result->fetchArray(SQLITE3_ASSOC);
+		$result->finalize();
+		if ($row === false) {
+			return null;
+		}
+		foreach (
+			[
+				'prev_user',
+				'next_user',
+				'prev_not_evaluated_user',
+				'next_not_evaluated_user',
+			] as $attr
+		) {
+			$user->$attr = $row[$attr];
+		}
 
 		return $user;
 	}
