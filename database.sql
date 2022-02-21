@@ -54,6 +54,7 @@ CREATE TABLE notes (
    uid TEXT NOT NULL,
    candidate_id INTEGER REFERENCES users,
    note TEXT NOT NULL,
+   type TEXT NOT NULL DEFAULT 'candidate',
    created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
    foreign key (candidate_id) references users (id)

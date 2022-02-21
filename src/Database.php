@@ -344,13 +344,17 @@ ORDER BY submitted DESC');
 	 *
 	 * @param int $id User ID
 	 * @param string $note Notes
+	 * @param string $type
 	 */
-	public function saveNotes(int $id, string $note)
+	public function saveNotes(int $id, string $note, string $type = 'candidate')
 	{
-		$stmt = $this->db->prepare('INSERT INTO notes (uid, candidate_id, note, created_at, updated_at) VALUES ( :uid, :id, :note, :now1, :now2 )');
+
+		$stmt = $this->db->prepare('INSERT INTO notes (uid, candidate_id, note, type, created_at, updated_at) VALUES ( :uid, :id, :note, :type, :now1, :now2 )');
+
 		$uid = $_SESSION['uid'];
 
 		$stmt->bindValue(':uid', $uid, SQLITE3_TEXT);
+		$stmt->bindValue(':type', $type, SQLITE3_TEXT);
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 		if ($note === '') {
 			$stmt->bindValue(':note', null, SQLITE3_NULL);
@@ -372,15 +376,18 @@ ORDER BY submitted DESC');
 	 *
 	 * @param int $id User ID
 	 * @param string $note Notes
+	 * @param string $type
 	 */
-	public function updateNote(int $id, string $note)
+	public function updateNote(int $id, string $note, string $type = 'candidate')
 	{
-		$stmt = $this->db->prepare('UPDATE notes SET note=:note, updated_at=:updated_at WHERE candidate_id=:id AND uid=:uid');
+		$stmt = $this->db->prepare('UPDATE notes SET note=:note, updated_at=:updated_at WHERE candidate_id=:id AND uid=:uid AND type=:type');
 		$uid = $_SESSION['uid'];
 
 		$stmt->bindValue(':uid', $uid, SQLITE3_TEXT);
+		$stmt->bindValue(':type', $type, SQLITE3_TEXT);
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 		$stmt->bindValue(':updated_at', time(), SQLITE3_INTEGER);
+
 		if ($note === '') {
 			$stmt->bindValue(':note', null, SQLITE3_NULL);
 		} else {
@@ -396,12 +403,16 @@ ORDER BY submitted DESC');
 	 * Retrieve notes beside on candidate id
 	 *
 	 * @param $candidateId
+	 * @param string $type
 	 * @return array
 	 */
-	public function getNotesByCandidateId($candidateId)
+	public function getNotesByCandidateId($candidateId, string $type = 'candidate')
 	{
-		$stmt = $this->db->prepare('SELECT id, uid, candidate_id, note, created_at, updated_at FROM notes WHERE candidate_id = :id ORDER BY updated_at DESC');
+
+		$stmt = $this->db->prepare('SELECT id, uid, candidate_id, note, created_at, updated_at FROM notes WHERE candidate_id = :id AND type=:type ORDER BY updated_at DESC');
+
 		$stmt->bindValue(':id', $candidateId, SQLITE3_INTEGER);
+		$stmt->bindValue(':type', $type, SQLITE3_TEXT);
 		$result = $stmt->execute();
 
 		$compact = [];

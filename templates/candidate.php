@@ -194,7 +194,7 @@ require_once 'stars.php';
 	<div class="form-group">
 		<label for="notes"><b><?= __('Aggiungi nota') ?></b></label>
 		<textarea id="notes" name="note" cols="40" rows="3"
-				class="form-control"><?=$this->e($user->notes)?></textarea>
+				class="form-control" required><?=$this->e($user->notes)?></textarea>
 	</div>
 	<div class="form-group text-center">
 		<button name="save" value="true" type="submit"

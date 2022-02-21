@@ -106,6 +106,7 @@ class PageInterviews implements RequestHandlerInterface
 			if ($request->getMethod() === 'POST') {
 				$POST = $request->getParsedBody();
 				$changed = false;
+				$note = $POST['note'] ?? '';
 
 				if (isset($POST['edit'])) {
 					// Update personal details, same as candidates.php
@@ -115,6 +116,10 @@ class PageInterviews implements RequestHandlerInterface
 						$db->updateUser($user);
 						$changed = true;
 					}
+				} elseif (isset($POST['saveNote'])) {
+					$db->saveNotes($id, $note, 'interview');
+				} elseif (isset($POST['updateNote'])) {
+					$db->updateNote($id, $note, 'interview');
 				} elseif (isset($POST['invite'])) {
 					// Generate invite link
 					$link = $ldap->createInvite($user);
@@ -172,7 +177,8 @@ class PageInterviews implements RequestHandlerInterface
 				'user'       => $user,
 				'interview'  => $interview,
 				'edit'       => isset($GET['edit']),
-				'recruiters' => $ldap->getRecruiters()
+				'recruiters' => $ldap->getRecruiters(),
+				'notes'      => $db->getNotesByCandidateId($id, 'interview')
 			]);
 
 			return new HtmlResponse($page);
