@@ -342,25 +342,18 @@ ORDER BY submitted DESC');
 	/**
 	 * Save notes.
 	 *
-	 * @param int $id User ID
+	 * @param string $author
+	 * @param int $candidate User ID
 	 * @param string $note Notes
 	 * @param string $type
 	 */
-	public function saveNotes(int $id, string $note, string $type = 'candidate')
+	public function saveNotes(string $author, int $candidate, string $note)
 	{
+		$stmt = $this->db->prepare('INSERT INTO notes (uid, candidate_id, note, created_at, updated_at) VALUES ( :uid, :id, :note, :now1, :now2 )');
 
-		$stmt = $this->db->prepare('INSERT INTO notes (uid, candidate_id, note, type, created_at, updated_at) VALUES ( :uid, :id, :note, :type, :now1, :now2 )');
-
-		$uid = $_SESSION['uid'];
-
-		$stmt->bindValue(':uid', $uid, SQLITE3_TEXT);
-		$stmt->bindValue(':type', $type, SQLITE3_TEXT);
-		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
-		if ($note === '') {
-			$stmt->bindValue(':note', null, SQLITE3_NULL);
-		} else {
-			$stmt->bindValue(':note', $note, SQLITE3_TEXT);
-		}
+		$stmt->bindValue(':uid', $author, SQLITE3_TEXT);
+		$stmt->bindValue(':id', $candidate, SQLITE3_INTEGER);
+		$stmt->bindValue(':note', $note, SQLITE3_TEXT);
 
 		$stmt->bindValue(':now1', time(), SQLITE3_INTEGER);
 		$stmt->bindValue(':now2', time(), SQLITE3_INTEGER);
@@ -378,21 +371,18 @@ ORDER BY submitted DESC');
 	 * @param string $note Notes
 	 * @param string $type
 	 */
-	public function updateNote(int $id, string $note, string $type = 'candidate')
+	public function updateNote(string $author, int $id, ?string $note)
 	{
-		$stmt = $this->db->prepare('UPDATE notes SET note=:note, updated_at=:updated_at WHERE candidate_id=:id AND uid=:uid AND type=:type');
-		$uid = $_SESSION['uid'];
-
-		$stmt->bindValue(':uid', $uid, SQLITE3_TEXT);
-		$stmt->bindValue(':type', $type, SQLITE3_TEXT);
-		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
-		$stmt->bindValue(':updated_at', time(), SQLITE3_INTEGER);
-
-		if ($note === '') {
-			$stmt->bindValue(':note', null, SQLITE3_NULL);
+		if($note === null || $note === '') {
+			$stmt = $this->db->prepare('DELETE FROM notes WHERE candidate_id=:id AND uid=:uid');
 		} else {
+			$stmt = $this->db->prepare('UPDATE notes SET note=:note, updated_at=:updated_at WHERE candidate_id=:id AND uid=:uid');
+			$stmt->bindValue(':updated_at', time(), SQLITE3_INTEGER);
 			$stmt->bindValue(':note', $note, SQLITE3_TEXT);
 		}
+		$stmt->bindValue(':uid', $author, SQLITE3_TEXT);
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+
 		$result = $stmt->execute();
 		if ($result === false) {
 			throw new DatabaseException();
@@ -400,19 +390,17 @@ ORDER BY submitted DESC');
 	}
 
 	/**
-	 * Retrieve notes beside on candidate id
+	 * Retrieve notes on a candidate
 	 *
-	 * @param $candidateId
+	 * @param int $candidateId
 	 * @param string $type
 	 * @return array
 	 */
-	public function getNotesByCandidateId($candidateId, string $type = 'candidate')
+	public function getNotesByCandidateId(int $candidateId)
 	{
-
-		$stmt = $this->db->prepare('SELECT id, uid, candidate_id, note, created_at, updated_at FROM notes WHERE candidate_id = :id AND type=:type ORDER BY updated_at DESC');
+		$stmt = $this->db->prepare('SELECT uid, candidate_id, note, created_at, updated_at FROM notes WHERE candidate_id = :id ORDER BY updated_at DESC');
 
 		$stmt->bindValue(':id', $candidateId, SQLITE3_INTEGER);
-		$stmt->bindValue(':type', $type, SQLITE3_TEXT);
 		$result = $stmt->execute();
 
 		$compact = [];
@@ -617,7 +605,7 @@ ORDER BY submitted DESC');
 	 */
 	public function getInterview(string $id): ?Interview
 	{
-		$stmt = $this->db->prepare('SELECT interview, interviewer, hold, interviewertg, notes AS questions, answers, interviewstatus FROM users WHERE id = :id LIMIT 1');
+		$stmt = $this->db->prepare('SELECT interview, interviewer, hold, interviewertg, answers, interviewstatus FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if ($result === false) {
@@ -639,7 +627,6 @@ ORDER BY submitted DESC');
 			$dt = $this->timestampToTime((int) $row['interview']);
 			$interview->when = $dt;
 		}
-		$interview->questions = $row['questions'];
 		$interview->answers = $row['answers'];
 		$interview->status = $row['interviewstatus'] === null ? null : (bool) $row['interviewstatus'];
 
@@ -678,11 +665,10 @@ ORDER BY submitted DESC');
 	 * @param string|null $questions Questions to ask and notes
 	 * @param string|null $answers Answers given by the candidate and comments
 	 */
-	public function setInterviewData(int $id, ?string $questions, ?string $answers)
+	public function setInterviewData(int $id, ?string $answers)
 	{
-		$stmt = $this->db->prepare('UPDATE users SET notes = :q, answers = :a WHERE id = :id');
+		$stmt = $this->db->prepare('UPDATE users SET answers = :a WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
-		$stmt->bindValue(':q', $questions, $questions === null ? SQLITE3_NULL : SQLITE3_TEXT);
 		$stmt->bindValue(':a', $answers, $answers === null ? SQLITE3_NULL : SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if ($result === false) {

@@ -17,7 +17,6 @@ create table users (
 	token text not null,
 	recruitertg text,
 	invitelink text,
-	notes text,
 	visiblenotes text default NULL,
 	interview int,
 	hold boolean not null default 0,
@@ -30,13 +29,13 @@ create table users (
 create unique index users_matricola_uindex
 	on users(matricola);
 
-CREATE TABLE config (
+create table config (
 	id varchar not null primary key,
 	value varchar
 );
 
-INSERT INTO config (id, value)
-VALUES ('expiry', null), ('rolesUnavailable', null), ('notifyEmail', 0);
+insert into config (id, value)
+values ('expiry', null), ('rolesUnavailable', null), ('notifyEmail', 0);
 
 create table evaluation (
 	id_evaluation integer primary key autoincrement,
@@ -49,13 +48,14 @@ create table evaluation (
 	foreign key (ref_user_id) references users (id)
 );
 
-CREATE TABLE notes (
-   id INTEGER PRIMARY KEY autoincrement,
-   uid TEXT NOT NULL,
-   candidate_id INTEGER REFERENCES users,
-   note TEXT NOT NULL,
-   type TEXT NOT NULL DEFAULT 'candidate',
-   created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-   foreign key (candidate_id) references users (id)
+create index if not exists ref_user_id_index on evaluation(ref_user_id);
+
+create table notes (
+	uid text not null,
+	candidate_id integer references users,
+	note text not null,
+	created_at datetime default current_timestamp not null,
+	updated_at datetime default current_timestamp not null,
+	foreign key (candidate_id) references users (id),
+	primary key (uid, candidate_id)
 );

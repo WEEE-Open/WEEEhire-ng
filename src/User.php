@@ -66,6 +66,11 @@ class User
 	 */
 	public $visiblenotes;
 
+	public $next_user = null;
+	public $prev_user = null;
+	public $next_not_evaluated_user = null;
+	public $prev_not_evaluated_user = null;
+
 	/**
 	 * Create User from POST data.
 	 *

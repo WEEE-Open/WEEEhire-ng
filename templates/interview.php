@@ -101,58 +101,39 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 					['edit' => 'true']
 				))?>"><?=__('Modifica dati')?></a>
 	</div>
-	<?php $userNoted = false; ?>
-	<h5 class="mt-5"><?=__('Note e domande per il colloquio')?></h5>
-	<div class="row">
-		<div class="col-md-2 border d-flex justify-content-center">
-			<p class="font-weight-bold"><?= __('Autore') ?></p>
-		</div>
-		<div class="col-md-6 border d-flex justify-content-center">
-			<p class="font-weight-bold"><?= __('Testo') ?></p>
-		</div>
-		<div class="col-md-2 border d-flex justify-content-center">
-			<p class="font-weight-bold"><?= __('Data') ?></p>
-		</div>
-		<div class="col-md-2 border d-flex justify-content-center">
-			<p class="font-weight-bold"><?= __('Azioni') ?></p>
-		</div>
-	</div>
-	<div class="form-group">
-		<?php if (count($notes) > 0) : ?>
-			<?php foreach ($notes as $note) : ?>
-				<?php $userNoted = $_SESSION['uid'] == $note['uid'] ? true : false ?>
-				<form method="post">
-					<div class="row">
-						<div class="col-md-2 border d-flex justify-content-center"><?= $note['uid'] ?></div>
-						<div class="col-md-6 border" style="padding-left: 0; padding-right: 0;">
-							<textarea class="form-control" name="note" cols="40" <?= $userNoted ? '' : 'disabled' ?>><?= $note['note'] ?></textarea>
-						</div>
-						<div class="col-md-2 border d-flex justify-content-center"><?= $note['updated_at']->format('Y-m-d') ?> <small><?= $note['updated_at']->format('H:i') ?></small></div>
-						<div class="col-md-2 border d-flex justify-content-center p-2"><?=  $userNoted ? '<button class="btn btn-outline-primary ml-3" name="updateNote" value="true">Edit</button>' : '' ?></div>
-					</div>
-				</form>
-			<?php endforeach; ?>
-		<?php else : ?>
-			<div class="row" style="background-color: #dee2e6;">
-				<div class="offset-md-5"></div><div class="col-md-2"><?= __('Nessuna nota') ?></div><div class="offset-md-5"></div>
-			</div>
-		<?php endif; ?>
-	</div>
+
+	<h4 class="mt-5"><?= __('Note') ?></h4>
+	<?= $this->fetch('notes', ['notes' => $notes]); ?>
+<?php
+	$userNoted = false;
+	foreach ($notes as $note) {
+		$userNoted = $_SESSION['uid'] === $note['uid'];
+		if($userNoted) {
+			break;
+		}
+	}
+?>
+<?php if (!$userNoted) : ?>
 	<form method="post" class="mt-3">
 		<div class="form-group">
-			<label for="note"><b><?= __('Aggiungi nota') ?></b></label>
-			<textarea id="note" name="note" cols="40" rows="3"
-					  class="form-control" required><?=$this->e($user->notes)?></textarea>
+			<label for="notes"><b><?= __('Aggiungi nota') ?></b></label>
+			<textarea id="notes" name="note" cols="40" rows="3"
+					class="form-control" required></textarea>
 		</div>
 		<div class="form-group text-center">
 			<button name="saveNote" value="true" type="submit"
-					class="btn btn-outline-primary my-1 mx-1"><?=__('Salva note')?></button>
+					class="btn btn-outline-primary my-1 mx-1"><?=__('Aggiungi nota')?></button>
 		</div>
 	</form>
+<?php endif; ?>
+	<form method="post">
 		<div class="form-group">
-			<label for="answers"><?=__('Risposte e commenti vari post-colloquio')?></label>
+			<label for="answers"><?=__('Commenti vari post-colloquio')?></label>
 			<textarea id="answers" name="answers" cols="40" rows="10"
 					class="form-control"><?=$this->e($interview->answers)?></textarea>
+		</div>
+		<div class="form-group text-center">
+			<button name="saveInterviewComments" value="true" type="submit" class="btn btn-outline-primary"><?=__('Salva commenti')?></button>
 		</div>
 		<div class="form-group text-center">
 			<?php if ($interview->status === null && $interview->recruiter !== null && $interview->when !== null) : ?>
@@ -171,7 +152,6 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 				<button name="limbo" value="true" type="submit"
 						class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
 			<?php endif ?>
-			<button name="save" value="true" type="submit" class="btn btn-outline-primary"><?=__('Salva')?></button>
 		</div>
 	</form>
 	<form method="post">

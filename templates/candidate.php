@@ -142,63 +142,28 @@ require_once 'stars.php';
 	</tbody>
 </table>
 
-<!-- User can not note more than 1 time -->
-	<?php $userNoted = false;
-	$currentUserNoted = false; ?>
 <h4 class="mt-5"><?= __('Note') ?></h4>
-<div class="row mx-0 border-bottom">
-	<div class="col col-md-6 d-none d-md-block">
-		<p class="font-weight-bold"><?= __('Testo') ?></p>
-	</div>
-	<div class="col col-md-2">
-		<p class="font-weight-bold"><?= __('Autore') ?></p>
-	</div>
-	<div class="col col-md-2">
-		<p class="font-weight-bold"><?= __('Data') ?></p>
-	</div>
-	<div class="col col-md-2 text-right text-md-left">
-		<p class="font-weight-bold"><?= __('Azioni') ?></p>
-	</div>
-</div>
-	<?php if (count($notes) > 0) : ?>
-		<?php foreach ($notes as $note) : ?>
-			<?php $currentUserNoted = $_SESSION['uid'] === $note['uid'];
-			$userNoted = $userNoted || $currentUserNoted; ?>
-			<form method="post">
-				<div class="row mx-0 mb-4">
-					<div class="col-12 col-md-6 mb-1" style="padding-left: 0; padding-right: 0;">
-						<?php if ($currentUserNoted) : ?>
-							<textarea class="form-control" name="note" cols="40"><?= htmlspecialchars($note['note']) ?></textarea>
-						<?php else : ?>
-							<div class="p-2 border"><?= htmlspecialchars($note['note']) ?></div>
-						<?php endif; ?>
-					</div>
-					<div class="col pt-1 col-md-2"><?= htmlspecialchars($note['uid']) ?></div>
-					<div class="col pt-1 col-md-2"><?= $note['updated_at']->format('Y-m-d') ?> <small><?= $note['updated_at']->format('H:i') ?></small></div>
-					<div class="col col-md-2 pr-0 text-right text-md-left">
-						<?php if ($currentUserNoted) : ?>
-							<button class="btn btn-outline-primary my-1" name="updateNote" value="true"><?= __('Modifica') ?></button>
-						<?php endif; ?>
-					</div>
-				</div>
-			</form>
-		<?php endforeach; ?>
-	<?php else : ?>
-	<div class="row mx-0">
-		<div class="col my-3 text-center"><?= __('Nessuna nota') ?></div>
-	</div>
-	<?php endif; ?>
+<?= $this->fetch('notes', ['notes' => $notes]); ?>
+<?php
+	$userNoted = false;
+	foreach ($notes as $note) {
+		$userNoted = $_SESSION['uid'] === $note['uid'];
+		if($userNoted) {
+			break;
+		}
+	}
+?>
 
 <form method="post" class="mt-3">
 	<?php if (!$userNoted) : ?>
 	<div class="form-group">
 		<label for="notes"><b><?= __('Aggiungi nota') ?></b></label>
 		<textarea id="notes" name="note" cols="40" rows="3"
-				class="form-control" required><?=$this->e($user->notes)?></textarea>
+				class="form-control" required></textarea>
 	</div>
 	<div class="form-group text-center">
 		<button name="save" value="true" type="submit"
-				class="btn btn-outline-primary my-1 mx-1"><?=__('Salva note')?></button>
+				class="btn btn-outline-primary my-1 mx-1"><?=__('Aggiungi nota')?></button>
 	<?php else : ?>
 		<!-- open div bacause there is close div tag in below -->
 		<div class="form-group text-center">
@@ -211,10 +176,10 @@ require_once 'stars.php';
 	</div>
 	<div class="form-group text-center justify-content-center row">
 		<div class="btn-toolbar">
-			<a href="/candidates.php?id=<?= $user->prev_not_evaluated_user ?>" class="btn btn-outline-primary mr-1 ml-1 <?= $user->prev_not_evaluated_user == null ? 'disabled' : '' ?>"><span class="fas fa-arrow-circle-left"></span>&nbsp;<?=__('Precedente da valutare')?></a>
-			<a href="/candidates.php?id=<?= $user->prev_user ?>" class="btn btn-outline-secondary mr-1 ml-1 <?= $user->prev_user == null ? 'disabled' : '' ?>"><span class="fas fa-arrow-circle-left"></span>&nbsp;<?=__('Precedente')?></a>
-			<a href="/candidates.php?id=<?= $user->next_user ?>" class="btn btn-outline-secondary mr-1 ml-1 <?= $user->next_user == null ? 'disabled' : '' ?>"><?= __('Successivo') ?>&nbsp;<span class="fas fa-arrow-circle-right"></span></a>
-			<a href="/candidates.php?id=<?= $user->next_not_evaluated_user ?>" class="btn btn-outline-primary mr-1 ml-1 <?= $user->next_not_evaluated_user == null ? 'disabled' : '' ?>"><?= __('Successivo da valutare') ?>&nbsp;<span class="fas fa-arrow-circle-right"></span></a>
+			<a href="/candidates.php?id=<?= (int) $user->prev_not_evaluated_user ?>" class="btn btn-outline-primary mr-1 ml-1 <?= $user->prev_not_evaluated_user == null ? 'disabled' : '' ?>"><span class="fas fa-arrow-circle-left"></span>&nbsp;<?=__('Precedente da valutare')?></a>
+			<a href="/candidates.php?id=<?= (int) $user->prev_user ?>" class="btn btn-outline-secondary mr-1 ml-1 <?= $user->prev_user == null ? 'disabled' : '' ?>"><span class="fas fa-arrow-circle-left"></span>&nbsp;<?=__('Precedente')?></a>
+			<a href="/candidates.php?id=<?= (int) $user->next_user ?>" class="btn btn-outline-secondary mr-1 ml-1 <?= $user->next_user == null ? 'disabled' : '' ?>"><?= __('Successivo') ?>&nbsp;<span class="fas fa-arrow-circle-right"></span></a>
+			<a href="/candidates.php?id=<?= (int) $user->next_not_evaluated_user ?>" class="btn btn-outline-primary mr-1 ml-1 <?= $user->next_not_evaluated_user == null ? 'disabled' : '' ?>"><?= __('Successivo da valutare') ?>&nbsp;<span class="fas fa-arrow-circle-right"></span></a>
 		</div>
 
 	</div>

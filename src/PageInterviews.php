@@ -117,9 +117,11 @@ class PageInterviews implements RequestHandlerInterface
 						$changed = true;
 					}
 				} elseif (isset($POST['saveNote'])) {
-					$db->saveNotes($id, $note, 'interview');
+					$db->saveNotes($_SESSION['uid'], $id, $note, 'interview');
+					$changed = true;
 				} elseif (isset($POST['updateNote'])) {
-					$db->updateNote($id, $note, 'interview');
+					$db->updateNote($_SESSION['uid'], $id, $note, 'interview');
+					$changed = true;
 				} elseif (isset($POST['invite'])) {
 					// Generate invite link
 					$link = $ldap->createInvite($user);
@@ -145,23 +147,26 @@ class PageInterviews implements RequestHandlerInterface
 					// Unschedule an interview
 					$db->setInterviewSchedule($interview->id, null, null, null);
 					$changed = true;
-				} elseif (isset($POST['approve']) || isset($POST['reject']) || isset($POST['save']) || isset($POST['limbo']) || isset($POST['pushHold']) || isset($POST['popHold'])) {
-					// All these buttons also update the interview data (questions/notes + answers/comments)
-					$db->setInterviewData($interview->id, $POST['questions'] ?? null, $POST['answers'] ?? null);
-					if (isset($POST['approve'])) {
-						$db->setInterviewStatus($interview->id, true);
-						$db->setHold($interview->id, false);
-					} elseif (isset($POST['reject'])) {
-						$db->setInterviewStatus($interview->id, false);
-						$db->setHold($interview->id, false);
-					} elseif (isset($POST['limbo'])) {
-						$db->setInterviewStatus($interview->id, null);
-						$db->setHold($interview->id, false);
-					} elseif (isset($POST['pushHold'])) {
-						$db->setHold($interview->id, true);
-					} elseif (isset($POST['popHold'])) {
-						$db->setHold($interview->id, false);
-					}
+				} elseif (isset($POST['saveInterviewComments'])) {
+					$db->setInterviewData($interview->id, $POST['answers'] ?? null);
+					$changed = true;
+				} elseif (isset($POST['approve'])) {
+					$db->setInterviewStatus($interview->id, true);
+					$db->setHold($interview->id, false);
+					$changed = true;
+				} elseif (isset($POST['reject'])) {
+					$db->setInterviewStatus($interview->id, false);
+					$db->setHold($interview->id, false);
+					$changed = true;
+				} elseif (isset($POST['limbo'])) {
+					$db->setInterviewStatus($interview->id, null);
+					$db->setHold($interview->id, false);
+					$changed = true;
+				} elseif (isset($POST['pushHold'])) {
+					$db->setHold($interview->id, true);
+					$changed = true;
+				} elseif (isset($POST['popHold'])) {
+					$db->setHold($interview->id, false);
 					$changed = true;
 				}
 
@@ -178,7 +183,7 @@ class PageInterviews implements RequestHandlerInterface
 				'interview'  => $interview,
 				'edit'       => isset($GET['edit']),
 				'recruiters' => $ldap->getRecruiters(),
-				'notes'      => $db->getNotesByCandidateId($id, 'interview')
+				'notes'      => $db->getNotesByCandidateId($id)
 			]);
 
 			return new HtmlResponse($page);

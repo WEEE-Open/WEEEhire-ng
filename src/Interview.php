@@ -21,10 +21,6 @@ class Interview
 	public $recruiter = null;
 	public $recruitertg = null;
 	/**
-	 * @var $questions string|null
-	 */
-	public $questions;
-	/**
 	 * @var $answers string|null
 	 */
 	public $answers;
