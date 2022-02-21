@@ -111,7 +111,7 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 		}
 
 		$theNote = 'notes example os8mieh7saich4rohZ6E';
-		$this->saveNotes($id, $theNote);
+		$this->updateNotes($id, $theNote);
 
 		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'GET', 'REQUEST_URI' => '/candidates.php'], ['id' => $id], [], [], []);
 		$response = (new PageCandidates())->handle($request);
@@ -284,7 +284,17 @@ class PageCandidatesAndPageStatusTest extends PagesTest {
 
 	private function saveNotes($id, string $theNote) {
 		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/candidates.php'],
-			['id' => $id], ['save' => 'true', 'note' => $theNote], [], []);
+			['id' => $id], ['saveNote' => 'true', 'note' => $theNote], [], []);
+		$response = (new PageCandidates())->handle($request);
+		$this->assertEquals(303, $response->getStatusCode(), 'Redirect to same page for notes');
+		if(session_status() === PHP_SESSION_ACTIVE) {
+			session_write_close();
+		}
+	}
+
+	private function updateNotes($id, string $theNote) {
+		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/candidates.php'],
+			['id' => $id], ['updateNote' => 'true', 'note' => $theNote], [], []);
 		$response = (new PageCandidates())->handle($request);
 		$this->assertEquals(303, $response->getStatusCode(), 'Redirect to same page for notes');
 		if(session_status() === PHP_SESSION_ACTIVE) {

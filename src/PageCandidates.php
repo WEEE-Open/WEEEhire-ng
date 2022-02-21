@@ -52,7 +52,7 @@ class PageCandidates implements RequestHandlerInterface
 						// Store it
 						$db->updateUser($user);
 					}
-				} elseif (isset($POST['save'])) {
+				} elseif (isset($POST['saveNote'])) {
 					// This button is always available
 					$db->saveNotes($_SESSION['uid'], $id, $note);
 				} elseif (isset($POST['updateNote'])) {

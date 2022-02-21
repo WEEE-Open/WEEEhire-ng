@@ -162,7 +162,7 @@ require_once 'stars.php';
 				class="form-control" required></textarea>
 	</div>
 	<div class="form-group text-center">
-		<button name="save" value="true" type="submit"
+		<button name="saveNote" value="true" type="submit"
 				class="btn btn-outline-primary my-1 mx-1"><?=__('Aggiungi nota')?></button>
 	<?php else : ?>
 		<!-- open div bacause there is close div tag in below -->

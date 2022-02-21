@@ -39,8 +39,7 @@ values ('expiry', null), ('rolesUnavailable', null), ('notifyEmail', 0);
 
 create table evaluation (
 	id_evaluation integer primary key autoincrement,
-	ref_user_id integer
-		references users,
+	ref_user_id integer,
 	id_evaluator varchar not null,
 	desc_evaluator varchar not null,
 	date integer,
@@ -52,10 +51,10 @@ create index if not exists ref_user_id_index on evaluation(ref_user_id);
 
 create table notes (
 	uid text not null,
-	candidate_id integer references users,
+	candidate_id integer,
 	note text not null,
 	created_at datetime default current_timestamp not null,
 	updated_at datetime default current_timestamp not null,
-	foreign key (candidate_id) references users (id),
+	foreign key (candidate_id) references users (id) on delete cascade on update cascade,
 	primary key (uid, candidate_id)
 );
