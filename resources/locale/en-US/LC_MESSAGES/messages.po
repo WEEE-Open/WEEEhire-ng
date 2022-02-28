@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-23 10:47+0100\n"
-"PO-Revision-Date: 2021-12-23 10:48+0100\n"
+"POT-Creation-Date: 2022-02-28 17:18+0100\n"
+"PO-Revision-Date: 2022-02-28 17:21+0100\n"
 "Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
 "Language-Team: Italian <>\n"
 "Language: en_US\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: templates/adminnavbar.php:8
 #, php-format
@@ -30,12 +30,12 @@ msgstr "Hi, %s (%s)"
 msgid "Candidati"
 msgstr "Candidates"
 
-#: templates/adminnavbar.php:12 templates/interview.php:15
+#: templates/adminnavbar.php:12 templates/interview.php:16
 msgid "Colloqui"
 msgstr "Interviews"
 
-#: templates/adminnavbar.php:13 templates/candidate.php:294
-#: templates/candidates.php:30 templates/interview.php:50
+#: templates/adminnavbar.php:13 templates/candidate.php:259
+#: templates/candidates.php:30 templates/interview.php:51
 #: templates/interviewsbyrecruiter.php:6 templates/interviewsbyrecruiter.php:14
 msgid "Recruiter"
 msgstr "Recruiter"
@@ -52,21 +52,7 @@ msgstr "Logout"
 msgid "Entra in WEEE Open"
 msgstr "Join WEEE Open"
 
-#: templates/candidate_close.php:3
-msgid "Spiacenti, le candidature sono chiuse!"
-msgstr "Sorry, applications are closed!"
-
-#: templates/candidate_close.php:5
-msgid "Candidature chiuse"
-msgstr "Applications are closed"
-
-#: templates/candidate_close.php:6
-msgid ""
-"Ci dispiace, ma le candidature in questo periodo sono chiuse. Riprova in "
-"futuro."
-msgstr "Sorry, but applications are closed right now. Try again in the future."
-
-#: templates/candidate.php:11 templates/interview.php:8
+#: templates/candidate.php:11 templates/interview.php:9
 #, php-format
 msgid "%s %s (%s)"
 msgstr "%s %s (%s)"
@@ -111,12 +97,11 @@ msgstr "Voter name"
 msgid "Voto"
 msgstr "Evaluation"
 
-#: templates/candidate.php:77 templates/candidate.php:157
-#: templates/interview.php:72
+#: templates/candidate.php:77 templates/interview.php:73 templates/notes.php:12
 msgid "Data"
 msgstr "Date"
 
-#: templates/candidate.php:78 templates/candidate.php:160
+#: templates/candidate.php:78 templates/notes.php:15
 msgid "Azioni"
 msgstr "Actions"
 
@@ -137,121 +122,116 @@ msgstr "Show (spoiler!)"
 msgid "Vota"
 msgstr "Vote"
 
-#: templates/candidate.php:148
+#: templates/candidate.php:145 templates/interview.php:105
 msgid "Note"
 msgstr "Notes"
 
-#: templates/candidate.php:151
-msgid "Testo"
-msgstr "Text"
-
-#: templates/candidate.php:154
-msgid "Autore"
-msgstr "Author"
-
-#: templates/candidate.php:180
-msgid "Modifica"
-msgstr "Edit"
-
-#: templates/candidate.php:188
-msgid "Nessuna nota"
-msgstr "No notes"
-
-#: templates/candidate.php:195
+#: templates/candidate.php:160 templates/candidate.php:166
+#: templates/interview.php:119 templates/interview.php:125
 msgid "Aggiungi nota"
 msgstr "Add note"
 
-#: templates/candidate.php:201
-msgid "Salva note"
-msgstr "Save notes"
-
-#: templates/candidate.php:210 templates/interview.php:101
+#: templates/candidate.php:175 templates/interview.php:102
 msgid "Modifica dati"
 msgstr "Edit info"
 
-#: templates/candidate.php:214
+#: templates/candidate.php:179
 msgid "Precedente da valutare"
 msgstr "Previous to be evaluated"
 
-#: templates/candidate.php:215
+#: templates/candidate.php:180
 msgid "Precedente"
 msgstr "Previous"
 
-#: templates/candidate.php:216
+#: templates/candidate.php:181
 msgid "Successivo"
 msgstr "Next"
 
-#: templates/candidate.php:217
+#: templates/candidate.php:182
 msgid "Successivo da valutare"
 msgstr "Next to be evaluated"
 
-#: templates/candidate.php:224
+#: templates/candidate.php:189
 msgid "Motivazioni (visibili alla persona interessata)"
 msgstr "Motivation (visible to this person)"
 
-#: templates/candidate.php:235 templates/candidate.php:280
+#: templates/candidate.php:200 templates/candidate.php:245
 msgid "Approva candidatura"
 msgstr "Approve"
 
-#: templates/candidate.php:237
+#: templates/candidate.php:202
 msgid "Rifiuta candidatura"
 msgstr "Reject"
 
-#: templates/candidate.php:239 templates/candidate.php:274
-#: templates/interview.php:121
+#: templates/candidate.php:204 templates/candidate.php:239
+#: templates/interview.php:145
 msgid "Metti in lista d'attesa"
 msgstr "Put on hold"
 
-#: templates/candidate.php:245 templates/candidate.php:253
-#: templates/interview.php:129
+#: templates/candidate.php:210 templates/candidate.php:218
+#: templates/interview.php:153
 msgid "Rimanda nel limbo"
 msgstr "Send back to limbo"
 
-#: templates/candidate.php:251 templates/candidate.php:260
+#: templates/candidate.php:216 templates/candidate.php:225
 msgid "Pubblica"
 msgstr "Publish"
 
-#: templates/candidate.php:262 templates/interview.php:118
+#: templates/candidate.php:227 templates/interview.php:142
 msgid "Togli dalla lista d'attesa"
 msgstr "Remove from hold"
 
-#: templates/candidate.php:264 templates/candidate.php:284
+#: templates/candidate.php:229 templates/candidate.php:249
 msgid "Salva motivazioni"
 msgstr "Save motivation"
 
-#: templates/candidate.php:282
+#: templates/candidate.php:247
 msgid "Rifiuta candidatura definitivamente"
 msgstr "Reject, at last"
 
-#: templates/candidate.php:315
+#: templates/candidate.php:280
 msgid "Lingua e template"
 msgstr "Language and template"
 
-#: templates/candidate.php:322
+#: templates/candidate.php:287
 msgid "Template"
 msgstr "Template"
 
-#: templates/candidate.php:335
+#: templates/candidate.php:300
 msgid "Oggetto"
 msgstr "Subject"
 
-#: templates/candidate.php:341
+#: templates/candidate.php:306
 msgid "Email"
 msgstr "Email"
 
-#: templates/candidate.php:346
+#: templates/candidate.php:311
 msgid "Pubblica e manda email"
 msgstr "Publish and send email"
 
-#: templates/candidate.php:437
+#: templates/candidate.php:402
 #, php-format
 msgid "Mail inviata da %s"
 msgstr "Mail sent by %s"
 
-#: templates/candidate.php:443 templates/interview.php:137
+#: templates/candidate.php:408 templates/interview.php:160
 #, php-format
 msgid "Link d'invito: %s"
 msgstr "Invite link: %s"
+
+#: templates/candidate_close.php:3
+msgid "Spiacenti, le candidature sono chiuse!"
+msgstr "Sorry, applications are closed!"
+
+#: templates/candidate_close.php:5
+msgid "Candidature chiuse"
+msgstr "Applications are closed"
+
+#: templates/candidate_close.php:6
+msgid ""
+"Ci dispiace, ma le candidature in questo periodo sono chiuse. Riprova in "
+"futuro."
+msgstr "Sorry, but applications are closed right now. Try again in the future."
 
 #: templates/candidates.php:26 templates/form.php:50
 #: templates/interviews.php:25 templates/interviews.php:102
@@ -705,24 +685,24 @@ msgstr ""
 
 #: templates/form.php:208
 msgid ""
-"Descrivi qualsiasi tua esperienza nel programmare in Python, specialmente "
-"Python 3, e se hai un account su Github non esitare a condividerlo nella tua "
-"lettera!"
+"Descrivi qualsiasi tua esperienza nel programmare in Python, e se hai un "
+"account su Github non esitare a condividerlo nella tua lettera!"
 msgstr ""
-"Describe any prior experience you have in coding in Python, especially "
-"Python 3, and don't hesitate sharing your Github account in your letter if "
-"you have one!"
+"Describe any prior experience you have in coding in Python, and don't "
+"hesitate sharing your Github account in your letter if you have one!"
 
 #: templates/form.php:209
 msgid ""
-"Dal 2021-2022 abbiamo lanciato un progetto per il miglioramento della "
-"qualità della vita degli studenti, per cui abbiamo intenzione di sviluppare "
-"delle piattaforme web dedicate. Se conosci già o hai intenzione di imparare "
-"il framework per backend Django, menzionalo!"
+"Dal 2021-2022 abbiamo lanciato un programma per il miglioramento della "
+"qualità della vita degli studenti (<a href=\"https://weeeopen.polito.it/"
+"skeeell\" target=\"_blank\">skeeell</a>). Stiamo lavorando per creare <a "
+"href=\"https://github.com/weee-open/skeeelled\" target=\"_blank\">skeeelled</"
+"a>, una piattaforma per alzare il livello di e-learning fornito a tutti i "
+"40'000 studenti del Poli. Se hai già lavorato su backend e/o REST API in "
+"Python (es. Django, Flask), o in altri linguaggi, ti stiamo cercando! Noi in "
+"particolare stiamo usando <a href=\"https://fastapi.tiangolo.com\" target="
+"\"_blank\">FastAPI</a>."
 msgstr ""
-"From 2021-2022 we launched a project to improve the quality of life of "
-"students, so we intend to develop dedicated web platforms. If you already "
-"know or are going to learn the Django backend framework, mention it!"
 
 #: templates/form.php:210
 msgid ""
@@ -798,30 +778,39 @@ msgstr ""
 
 #: templates/form.php:226
 msgid ""
-"Dal 2021-2022 lanciamo un nuovo progetto per migliorare la qualità della "
-"vita degli studenti, per cui abbiamo instaurato una collaborazione con gli "
-"sviluppatori dell'estensione per browser <a href=\"https://chrome.google.com/"
-"webstore/detail/politools/fbbjhoaakfhbggkegckmjafkffaofnkd?hl=it\" target="
-"\"_blank\">PoliTools</a>, e vogliamo inoltre sviluppare alcune piattaforme "
-"web con vari scopi."
+"Dal 2021-2022 abbiamo lanciato un nuovo progetto per migliorare la qualità "
+"della vita degli studenti (<a href=\"https://weeeopen.polito.it/skeeell\" "
+"target=\"_blank\">skeeell</a>). Abbiamo creato <a href=\"https://weee.link/"
+"skeeep\" target=\"_blank\">skeeep</a>, stiamo lavorando per creare <a href="
+"\"https://github.com/weee-open/skeeelled\" target=\"_blank\">skeeelled</a> "
+"(migliore e-learning per tutti i 40'000 studenti del Poli), e abbiamo "
+"instaurato una collaborazione con gli sviluppatori dell'estensione per "
+"browser <a href=\"https://chrome.google.com/webstore/detail/politools/"
+"fbbjhoaakfhbggkegckmjafkffaofnkd?hl=it\" target=\"_blank\">PoliTools</a>."
 msgstr ""
-"From 2021-2022 we are launching a new project to improve the quality of life "
-"of students, so we have established a collaboration with the developers of "
-"the browser extension <a href=“https://chrome.google.com/webstore/detail/"
-"politools/fbbjhoaakfhbggkegckmjafkffaofnkd?hl=it” target=“_blank”>PoliTools</"
-"a>, and we also want to develop some web platforms for various purposes."
+"In 2021-2022 we have launched a new project to improve the quality of life "
+"of students (<a href=“https://weeeopen.polito.it/skeeell” "
+"target=“_blank”>skeeell</a>). We have created <a href=“https://weee.link/"
+"skeeep” target=“_blank”>skeeep</a>, we are working on creating  <a "
+"href=“https://github.com/weee-open/skeeelled” target=“_blank”>skeeelled</a> "
+"(better e-learning for all the 40’000 PoliTo students), and we have "
+"established a collaboration with the developers of the browser extension <a "
+"href=“https://chrome.google.com/webstore/detail/politools/"
+"fbbjhoaakfhbggkegckmjafkffaofnkd?hl=it” target=“_blank”>PoliTools</a>."
 
 #: templates/form.php:227
 msgid ""
 "Parla di qualsiasi tua esperienza riguardante l'utilizzo di JavaScript "
 "(frontend - in particolare ReactJS e Angular -, backend, app NodeJS). "
 "Conosci altri linguaggi che usiamo in team, come Python, PHP e Bash, o altri "
-"ancora? Menzionali pure!"
+"ancora? Menzionali pure! E se hai un account su Github non esitare a "
+"condividerlo nella tua lettera!"
 msgstr ""
 "Talk about any of your experiences using JavaScript (frontend - especially "
 "ReactJS and Angular -, backend, NodeJS app) or Docker. Do you know any other "
 "languages we use in our team, such as Python, PHP and Bash, or even more? "
-"Mention them here!"
+"Mention them here! And if you have a GitHub account don’t hesitate sharing "
+"it in your letter!"
 
 #: templates/form.php:234
 msgid ""
@@ -1122,26 +1111,26 @@ msgstr "Applications will close in ${days} days and 1 hour."
 msgid "Le candidature si chiuderanno tra ${days} giorni e ${hours} ore."
 msgstr "Applications will close in ${days} days and ${hours} hours."
 
-#: templates/interview.php:9
+#: templates/interview.php:10
 #, php-format
 msgid "%s - Colloquio"
 msgstr "%s's interview"
 
-#: templates/interview.php:22
+#: templates/interview.php:23
 #, php-format
 msgid "Colloquio superato secondo %s"
 msgstr "Interview passed according to %s"
 
-#: templates/interview.php:26
+#: templates/interview.php:27
 #, php-format
 msgid "Colloquio fallito secondo %s"
 msgstr "Interview failed according to %s"
 
-#: templates/interview.php:32
+#: templates/interview.php:33
 msgid "Colloquio da fissare"
 msgstr "Interview to be scheduled"
 
-#: templates/interview.php:37
+#: templates/interview.php:38
 #, php-format
 msgid ""
 "Colloquio fissato per il %s alle %s con <a href=\"https://t.me/%s\">%s</a>. "
@@ -1150,51 +1139,39 @@ msgstr ""
 "Interview scheduled for %s at %s with <a href=\"https://t.me/%s\">%s</a>. <a "
 "href=\"%s\">🗓 Add to calendar.</a>"
 
-#: templates/interview.php:78 templates/interviews.php:27
+#: templates/interview.php:79 templates/interviews.php:27
 msgid "Ora"
 msgstr "Time"
 
-#: templates/interview.php:86
+#: templates/interview.php:87
 msgid "Fissa colloquio"
 msgstr "Schedule interview"
 
-#: templates/interview.php:88
+#: templates/interview.php:89
 msgid "Annulla colloquio"
 msgstr "Cancel interview"
 
-#: templates/interview.php:105
-msgid "Note e domande per il colloquio"
-msgstr "Notes and questions for the interview"
-
-#: templates/interview.php:110
-msgid "Risposte e commenti vari post-colloquio"
+#: templates/interview.php:131
+#, fuzzy
+msgid "Commenti vari post-colloquio"
 msgstr "Answers and comments after the interview"
 
-#: templates/interview.php:124
+#: templates/interview.php:136
+#, fuzzy
+msgid "Salva commenti"
+msgstr "Save notes"
+
+#: templates/interview.php:148
 msgid "Colloquio passato"
 msgstr "Interview passed"
 
-#: templates/interview.php:126 templates/interviews.php:59
+#: templates/interview.php:150 templates/interviews.php:59
 msgid "Colloquio fallito"
 msgstr "Interview failed"
 
-#: templates/interview.php:131
-msgid "Salva"
-msgstr "Save"
-
-#: templates/interview.php:142
+#: templates/interview.php:165
 msgid "Genera link d'invito"
 msgstr "Generate an invite link"
-
-#: templates/interviewsbyrecruiter.php:38 templates/interviews.php:82
-#, php-format
-msgid "Giorno %s (%s)"
-msgstr "%s (%s)"
-
-#: templates/interviewsbyrecruiter.php:44
-#, php-format
-msgid "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
-msgstr "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
 
 #: templates/interviews.php:21
 msgid "Colloqui fissati"
@@ -1211,6 +1188,11 @@ msgstr "Interview passed, with invite link"
 #: templates/interviews.php:55
 msgid "Colloquio superato"
 msgstr "Interview passed"
+
+#: templates/interviews.php:82 templates/interviewsbyrecruiter.php:38
+#, php-format
+msgid "Giorno %s (%s)"
+msgstr "%s (%s)"
 
 #: templates/interviews.php:98
 msgid "Colloqui da fissare"
@@ -1255,9 +1237,30 @@ msgid_plural "%d invitati"
 msgstr[0] "%d invited"
 msgstr[1] "%d invited"
 
+#: templates/interviewsbyrecruiter.php:44
+#, php-format
+msgid "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
+msgstr "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
+
 #: templates/logout.php:6
 msgid "Logout completato"
 msgstr "Logout done"
+
+#: templates/notes.php:6
+msgid "Testo"
+msgstr "Text"
+
+#: templates/notes.php:9
+msgid "Autore"
+msgstr "Author"
+
+#: templates/notes.php:35
+msgid "Modifica"
+msgstr "Edit"
+
+#: templates/notes.php:43
+msgid "Nessuna nota"
+msgstr "No notes"
 
 #: templates/privacy.php:3
 msgid "Informazioni sul trattamento dei dati personali"
@@ -1440,6 +1443,22 @@ msgstr "Update info"
 #: templates/userinfo.php:61
 msgid "Annulla"
 msgstr "Cancel"
+
+#~ msgid ""
+#~ "Dal 2021-2022 abbiamo lanciato un progetto per il miglioramento della "
+#~ "qualità della vita degli studenti, per cui abbiamo intenzione di "
+#~ "sviluppare delle piattaforme web dedicate. Se conosci già o hai "
+#~ "intenzione di imparare il framework per backend Django, menzionalo!"
+#~ msgstr ""
+#~ "From 2021-2022 we launched a project to improve the quality of life of "
+#~ "students, so we intend to develop dedicated web platforms. If you already "
+#~ "know or are going to learn the Django backend framework, mention it!"
+
+#~ msgid "Note e domande per il colloquio"
+#~ msgstr "Notes and questions for the interview"
+
+#~ msgid "Salva"
+#~ msgstr "Save"
 
 #~ msgid "Mosta (spoiler!)"
 #~ msgstr "Show (spoiler!)"
