@@ -205,8 +205,8 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-Python">
-					<p><?=__('Descrivi qualsiasi tua esperienza nel programmare in Python, specialmente Python 3, e se hai un account su Github non esitare a condividerlo nella tua lettera!')?></p>
-					<p><?=__('Dal 2021-2022 abbiamo lanciato un progetto per il miglioramento della qualità della vita degli studenti, per cui abbiamo intenzione di sviluppare delle piattaforme web dedicate. Se conosci già o hai intenzione di imparare il framework per backend Django, menzionalo!')?></p>
+					<p><?=__('Descrivi qualsiasi tua esperienza nel programmare in Python, e se hai un account su Github non esitare a condividerlo nella tua lettera!')?></p>
+					<p><?=__('Dal 2021-2022 abbiamo lanciato un programma per il miglioramento della qualità della vita degli studenti (<a href="https://weeeopen.polito.it/skeeell" target="_blank">skeeell</a>). Stiamo lavorando per creare <a href="https://github.com/weee-open/skeeelled" target="_blank">skeeelled</a>, una piattaforma per alzare il livello di e-learning fornito a tutti i 40\'000 studenti del Poli. Se hai già lavorato su backend e/o REST API in Python (es. Django, Flask), o in altri linguaggi, ti stiamo cercando! Noi in particolare stiamo usando <a href="https://fastapi.tiangolo.com" target="_blank">FastAPI</a>.')?></p>
 					<p><?=__('Potresti menzionare se hai mai usato virtual environments, collaborato con qualcuno su un progetto software, o se sai scrivere in altri linguaggi che usiamo nel team, come JavaScript, PHP e Bash o altri ancora.')?></p>
 					<p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
 					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
