@@ -60,7 +60,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 		<div class="form-group row">
 			<label for="year" class="col-md-1 col-form-label"><?=__('Anno')?></label>
 			<div class="col-md-2 col-lg-4">
-				<select id="year" name="year" required="required" class="form-control" onchange="dottorandize()">
+				<select id="year" name="year" required="required" class="form-control">
 					<option value selected disabled class="d-none"></option>
 					<option value="1º Triennale"><?=__('1º Triennale')?></option>
 					<option value="2º Triennale"><?=__('2º Triennale')?></option>
@@ -73,63 +73,92 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			<label for="degreecourse" class="col-md-2 col-lg-1 col-form-label"><?=__('Corso di laurea')?></label>
 			<div class="col-md-7 col-lg-6">
 				<select id="degreecourse" name="degreecourse" required="required" class="form-control">
-					<optgroup label="<?=__('Ingegneria (L, LM)')?>">
-						<option value selected disabled class="d-none"></option>
+					<option hidden disabled class="default"></option>
+					<optgroup label="<?= __('Ingegneria') ?>" data-level="bachelor">
 						<option value="Automotive Engineering">Automotive Engineering</option>
-						<option value="Civil Engineering">Civil Engineering</option>
-						<option value="Communications And Computer Networks Engineering">Communications And Computer Networks Engineering</option>
 						<option value="Computer Engineering">Computer Engineering</option>
-						<option value="Electronic And Communications Engineering">Electronic And Communications Engineering</option>
-						<option value="Electronic Engineering">Electronic Engineering</option>
-						<option value="Engineering And Management">Engineering And Management</option>
-						<option value="ICT For Smart Societies">ICT For Smart Societies</option>
 						<option value="Ingegneria Aerospaziale">Ingegneria Aerospaziale</option>
 						<option value="Ingegneria Biomedica">Ingegneria Biomedica</option>
 						<option value="Ingegneria Chimica E Alimentare">Ingegneria Chimica E Alimentare</option>
-						<option value="Ingegneria Chimica E Dei Processi Sostenibili">Ingegneria Chimica E Dei Processi Sostenibili</option>
 						<option value="Ingegneria Civile">Ingegneria Civile</option>
 						<option value="Ingegneria Dei Materiali">Ingegneria Dei Materiali</option>
 						<option value="Ingegneria Del Cinema E Dei Mezzi Di Comunicazione">Ingegneria Del Cinema E Dei Mezzi Di Comunicazione</option>
 						<option value="Ingegneria Dell'autoveicolo">Ingegneria Dell'autoveicolo</option>
 						<option value="Ingegneria Della Produzione Industriale">Ingegneria Della Produzione Industriale</option>
-						<option value="Ingegneria Della Produzione Industriale E Dell'innovazione Tecnologica">Ingegneria Della Produzione Industriale E Dell'innovazione Tecnologica</option>
 						<option value="Ingegneria Edile">Ingegneria Edile</option>
 						<option value="Ingegneria Elettrica">Ingegneria Elettrica</option>
 						<option value="Ingegneria Elettronica">Ingegneria Elettronica</option>
 						<option value="Ingegneria Energetica">Ingegneria Energetica</option>
-						<option value="Ingegneria Energetica E Nucleare">Ingegneria Energetica E Nucleare</option>
 						<option value="Ingegneria Fisica">Ingegneria Fisica</option>
 						<option value="Ingegneria Gestionale L-8">Ingegneria Gestionale L-8</option>
 						<option value="Ingegneria Gestionale L-9">Ingegneria Gestionale L-9</option>
 						<option value="Ingegneria Informatica">Ingegneria Informatica</option>
-						<option value="Ingegneria Matematica">Ingegneria Matematica</option>
 						<option value="Ingegneria Meccanica">Ingegneria Meccanica</option>
 						<option value="Ingegneria Per L'ambiente E Il Territorio">Ingegneria Per L'ambiente E Il Territorio</option>
 						<option value="Matematica Per L'ingegneria">Matematica Per L'ingegneria</option>
 						<option value="Mechanical Engineering">Mechanical Engineering</option>
+						<option value="Electronic And Communications Engineering">Electronic And Communications Engineering</option>
+					</optgroup>
+					<optgroup label="<?= __('Design') ?>" data-level="bachelor">
+						<option value="Design E Comunicazione Visiva">Design E Comunicazione Visiva</option>
+					</optgroup>
+					<optgroup label="<?= __('Architettura e pianificazione urbanistica') ?>" data-level="bachelor">
+						<option value="Architettura">Architettura</option>
+						<option value="Pianificazione Territoriale, Urbanistica E Paesaggistico-ambientale">Pianificazione Territoriale, Urbanistica E Paesaggistico-ambientale</option>
+					</optgroup>
+					<optgroup label="<?= __('Ingegneria') ?>" data-level="master">
+						<option value="Building Engineering">Building Engineering</option>
+						<option value="Civil Engineering">Civil Engineering</option>
+						<option value="Computer Engineering">Computer Engineering</option>
+						<option value="Electronic Engineering">Electronic Engineering</option>
+						<option value="Energy And Nuclear Engineering">Energy And Nuclear Engineering</option>
+						<option value="Engineering And Management">Engineering And Management</option>
+						<option value="Environmental And Land Engineering">Environmental And Land Engineering</option>
+						<option value="Ingegneria Aerospaziale">Ingegneria Aerospaziale</option>
+						<option value="Ingegneria Biomedica">Ingegneria Biomedica</option>
+						<option value="Ingegneria Chimica E Dei Processi Sostenibili">Ingegneria Chimica E Dei Processi Sostenibili</option>
+						<option value="Ingegneria Civile">Ingegneria Civile</option>
+						<option value="Ingegneria Dei Materiali">Ingegneria Dei Materiali</option>
+						<option value="Ingegneria Del Cinema E Dei Mezzi Di Comunicazione">Ingegneria Del Cinema E Dei Mezzi Di Comunicazione</option>
+						<option value="Ingegneria Della Produzione Industriale E Dell'innovazione Tecnologica">Ingegneria Della Produzione Industriale E Dell'innovazione Tecnologica</option>
+						<option value="Ingegneria Edile">Ingegneria Edile</option>
+						<option value="Ingegneria Elettrica">Ingegneria Elettrica</option>
+						<option value="Ingegneria Elettronica (Electronic Engineering)">Ingegneria Elettronica (Electronic Engineering)</option>
+						<option value="Ingegneria Energetica E Nucleare">Ingegneria Energetica E Nucleare</option>
+						<option value="Ingegneria Gestionale">Ingegneria Gestionale</option>
+						<option value="Ingegneria Informatica (Computer Engineering)">Ingegneria Informatica (Computer Engineering)</option>
+						<option value="Ingegneria Matematica">Ingegneria Matematica</option>
+						<option value="Ingegneria Meccanica">Ingegneria Meccanica</option>
+						<option value="Ingegneria Per L'ambiente E Il Territorio">Ingegneria Per L'ambiente E Il Territorio</option>
+						<option value="Mechanical Engineering">Mechanical Engineering</option>
 						<option value="Mechatronic Engineering">Mechatronic Engineering</option>
 						<option value="Nanotechnologies For Icts">Nanotechnologies For Icts</option>
 						<option value="Petroleum And Mining Engineering">Petroleum And Mining Engineering</option>
+						<option value="Physics Of Complex Systems (Fisica Dei Sistemi Complessi)">Physics Of Complex Systems (Fisica Dei Sistemi Complessi)</option>
 						<option value="Physics Of Complex Systems">Physics Of Complex Systems</option>
+						<option value="ICT For Smart Societies">ICT For Smart Societies</option>
 					</optgroup>
-					<optgroup label="<?=__('Design (L, LM)')?>">
-						<option value="Design E Comunicazione Visiva">Design E Comunicazione Visiva</option>
+					<optgroup label="<?= __('Design') ?>" data-level="master">
 						<option value="Design Sistemico">Design Sistemico</option>
 					</optgroup>
-					<optgroup label="<?=__('Architettura e pianificazione urbanistica (L, LM)')?>">
-						<option value="Architecture">Architecture</option>
+					<optgroup label="<?= __('Architettura e pianificazione urbanistica') ?>" data-level="master">
 						<option value="Architecture Construction City">Architecture Construction City</option>
-						<option value="Architecture For The Sustainability Design">Architecture For The Sustainability Design</option>
-						<option value="Architettura">Architettura</option>
-						<option value="Architettura Costruzione Città">Architettura Costruzione Città</option>
-						<option value="Architettura Per Il Progetto Sostenibile">Architettura Per Il Progetto Sostenibile</option>
-						<option value="Architettura Per Il Restauro E Valorizzazione Del Patrimonio">Architettura Per Il Restauro E Valorizzazione Del Patrimonio</option>
-						<option value="Pianificazione Territoriale, Urbanistica E Paesaggistico-ambientale">Pianificazione Territoriale, Urbanistica E Paesaggistico-ambientale</option>
+						<option value="Architecture For Heritage">Architecture For Heritage</option>
+						<option value="Architecture For Sustainability">Architecture For Sustainability</option>
+						<option value="Architettura Per Il Patrimonio">Architettura Per Il Patrimonio</option>
+						<option value="Architettura Per La Sostenibilita'">Architettura Per La Sostenibilita'</option>
+						<option value="Automotive Engineering">Automotive Engineering</option>
+						<option value="Communications And Computer Networks Engineering">Communications And Computer Networks Engineering</option>
+						<option value="Data Science And Engineering">Data Science And Engineering</option>
+						<option value="Digital Skills For Sustainable Societal Transitions">Digital Skills For Sustainable Societal Transitions</option>
+						<option value="Economia Dell'ambiente, Della Cultura E Del Territorio">Economia Dell'ambiente, Della Cultura E Del Territorio</option>
+						<option value="Geografia E Scienze Territoriali">Geografia E Scienze Territoriali</option>
+						<option value="Pianificazione Territoriale, Urbanistica E Paesaggistico-Ambientale">Pianificazione Territoriale, Urbanistica E Paesaggistico-Ambientale</option>
 						<option value="Progettazione Delle Aree Verdi E Del Paesaggio">Progettazione Delle Aree Verdi E Del Paesaggio</option>
 						<option value="Territorial, Urban, Environmental And Landscape Planning">Territorial, Urban, Environmental And Landscape Planning</option>
+						<option value="Architettura Costruzione Citta'">Architettura Costruzione Citta'</option>
 					</optgroup>
-					<optgroup label="<?=__('Dottorato (tutti i settori)')?>">
-						<option value="Dottorato in Ambiente E Territorio">Dottorato in Ambiente E Territorio</option>
+					<optgroup label="<?=__('Dottorato')?>" data-level="phd">
 						<option value="Dottorato in Architettura. Storia E Progetto">Dottorato in Architettura. Storia E Progetto</option>
 						<option value="Dottorato in Beni Architettonici E Paesaggistici">Dottorato in Beni Architettonici E Paesaggistici</option>
 						<option value="Dottorato in Beni Culturali">Dottorato in Beni Culturali</option>
@@ -150,6 +179,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 						<option value="Dottorato in Scienza E Tecnologia Dei Materiali">Dottorato in Scienza E Tecnologia Dei Materiali</option>
 						<option value="Dottorato in Storia Dell'architettura E Dell'urbanistica">Dottorato in Storia Dell'architettura E Dell'urbanistica</option>
 						<option value="Dottorato in Urban And Regional Development">Dottorato in Urban And Regional Development</option>
+						<option value="Dottorato in Ambiente E Territorio">Dottorato in Ambiente E Territorio</option>
 					</optgroup>
 				</select>
 			</div>
@@ -329,109 +359,49 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 
 	updateHints();
 
+	let yearSelector = document.getElementById("year");
+
 	function dottorandize() {
-		if(document.getElementById('year').value === 'Dottorato') {
+		if(yearSelector.value === 'Dottorato') {
 			document.getElementById('matricola').placeholder = 'd123456';
 		} else {
 			document.getElementById('matricola').placeholder = 's123456';
 		}
 	}
-
+	yearSelector.addEventListener('change', dottorandize);
 	dottorandize();
 
-	let yearSelector = document.getElementById("year");
 	let courseSelector = document.getElementById("degreecourse");
-	// array of objects for each courses
-	let selectOptions = [
-		{
-			bachelor: [
-				{
-					optgroup: "<?= __('Architettura e pianificazione urbanistica (L, LM)') ?>",
-					options: ["Architettura", "Pianificazione Territoriale, Urbanistica E Paesaggistico-ambientale"]
-				},
-				{
-					optgroup: "<?= __('Design (L, LM)') ?>",
-					options: ['Design E Comunicazione Visiva']
-				},
-				{
-					optgroup: "<?= __('Ingegneria (L, LM)') ?>",
-					options: ["Electronic And Communications Engineering", "Ingegneria Aerospaziale", "Ingegneria Biomedica", "Ingegneria Chimica E Alimentare", "Ingegneria Civile",
-						"Ingegneria Dei Materiali", "Ingegneria Del Cinema E Dei Mezzi Di Comunicazione", "Ingegneria Dell'autoveicolo", "Automotive Engineering", "Ingegneria Della Produzione Industriale",
-						"Ingegneria Edile", "Ingegneria Elettrica", "Ingegneria Elettronica", "Ingegneria Energetica", "Ingegneria Fisica", "Ingegneria Gestionale L-9",
-							"Ingegneria Gestionale L-8", "Ingegneria Informatica", "Computer Engineering", "Ingegneria Meccanica", "Mechanical Engineering",
-						"Ingegneria Per L'ambiente E Il Territorio", "Matematica Per L'ingegneria"]
-				}]
-		},
-		{
-			master:[
-				{
-					optgroup: "<?=__('Architettura e pianificazione urbanistica (L, LM)')?>",
-					options: ["Architettura Costruzione Citta'", "Architecture Construction City", "Architettura Per Il Patrimonio", "Architecture For Heritage",
-							"Architettura Per La Sostenibilita'", "Architecture For Sustainability", "Automotive Engineering", "Communications And Computer Networks Engineering", "Data Science And Engineering",
-							"Digital Skills For Sustainable Societal Transitions", "Economia Dell'ambiente, Della Cultura E Del Territorio", "Geografia E Scienze Territoriali",
-							"Pianificazione Territoriale, Urbanistica E Paesaggistico-Ambientale", "Territorial, Urban, Environmental And Landscape Planning", "Progettazione Delle Aree Verdi E Del Paesaggio"]
-				},
-				{
-					optgroup: "<?=__('Design (L, LM)')?>",
-					options: ["Design Sistemico"]
-				},
-				{
-					optgroup: "<?=__('Ingegneria (L, LM)')?>",
-					options: ["ICT For Smart Societies", "Ingegneria Aerospaziale", "Ingegneria Biomedica", "Ingegneria Chimica E Dei Processi Sostenibili", "Ingegneria Civile",
-							  "Civil Engineering", "Ingegneria Dei Materiali", "Ingegneria Del Cinema E Dei Mezzi Di Comunicazione", "Ingegneria Della Produzione Industriale E Dell'innovazione Tecnologica",
-							  "Ingegneria Edile", "Building Engineering", "Ingegneria Elettrica", "Ingegneria Elettronica (Electronic Engineering)", "Electronic Engineering", "Ingegneria Energetica E Nucleare",
-							  "Energy And Nuclear Engineering", "Ingegneria Gestionale", "Engineering And Management", "Ingegneria Informatica (Computer Engineering)", "Computer Engineering",
-							  "Ingegneria Matematica", "Ingegneria Meccanica", "Mechanical Engineering", "Ingegneria Per L'ambiente E Il Territorio", "Environmental And Land Engineering",
-							  "Mechatronic Engineering", "Nanotechnologies For Icts", "Petroleum And Mining Engineering", "Physics Of Complex Systems (Fisica Dei Sistemi Complessi)",
-							  "Physics Of Complex Systems"]
-				}]
+	function coursize() {
+		let year = yearSelector.value;
+
+		let level = null;
+		if(year.includes("Triennale")) {
+			level = "bachelor";
+		} else if(year.includes("Magistrale")) {
+			level = "master";
+		} else if(year.includes("Dottorato")) {
+			level = "phd";
 		}
-	]
 
-	yearSelector.onchange = () => {
-		let val = yearSelector.options[yearSelector.selectedIndex].value;
-
-		// remove all child
-		courseSelector.textContent = '';
-
-		// to show first element blank
-		let option = document.createElement('option');
-		option.setAttribute('value', '');
-		option.appendChild(document.createTextNode(''));
-		courseSelector.appendChild(option);
-
-		// build inner HTML first iterate two courses then optgroup put every option to optgroup
-		selectOptions.forEach((degree, index) => {
-			if ( (val === '1º Triennale' || val === '2º Triennale' || val === '3º Triennale') && index === 0) {
-				degree.bachelor.forEach((singleOptgroup) => {
-					buildOptions(singleOptgroup);
-				});
-			} else if ( (val === '1º Magistrale' || val === '2º Magistrale') && index === 1) {
-				degree.master.forEach((singleOptgroup) => {
-					buildOptions(singleOptgroup);
-				});
+		for(let el of courseSelector.childNodes) {
+			if(el.nodeName == 'OPTGROUP') {
+				if(level) {
+					if(el.dataset.level) {
+						el.style.display = el.dataset.level == level ? '' : 'none';
+					}
+				} else {
+					el.style.display = '';
+				}
 			}
-		});
+		}
 
-	};
-
-	// build inside of optgroup
-	function buildOptions( singleOptgroup ) {
-		let newOptgroup = document.createElement('optgroup');
-		newOptgroup.setAttribute('label', singleOptgroup.optgroup);
-
-		singleOptgroup.options.forEach((value) => {
-
-			let option = document.createElement('option');
-			option.setAttribute('value', value);
-			option.appendChild(document.createTextNode(value));
-			newOptgroup.appendChild(option);
-		});
-
-		courseSelector.appendChild(newOptgroup);
+		let currentGroup = courseSelector.options[courseSelector.selectedIndex].parentElement;
+		if(currentGroup.style.display !== '') {
+			courseSelector.querySelector('.default').selected = 'selected';
+		}
 	}
-
-
-
+	yearSelector.addEventListener('change', coursize);
+	coursize();
 
 </script>
