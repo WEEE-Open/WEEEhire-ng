@@ -77,6 +77,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<optgroup label="<?= __('Ingegneria') ?>" data-level="bachelor">
 						<option value="Automotive Engineering">Automotive Engineering</option>
 						<option value="Computer Engineering">Computer Engineering</option>
+						<option value="Electronic And Communications Engineering">Electronic And Communications Engineering</option>
 						<option value="Ingegneria Aerospaziale">Ingegneria Aerospaziale</option>
 						<option value="Ingegneria Biomedica">Ingegneria Biomedica</option>
 						<option value="Ingegneria Chimica E Alimentare">Ingegneria Chimica E Alimentare</option>
@@ -97,7 +98,6 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 						<option value="Ingegneria Per L'ambiente E Il Territorio">Ingegneria Per L'ambiente E Il Territorio</option>
 						<option value="Matematica Per L'ingegneria">Matematica Per L'ingegneria</option>
 						<option value="Mechanical Engineering">Mechanical Engineering</option>
-						<option value="Electronic And Communications Engineering">Electronic And Communications Engineering</option>
 					</optgroup>
 					<optgroup label="<?= __('Design') ?>" data-level="bachelor">
 						<option value="Design E Comunicazione Visiva">Design E Comunicazione Visiva</option>
@@ -114,6 +114,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 						<option value="Energy And Nuclear Engineering">Energy And Nuclear Engineering</option>
 						<option value="Engineering And Management">Engineering And Management</option>
 						<option value="Environmental And Land Engineering">Environmental And Land Engineering</option>
+						<option value="ICT For Smart Societies">ICT For Smart Societies</option>
 						<option value="Ingegneria Aerospaziale">Ingegneria Aerospaziale</option>
 						<option value="Ingegneria Biomedica">Ingegneria Biomedica</option>
 						<option value="Ingegneria Chimica E Dei Processi Sostenibili">Ingegneria Chimica E Dei Processi Sostenibili</option>
@@ -136,7 +137,6 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 						<option value="Petroleum And Mining Engineering">Petroleum And Mining Engineering</option>
 						<option value="Physics Of Complex Systems (Fisica Dei Sistemi Complessi)">Physics Of Complex Systems (Fisica Dei Sistemi Complessi)</option>
 						<option value="Physics Of Complex Systems">Physics Of Complex Systems</option>
-						<option value="ICT For Smart Societies">ICT For Smart Societies</option>
 					</optgroup>
 					<optgroup label="<?= __('Design') ?>" data-level="master">
 						<option value="Design Sistemico">Design Sistemico</option>
@@ -145,6 +145,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 						<option value="Architecture Construction City">Architecture Construction City</option>
 						<option value="Architecture For Heritage">Architecture For Heritage</option>
 						<option value="Architecture For Sustainability">Architecture For Sustainability</option>
+						<option value="Architettura Costruzione Citta'">Architettura Costruzione Citta'</option>
 						<option value="Architettura Per Il Patrimonio">Architettura Per Il Patrimonio</option>
 						<option value="Architettura Per La Sostenibilita'">Architettura Per La Sostenibilita'</option>
 						<option value="Automotive Engineering">Automotive Engineering</option>
@@ -156,9 +157,9 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 						<option value="Pianificazione Territoriale, Urbanistica E Paesaggistico-Ambientale">Pianificazione Territoriale, Urbanistica E Paesaggistico-Ambientale</option>
 						<option value="Progettazione Delle Aree Verdi E Del Paesaggio">Progettazione Delle Aree Verdi E Del Paesaggio</option>
 						<option value="Territorial, Urban, Environmental And Landscape Planning">Territorial, Urban, Environmental And Landscape Planning</option>
-						<option value="Architettura Costruzione Citta'">Architettura Costruzione Citta'</option>
 					</optgroup>
 					<optgroup label="<?=__('Dottorato')?>" data-level="phd">
+						<option value="Dottorato in Ambiente E Territorio">Dottorato in Ambiente E Territorio</option>
 						<option value="Dottorato in Architettura. Storia E Progetto">Dottorato in Architettura. Storia E Progetto</option>
 						<option value="Dottorato in Beni Architettonici E Paesaggistici">Dottorato in Beni Architettonici E Paesaggistici</option>
 						<option value="Dottorato in Beni Culturali">Dottorato in Beni Culturali</option>
@@ -179,7 +180,6 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 						<option value="Dottorato in Scienza E Tecnologia Dei Materiali">Dottorato in Scienza E Tecnologia Dei Materiali</option>
 						<option value="Dottorato in Storia Dell'architettura E Dell'urbanistica">Dottorato in Storia Dell'architettura E Dell'urbanistica</option>
 						<option value="Dottorato in Urban And Regional Development">Dottorato in Urban And Regional Development</option>
-						<option value="Dottorato in Ambiente E Territorio">Dottorato in Ambiente E Territorio</option>
 					</optgroup>
 				</select>
 			</div>
