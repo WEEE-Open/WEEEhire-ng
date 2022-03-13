@@ -29,6 +29,7 @@ class PageInterviews implements RequestHandlerInterface
 			$id = (int) $GET['id'];
 			$user = $db->getUser($id);
 			$interview = $db->getInterview($id);
+			$notes = $db->getNotesByCandidateId($id);
 
 			// Download button
 			if (isset($GET['download'])) {
@@ -39,13 +40,23 @@ class PageInterviews implements RequestHandlerInterface
 					return new TextResponse('Interview not scheduled', 404);
 				}
 
+				if(count($notes) > 0) {
+					$pieces = [];
+					foreach($notes as $row) {
+						$pieces[] = "${row['note']} - ${row['uid']}\n";
+					}
+					$optionalNotes = "\n\nNote:\n" . implode('', $pieces);
+				} else {
+					$optionalNotes = "";
+				}
+
 				$ical = new VCalendar([
 					'VEVENT' => [
 						'SUMMARY' => "Colloquio con $user->name $user->surname",
 						'UID' => $user->id,
 						'DTSTART' => $interview->when,
 						'DTEND' => (clone $interview->when)->add(new \DateInterval('PT30M')),
-						'DESCRIPTION' => "Colloquio per $user->area.\n\nNote:\n$user->notes",
+						'DESCRIPTION' => "Colloquio per $user->area.$optionalNotes",
 					]
 				]);
 				/** @noinspection PhpUndefinedFieldInspection */
@@ -183,7 +194,7 @@ class PageInterviews implements RequestHandlerInterface
 				'interview'  => $interview,
 				'edit'       => isset($GET['edit']),
 				'recruiters' => $ldap->getRecruiters(),
-				'notes'      => $db->getNotesByCandidateId($id)
+				'notes'      => $notes,
 			]);
 
 			return new HtmlResponse($page);
