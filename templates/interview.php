@@ -118,7 +118,7 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 		<div class="form-group">
 			<label for="notes"><b><?= __('Aggiungi nota') ?></b></label>
 			<textarea id="notes" name="note" cols="40" rows="3"
-					class="form-control" required></textarea>
+					class="form-control"></textarea>
 		</div>
 		<div class="form-group text-center">
 			<button name="saveNote" value="true" type="submit"
