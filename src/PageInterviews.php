@@ -40,9 +40,9 @@ class PageInterviews implements RequestHandlerInterface
 					return new TextResponse('Interview not scheduled', 404);
 				}
 
-				if(count($notes) > 0) {
+				if (count($notes) > 0) {
 					$pieces = [];
-					foreach($notes as $row) {
+					foreach ($notes as $row) {
 						$pieces[] = "${row['note']} - ${row['uid']}\n";
 					}
 					$optionalNotes = "\n\nNote:\n" . implode('', $pieces);
