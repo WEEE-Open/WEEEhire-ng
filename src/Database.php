@@ -584,12 +584,12 @@ ORDER BY submitted DESC');
 	 */
 	public function updateUser(User $user)
 	{
-//		$stmt = $this->db->prepare('UPDATE users SET name = :namep, surname = :surname, degreecourse = :degreecourse, year = :yearp, matricola = :matricola, area = :area, letter = :letter WHERE id = :id');
-//		$this->bindUserParameters($user, $stmt);
-//		$result = $stmt->execute();
-//		if ($result === false) {
-//			throw new DatabaseException();
-//		}
+		$stmt = $this->db->prepare('UPDATE users SET name = :namep, surname = :surname, degreecourse = :degreecourse, year = :yearp, matricola = :matricola, area = :area, letter = :letter WHERE id = :id');
+		$this->bindUserParameters($user, $stmt);
+		$result = $stmt->execute();
+		if ($result === false) {
+			throw new DatabaseException();
+		}
 	}
 
 	/**
