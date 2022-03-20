@@ -43,7 +43,7 @@ class PageInterviews implements RequestHandlerInterface
 				if (count($notes) > 0) {
 					$pieces = [];
 					foreach ($notes as $row) {
-						$pieces[] = "${row['note']} - ${row['uid']}\n";
+						$pieces[] = "> ${row['note']} - ${row['uid']}\n";
 					}
 					$optionalNotes = "\n\nNote:\n" . implode('', $pieces);
 				} else {
