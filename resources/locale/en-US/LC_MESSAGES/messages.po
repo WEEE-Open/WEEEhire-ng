@@ -1323,12 +1323,16 @@ msgstr "Edit applications expiry time"
 
 #: templates/settings.php:35
 #, php-format
-msgid "Scadenza Candidature <b>(%s alle 00:00)</b>"
-msgstr "Applications expiry <b>(%s at 00:00)</b>"
+msgid "Scadenza Candidature <b>(%s)</b>"
+msgstr "Applications expiry <b>(%s)</b>"
 
 #: templates/settings.php:36
 msgid "nessuna scadenza"
 msgstr "no expiry"
+
+#: templates/settings.php:36
+msgid "alle 00:00"
+msgstr "at 00:00"
 
 #: templates/settings.php:46 templates/settings.php:50
 #: templates/settings.php:91

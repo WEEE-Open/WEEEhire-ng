@@ -4,13 +4,25 @@ Manage applications to the team.
 
 ## Local development
 
-The Docker container is still a work in progress. In the meantime, you can run locally.
+### With Docker
+
+> The Docker container is still a work in progress. If you encounter issues use the [containerless version](#locally-with-no-containers) instead.
+
+Run `./launch.sh` in the main directory of the repository to run the server with `docker-compose`. The script accepts one optional parameter:
+
+- `d` or `detach` to run in detached mode (remember to run `docker-compose down` when you are done).
+- `p` or `php` to only follow logs coming from php and not from the web server (press `CTRL+C` to terminate the server).
+- nothing (default) to run the containers in the foreground and follow all logs (press `CTRL+C` to terminate the server).
+
+Once launched the application is available at `http://localhost:8082`
+
+### Without containers
 
 You will need:
-- PHP, any recent version, with sqlite extension enabled
+- PHP (any recent version) with SQLite extension enabled
 - Composer
-- sqlite3 executable to create an empty database
-- gettetxt (for msgfmt command)
+- The `sqlite3` executable to create an empty database
+- gettetxt (for the `msgfmt` command)
 
 Then, run these commands:
 
@@ -28,7 +40,7 @@ Done. Browse to `[::]:8777` and have fun.
 
 You do not need to configure the SSO part, neither LDAP, neither sendmail, nor to install APCu: these are required in production only.
 
-In fact, if TEST_MODE is true in config.php:
+In fact, if `TEST_MODE` is true in config.php:
 
 - Emails will *not* be sent, they are printed to stderr
 - Authentication is bypassed, access `[::]:8777/candidates.php` directly
@@ -43,10 +55,13 @@ WEEEHire will print some warnings to stderr if APCu is not enabled.
 ```bash
 # Generate the master .pot file
 xgettext -k__ -k_ngettext:1,2 --from-code utf-8 templates/*.php -o messages.pot
+
 # Merge it into other .po files (en-US only, right now)
 msgmerge --update resources/locale/en-US/LC_MESSAGES/messages.po messages.pot
+
 # Translate strings, e.g. with
 lokalize resources/locale/en-US/LC_MESSAGES/messages.po &
+
 # Create the .mo file
 msgfmt resources/locale/en-US/LC_MESSAGES/messages.po --output-file=resources/locale/en-US/LC_MESSAGES/messages.mo
 ```
