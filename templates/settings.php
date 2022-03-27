@@ -32,8 +32,8 @@ if ($rolesUnavailable === null) {
 			<div class="<?=$expiry === null ? 'col-sm-12 col-lg-8' : 'col-sm-12 col-lg-6'?>">
 				<label for="expiry">
 					<?=sprintf(
-						__('Scadenza Candidature <b>(%s alle 00:00)</b>'),
-						$expiry === null ? __('nessuna scadenza') : $expiry->format('d-m-Y')
+						__('Scadenza Candidature <b>(%s)</b>'),
+						$expiry === null ? __('nessuna scadenza') : $expiry->format('d-m-Y') . ' ' . __('alle 00:00')
 					)?>
 				</label>
 			</div>
