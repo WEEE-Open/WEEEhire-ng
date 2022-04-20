@@ -40,7 +40,7 @@ class Template
 	{
 		Loader::loadFunctions();
 
-		_setlocale(LC_MESSAGES, $locale);
+		_setlocale("LC_MESSAGES", $locale);
 		_textdomain('messages');
 		_bindtextdomain(
 			'messages',
@@ -65,7 +65,7 @@ class Template
 	{
 		Loader::loadFunctions();
 
-		_setlocale(LC_MESSAGES, self::getLocale());
+		_setlocale("LC_MESSAGES", self::getLocale());
 		_textdomain('messages');
 		_bindtextdomain(
 			'messages',

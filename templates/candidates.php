@@ -90,12 +90,18 @@ require_once 'stars.php';
 		if ($user['hold']) {
 			$statusCellIcons .= '<span class="fas fa-lock text-dark"></span>';
 		}
+
+		// if user has note by admin add note icon
+		if (!is_null($user['has_note'])) {
+			$statusCellIcons .= '<span class="fas fa-sticky-note"></span>';
+		}
+
 		if ($statusCellIcons !== '') {
 			$statusCell .= '&nbsp;' . $statusCellIcons;
 		}
 		?>
 		<tr <?=$trcolor?>>
-			<td><a href="/candidates.php?id=<?=$user['id']?>"><?=$this->e($user['name'])?></a></td>
+			<td><a href="/candidates.php?id=<?= $user['id'] ?>"><?= $this->e($user['name']) ?></a></td>
 			<td><?=$this->e($user['area'])?></td>
 			<td class="stars <?= $user['myvote'] === null && $user['evaluation'] !== null ? 'notmine' : '' ?>"><?=$user['evaluation'] === null ? '' : sprintf('%3.1f', $user['evaluation']) . '&nbsp;' . stars($user['evaluation'])?></td>
 			<td><?=$date?></td>

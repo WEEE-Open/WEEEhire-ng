@@ -170,7 +170,7 @@ class PageCandidates implements RequestHandlerInterface
 				}
 			}
 
-			$users = $db->getallusersfortable($_SESSION['uid']);
+			$users = $db->getUsersWithNotesAndEvaluations($_SESSION['uid']);
 			return new HtmlResponse($template->render('candidates', ['users' => $users, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]));
 		}
 	}

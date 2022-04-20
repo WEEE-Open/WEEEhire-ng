@@ -340,6 +340,51 @@ ORDER BY submitted DESC');
 	}
 
 	/**
+	 * Get all users for the candidates table with notes and evaluations
+	 *
+	 * @param string $evaluatorName Evaluator username
+	 *
+	 * @return array Array of associative arrays
+	 */
+	public function getUsersWithNotesAndEvaluations(string $evaluatorName): array
+	{
+		$votes = $this->getAllEvaluationsAverage();
+
+		// there is additional left join in order to get note about user,
+		// the reason why there is additional subquery with distinct candidate_id because
+		// if I left join and if user has some ( more than one ) notes after join user begin to duplicate
+		// in this case I am getting with distinct candidate_id
+		$query = 'SELECT users.id, name, surname, area, recruiter, published, status, submitted, hold, evaluation.vote AS myvote, candidate_id AS has_note
+                    FROM users
+                    LEFT JOIN evaluation ON ref_user_id=users.id AND evaluation.id_evaluator=:user
+                    LEFT JOIN ( SELECT DISTINCT candidate_id FROM notes WHERE uid=:user ) ON candidate_id=users.id
+                    ORDER BY submitted DESC';
+
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':user', $evaluatorName, SQLITE3_TEXT);
+		$result = $stmt->execute();
+
+		$compact = [];
+		while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+			$compact[] = [
+				'id'           => $row['id'],
+				'name'         => $row['name'] . ' ' . $row['surname'],
+				'area'         => $row['area'],
+				'recruiter'    => $row['recruiter'],
+				'hold'         => (bool) $row['hold'],
+				'published'    => (bool) $row['published'],
+				'myvote'       => $row['myvote'] === null ? null : (int) $row['myvote'],
+				'status'       => $row['status'] === null ? null : (bool) $row['status'],
+				'submitted'    => $row['submitted'],
+				'evaluation'   => $votes[$row['id']] ?? null,
+				'has_note'     => $row['has_note'], // convert candidate_id to has_note
+			];
+		}
+
+		return $compact;
+	}
+
+	/**
 	 * Save notes.
 	 *
 	 * @param int $id User ID
