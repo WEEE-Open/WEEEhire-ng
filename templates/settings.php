@@ -14,9 +14,11 @@ if ($rolesUnavailable === null) {
 	$roles = explode('|', $rolesUnavailable);
 	$roles = array_combine($roles, $roles);
 }
+$currentFileName = basename(__FILE__);
+
 ?>
 
-<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser])?>
+<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser, 'currentFileName' => $currentFileName])?>
 
 <?php if (isset($error)) : ?>
 	<div class="alert alert-danger">

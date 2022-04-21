@@ -14,10 +14,11 @@ $tobe = 0;
 $topublish = 0;
 $published = 0;
 $hold = 0;
+$currentFileName = basename(__FILE__);
 require_once 'stars.php';
 ?>
 
-<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser])?>
+<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser, 'currentFileName' => $currentFileName])?>
 
 <h1><?=__('Candidati')?></h1>
 <table id="candidates" class="table" data-search="true">
@@ -90,12 +91,18 @@ require_once 'stars.php';
 		if ($user['hold']) {
 			$statusCellIcons .= '<span class="fas fa-lock text-dark"></span>';
 		}
+
+		// if user has note by admin add note icon
+		if (!is_null($user['has_note'])) {
+			$statusCellIcons .= '<span class="fas fa-sticky-note"></span>';
+		}
+
 		if ($statusCellIcons !== '') {
 			$statusCell .= '&nbsp;' . $statusCellIcons;
 		}
 		?>
 		<tr <?=$trcolor?>>
-			<td><a href="/candidates.php?id=<?=$user['id']?>"><?=$this->e($user['name'])?></a></td>
+			<td><a href="/candidates.php?id=<?= $user['id'] ?>"><?= $this->e($user['name']) ?></a></td>
 			<td><?=$this->e($user['area'])?></td>
 			<td class="stars <?= $user['myvote'] === null && $user['evaluation'] !== null ? 'notmine' : '' ?>"><?=$user['evaluation'] === null ? '' : sprintf('%3.1f', $user['evaluation']) . '&nbsp;' . stars($user['evaluation'])?></td>
 			<td><?=$date?></td>

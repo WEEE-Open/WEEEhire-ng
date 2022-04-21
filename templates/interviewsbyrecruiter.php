@@ -7,9 +7,10 @@ $this->layout('base', ['title' => __('Recruiter'), 'logoHref' => 'interviews.php
 
 $later = [];
 $prevdate = null;
+$currentFileName = basename(__FILE__);
 ?>
 
-<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser])?>
+<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser, 'currentFileName' => $currentFileName])?>
 
 <h1><?=__('Recruiter')?></h1>
 
