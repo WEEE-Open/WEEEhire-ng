@@ -19,7 +19,7 @@ class PageIndex implements RequestHandlerInterface
 		$rolesUnavailable = $db->getConfigValue('rolesUnavailable');
 
 		if (!is_null($rolesUnavailable)) {
-			$expiry = time();
+			$expiry = 1;
 		}
 
 		// Get from DB -> if "unixtime.now >= expiry date" then candidate_close : else show the form
