@@ -81,3 +81,11 @@ a.disabled {
 	pointer-events: none;
 	cursor: default;
 }
+
+.navbar-light .navbar-nav .nav-link {
+	color: #007bff;
+}
+
+.navbar-nav>.active>a {
+	background-color: #C0C0C0;
+}

@@ -11,12 +11,12 @@ $toschedule = 0;
 $scheduled = 0;
 $invited = 0;
 $toinvite = 0;
-
+$currentFileName = basename(__FILE__);
 $later = [];
 $prevdate = null;
 ?>
 
-<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser])?>
+<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser, 'currentFileName' => $currentFileName])?>
 
 <h2><?=__('Colloqui fissati')?></h2>
 <table id="interviews" class="table">

@@ -303,43 +303,6 @@ class Database
 	}
 
 	/**
-	 * Get all users for the candidates table
-	 *
-	 * @param string $username Evaluator username
-	 *
-	 * @return array Array of associative arrays
-	 */
-	public function getAllUsersForTable(string $username)
-	{
-		$votes = $this->getAllEvaluationsAverage();
-
-		$stmt = $this->db->prepare('SELECT id, name, surname, area, recruiter, published, status, submitted, hold, evaluation.vote AS myvote
-FROM users
-LEFT JOIN evaluation ON ref_user_id=id AND evaluation.id_evaluator=:user
-ORDER BY submitted DESC');
-		$stmt->bindValue(':user', $username, SQLITE3_TEXT);
-		$result = $stmt->execute();
-
-		$compact = [];
-		while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-			$compact[] = [
-				'id'         => $row['id'],
-				'name'       => $row['name'] . ' ' . $row['surname'],
-				'area'       => $row['area'],
-				'recruiter'  => $row['recruiter'],
-				'hold'       => (bool) $row['hold'],
-				'published'  => (bool) $row['published'],
-				'myvote'     => $row['myvote'] === null ? null : (int) $row['myvote'],
-				'status'     => $row['status'] === null ? null : (bool) $row['status'],
-				'submitted'  => $row['submitted'],
-				'evaluation' => $votes[$row['id']] ?? null,
-			];
-		}
-
-		return $compact;
-	}
-
-	/**
 	 * Get all users for the candidates table with notes and evaluations
 	 *
 	 * @param string $evaluatorName Evaluator username

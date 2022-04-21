@@ -14,10 +14,11 @@ $tobe = 0;
 $topublish = 0;
 $published = 0;
 $hold = 0;
+$currentFileName = basename(__FILE__);
 require_once 'stars.php';
 ?>
 
-<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser])?>
+<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser, 'currentFileName' => $currentFileName])?>
 
 <h1><?=__('Candidati')?></h1>
 <table id="candidates" class="table" data-search="true">
