@@ -83,9 +83,10 @@ a.disabled {
 }
 
 .navbar-light .navbar-nav .nav-link {
-	color: #007bff;
+	color: #007bff !important;
 }
 
 .navbar-nav>.active>a {
-	background-color: #C0C0C0;
+	border: 1px solid #00983a;
+	border-radius: 5px;
 }
