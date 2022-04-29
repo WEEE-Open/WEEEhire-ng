@@ -759,7 +759,7 @@ class Database
 	 *
 	 * @return array Array of associative arrays
 	 */
-	public function getAllAssignedInterviewsForTable()
+	public function getAllAssignedInterviewsForTable(): array
 	{
 		$dtz = new DateTimeZone('Europe/Rome');
 		$result = $this->db->query('SELECT id, name, surname, area, interviewer, interview, interviewstatus AS status FROM users WHERE status >= 1 AND published >= 1 AND interviewer IS NOT NULL and interview IS NOT NULL ORDER BY interviewer, interview, surname, name');

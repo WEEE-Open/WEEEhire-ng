@@ -193,7 +193,16 @@ class PageInterviews implements RequestHandlerInterface
 			if (isset($GET['byrecruiter'])) {
 				// List of interviews by recruiter
 				$interviews = $db->getAllAssignedInterviewsForTable();
-				$page = $template->render('interviewsbyrecruiter', ['interviews' => $interviews, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
+
+				$page = $template->render(
+					'interviewsbyrecruiter',
+					[
+						'interviews' => $interviews,
+						'myuser' => $_SESSION['uid'],
+						'myname' => $_SESSION['cn'],
+						'showOldInterviews' => ( isset($GET['showOldInterviews']) && $GET['showOldInterviews'] === 'on' )
+					]
+				);
 				return new HtmlResponse($page);
 			} else {
 				// List of all interviews in chronological order
