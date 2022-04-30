@@ -7,8 +7,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'roles.php';
-
 class PageIndex implements RequestHandlerInterface
 {
 	public function handle(ServerRequestInterface $request): ResponseInterface
@@ -18,11 +16,10 @@ class PageIndex implements RequestHandlerInterface
 		$db = new Database();
 
 		$expiry = $db->getConfigValue('expiry');
-		$rolesUnavailable = $db->getConfigValue('rolesUnavailable');
-		$rolesUnavailableCount = $rolesUnavailable ? count(explode('|', $rolesUnavailable)) : 0;
-		$allRoles = count(getRoles());
+		$rolesAvailable = $db->getConfigValue('rolesAvailable');
+		$rolesAvailableCount = $rolesAvailable ? count(explode('|', $rolesAvailable)) : 0;
 
-		if ($rolesUnavailableCount === $allRoles) {
+		if ($rolesAvailableCount === 0) {
 			$expiry = 1;
 		}
 

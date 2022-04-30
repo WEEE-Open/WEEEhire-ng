@@ -1,11 +1,11 @@
 <?php
 
-/** @var string|null $rolesUnavailable */
+/** @var string|null $rolesAvailable */
 
-if ($rolesUnavailable === null) {
+if ($rolesAvailable === null) {
 	$roles = [];
 } else {
-	$roles = explode('|', $rolesUnavailable);
+	$roles = explode('|', $rolesAvailable);
 	$roles = array_combine($roles, $roles);
 }
 require_once 'roles.php';
@@ -195,12 +195,12 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				<select id="area" name="area" required="required" class="form-control" onchange="updateHints()">
 					<option value selected disabled class="d-none"></option>
 					<?php foreach ($allRoles as $value => $role) : ?>
-						<option <?= isset($roles[$value]) ? 'disabled' : '' ?> value="<?= $this->e($value) ?>"><?= $this->e($role) ?></option>
+						<option <?= isset($roles[$value]) ? '' : 'disabled' ?> value="<?= $this->e($value) ?>"><?= $this->e($role) ?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>
 		</div>
-		<?php if (count($roles) > 0) : ?>
+		<?php if (count($roles) < count($allRoles)) : ?>
 		<div class="form-group">
 			<p><small><?= __('Al momento alcune aree del team sono al completo, è possibile candidarsi solo nelle aree selezionabili dall\'elenco. In futuro le aree disponibili potrebbero cambiare senza preavviso.') ?></small></p>
 		</div>

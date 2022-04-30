@@ -35,7 +35,7 @@ create table config (
 );
 
 insert into config (id, value)
-values ('expiry', null), ('rolesUnavailable', null), ('notifyEmail', 0);
+values ('expiry', null), ('rolesAvailable', null), ('notifyEmail', 0);
 
 create table evaluation (
 	id_evaluation integer primary key autoincrement,

@@ -3,15 +3,15 @@
 /** @var $myuser string */
 /** @var $expiry String */
 /** @var $sendMail String */
-/** @var $rolesUnavailable String */
+/** @var $rolesAvailable String */
 
 $this->layout('base', ['title' => __('Opzioni WEEEHire'), 'logoHref' => 'settings.php']);
 require_once 'roles.php';
 $allRoles = getRoles();
-if ($rolesUnavailable === null) {
+if ($rolesAvailable === null) {
 	$roles = [];
 } else {
-	$roles = explode('|', $rolesUnavailable);
+	$roles = explode('|', $rolesAvailable);
 	$roles = array_combine($roles, $roles);
 }
 $currentFileName = basename(__FILE__);
@@ -65,7 +65,7 @@ $currentFileName = basename(__FILE__);
 					<div class="col border-right">
 						<h5 class="text-success"><?=__('Ruoli disponibili')?></h5>
 						<?php foreach ($allRoles as $value => $role) : ?>
-							<?php if (!isset($roles[$value])) : ?>
+							<?php if (isset($roles[$value])) : ?>
 								<p><?= $this->e($role) ?></p>
 							<?php endif; ?>
 						<?php endforeach; ?>
@@ -73,7 +73,7 @@ $currentFileName = basename(__FILE__);
 					<div class="col border-right">
 						<h5 class="text-danger"><?=__('Ruoli non disponibili')?></h5>
 						<?php foreach ($allRoles as $value => $role) : ?>
-							<?php if (isset($roles[$value])) : ?>
+							<?php if (!isset($roles[$value])) : ?>
 								<p><?= $this->e($role) ?></p>
 							<?php endif; ?>
 						<?php endforeach; ?>
@@ -82,7 +82,7 @@ $currentFileName = basename(__FILE__);
 			</div>
 			<div class="col ml-3">
 				<div class="row">
-					<label for="roles"><?= __('Seleziona i ruoli da rendere non disponibili') ?></label>
+					<label for="roles"><?= __('Seleziona i ruoli da rendere disponibili') ?></label>
 					<select size="<?= count($allRoles) ?>" class="custom-select mb-2" multiple name="roles[]" id="roles">
 						<?php foreach ($allRoles as $value => $role) : ?>
 							<option <?= isset($roles[$value]) ? 'selected' : '' ?> value="<?= $this->e($value) ?>"><?= $this->e($role) ?></option>
@@ -91,7 +91,7 @@ $currentFileName = basename(__FILE__);
 				</div>
 				<div class="row justify-content-between mt-3">
 					<button type="submit" class="btn btn-primary mb-md-0 mb-2"><?=__('Conferma')?></button>
-					<button type="submit" class="btn btn-warning" name="rolesReset" value="true"><?=__('Rendi tutti disponibili')?></button>
+					<button type="submit" class="btn btn-warning" name="rolesReset" value="true"><?=__('Rendi tutti non disponibili')?></button>
 				</div>
 			</div>
 		</div>
