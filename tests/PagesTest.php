@@ -12,13 +12,13 @@ abstract class PagesTest extends TestCase {
 		require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 		$db = new Database();
 		$db->unsetConfigValue('expiry');
-		$db->unsetConfigValue('rolesAvailable');
+		$db->setConfigValue('rolesAvailable', 'Sviluppo software PHP|Sviluppo software Python|Elettronica');
 		$db->unsetConfigValue('notifyEmail');
 	}
 
 	protected function assertPreConditions(): void {
 		$this->assertTrue(defined('TEST_MODE'), 'TEST_MODE is defined');
-		$this->assertTrue(TEST_MODE, 'TEST_MODE is enalbed');
+		$this->assertTrue(TEST_MODE, 'TEST_MODE is enabled');
 	}
 
 	protected function setUp(): void {
