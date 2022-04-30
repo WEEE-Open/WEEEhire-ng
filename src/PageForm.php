@@ -9,6 +9,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 
+require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'roles.php';
+
 class PageForm implements RequestHandlerInterface
 {
 	public function handle(ServerRequestInterface $request): ResponseInterface
@@ -19,8 +21,10 @@ class PageForm implements RequestHandlerInterface
 
 		$expiry = $db->getConfigValue('expiry');
 		$rolesUnavailable = $db->getConfigValue('rolesUnavailable');
+		$rolesUnavailableCount = $rolesUnavailable ? count(explode('|', $rolesUnavailable)) : 0;
+		$allRoles = count(getRoles());
 
-		if (!is_null($rolesUnavailable)) {
+		if ($rolesUnavailableCount === $allRoles) {
 			$expiry = 1;
 		}
 
