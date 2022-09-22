@@ -227,10 +227,11 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Sysadmin">
-					<p><?=__('Il team ha alcuni server Linux con delle web app e dei software di SSO. La configurazione è automatizzata in parte con Ansible e in parte con container Docker/Podman.') ?></p>
-					<p><?=__('Tra nuovi software da installare e configurare, container da migliorare e ordinaria manutenzione da eseguire (installazione di aggiornamenti), il lavoro non manca mai.')?></p>
-					<p><?=__('Se hai già esperienza con queste cose, ottimo, ma il minimo richiesto è non spaventarsi davanti a un terminale Linux.')?></p>
-					<p><?=__('È piuttosto importante che tu sia una persona cauta e attenta, che legga con cura il manuale e i messaggi prima di lanciare comandi. Se ti ritieni tale e vuoi mettere le mani in pasta su dei server, dicci qualcosa su di te e che esperienza hai con Linux, con i server o con l\'informatica in generale.')?></p>
+					<p><?=__('Il compito dei sysadmin è assicurarsi che gli strumenti informatici a cui il team si appoggia per le sue operazioni siano al massimo della loro efficienza.') ?></p>
+					<p><?=__('Per fare questo gestiscono i server che ospitano i nostri servizi, collaborano con gli sviluppatori per deployare e aggiornare i software che creiamo, monitorano lo stato di salute della nostra infrastruttura e si assicurano che i nostri dati siano protetti da attacchi e perdite') ?></p>
+					<p><?=__('I sysadmin seguono l\'intero ciclo di vita dei servizi, dalla configurazione del server tramite Ansible, passando per la containerizzazione e gestione dei servizi, alle normali procedure di manutenzione.') ?></p>
+					<p><?=__('Le competenze esercitate sono una generale conoscenza di Ansible e della containerizzazione, familiarità con la gestione e configurazione di software per server comuni come Nginx, PHP e MariaDB/PostgreSQL e maneggevolezza con il terminale Linux.') ?></p>
+					<p><?=__('Se hai esperienza con alcune di queste cose, parlane liberamente.')?></p>
 					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre ad amministrare server.')?></p>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
