@@ -30,7 +30,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					);
 					break;
 				case 'duplicate':
-					echo sprintf(__('Hai già inviato una candidatura con questa matricola. Puoi controllare la pagina con lo stato dal link che ti abbiamo mandato via email.'));
+					echo sprintf(__('Hai già inviato una candidatura con questa matricola. Puoi controllare la pagina con lo stato dal link che ti abbiamo mandato via email. Per favore non inviare più di una candidatura a testa, se vuoi candidarti per più di un\'area puoi <a href="https://weeeopen.polito.it/contattaci/" target="_blank">inviarci un messaggio tramite il sito</a> o dircelo durante il colloquio.'));
 					break;
 				default:
 					echo sprintf(
