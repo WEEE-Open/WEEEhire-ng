@@ -16,8 +16,7 @@ services:
       - ./templates:/var/www/html/templates
       - ./tests:/var/www/html/tests
       - ./config:/var/www/html/config
-      # Database SQL file
-      - ./weeehire.db:/var/www/html/weeehire.db
+      - ./database:/var/www/html/database
 
   web:
     image: weeehire-ng/web

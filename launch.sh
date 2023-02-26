@@ -11,9 +11,9 @@ check_or_exit docker
 check_or_exit docker-compose
 
 echo "Creating database file"
-if [[ ! -f weeehire.db ]]; then
-	sqlite3 weeehire.db < database.sql
-	sqlite3 weeehire.db < example-data.sql
+if [[ ! -f database/weeehire.db ]]; then
+	sqlite3 database/weeehire.db < database/database.sql
+	sqlite3 database/weeehire.db < database/example-data.sql
 fi
 
 echo "Copying example configuration"

@@ -1,7 +1,7 @@
 .idea/
 composer.phar
 /vendor/
-weeehire.db
+database/weeehire.db
 config/config.php
 resources/locale/*/LC_MESSAGES/*.mo
 messages.pot

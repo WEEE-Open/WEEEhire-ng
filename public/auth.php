@@ -42,7 +42,7 @@ try {
 	$_SESSION['id_token'] = $id_token;
 	$_SESSION['isAdmin'] = true;
 	$authorized = false;
-	foreach (WEEEHIRE_OIDC_ALLOWED_GROUPS as $group) {
+	foreach (explode(',', WEEEHIRE_OIDC_ALLOWED_GROUPS) as $group) {
 		if (in_array($group, $groups, true)) {
 			$authorized = true;
 			break;
