@@ -28,9 +28,6 @@ jobs:
       - name: Create Database
         run: sqlite3 database/weeehire.db < database/database.sql
 
-      - name: Create config.php
-        run: cp config/config-example.php config/config.php
-
       - name: Run msgfmt
         run: |
           sudo apt-get install gettext
