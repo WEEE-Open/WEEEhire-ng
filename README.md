@@ -27,8 +27,8 @@ You will need:
 Then, run these commands:
 
 ```bash
-sqlite3 database/weeehire.db < database.sql
-sqlite3 database/weeehire.db < example-data.sql  # If you want some example data
+sqlite3 database/weeehire.db < database/database.sql
+sqlite3 database/weeehire.db < database/example-data.sql  # If you want some example data
 cp config/config-example.php config/config.php
 nano config/config.php  # Optional, the defaults are good for a test instance but not for production
 msgfmt resources/locale/en-US/LC_MESSAGES/messages.po --output-file=resources/locale/en-US/LC_MESSAGES/messages.mo
@@ -73,7 +73,7 @@ And done.
 Basically the same as development:
 
 ```bash
-sqlite3 database/weeehire.db < database.sql
+sqlite3 database/weeehire.db < database/database.sql
 cp config/config-example.php config/config.php
 nano config/config.php
 msgfmt resources/locale/en-US/LC_MESSAGES/messages.po --output-file=resources/locale/en-US/LC_MESSAGES/messages.mo

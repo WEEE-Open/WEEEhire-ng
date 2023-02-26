@@ -2,7 +2,6 @@
 composer.phar
 /vendor/
 database/weeehire.db
-config/config.php
 resources/locale/*/LC_MESSAGES/*.mo
 messages.pot
 messages.po~

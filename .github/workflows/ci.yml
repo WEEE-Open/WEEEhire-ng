@@ -26,7 +26,7 @@ jobs:
           php_version: "${{ matrix.php }}"
 
       - name: Create Database
-        run: sqlite3 weeehire.db < database.sql
+        run: sqlite3 database/weeehire.db < database/database.sql
 
       - name: Create config.php
         run: cp config/config-example.php config/config.php
