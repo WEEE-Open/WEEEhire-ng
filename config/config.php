@@ -7,7 +7,7 @@ function env_or_default($varname, $default) {
 	} else {
 		// Handle booleans.
 		if(is_bool($default)) {
-			define($varname, boolval($value));
+			define($varname, filter_var($value, FILTER_VALIDATE_BOOLEAN));
 		} else {
 			define($varname, $value);
 		}
