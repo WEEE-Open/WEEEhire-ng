@@ -39,7 +39,7 @@ class Email
 		$mail->isHTML(false);
 		$mail->Subject = $subject;
 		$mail->Body = $body;
-		
+
 		// Talk to the SMTP server in a sibling container over the podman network.
 		// Do not use any TLS or Auth as the entire process is internal.
 		$mail->Host = 'mail';
