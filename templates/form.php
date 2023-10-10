@@ -314,7 +314,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<p><?=__('Stupiscici.')?></p>
 				</div>
 			</div>
-			<textarea id="letter" name="letter" cols="40" rows="5" required="required" class="form-control"></textarea>
+			<textarea id="letter" name="letter" cols="40" rows="8" required="required" class="form-control"></textarea>
 		</div>
 		<div class="form-group">
 			<div>
