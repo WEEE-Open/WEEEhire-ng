@@ -52,7 +52,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				<input id="name" name="name" type="text" required="required" class="form-control">
 			</div>
 			<label for="surname" class="col-md-2 col-lg-1 col-form-label"><?=__('Cognome')?></label>
-			<div class="col-md-4 col-lg-5">
+			<div class="col-md-4 col-lg-6">
 				<input id="surname" name="surname" type="text" required="required" class="form-control">
 			</div>
 		</div>
