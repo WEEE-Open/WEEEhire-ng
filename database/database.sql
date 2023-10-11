@@ -44,7 +44,7 @@ create table evaluation (
 	desc_evaluator varchar not null,
 	date integer,
 	vote integer not null,
-	foreign key (ref_user_id) references users (id)
+	foreign key (ref_user_id) references users (id) on delete cascade on update cascade,
 );
 
 create index if not exists ref_user_id_index on evaluation(ref_user_id);
