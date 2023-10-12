@@ -196,6 +196,8 @@ require_once 'stars.php';
 			default:
 			case \WEEEOpen\WEEEHire\User::STATUS_NEW:
 				?>
+			<button name="resendemail" value="true" type="submit"
+					class="btn btn-outline-secondary my-1 mx-1"><?=__('Rinvia email')?></button>
 			<button name="approve" value="true" type="submit"
 					class="btn btn-success my-1 mx-1"><?=__('Approva candidatura')?></button>
 			<button name="reject" value="true" type="submit"

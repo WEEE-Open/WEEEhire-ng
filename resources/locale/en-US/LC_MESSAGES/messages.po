@@ -1,4 +1,4 @@
-# Copyright (C) 2021 WEEE Open
+# SPDX-FileCopyrightText: 2021, 2023 WEEE Open
 # This file is distributed under the same license as the WEEEHire-ng package.
 #
 # quel_tale <lvps@users.noreply.github.com>, 2019, 2020, 2021, 2022.
@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-22 23:01+0200\n"
-"PO-Revision-Date: 2022-09-22 23:12+0200\n"
-"Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
-"Language-Team: Italian <>\n"
+"POT-Creation-Date: 2023-10-12 10:13+0200\n"
+"PO-Revision-Date: 2023-10-12 10:21+0200\n"
+"Last-Translator: enrico\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: templates/adminnavbar.php:9
 #, php-format
@@ -34,7 +34,7 @@ msgstr "Candidates"
 msgid "Colloqui"
 msgstr "Interviews"
 
-#: templates/adminnavbar.php:19 templates/candidate.php:259
+#: templates/adminnavbar.php:19 templates/candidate.php:261
 #: templates/candidates.php:31 templates/interview.php:51
 #: templates/interviewsbyrecruiter.php:6 templates/interviewsbyrecruiter.php:15
 msgid "Recruiter"
@@ -169,66 +169,70 @@ msgstr "Next to be evaluated"
 msgid "Motivazioni (visibili alla persona interessata)"
 msgstr "Motivation (visible to this person)"
 
-#: templates/candidate.php:200 templates/candidate.php:245
+#: templates/candidate.php:200
+msgid "Rinvia email"
+msgstr "Send email again"
+
+#: templates/candidate.php:202 templates/candidate.php:247
 msgid "Approva candidatura"
 msgstr "Approve"
 
-#: templates/candidate.php:202
+#: templates/candidate.php:204
 msgid "Rifiuta candidatura"
 msgstr "Reject"
 
-#: templates/candidate.php:204 templates/candidate.php:239
+#: templates/candidate.php:206 templates/candidate.php:241
 #: templates/interview.php:145
 msgid "Metti in lista d'attesa"
 msgstr "Put on hold"
 
-#: templates/candidate.php:210 templates/candidate.php:218
+#: templates/candidate.php:212 templates/candidate.php:220
 #: templates/interview.php:153
 msgid "Rimanda nel limbo"
 msgstr "Send back to limbo"
 
-#: templates/candidate.php:216 templates/candidate.php:225
+#: templates/candidate.php:218 templates/candidate.php:227
 msgid "Pubblica"
 msgstr "Publish"
 
-#: templates/candidate.php:227 templates/interview.php:142
+#: templates/candidate.php:229 templates/interview.php:142
 msgid "Togli dalla lista d'attesa"
 msgstr "Remove from hold"
 
-#: templates/candidate.php:229 templates/candidate.php:249
+#: templates/candidate.php:231 templates/candidate.php:251
 msgid "Salva motivazioni"
 msgstr "Save motivation"
 
-#: templates/candidate.php:247
+#: templates/candidate.php:249
 msgid "Rifiuta candidatura definitivamente"
 msgstr "Reject, at last"
 
-#: templates/candidate.php:280
+#: templates/candidate.php:282
 msgid "Lingua e template"
 msgstr "Language and template"
 
-#: templates/candidate.php:287
+#: templates/candidate.php:289
 msgid "Template"
 msgstr "Template"
 
-#: templates/candidate.php:300
+#: templates/candidate.php:302
 msgid "Oggetto"
 msgstr "Subject"
 
-#: templates/candidate.php:306
+#: templates/candidate.php:308
 msgid "Email"
 msgstr "Email"
 
-#: templates/candidate.php:311
+#: templates/candidate.php:313
 msgid "Pubblica e manda email"
 msgstr "Publish and send email"
 
-#: templates/candidate.php:402
+#: templates/candidate.php:404
 #, php-format
 msgid "Mail inviata da %s"
 msgstr "Mail sent by %s"
 
-#: templates/candidate.php:408 templates/interview.php:160
+#: templates/candidate.php:410 templates/interview.php:160
 #, php-format
 msgid "Link d'invito: %s"
 msgstr "Invite link: %s"
@@ -335,15 +339,15 @@ msgid_plural "%d pubblicati"
 msgstr[0] "%d published"
 msgstr[1] "%d published"
 
-#: templates/confirm_email.php:6
+#: templates/confirm_email.php:7
 msgid "Candidatura in WEEE Open"
 msgstr "Your application to WEEE Open"
 
-#: templates/confirm_email.php:8
+#: templates/confirm_email.php:9
 msgid "Ciao!"
 msgstr "Hi!"
 
-#: templates/confirm_email.php:9
+#: templates/confirm_email.php:10
 #, php-format
 msgid ""
 "Abbiamo ricevuto la tua candidatura per il team WEEE Open, questa è la "
@@ -352,7 +356,7 @@ msgstr ""
 "We have received your application for the WEEE Open team, this is the web "
 "page where you’ll be able to check the status of your application: %s"
 
-#: templates/confirm_email.php:10
+#: templates/confirm_email.php:11
 msgid ""
 "Se la domanda sarà approvata, riceverai un'email sempre a questo indirizzo "
 "con scritto chi contattare per passare al colloquio. Le stesse informazioni "
@@ -362,11 +366,21 @@ msgstr ""
 "address with our contacts to to schedule an interview with someone from our "
 "team. The same information will be available at the web page linked above."
 
-#: templates/confirm_email.php:11
+#: templates/confirm_email.php:12
 msgid "Buona fortuna ;)"
 msgstr "Good luck ;)"
 
-#: templates/confirm_email.php:12
+#: templates/confirm_email.php:13
+msgid ""
+"Nota: se hai già ricevuto un email come questa, il link sulla precedente "
+"email non è più valido. Usa il link sopra per verificare lo stato della tua "
+"candidatura."
+msgstr ""
+"Note: if you have already received a similar email, the link on the previous"
+" email is expired. Use the new link above to check the status of your"
+" application."
+
+#: templates/confirm_email.php:14
 #, php-format
 msgid ""
 "Se non hai inviato tu questa candidatura e presumi che questa e-mail ti sia "
@@ -377,7 +391,7 @@ msgstr ""
 "sent to you by mistake, you can ignore it. If the issue persists, please, "
 "contact us at the following e-mail address: %s"
 
-#: templates/confirm_email.php:13
+#: templates/confirm_email.php:15
 msgid "Il software WEEEHire per conto del team WEEE Open"
 msgstr "The WEEEHire software on behalf of WEEE Open Team"
 
@@ -463,11 +477,10 @@ msgid ""
 "durante il colloquio."
 msgstr ""
 "You already applied with this student ID (matricola). You can check the "
-"status page with the link you received via email. Please do not apply "
-"twice, if you want to apply for multiple roles you can "
-"<a href=\"https://weeeopen.polito.it/en_us/contattaci/\" target=\"_blank\""
-">send "
-"us a message through the website</a> or tell us during the interview."
+"status page with the link you received via email. Please do not apply twice, "
+"if you want to apply for multiple roles you can <a href=\"https://weeeopen."
+"polito.it/en_us/contattaci/\" target=\"_blank\">send us a message through "
+"the website</a> or tell us during the interview."
 
 #: templates/form.php:37
 #, php-format
@@ -645,8 +658,8 @@ msgid ""
 "team si appoggia per le sue operazioni siano al massimo della loro "
 "efficienza."
 msgstr ""
-"Our sysadmins ensure that IT tools - which are essential for the "
-"team - are operating at peak efficiency."
+"Our sysadmins ensure that IT tools - which are essential for the team - are "
+"operating at peak efficiency."
 
 #: templates/form.php:231
 msgid ""
@@ -676,10 +689,9 @@ msgid ""
 "per server comuni come Nginx, PHP e MariaDB/PostgreSQL e maneggevolezza con "
 "il terminale Linux."
 msgstr ""
-"The competences you will use are general knowledge of Ansible and "
-"containes, familiarity with managing and configuring common server "
-"software like Nginx, PHP and MariaDB/PostgreSQL, and familiarity "
-"with the Linux terminal."
+"The competences you will use are general knowledge of Ansible and containes, "
+"familiarity with managing and configuring common server software like Nginx, "
+"PHP and MariaDB/PostgreSQL, and familiarity with the Linux terminal."
 
 #: templates/form.php:234
 msgid "Se hai esperienza con alcune di queste cose, parlane liberamente."
@@ -1633,3 +1645,4 @@ msgstr "Cancel"
 
 #~ msgid "Solo pubblicati"
 #~ msgstr "Published only"
+
