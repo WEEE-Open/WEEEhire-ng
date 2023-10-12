@@ -50,9 +50,9 @@ class Database
 
 	/**
 	 * Regenerate token for a user, used for resending email
-	 * 
+	 *
 	 * @param int $id User ID
-	 * 
+	 *
 	 * @return string New token
 	 */
 	public function regenerateToken(int $id): string
@@ -64,7 +64,7 @@ class Database
 
 		if (!@$stmt->execute()) {
 			throw new DatabaseException();
-		} else if ($this->db->changes() === 0) {
+		} elseif ($this->db->changes() === 0) {
 			throw new Exception('User not found');
 		} else {
 			return $token;
