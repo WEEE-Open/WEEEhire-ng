@@ -73,7 +73,7 @@ class PageCandidates implements RequestHandlerInterface
 						} catch (Exepction $e) {
 							return new HtmlResponse($template->render('error', ['message' => 'User does not exists']), 404);
 						}
-						
+
 						Email::sendMail(
 							Utils::politoMail($user->matricola),
 							$template->render('confirm_email', ['subject' => true]),
