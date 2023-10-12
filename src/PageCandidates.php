@@ -64,6 +64,24 @@ class PageCandidates implements RequestHandlerInterface
 				} elseif (isset($POST['unvote']) && isset($POST["id_evaluation"])) {
 					// This button is always available
 					$db->removeEvaluation($POST["id_evaluation"]);
+				} elseif (isset($POST['resendemail'])) {
+					if ($status === User::STATUS_NEW) {
+						try {
+							$token = $db->regenerateToken($id);
+						} catch (DatabaseException $e) {
+							return new HtmlResponse($template->render('error', ['message' => 'Database error']), 500);
+						} catch (Exepction $e) {
+							return new HtmlResponse($template->render('error', ['message' => 'User does not exists']), 404);
+						}
+
+						Email::sendMail(
+							Utils::politoMail($user->matricola),
+							$template->render('confirm_email', ['subject' => true]),
+							$template->render('confirm_email', ['link' => WEEEHIRE_SELF_LINK . "/status.php?id=" . $id . "&token=" . $token, 'subject' => false, 'resend' => true]),
+						);
+
+						return new RedirectResponse("/candidates.php?id=" . $GET['id'], 303); // prevent resending email on refresh
+					}
 				} elseif (isset($POST['approve'])) {
 					if ($status === User::STATUS_NEW) {
 						$db->setStatus($id, true, $_SESSION['cn'] ?? null);

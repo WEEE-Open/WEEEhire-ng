@@ -49,6 +49,29 @@ class Database
 	}
 
 	/**
+	 * Regenerate token for a user, used for resending email
+	 *
+	 * @param int $id User ID
+	 *
+	 * @return string New token
+	 */
+	public function regenerateToken(int $id): string
+	{
+		$token = bin2hex(random_bytes(10));
+		$stmt = $this->db->prepare('UPDATE users SET token=:token WHERE id=:id');
+		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
+		$stmt->bindValue(':token', password_hash($token, PASSWORD_DEFAULT), SQLITE3_TEXT);
+
+		if (!@$stmt->execute()) {
+			throw new DatabaseException();
+		} elseif ($this->db->changes() === 0) {
+			throw new Exception('User not found');
+		} else {
+			return $token;
+		}
+	}
+
+	/**
 	 * Get a User from the database
 	 *
 	 * @param string $id User ID
