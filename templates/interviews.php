@@ -13,6 +13,7 @@ $invited = 0;
 $toinvite = 0;
 $currentFileName = basename(__FILE__);
 $later = [];
+$hasSafetyExamDate = [];
 $prevdate = null;
 ?>
 
@@ -83,6 +84,9 @@ $prevdate = null;
 			</tr>
 			<?php
 		}
+		if ($int['safetyExamDate'] !== null) {
+			$hasSafetyExamDate[] = $int;
+		}
 
 		?>
 		<tr <?=$trcolor?>>
@@ -115,7 +119,7 @@ $prevdate = null;
 	</tbody>
 </table>
 
-<ul class="list-group mt-3">
+<ul class="list-group my-3">
 	<li class="list-group-item"><?=sprintf(_ngettext('%d candidato per il colloquio', '%d candidati per i colloqui', $total), $total);?></li>
 	<li class="list-group-item list-group-item-primary"><?=sprintf(_ngettext('%d da fissare', '%d da fissare', $toschedule), $toschedule);?></li>
 	<li class="list-group-item"><?=sprintf(_ngettext('%d colloquio fissato', '%d colloqui fissati', $scheduled), $scheduled);?></li>
@@ -124,3 +128,26 @@ $prevdate = null;
 	<li class="list-group-item"><?=sprintf(_ngettext('%d da invitare', '%d da invitare', $toinvite), $toinvite);?></li>
 	<li class="list-group-item list-group-item-success"><?=sprintf(_ngettext('%d invitato', '%d invitati', $invited), $invited);?></li>
 </ul>
+<?php
+usort($hasSafetyExamDate, function ($a, $b) {
+	return $a['safetyExamDate'] <=> $b['safetyExamDate'];
+});
+?>
+
+<h2><?=__('Candidati con data esame sicurezza')?></h2>
+<table class="table">
+	<thead class="thead-dark">
+	<tr>
+		<th><?=__('Nome')?></th>
+		<th><?=__('Data')?></th>
+	</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($hasSafetyExamDate as $exam) : ?>
+		<tr>
+			<td><a href="/interviews.php?id=<?=$exam['id']?>"><?=$this->e($int['name'])?></a></td>
+			<td><?=$this->e($exam['safetyExamDate']->format('Y-m-d H:i'))?></td>
+		</tr>
+	<?php endforeach; ?>
+	</tbody>
+</table>

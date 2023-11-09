@@ -91,6 +91,32 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 	</form>
 <?php endif ?>
 
+<?php if ($interview->status === true && !$edit) : ?>
+	<form method="post">
+		<div class="form-group row">
+			<label for="safetyExamDate1" class="col-md-1 col-form-label"><?=__('Data')?></label>
+			<div class="col-md-2">
+				<input type="date" id="safetyExamDate1" name="safetyExamDate1" required="required" class="form-control"
+						placeholder="YYYY-MM-DD"
+						value="<?=$interview->safetyExamDate === null ? '' : $interview->safetyExamDate->format('Y-m-d')?>">
+			</div>
+			<label for="safetyExamDate2" class="col-md-1 col-form-label"><?=__('Ora')?></label>
+			<div class="col-md-2">
+				<input type="time" id="safetyExamDate2" name="safetyExamDate2" required="required" class="form-control" placeholder="HH:MM"
+						value="<?=$interview->safetyExamDate === null ? '' : $interview->safetyExamDate->format('H:i')?>">
+			</div>
+			<div class="col-md-3">
+			<button name="setSafetyExamDate" value="true" type="submit"
+					class="btn btn-primary"><?=__('Fissa esame della sicurezza')?></button>
+			</div>
+			<div class="col-md-3">
+			<button name="unsetSafetyExamDate" value="true" type="submit"
+					class="btn btn-outline-danger"><?=__('Cancella esame della sicurezza')?></button>
+			</div>
+		</div>
+	</form>
+<?php endif ?>
+
 <?=$this->fetch('userinfo', ['user' => $user, 'edit' => $edit])?>
 
 <?php if (!$edit) : ?>

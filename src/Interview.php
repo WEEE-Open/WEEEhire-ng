@@ -25,4 +25,8 @@ class Interview
 	 */
 	public $answers;
 	public $hold;
+	/**
+	 * @var $safetyExamDate \DateTime|null
+	 */
+	public $safetyExamDate = null;
 }

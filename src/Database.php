@@ -663,7 +663,7 @@ class Database
 	 */
 	public function getInterview(string $id): ?Interview
 	{
-		$stmt = $this->db->prepare('SELECT interview, interviewer, hold, interviewertg, answers, interviewstatus FROM users WHERE id = :id LIMIT 1');
+		$stmt = $this->db->prepare('SELECT interview, interviewer, hold, interviewertg, answers, interviewstatus, safetyExamDate FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if ($result === false) {
@@ -687,6 +687,12 @@ class Database
 		}
 		$interview->answers = $row['answers'];
 		$interview->status = $row['interviewstatus'] === null ? null : (bool) $row['interviewstatus'];
+		if ($row['safetyExamDate'] === null) {
+			$interview->safetyExamDate = null;
+		} else {
+			$dt = $this->timestampToTime((int) $row['safetyExamDate']);
+			$interview->safetyExamDate = $dt;
+		}
 
 		return $interview;
 	}
@@ -755,6 +761,27 @@ class Database
 		}
 	}
 
+	public function setSafetyExamDate(int $id, DateTime $when)
+	{
+		$stmt = $this->db->prepare('UPDATE users SET safetyExamDate = :safetyExamDate WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		$stmt->bindValue(':safetyExamDate', $when->getTimestamp(), SQLITE3_INTEGER);
+		$result = $stmt->execute();
+		if ($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	public function clearSafetyExamDate(int $id)
+	{
+		$stmt = $this->db->prepare('UPDATE users SET safetyExamDate = null WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		$result = $stmt->execute();
+		if ($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
 	/**
 	 * Get all interviews for the tables in the interview page
 	 *
@@ -763,7 +790,7 @@ class Database
 	public function getAllInterviewsForTable()
 	{
 		$dtz = new DateTimeZone('Europe/Rome');
-		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, hold, interviewstatus, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname, name');
+		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, hold, interviewstatus, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il, safetyExamDate FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname, name');
 		$compact = [];
 		while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			if ($row['interview'] === null) {
@@ -771,6 +798,13 @@ class Database
 			} else {
 				$dt = $this->timestampToTime((int) $row['interview'], $dtz);
 				$when = $dt;
+			}
+
+			if ($row['safetyExamDate'] === null) {
+				$safetyExamDate = null;
+			} else {
+				$dt = $this->timestampToTime((int) $row['safetyExamDate'], $dtz);
+				$safetyExamDate = $dt;
 			}
 
 			$compact[] = [
@@ -783,7 +817,8 @@ class Database
 				'interviewstatus' => $row['interviewstatus'] === null ? null : (bool) $row['interviewstatus'],
 				'answers'         => (bool) $row['al'],
 				'when'            => $when,
-				'invite'          => (bool) $row['il']
+				'invite'          => (bool) $row['il'],
+				'safetyExamDate'  => $safetyExamDate
 			];
 		}
 

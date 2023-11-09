@@ -43,7 +43,7 @@ class PageInterviews implements RequestHandlerInterface
 				if (count($notes) > 0) {
 					$pieces = [];
 					foreach ($notes as $row) {
-						$pieces[] = "> ${row['note']} - ${row['uid']}\n";
+						$pieces[] = "> {$row['note']} - {$row['uid']}\n";
 					}
 					$optionalNotes = "\n\nNote:\n" . implode('', $pieces);
 				} else {
@@ -178,6 +178,17 @@ class PageInterviews implements RequestHandlerInterface
 					$changed = true;
 				} elseif (isset($POST['popHold'])) {
 					$db->setHold($interview->id, false);
+					$changed = true;
+				} elseif (isset($POST['setSafetyExamDate'])) {
+					$date = DateTime::createFromFormat(
+						"Y-m-d H:i",
+						$POST['safetyExamDate1'] . ' ' . $POST['safetyExamDate2'],
+						new DateTimeZone('Europe/Rome')
+					);
+					$db->setSafetyExamDate($interview->id, $date);
+					$changed = true;
+				} else if (isset($post['unsetSafetyExamDate'])) {
+					$db->clearSafetyExamDate($interview->id);
 					$changed = true;
 				}
 

@@ -1,4 +1,4 @@
-FROM php:7.3-fpm-stretch
+FROM php:8.2.12-fpm-bookworm
 
 RUN mkdir -p /var/www/html
 WORKDIR /var/www/html
