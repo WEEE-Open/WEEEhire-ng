@@ -44,7 +44,7 @@ require_once 'stars.php';
 		switch ($status) {
 			case User::STATUS_NEW:
 				$tobe++;
-				$statusCell = "<a href=\"/candidates.php?id=${user['id']}\">" . __('Da decidere') . '</a>';
+				$statusCell = "<a href=\"/candidates.php?id={$user['id']}\">" . __('Da decidere') . '</a>';
 				$tdcolor = '';
 				break;
 			case User::STATUS_NEW_APPROVED:
@@ -62,7 +62,7 @@ require_once 'stars.php';
 			case User::STATUS_NEW_HOLD:
 				$hold++;
 				$topublish++;
-				$statusCell = "<a href=\"/candidates.php?id=${user['id']}\">" . __('In lista d\'attesa') . '</a>';
+				$statusCell = "<a href=\"/candidates.php?id={$user['id']}\">" . __('In lista d\'attesa') . '</a>';
 				$tdcolor = 'class="candidates-hold"';
 				break;
 			case User::STATUS_PUBLISHED_APPROVED:
@@ -80,7 +80,7 @@ require_once 'stars.php';
 			case User::STATUS_PUBLISHED_HOLD:
 				$hold++;
 				$published++;
-				$statusCell = "<a href=\"/candidates.php?id=${user['id']}\">" . __('In lista d\'attesa, pubblicata') . '</a>';
+				$statusCell = "<a href=\"/candidates.php?id={$user['id']}\">" . __('In lista d\'attesa, pubblicata') . '</a>';
 				$tdcolor = $trcolor = 'class="candidates-hold"';
 				break;
 		}

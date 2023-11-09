@@ -10,7 +10,7 @@
     "ext-ldap": "*",
     "ext-mbstring": "*",
     "ext-json": "*",
-    "phpmyadmin/motranslator": "^4.0",
+    "phpmyadmin/motranslator": "^5.3",
     "willdurand/negotiation": "^3.0",
     "ext-sqlite3": "*",
     "phpmailer/phpmailer": "^6.1",

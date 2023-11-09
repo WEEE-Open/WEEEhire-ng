@@ -21,12 +21,18 @@ require_once 'stars.php';
 </nav>
 
 <?php if ($user->status === true) : ?>
-	<div class="alert alert-success" role="alert">
-		<?=sprintf(
-			__('Candidatura approvata, <a href="%s">passa al colloquio</a>'),
-			'interviews.php?id=' . $user->id
-		) // It's an int, no risks here ?>
-	</div>
+	<?php if (!$user->emailed) : ?>
+		<div class="alert alert-warning" role="alert">
+			<?=__('Candidatura approvata, <a href="#email-form">ma email non ancora inviata</a>')?>
+		</div>
+	<?php else: ?>
+		<div class="alert alert-success" role="alert">
+			<?=sprintf(
+				__('Candidatura approvata, <a href="%s">passa al colloquio</a>'),
+				'interviews.php?id=' . $user->id
+			) // It's an int, no risks here ?>
+		</div>
+	<?php endif ?>
 <?php elseif ($user->status === false) : ?>
 	<div class="alert alert-danger" role="alert">
 		<?=__('Candidatura rifiutata')?>
@@ -256,7 +262,7 @@ require_once 'stars.php';
 </form>
 <?php endif ?>
 <?php if (!$edit && !$user->emailed && $user->status === true) : ?>
-	<form method="post">
+	<form method="post" id="email-form">
 		<div class="form-group">
 			<label for="recruiter"><?=__('Recruiter')?></label>
 			<select id="recruiter" name="recruiter" required="required" class="form-control">
@@ -345,28 +351,28 @@ require_once 'stars.php';
 			const defaultEmailText = {
 				'it-IT': {
 					'subject': 'Colloquio per Team WEEE Open',
-					'beginning': `Ciao ${firstname},
+					'beginning': `Ciao {$firstname},
 
 Ci fa piacere il tuo interesse per il nostro progetto!
 Abbiamo valutato la tua candidatura e ora vorremmo scambiare due parole in maniera più diretta con te, sia per discutere delle attività che potresti svolgere nel Team, sia in modo che tu possa farci domande, se vuoi.
-Poiché utilizziamo Telegram per coordinare tutte le attività del team, ti chiedo di contattarmi lì: il mio username è @${telegram}, scrivimi pure.`,
+Poiché utilizziamo Telegram per coordinare tutte le attività del team, ti chiedo di contattarmi lì: il mio username è @{$telegram}, scrivimi pure.`,
 					'end': `
 
 A presto,
-${name}
+{$name}
 Team WEEE Open`
 				},
 				'en-US': {
 					'subject': 'Interview for WEEE Open Team',
-					'beginning': `Hi ${firstname},
+					'beginning': `Hi {$firstname},
 
 We are glad that you are interested in our project!
 We read your application and we would like to meet you in person to discuss about the activities that you could do within the Team, and to let you ask some questions if you have any.
-Since we use Telegram for all the communications between team members, I'd like you to contact me there: my username is @${telegram}.`,
+Since we use Telegram for all the communications between team members, I'd like you to contact me there: my username is @{$telegram}.`,
 					'end': `
 
 See you soon,
-${name}
+{$name}
 Team WEEE Open`
 				},
 			};

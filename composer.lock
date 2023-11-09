@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "80741cff016b43182323bcf6b88c9ccb",
+    "content-hash": "bf59f46949c9ec21e7bccda619ce0714",
     "packages": [
         {
             "name": "jumbojett/openid-connect-php",
@@ -543,26 +543,29 @@
         },
         {
             "name": "phpmyadmin/motranslator",
-            "version": "4.0",
+            "version": "5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmyadmin/motranslator.git",
-                "reference": "fcb370254998fda7eeccfd7c787b4deb71b0d77c"
+                "reference": "d03b4d9c608e7265091bf6decc05323d16c7c047"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpmyadmin/motranslator/zipball/fcb370254998fda7eeccfd7c787b4deb71b0d77c",
-                "reference": "fcb370254998fda7eeccfd7c787b4deb71b0d77c",
+                "url": "https://api.github.com/repos/phpmyadmin/motranslator/zipball/d03b4d9c608e7265091bf6decc05323d16c7c047",
+                "reference": "d03b4d9c608e7265091bf6decc05323d16c7c047",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0",
-                "symfony/expression-language": "^4.0 || ^3.2 || ^2.8"
+                "php": "^7.1 || ^8.0",
+                "symfony/expression-language": "^4.0 || ^5.0 || ^6.0"
             },
             "require-dev": {
-                "apigen/apigen": "^4.1",
-                "phpunit/php-code-coverage": "*",
-                "phpunit/phpunit": "~4.8 || ~5.7 || ~6.5"
+                "phpmyadmin/coding-standard": "^3.0.0",
+                "phpstan/phpstan": "^1.4.6",
+                "phpunit/phpunit": "^7.4 || ^8 || ^9"
+            },
+            "suggest": {
+                "ext-apcu": "Needed for ACPu-backed translation cache"
             },
             "type": "library",
             "autoload": {
@@ -593,7 +596,7 @@
                 "issues": "https://github.com/phpmyadmin/motranslator/issues",
                 "source": "https://github.com/phpmyadmin/motranslator"
             },
-            "time": "2018-02-12T13:22:52+00:00"
+            "time": "2023-08-23T18:32:07+00:00"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -3730,7 +3733,7 @@
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "7.3"
+        "php": "8.1"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
