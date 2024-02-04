@@ -62,7 +62,6 @@ class PageFormClosedTest extends PagesTest {
 			'matricola' => 's1',
 			'area' => 'Sviluppo software PHP',
 			'letter' => 'asddasasdasd',
-			'mandatorycheckbox_1' => 'true',
 			'mandatorycheckbox_0' => 'true',
 		], [], [], []);
 		$response = (new PageForm())->handle($request);

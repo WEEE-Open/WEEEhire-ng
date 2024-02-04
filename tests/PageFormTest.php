@@ -38,7 +38,6 @@ class PageFormTest extends PagesTest {
 			'matricola' => 's1',
 			'area' => 'Sviluppo software PHP',
 			'letter' => 'asddasasdasd',
-			'mandatorycheckbox_1' => 'true',
 			'mandatorycheckbox_0' => 'true',
 		], [], []);
 		$response = (new PageForm())->handle($request);
@@ -72,7 +71,6 @@ class PageFormTest extends PagesTest {
 			'matricola' => 's1',
 			'area' => 'Sviluppo software PHP',
 			'letter' => 'asddasasdasd',
-			'mandatorycheckbox_1' => 'true',
 			'mandatorycheckbox_0' => 'true',
 		], [], []);
 		$response = (new PageForm())->handle($request);
@@ -94,27 +92,6 @@ class PageFormTest extends PagesTest {
 			'matricola' => 's1',
 			'area' => 'Sviluppo software PHP',
 			'letter' => 'asddasasdasd',
-			'mandatorycheckbox_1' => 'true',
-		], [], []);
-		$response = (new PageForm())->handle($request);
-
-		$this->assertEquals(400, $response->getStatusCode(), 'Bad request');
-		$this->assertStringContainsStringIgnoringCase('class="alert alert-danger"', $response->getBody());
-	}
-
-	/**
-	 * @covers \WEEEOpen\WEEEHire\PageForm
-	 */
-	public function testFormSubmissionMissingCheckbox1() {
-		$request = ServerRequestFactory::fromGlobals(['REQUEST_METHOD' => 'POST', 'REQUEST_URI' => '/form.php'], [], [
-			'name' => 'Test',
-			'surname' => 'Test',
-			'degreecourse' => 'Communications And Computer Networks Engineering',
-			'year' => '2º Magistrale',
-			'matricola' => 's1',
-			'area' => 'Sviluppo software PHP',
-			'letter' => 'asddasasdasd',
-			'mandatorycheckbox_0' => 'true',
 		], [], []);
 		$response = (new PageForm())->handle($request);
 
@@ -135,7 +112,6 @@ class PageFormTest extends PagesTest {
 			'area' => 'Sviluppo software PHP',
 			'letter' => 'asddasasdasd',
 			'mandatorycheckbox_0' => 'true',
-			'mandatorycheckbox_1' => 'true',
 		], [], []);
 		$response = (new PageForm())->handle($request);
 
@@ -156,7 +132,6 @@ class PageFormTest extends PagesTest {
 			'area' => 'Sviluppo software PHP',
 			'letter' => 'asddasasdasd',
 			'mandatorycheckbox_0' => 'true',
-			'mandatorycheckbox_1' => 'true',
 		], [], []);
 		$response = (new PageForm())->handle($request);
 
@@ -182,7 +157,6 @@ class PageFormTest extends PagesTest {
 			'matricola' => 's1',
 			'area' => 'Sviluppo software Python',
 			'letter' => 'boh',
-			'mandatorycheckbox_1' => 'true',
 			'mandatorycheckbox_0' => 'true',
 		], [], []);
 		$response = (new PageForm())->handle($request);

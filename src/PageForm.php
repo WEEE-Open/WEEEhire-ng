@@ -38,7 +38,6 @@ class PageForm implements RequestHandlerInterface
 			$POST = $request->getParsedBody();
 			$checkboxes = [
 				'mandatorycheckbox_0',
-				'mandatorycheckbox_1',
 			];
 			foreach ($checkboxes as $attr) {
 				if (!isset($POST[$attr]) || $POST[$attr] !== 'true') {

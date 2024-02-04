@@ -318,25 +318,16 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 		</div>
 		<div class="form-group">
 			<div>
-				<span id="checkboxesHelpBlock"
-						class="form-text text-muted"><?=sprintf(
-							__('Dovresti leggere le <a href="%s">Informazioni sul trattamento dei dati personali</a> e almeno dare un\'occhiata alla pagina <a href="%s">Attività</a> sul nostro sito prima di candidarti.'),
-							'privacy.php',
-							__('https://weeeopen.polito.it/attivita/')
-						)?></a></span>
+				<div id="checkboxesHelpBlock" class="form-text text-muted">
+					<span class="form-text text-muted" id="generatedEmailAddrText" class="hidden"> <?= __('Una conferma della tua candidatura verrà inviata all\'indirizzo <span id="generatedEmailAddr"></span>.') ?></span>
+					<span><?=sprintf(__('Visualizza le <a href="%s">Informazioni sul trattamento dei dati personali</a>.'), 'privacy.php')?></span>
+				</div>
 				<div class="form-check">
-					<input name="mandatorycheckbox_1" id="mandatorycheckbox_0" type="checkbox" class="form-check-input"
+					<input name="mandatorycheckbox_0" id="mandatorycheckbox_0" type="checkbox" class="form-check-input"
 							value="true" aria-describedby="checkboxesHelpBlock" required="required">
 					<label for="mandatorycheckbox_0"
 							class="form-check-label"><?=__('Ho letto le Informazioni sul trattamento dei dati personali e accetto le condizioni lì delineate')?></label>
 				</div>
-				<div class="form-check">
-					<input name="mandatorycheckbox_0" id="mandatorycheckbox_1" type="checkbox" class="form-check-input"
-							value="true" aria-describedby="checkboxesHelpBlock" required="required">
-					<label for="mandatorycheckbox_1"
-							class="form-check-label"><?=__('Dichiaro che tutte le informazioni inserite sono corrette e ho dato un\'occhiata alla pagina "Entra nel team" sul sito')?></label>
-				</div>
-
 			</div>
 		</div>
 		<div class="form-group">
@@ -345,6 +336,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 	</form>
 </div>
 <script type="text/javascript">
+(function(){
 	let area = document.getElementById("area");
 	let explanations = document.getElementById('mlet-explain').children;
 
@@ -361,16 +353,32 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 	updateHints();
 
 	let yearSelector = document.getElementById("year");
+	let matricolaSelector = document.getElementById('matricola');
 
 	function dottorandize() {
 		if(yearSelector.value === 'Dottorato') {
-			document.getElementById('matricola').placeholder = 'd123456';
+			matricolaSelector.placeholder = 'd123456';
 		} else {
-			document.getElementById('matricola').placeholder = 's123456';
+			matricolaSelector.placeholder = 's123456';
 		}
 	}
 	yearSelector.addEventListener('change', dottorandize);
 	dottorandize();
+
+	let generatedEmailAddrText = document.getElementById("generatedEmailAddrText");
+	let generatedEmailAddr = document.getElementById("generatedEmailAddr");
+	function matricolize() {
+		generatedEmailAddrText.classList.toggle("hidden", matricolaSelector.value === "");
+		let email = matricolaSelector.value;
+		if(email.startsWith('s')) {
+			email += "@studenti.polito.it";
+		} else {
+			email += "@polito.it";
+		}
+		generatedEmailAddr.innerText = email;
+	}
+	matricolaSelector.addEventListener('change', matricolize);
+	matricolize();
 
 	let courseSelector = document.getElementById("degreecourse");
 	function coursize() {
@@ -386,10 +394,10 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 		}
 
 		for(let el of courseSelector.childNodes) {
-			if(el.nodeName == 'OPTGROUP') {
+			if(el.nodeName === 'OPTGROUP') {
 				if(level) {
 					if(el.dataset.level) {
-						el.style.display = el.dataset.level == level ? '' : 'none';
+						el.style.display = el.dataset.level === level ? '' : 'none';
 					}
 				} else {
 					el.style.display = '';
@@ -404,5 +412,5 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 	}
 	yearSelector.addEventListener('change', coursize);
 	coursize();
-
+}());
 </script>
