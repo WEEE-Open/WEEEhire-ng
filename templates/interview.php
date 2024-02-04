@@ -94,23 +94,23 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 <?php if ($interview->status === true && !$edit) : ?>
 	<form method="post">
 		<div class="form-group row">
-			<label for="safetyExamDate1" class="col-md-1 col-form-label"><?=__('Data')?></label>
+			<label for="safetyTestDate1" class="col-md-1 col-form-label"><?=__('Data')?></label>
 			<div class="col-md-2">
-				<input type="date" id="safetyExamDate1" name="safetyExamDate1" required="required" class="form-control"
+				<input type="date" id="safetyTestDate1" name="safetyTestDate1" required="required" class="form-control"
 						placeholder="YYYY-MM-DD"
-						value="<?=$interview->safetyExamDate === null ? '' : $interview->safetyExamDate->format('Y-m-d')?>">
+						value="<?=$interview->safetyTestDate === null ? '' : $interview->safetyTestDate->format('Y-m-d')?>">
 			</div>
-			<label for="safetyExamDate2" class="col-md-1 col-form-label"><?=__('Ora')?></label>
+			<label for="safetyTestDate2" class="col-md-1 col-form-label"><?=__('Ora')?></label>
 			<div class="col-md-2">
-				<input type="time" id="safetyExamDate2" name="safetyExamDate2" required="required" class="form-control" placeholder="HH:MM"
-						value="<?=$interview->safetyExamDate === null ? '' : $interview->safetyExamDate->format('H:i')?>">
+				<input type="time" id="safetyTestDate2" name="safetyTestDate2" required="required" class="form-control" placeholder="HH:MM"
+						value="<?=$interview->safetyTestDate === null ? '' : $interview->safetyTestDate->format('H:i')?>">
 			</div>
 			<div class="col-md-3">
-			<button name="setSafetyExamDate" value="true" type="submit"
+			<button name="setsafetyTestDate" value="true" type="submit"
 					class="btn btn-primary"><?=__('Fissa esame della sicurezza')?></button>
 			</div>
 			<div class="col-md-3">
-			<button name="unsetSafetyExamDate" value="true" type="submit"
+			<button name="unsetsafetyTestDate" value="true" type="submit"
 					class="btn btn-outline-danger"><?=__('Cancella esame della sicurezza')?></button>
 			</div>
 		</div>

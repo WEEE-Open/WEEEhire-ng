@@ -13,7 +13,7 @@ $invited = 0;
 $toinvite = 0;
 $currentFileName = basename(__FILE__);
 $later = [];
-$hasSafetyExamDate = [];
+$hassafetyTestDate = [];
 $prevdate = null;
 ?>
 
@@ -84,8 +84,8 @@ $prevdate = null;
 			</tr>
 			<?php
 		}
-		if ($int['safetyExamDate'] !== null) {
-			$hasSafetyExamDate[] = $int;
+		if ($int['safetyTestDate'] !== null) {
+			$hassafetyTestDate[] = $int;
 		}
 
 		?>
@@ -129,8 +129,8 @@ $prevdate = null;
 	<li class="list-group-item list-group-item-success"><?=sprintf(_ngettext('%d invitato', '%d invitati', $invited), $invited);?></li>
 </ul>
 <?php
-usort($hasSafetyExamDate, function ($a, $b) {
-	return $a['safetyExamDate'] <=> $b['safetyExamDate'];
+usort($hassafetyTestDate, function ($a, $b) {
+	return $a['safetyTestDate'] <=> $b['safetyTestDate'];
 });
 ?>
 
@@ -143,10 +143,10 @@ usort($hasSafetyExamDate, function ($a, $b) {
 	</tr>
 	</thead>
 	<tbody>
-	<?php foreach ($hasSafetyExamDate as $exam) : ?>
+	<?php foreach ($hassafetyTestDate as $exam) : ?>
 		<tr>
 			<td><a href="/interviews.php?id=<?=$exam['id']?>"><?=$this->e($int['name'])?></a></td>
-			<td><?=$this->e($exam['safetyExamDate']->format('Y-m-d H:i'))?></td>
+			<td><?=$this->e($exam['safetyTestDate']->format('Y-m-d H:i'))?></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>

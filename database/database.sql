@@ -24,7 +24,7 @@ create table users (
 	interviewertg text,
 	interviewstatus int,
 	answers int,
-	safetyExamDate int
+	safetytestdate int
 );
 
 create unique index users_matricola_uindex

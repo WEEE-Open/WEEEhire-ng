@@ -179,16 +179,16 @@ class PageInterviews implements RequestHandlerInterface
 				} elseif (isset($POST['popHold'])) {
 					$db->setHold($interview->id, false);
 					$changed = true;
-				} elseif (isset($POST['setSafetyExamDate'])) {
+				} elseif (isset($POST['setsafetyTestDate'])) {
 					$date = DateTime::createFromFormat(
 						"Y-m-d H:i",
-						$POST['safetyExamDate1'] . ' ' . $POST['safetyExamDate2'],
+						$POST['safetyTestDate1'] . ' ' . $POST['safetyTestDate2'],
 						new DateTimeZone('Europe/Rome')
 					);
-					$db->setSafetyExamDate($interview->id, $date);
+					$db->setsafetyTestDate($interview->id, $date);
 					$changed = true;
-				} elseif (isset($post['unsetSafetyExamDate'])) {
-					$db->clearSafetyExamDate($interview->id);
+				} elseif (isset($post['unsetsafetyTestDate'])) {
+					$db->clearsafetyTestDate($interview->id);
 					$changed = true;
 				}
 
