@@ -187,7 +187,7 @@ class PageInterviews implements RequestHandlerInterface
 					);
 					$db->setSafetyExamDate($interview->id, $date);
 					$changed = true;
-				} else if (isset($post['unsetSafetyExamDate'])) {
+				} elseif (isset($post['unsetSafetyExamDate'])) {
 					$db->clearSafetyExamDate($interview->id);
 					$changed = true;
 				}

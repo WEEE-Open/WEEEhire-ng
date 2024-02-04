@@ -25,7 +25,7 @@ require_once 'stars.php';
 		<div class="alert alert-warning" role="alert">
 			<?=__('Candidatura approvata, <a href="#email-form">ma email non ancora inviata</a>')?>
 		</div>
-	<?php else: ?>
+	<?php else : ?>
 		<div class="alert alert-success" role="alert">
 			<?=sprintf(
 				__('Candidatura approvata, <a href="%s">passa al colloquio</a>'),
