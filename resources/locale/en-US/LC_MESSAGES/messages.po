@@ -1,23 +1,25 @@
 # SPDX-FileCopyrightText: 2021, 2023 WEEE Open
 # This file is distributed under the same license as the WEEEHire-ng package.
 #
-# quel_tale <lvps@users.noreply.github.com>, 2019, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2024 quel _tale
 # Zubyte <28754230+Zubyte@users.noreply.github.com>, 2021.
 # steemnd <27449310+steemnd@users.noreply.github.com>, 2021.
+# SPDX-FileCopyrightText: 2024 quel _tale
+# SPDX-FileCopyrightText: 2024 quel _tale
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-09 12:00+0100\n"
-"PO-Revision-Date: 2023-11-09 12:05+0100\n"
-"Last-Translator: enrico\n"
-"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"POT-Creation-Date: 2024-02-04 15:07+0100\n"
+"PO-Revision-Date: 2024-02-04 15:08+0100\n"
+"Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
+"Language-Team: Italian <>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: templates/adminnavbar.php:9
 #, php-format
@@ -36,7 +38,7 @@ msgstr "Interviews"
 
 #: templates/adminnavbar.php:19 templates/candidate.php:267
 #: templates/candidates.php:31 templates/interview.php:51
-#: templates/interviewsbyrecruiter.php:6 templates/interviewsbyrecruiter.php:15
+#: templates/interviewsbyrecruiter.php:7 templates/interviewsbyrecruiter.php:26
 msgid "Recruiter"
 msgstr "Recruiter"
 
@@ -1124,7 +1126,6 @@ msgid "Le candidature si chiuderanno tra 1 ora."
 msgstr "Applications will close in 1 hour."
 
 #: templates/index.php:45
-#, fuzzy
 msgid "Le candidature si chiuderanno tra {$hours} ore."
 msgstr "Applications will close in ${hours} hours."
 
@@ -1137,22 +1138,18 @@ msgid "Le candidature si chiuderanno tra 1 giorno e 1 ora."
 msgstr "Applications will close in 1 day and 1 hour."
 
 #: templates/index.php:53
-#, fuzzy
 msgid "Le candidature si chiuderanno tra 1 giorno e {$hours} ore."
 msgstr "Applications will close in 1 day and ${hours} hours."
 
 #: templates/index.php:57
-#, fuzzy
 msgid "Le candidature si chiuderanno tra {$days} giorni."
 msgstr "Applications will close in ${days} days."
 
 #: templates/index.php:59
-#, fuzzy
 msgid "Le candidature si chiuderanno tra {$days} giorni e 1 ora."
 msgstr "Applications will close in ${days} days and 1 hour."
 
 #: templates/index.php:61
-#, fuzzy
 msgid "Le candidature si chiuderanno tra {$days} giorni e {$hours} ore."
 msgstr "Applications will close in ${days} days and ${hours} hours."
 
@@ -1225,12 +1222,16 @@ msgstr "Interview failed"
 msgid "Genera link d'invito"
 msgstr "Generate an invite link"
 
-#: templates/interviewsbyrecruiter.php:39 templates/interviews.php:83
+#: templates/interviewsbyrecruiter.php:36
+msgid "Mostra vecchi colloqui"
+msgstr "Show old interviews"
+
+#: templates/interviewsbyrecruiter.php:71 templates/interviews.php:83
 #, php-format
 msgid "Giorno %s (%s)"
 msgstr "%s (%s)"
 
-#: templates/interviewsbyrecruiter.php:45
+#: templates/interviewsbyrecruiter.php:77
 #, php-format
 msgid "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
 msgstr "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
@@ -1549,6 +1550,3 @@ msgstr "Cancel"
 #~ "about yourself and your experience with Linux, servers or computers in "
 #~ "general."
 
-#: templates/interviewsbyrecruiter.php:29
-msgid "Mostra vecchie interviste"
-msgstr "Show old interviews"

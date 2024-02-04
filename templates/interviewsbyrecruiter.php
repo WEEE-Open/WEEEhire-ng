@@ -33,7 +33,7 @@ $today = $dt->format('Y-m-d');
 					   id="showOldInterviews" onclick="document.getElementById('showOldInterviewsForm').submit()">
 
 				<label class="form-check-label" for="showOldInterviews">
-					<?= __('Mostra vecchie interviste') ?>
+					<?= __('Mostra vecchi colloqui') ?>
 				</label>
 			</div>
 		</form>
