@@ -89,3 +89,7 @@ a.disabled {
 .navbar-nav>.active>a {
 	background-color: #C0C0C0;
 }
+
+.hidden {
+	display: none !important;
+}
