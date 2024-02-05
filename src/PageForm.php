@@ -58,6 +58,9 @@ class PageForm implements RequestHandlerInterface
 			foreach ($attrs as $attr) {
 				if (isset($POST[$attr]) && $POST[$attr] !== '') {
 					$user->$attr = $POST[$attr];
+					if (is_string($user->$attr)) {
+						$user->$attr = trim($user->$attr);
+					}
 				} else {
 					return new HtmlResponse($template->render('form', ['error' => 'form', 'rolesAvailable' => $rolesAvailable]), 400);
 				}
