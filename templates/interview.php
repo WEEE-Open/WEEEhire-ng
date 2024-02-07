@@ -91,7 +91,10 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 	</form>
 <?php endif ?>
 
-<?php /** @noinspection PhpStatementHasEmptyBodyInspection */
+<?php
+
+/** @noinspection PhpStatementHasEmptyBodyInspection */
+
 if ($interview->status === true && !$edit) : /* ?>
 	<form method="post">
 		<div class="form-group row">
@@ -116,7 +119,8 @@ if ($interview->status === true && !$edit) : /* ?>
 			</div>
 		</div>
 	</form>
-<?php */ endif ?>
+<?php */
+endif ?>
 
 <?=$this->fetch('userinfo', ['user' => $user, 'edit' => $edit])?>
 
