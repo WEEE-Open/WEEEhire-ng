@@ -185,10 +185,10 @@ class PageInterviews implements RequestHandlerInterface
 						$POST['safetyTestDate1'] . ' ' . $POST['safetyTestDate2'],
 						new DateTimeZone('Europe/Rome')
 					);
-					$db->setsafetyTestDate($interview->id, $date);
+					$db->setSafetyTestDate($interview->id, $date);
 					$changed = true;
 				} elseif (isset($post['unsetsafetyTestDate'])) {
-					$db->clearsafetyTestDate($interview->id);
+					$db->clearSafetyTestDate($interview->id);
 					$changed = true;
 				}
 

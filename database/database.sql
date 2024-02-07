@@ -23,8 +23,8 @@ create table users (
 	interviewer text,
 	interviewertg text,
 	interviewstatus int,
-	answers int,
-	safetytestdate int
+	answers int
+--	safetytestdate int
 );
 
 create unique index users_matricola_uindex

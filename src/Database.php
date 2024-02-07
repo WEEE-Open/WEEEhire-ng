@@ -663,7 +663,8 @@ class Database
 	 */
 	public function getInterview(string $id): ?Interview
 	{
-		$stmt = $this->db->prepare('SELECT interview, interviewer, hold, interviewertg, answers, interviewstatus, safetytestdate FROM users WHERE id = :id LIMIT 1');
+		// safetytestdate
+		$stmt = $this->db->prepare('SELECT interview, interviewer, hold, interviewertg, answers, interviewstatus FROM users WHERE id = :id LIMIT 1');
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if ($result === false) {
@@ -687,7 +688,7 @@ class Database
 		}
 		$interview->answers = $row['answers'];
 		$interview->status = $row['interviewstatus'] === null ? null : (bool) $row['interviewstatus'];
-		if ($row['safetytestdate'] === null) {
+		if (!isset($row['safetytestdate'])) {
 			$interview->safetyTestDate = null;
 		} else {
 			$dt = $this->timestampToTime((int) $row['safetytestdate']);
@@ -761,7 +762,7 @@ class Database
 		}
 	}
 
-	public function setsafetyTestDate(int $id, DateTime $when)
+	public function setSafetyTestDate(int $id, DateTime $when)
 	{
 		$stmt = $this->db->prepare('UPDATE users SET safetytestdate = :safetyTestDate WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -772,7 +773,7 @@ class Database
 		}
 	}
 
-	public function clearsafetyTestDate(int $id)
+	public function clearSafetyTestDate(int $id)
 	{
 		$stmt = $this->db->prepare('UPDATE users SET safetytestdate = null WHERE id = :id');
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -790,7 +791,8 @@ class Database
 	public function getAllInterviewsForTable()
 	{
 		$dtz = new DateTimeZone('Europe/Rome');
-		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, hold, interviewstatus, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il, safetyTestDate FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname, name');
+		// safetyTestDate
+		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, hold, interviewstatus, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname, name');
 		$compact = [];
 		while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			if ($row['interview'] === null) {
@@ -800,7 +802,7 @@ class Database
 				$when = $dt;
 			}
 
-			if ($row['safetytestdate'] === null) {
+			if (!isset($row['safetytestdate'])) {
 				$safetyTestDate = null;
 			} else {
 				$dt = $this->timestampToTime((int) $row['safetytestdate'], $dtz);

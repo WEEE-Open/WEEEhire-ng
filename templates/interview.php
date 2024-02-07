@@ -91,7 +91,8 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 	</form>
 <?php endif ?>
 
-<?php if ($interview->status === true && !$edit) : ?>
+<?php /** @noinspection PhpStatementHasEmptyBodyInspection */
+if ($interview->status === true && !$edit) : /* ?>
 	<form method="post">
 		<div class="form-group row">
 			<label for="safetyTestDate1" class="col-md-1 col-form-label"><?=__('Data')?></label>
@@ -115,7 +116,7 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 			</div>
 		</div>
 	</form>
-<?php endif ?>
+<?php */ endif ?>
 
 <?=$this->fetch('userinfo', ['user' => $user, 'edit' => $edit])?>
 
