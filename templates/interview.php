@@ -91,11 +91,7 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 	</form>
 <?php endif ?>
 
-<?php
-
-/** @noinspection PhpStatementHasEmptyBodyInspection */
-
-if ($interview->status === true && !$edit) : /* ?>
+<?php if ($interview->status === true && !$edit) : /* ?>
 	<form method="post">
 		<div class="form-group row">
 			<label for="safetyTestDate1" class="col-md-1 col-form-label"><?=__('Data')?></label>
