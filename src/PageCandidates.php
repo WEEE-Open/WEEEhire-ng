@@ -70,7 +70,7 @@ class PageCandidates implements RequestHandlerInterface
 							$token = $db->regenerateToken($id);
 						} catch (DatabaseException $e) {
 							return new HtmlResponse($template->render('error', ['message' => 'Database error']), 500);
-						} catch (Exepction $e) {
+						} catch (\Exception $e) {
 							return new HtmlResponse($template->render('error', ['message' => 'User does not exists']), 404);
 						}
 
@@ -123,7 +123,12 @@ class PageCandidates implements RequestHandlerInterface
 					} elseif ($status === User::STATUS_NEW_REJECTED) {
 						$db->setPublished($id, true);
 					} elseif ($status === User::STATUS_NEW_HOLD) {
-						// TODO: send mail
+						if (!isset($POST['visiblenotes'])) {
+							return new HtmlResponse(
+								$template->render('error', ['message' => 'Add notes visible to the candidate']),
+								400
+							);
+						}
 						$db->saveVisibleNotes($id, $POST['visiblenotes']);
 						$db->setPublished($id, true);
 					}
