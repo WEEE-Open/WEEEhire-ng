@@ -192,7 +192,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			</div>
 			<label for="area" class="col-md-2 col-lg-1 col-form-label"><?=__('Interesse')?></label>
 			<div class="col-md-5 col-lg-6">
-				<select id="area" name="area" required="required" class="form-control" onchange="updateHints()">
+				<select id="area" name="area" required="required" class="form-control">
 					<option value selected disabled class="d-none"></option>
 					<?php foreach ($allRoles as $value => $role) : ?>
 						<option <?= isset($roles[$value]) ? '' : 'disabled' ?> value="<?= $this->e($value) ?>"><?= $this->e($role) ?></option>
@@ -351,6 +351,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 	}
 
 	updateHints();
+	area.addEventListener("change", updateHints);
 
 	let yearSelector = document.getElementById("year");
 	let matricolaSelector = document.getElementById('matricola');
