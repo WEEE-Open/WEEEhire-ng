@@ -237,7 +237,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-Python">
 					<p><?=__('Descrivi qualsiasi tua esperienza nel programmare in Python, e se hai un account su Github non esitare a condividerlo nella tua lettera!')?></p>
-					<p><?=__('Dal 2021-2022 abbiamo lanciato un programma per il miglioramento della qualità della vita degli studenti (<a href="https://weeeopen.polito.it/skeeell" target="_blank">skeeell</a>). Stiamo lavorando per creare <a href="https://github.com/weee-open/skeeelled" target="_blank">skeeelled</a>, una piattaforma per alzare il livello di e-learning fornito a tutti i 40\'000 studenti del Poli. Se hai già lavorato su backend e/o REST API in Python (es. Django, Flask), o in altri linguaggi, ti stiamo cercando! Noi in particolare stiamo usando <a href="https://fastapi.tiangolo.com" target="_blank">FastAPI</a>.')?></p>
+					<p><?=__('Molti degli strumenti interni del team sono stati creati con python, per esempio la <a href="https://github.com/WEEE-Open/peracotta" target="_blank">Peracotta</a> ed il <a href="https://github.com/WEEE-Open/pesto" target="_blank">Pesto</a>. Se conosci come lavorare con qt ed interagire con API, sei la persona che stiamo cercando!')?></p>
 					<p><?=__('Potresti menzionare se hai mai usato virtual environments, collaborato con qualcuno su un progetto software, o se sai scrivere in altri linguaggi che usiamo nel team, come JavaScript, PHP e Bash o altri ancora.')?></p>
 					<p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
 					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
@@ -246,16 +246,25 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-PHP">
 					<p><?=__('I principali progetti PHP del team sono <a href="https://github.com/WEEE-Open/tarallo" target="_blank">Tarallo</a>, <a href="https://github.com/WEEE-Open/WEEEHire-ng" target="_blank">WEEEHire</a> e <a href="https://github.com/WEEE-Open/crauto" target="_blank">crauto</a>, puoi darci già un\'occhiata per sapere a cosa vai incontro.')?></p>
-					<p><?=__('Dal 2021-2022 abbiamo anche instaurato una collaborazione con gli sviluppatori del bot Telegram <a href="https://t.me/inginf_bot" target="_blank">inginf_bot</a>, per il nostro progetto di miglioramento della qualità della vita degli studenti.')?></p>
-					<p><?=__('Parla di qualsiasi tua esperienza nello scrivere software in PHP o per il web in generale. Va bene anche "per l\'esame di ... ho creato un programma che fa ..." o "ho fatto il sito web per la panetteria all\'angolo".') ?></p>
+					<p><?=__('Descrivi qualsiasi tua esperienza nel programmare in PHP, e se hai un account su Github non esitare a condividerlo nella tua lettera!')?></p>
+					<p><?=__('Va bene anche "per l\'esame di ... ho creato un programma che fa ..." o "ho fatto il sito web per la panetteria all\'angolo".') ?></p>
+					<p><?=__('Se conosci anche altri linguaggi non esitare a condividere la tua esperienza.') ?></p>
 					<p><?=__('Puoi anche menzionare se conosci altri linguaggi di programmazione o hai mai partecipato ad altri progetti collaborativi.')?></p>
 					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
 					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
 					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
 				</div>
 				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-JavaScript">
-					<p><?=__('Dal 2021-2022 abbiamo lanciato un nuovo progetto per migliorare la qualità della vita degli studenti (<a href="https://weeeopen.polito.it/skeeell" target="_blank">skeeell</a>). Abbiamo creato <a href="https://weee.link/skeeep" target="_blank">skeeep</a>, stiamo lavorando per creare <a href="https://github.com/weee-open/skeeelled" target="_blank">skeeelled</a> (migliore e-learning per tutti i 40\'000 studenti del Poli), e abbiamo instaurato una collaborazione con gli sviluppatori dell\'estensione per browser <a href="https://chrome.google.com/webstore/detail/politools/fbbjhoaakfhbggkegckmjafkffaofnkd?hl=it" target="_blank">PoliTools</a>.')?></p>
-					<p><?=__('Parla di qualsiasi tua esperienza riguardante l\'utilizzo di JavaScript (frontend - in particolare ReactJS e Angular -, backend, app NodeJS). Conosci altri linguaggi che usiamo in team, come Python, PHP e Bash, o altri ancora? Menzionali pure! E se hai un account su Github non esitare a condividerlo nella tua lettera!')?></p>
+					<p><?=__('Da un paio d\'anni abbiamo iniziato a migrare alcuni dei nostri progetti a Node.js. Cerchiamo persone capaci di lavorare con express, MySQL e creare API.')?></p>
+					<p><?=__('Parla di qualsiasi tua esperienza riguardante l\'utilizzo di JavaScript (backend, app NodeJS, e frontend, sia vanilla JS, sia framework, in particolare Vue.js). Conosci altri linguaggi che usiamo in team, come Python, PHP e Bash, o altri ancora? Menzionali pure! E se hai un account su Github non esitare a condividerlo nella tua lettera!')?></p>
+					<p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
+					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
+					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
+					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
+				</div>
+				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-Vuejs">
+					<p><?=__('Da un paio d\'anni abbiamo iniziato a migrare alcuni dei nostri progetti a Vue.js. Cerchiamo persone capaci di creare SPA e PWA con Vue.js integrate con servizi backend.')?></p>
+					<p><?=__('Parla di qualsiasi tua esperienza riguardante l\'utilizzo di JavaScript (frontend, vanilla JS, Vue.js or any other framework, e backend, NodeJS). Conosci altri linguaggi che usiamo in team, come Python, PHP e Bash, o altri ancora? Menzionali pure! E se hai un account su Github non esitare a condividerlo nella tua lettera!')?></p>
 					<p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
 					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
 					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>

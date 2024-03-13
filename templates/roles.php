@@ -8,6 +8,7 @@ function getRoles()
 		'Sviluppo software Python'        => __('Sviluppo software Python'),
 		'Sviluppo software PHP'           => __('Sviluppo software PHP'),
 		'Sviluppo software JavaScript'    => __('Sviluppo software JavaScript'),
+		'Sviluppo software Vuejs'        => __('Sviluppo software Vue.js'),
 		'Machine Learning Engineer'       => __('Machine Learning Engineer'),
 		'Sysadmin'                        => __('Sysadmin'),
 		'Comunicazione e social'          => __('Comunicazione e social'),
