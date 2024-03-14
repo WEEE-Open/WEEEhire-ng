@@ -6,14 +6,16 @@
 # steemnd <27449310+steemnd@users.noreply.github.com>, 2021.
 # SPDX-FileCopyrightText: 2024 quel _tale
 # SPDX-FileCopyrightText: 2024 quel _tale
+# SPDX-FileCopyrightText: 2024 quel _tale
+# SPDX-FileCopyrightText: 2024 quel _tale
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-13 21:14+0100\n"
-"PO-Revision-Date: 2024-03-13 21:22+0100\n"
-"Last-Translator: enrico\n"
-"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"POT-Creation-Date: 2024-03-14 23:13+0100\n"
+"PO-Revision-Date: 2024-03-14 23:14+0100\n"
+"Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
+"Language-Team: Italian <>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -732,11 +734,11 @@ msgid ""
 "pesto\" target=\"_blank\">Pesto</a>. Se conosci come lavorare con qt ed "
 "interagire con API, sei la persona che stiamo cercando!"
 msgstr ""
-"Many of the team's internal toold have been created with python, for example"
-" <a href=\"https://github.com/WEEE-Open/peracotta\" target=\"_blank\""
-">Peracotta</a> ed il <a href=\"https://github.com/WEEE-Open/pesto\""
-" target=\"_blank\">Pesto</a>. If you know how to work with Qt and how to"
-" integrate with APIs, you are the member we are looking for!"
+"Many of the team's internal toold have been created with python, for example "
+"<a href=\"https://github.com/WEEE-Open/peracotta\" "
+"target=\"_blank\">Peracotta</a> ed il <a href=\"https://github.com/WEEE-Open/"
+"pesto\" target=\"_blank\">Pesto</a>. If you know how to work with Qt and how "
+"to integrate with APIs, you are the member we are looking for!"
 
 #: templates/form.php:241
 msgid ""
@@ -819,9 +821,9 @@ msgid ""
 "Node.js. Cerchiamo persone capaci di lavorare con express, MySQL e creare "
 "API."
 msgstr ""
-"Since a couple of years, we've started to migrate some of our projects to"
-" Node.js. We are looking for people capable of working with express, MySQL"
-" and create APIs."
+"Since a couple of years, we've started to migrate some of our projects to "
+"Node.js. We are looking for people capable of working with express, MySQL "
+"and create APIs."
 
 #: templates/form.php:259
 #, fuzzy
@@ -844,9 +846,9 @@ msgid ""
 "Vue.js. Cerchiamo persone capaci di creare SPA e PWA con Vue.js integrate "
 "con servizi backend."
 msgstr ""
-"Since a couple of years, we've started to migrate some of out projects to"
-" Vue.js. We are looking for people capable of creating SPAs and PWAs with"
-" Vue.js integrated with backend services."
+"Since a couple of years, we've started to migrate some of out projects to "
+"Vue.js. We are looking for people capable of creating SPAs and PWAs with Vue."
+"js integrated with backend services."
 
 #: templates/form.php:267
 #, fuzzy
@@ -1091,15 +1093,14 @@ msgid ""
 "Una conferma della tua candidatura verrà inviata all'indirizzo <span "
 "id=\"generatedEmailAddr\"></span>."
 msgstr ""
-"A confirmation email will be sent to <span "
-"id=\"generatedEmailAddr\"></span>."
+"A confirmation email will be sent to <span id=\"generatedEmailAddr\"></span>."
 
 #: templates/form.php:332
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Visualizza le <a href=\"%s\">Informazioni sul trattamento dei dati "
 "personali</a>."
-msgstr "Privacy Policy"
+msgstr "View <a href=\"%s\">Privacy Policy</a>."
 
 #: templates/form.php:338
 msgid ""
@@ -1128,7 +1129,7 @@ msgid "Le candidature si chiuderanno tra 1 ora."
 msgstr "Applications will close in 1 hour."
 
 #: templates/index.php:45
-msgid "Le candidature si chiuderanno tra {$hours} ore."
+msgid "Le candidature si chiuderanno tra ${hours} ore."
 msgstr "Applications will close in ${hours} hours."
 
 #: templates/index.php:49
@@ -1140,19 +1141,19 @@ msgid "Le candidature si chiuderanno tra 1 giorno e 1 ora."
 msgstr "Applications will close in 1 day and 1 hour."
 
 #: templates/index.php:53
-msgid "Le candidature si chiuderanno tra 1 giorno e {$hours} ore."
+msgid "Le candidature si chiuderanno tra 1 giorno e ${hours} ore."
 msgstr "Applications will close in 1 day and ${hours} hours."
 
 #: templates/index.php:57
-msgid "Le candidature si chiuderanno tra {$days} giorni."
+msgid "Le candidature si chiuderanno tra ${days} giorni."
 msgstr "Applications will close in ${days} days."
 
 #: templates/index.php:59
-msgid "Le candidature si chiuderanno tra {$days} giorni e 1 ora."
+msgid "Le candidature si chiuderanno tra ${days} giorni e 1 ora."
 msgstr "Applications will close in ${days} days and 1 hour."
 
 #: templates/index.php:61
-msgid "Le candidature si chiuderanno tra {$days} giorni e {$hours} ore."
+msgid "Le candidature si chiuderanno tra ${days} giorni e ${hours} ore."
 msgstr "Applications will close in ${days} days and ${hours} hours."
 
 #: templates/interview.php:10

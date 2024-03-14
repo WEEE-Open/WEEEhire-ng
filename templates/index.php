@@ -42,7 +42,7 @@ $this->layout('base', ['title' => 'WEEElcome']) ?>
 					} else if(hours === 1) {
 						timer.textContent = `<?= __('Le candidature si chiuderanno tra 1 ora.') ?>`;
 					} else {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra {$hours} ore.') ?>`;
+						timer.textContent = `<?= __('Le candidature si chiuderanno tra ${hours} ore.') ?>`;
 					}
 				} else if(days === 1) {
 					if(hours === 0) {
@@ -50,15 +50,15 @@ $this->layout('base', ['title' => 'WEEElcome']) ?>
 					} else if(hours === 1) {
 						timer.textContent = `<?= __('Le candidature si chiuderanno tra 1 giorno e 1 ora.') ?>`;
 					} else {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra 1 giorno e {$hours} ore.') ?>`;
+						timer.textContent = `<?= __('Le candidature si chiuderanno tra 1 giorno e ${hours} ore.') ?>`;
 					}
 				} else {
 					if(hours === 0) {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra {$days} giorni.') ?>`;
+						timer.textContent = `<?= __('Le candidature si chiuderanno tra ${days} giorni.') ?>`;
 					} else if(hours === 1) {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra {$days} giorni e 1 ora.') ?>`;
+						timer.textContent = `<?= __('Le candidature si chiuderanno tra ${days} giorni e 1 ora.') ?>`;
 					} else {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra {$days} giorni e {$hours} ore.') ?>`;
+						timer.textContent = `<?= __('Le candidature si chiuderanno tra ${days} giorni e ${hours} ore.') ?>`;
 					}
 				}
 
