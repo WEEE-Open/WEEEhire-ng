@@ -8,3 +8,4 @@ messages.po~
 *.exe
 .phpunit.result.cache
 **/.DS_Store
+config/config.php
