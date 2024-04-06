@@ -45,5 +45,8 @@ jobs:
       - name: Linting
         run: composer lint
 
+      - name: Create config
+        run: cp config/config-example.php config/config.php
+
       - name: Run tests
         run: composer test
