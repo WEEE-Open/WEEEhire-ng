@@ -123,7 +123,7 @@ class Ldap
 			'mail'                    => Utils::politoMail($user->matricola),
 			'schacpersonaluniquecode' => $user->matricola,
 			'degreecourse'            => $user->degreecourse,
-			'weeeOpenUniqueId'        => "not-yet-generated",
+			'weeeOpenUniqueId'        => $inviteCode,
 		];
 
 		if (TEST_MODE) {
