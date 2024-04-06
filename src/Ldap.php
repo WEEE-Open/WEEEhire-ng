@@ -122,7 +122,8 @@ class Ldap
 			'sn'                      => $normalizedSurname,
 			'mail'                    => Utils::politoMail($user->matricola),
 			'schacpersonaluniquecode' => $user->matricola,
-			'degreecourse'            => $user->degreecourse
+			'degreecourse'            => $user->degreecourse,
+			'weeeOpenUniqueId'        => "not-yet-generated",
 		];
 
 		if (TEST_MODE) {
