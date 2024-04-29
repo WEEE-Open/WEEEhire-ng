@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['8.0', '8.1', 'latest']
+        php: ['8.0', '8.2', 'latest']
 
     steps:
       - uses: actions/checkout@v2
@@ -43,10 +43,18 @@ jobs:
 #          php_extensions: ldap mbstring json sqlite3
 
       - name: Linting
-        run: composer lint
+        uses: php-actions/composer@v6
+        with:
+          php_extensions: ldap mbstring json sqlite3
+          php_version: "${{ matrix.php }}"
+          command: lint
 
       - name: Create config
         run: cp config/config-example.php config/config.php
 
       - name: Run tests
-        run: composer test
+        uses: php-actions/composer@v6
+        with:
+          php_extensions: ldap mbstring json sqlite3
+          php_version: "${{ matrix.php }}"
+          command: test
