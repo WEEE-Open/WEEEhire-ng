@@ -59,3 +59,6 @@ create table notes (
 	foreign key (candidate_id) references users (id) on delete cascade on update cascade,
 	primary key (uid, candidate_id)
 );
+
+-- Be careful not to change this line other than the number of the version, this is parsed with regex by the updater
+insert into config (id, value) values ('SchemaVersion', '0');

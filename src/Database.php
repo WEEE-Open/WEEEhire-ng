@@ -20,6 +20,17 @@ class Database
 	}
 
 	/**
+	 * ⚠️ THIS METHOD IS UNSAFE, NEVER EXPOSE IT, ONLY FOR DB UPGRADE ⚠️
+	 * Get the SQLite3 object
+	 * @return SQLite3
+	 */
+
+	public function getDb(): SQLite3
+	{
+		return $this->db;
+	}
+
+	/**
 	 * Insert a new User into the database
 	 *
 	 * @param User $user The user
@@ -205,7 +216,7 @@ class Database
 			$result->finalize();
 
 			if ($row === false) {
-				throw new DatabaseException("Config value $option not found");
+				throw new DatabaseException("Config value $option not found", 404);
 			}
 
 			return $row['value'];

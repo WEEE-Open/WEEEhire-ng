@@ -16,6 +16,8 @@ Run `./launch.sh` in the main directory of the repository to run the server with
 
 Once launched the application is available at `http://localhost:8082`
 
+To update the database schema run `docker-compose exec -T app php /var/www/html/database/update-db.php`.
+
 ### Without containers
 
 You will need:
