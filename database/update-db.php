@@ -80,13 +80,13 @@ try {
 		}
 
 		$sql = file_get_contents($filename);
-		var_dump($rawDb->exec('BEGIN'));
+		$rawDb->exec('BEGIN');
 		$result = $rawDb->exec($sql);
 		if ($result === false) {
 			throw new \Exception('Error executing query: ' . $rawDb->lastErrorMsg(), 3);
 		}
 		$db->setConfigValue('SchemaVersion', $currentVersion);
-		var_dump($rawDb->exec('COMMIT'));
+		$rawDb->exec('COMMIT');
 		echo 'Updated to version ' . $currentVersion;
 		echo PHP_EOL;
 	}
