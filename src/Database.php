@@ -867,6 +867,126 @@ class Database
 		return $compact;
 	}
 
+	/**
+	 * Get all positions
+	 * @param string $lang Language (optional), if not set, won't provide name or description
+	 * 
+	 * @return array Array of associative arrays with id, availability, printable name and description
+	 */
+	public function getPositions($lang)
+	{
+		if ($lang) {
+			$stmt = $this->db->prepare('SELECT 
+					p.id AS id,
+					p.available,
+					MAX(CASE 
+						WHEN t.id LIKE 'position.' || p.id || '.name' THEN t.value 
+						ELSE NULL 
+					END) AS name,
+					MAX(CASE 
+						WHEN t.id LIKE 'position.' || p.id || '.description' THEN t.value 
+						ELSE NULL 
+					END) AS description
+				FROM 
+					positions p
+				LEFT JOIN 
+					translations t
+				ON 
+					t.id LIKE 'position.' || p.id || '.%'
+				GROUP BY 
+					p.id, p.available;');
+			$stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
+		} else {
+			$stmt = $this->db->prepare('SELECT id, availability FROM positions');
+		}
+		$result = $stmt->execute();
+
+		return $result->fetchArray(SQLITE3_ASSOC);
+	}
+
+	/**
+	 * Get a single position
+	 * 
+	 * @param int $id Position ID
+	 * @param string $lang Language (optional), if not set, won't provide name or description
+	 * 
+	 * @return array Associative array with id, availability, printable name and description
+	 */
+	public function getPosition($id, $lang)
+	{
+		if ($lang) {
+			$stmt = $this->db->prepare('SELECT 
+					p.id AS id,
+					p.available,
+					MAX(CASE 
+						WHEN t.id LIKE 'position.' || p.id || '.name' THEN t.value 
+						ELSE NULL 
+					END) AS name,
+					MAX(CASE 
+						WHEN t.id LIKE 'position.' || p.id || '.description' THEN t.value 
+						ELSE NULL 
+					END) AS description
+				FROM 
+					positions p
+				LEFT JOIN 
+					translations t
+				ON 
+					t.id LIKE 'position.' || p.id || '.%'
+				WHERE
+					p.id = :id
+				GROUP BY 
+					p.id, p.available;');
+			$stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
+		} else {
+			$stmt = $this->db->prepare('SELECT id, availability FROM positions WHERE id = :id');
+		}
+		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		$result = $stmt->execute();
+
+		return $result->fetchArray(SQLITE3_ASSOC);
+	}
+
+	/**
+	 * Get a translation
+	 * 
+	 * @param string $id Translation ID
+	 * @param string $lang Language
+	 * 
+	 * @return array Associative array with value
+	 */
+	public function getTranslation($id, $lang)
+	{
+		$stmt = $this->db->prepare('SELECT value FROM translations WHERE id = :id AND lang = :lang');
+		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
+		$stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
+		$result = $stmt->execute();
+
+		return $result->fetchArray(SQLITE3_ASSOC);
+	}
+
+	/**
+	 * Update a translation
+	 * 
+	 * @param string $id Translation ID
+	 * @param string $lang Language
+	 * @param string $value Translation value
+	 * 
+	 * @throws DatabaseException
+	 * 
+	 * @return void
+	 */
+	public function updateTranslation($id, $lang, $value)
+	{
+		$stmt = $this->db->prepare('INSERT OR REPLACE INTO translations (id, lang, value) VALUES (:id, :lang, :value)');
+		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
+		$stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
+		$stmt->bindValue(':value', $value, SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if ($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
 	/** @noinspection PhpDocMissingThrowsInspection */
 	/**
 	 * Convert timestamp to a DateTime
