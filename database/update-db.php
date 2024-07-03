@@ -31,7 +31,7 @@ if ($database === false) {
 	exit(1);
 }
 
-preg_match("#\(.SchemaVersion., (\d+)\)#", $database, $matches);
+preg_match("#\(.SchemaVersion., '(\d+)'\)#", $database, $matches);
 if (sizeof($matches) < 1) {
 	$schema = 0;
 	echo 'Schema version not found, assuming 0';
@@ -47,8 +47,13 @@ try {
 	$db = new Database();
 	try {
 		$currentVersion = (int) $db->getConfigValue('SchemaVersion');
+
+		echo 'Current database version: ' . $currentVersion;
+		echo PHP_EOL;
 	} catch (\Exception $e) {
 		if ($e->getCode() === 404) {
+			echo 'Database missing version, assuming 0';
+			echo PHP_EOL;
 			$currentVersion = 0;
 		} else {
 			throw $e;
@@ -57,6 +62,7 @@ try {
 
 	if ($currentVersion === $schema) {
 		echo 'Database is up to date';
+		echo PHP_EOL;
 		return;
 	}
 
@@ -74,10 +80,13 @@ try {
 		}
 
 		$sql = file_get_contents($filename);
-		$rawDb->exec('BEGIN');
-		$rawDb->exec($sql);
+		var_dump($rawDb->exec('BEGIN'));
+		$result = $rawDb->exec($sql);
+		if ($result === false) {
+			throw new \Exception('Error executing query: ' . $rawDb->lastErrorMsg(), 3);
+		}
 		$db->setConfigValue('SchemaVersion', $currentVersion);
-		$rawDb->exec('COMMIT');
+		var_dump($rawDb->exec('COMMIT'));
 		echo 'Updated to version ' . $currentVersion;
 		echo PHP_EOL;
 	}

@@ -248,7 +248,7 @@ class Database
 	 */
 	public function setConfigValue(string $option, string $value)
 	{
-		$stmt = $this->db->prepare('UPDATE config SET value = :value WHERE id = :id');
+		$stmt = $this->db->prepare('INSERT OR REPLACE INTO config (id, value) VALUES (:id, :value)');
 		$stmt->bindValue(':value', $value, SQLITE3_TEXT);
 		$stmt->bindValue(':id', $option, SQLITE3_TEXT);
 		$result = $stmt->execute();
