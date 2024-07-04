@@ -85,10 +85,12 @@ class Template
 	 *
 	 * @return string
 	 */
-	private static function getLocale(): string
+	static function getLocale(): string
 	{
 		// Must be here, or $_SESSION is not available
-		session_start();
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
 		if (isset($_SESSION['locale'])) {
 			return $_SESSION['locale'];
 		}

@@ -1,15 +1,16 @@
 <?php
 
-/** @var string|null $rolesAvailable */
+/** @var string|null $positions */
 
-if ($rolesAvailable === null) {
-	$roles = [];
-} else {
-	$roles = explode('|', $rolesAvailable);
-	$roles = array_combine($roles, $roles);
+use Michelf\Markdown;
+
+$totalUnavailable = count($positions);
+foreach ($positions as $position) {
+	if ($position['available'] == 1) {
+		$totalUnavailable--;
+	}
 }
-require_once 'roles.php';
-$allRoles = getRoles();
+
 $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 
 <div class="col-md-12">
@@ -194,13 +195,13 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			<div class="col-md-5 col-lg-6">
 				<select id="area" name="area" required="required" class="form-control">
 					<option value selected disabled class="d-none"></option>
-					<?php foreach ($allRoles as $value => $role) : ?>
-						<option <?= isset($roles[$value]) ? '' : 'disabled' ?> value="<?= $this->e($value) ?>"><?= $this->e($role) ?></option>
+					<?php foreach ($positions as $position) : ?>
+						<option <?= $position['available'] == 1 ? '' : 'disabled' ?> value="<?= $this->e($position['id']) ?>"><?= $this->e($position['name']) ?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>
 		</div>
-		<?php if (count($roles) < count($allRoles)) : ?>
+		<?php if ($totalUnavailable != 0) : ?>
 		<div class="form-group">
 			<p><small><?= __('Al momento alcune aree del team sono al completo, è possibile candidarsi solo nelle aree selezionabili dall\'elenco. In futuro le aree disponibili potrebbero cambiare senza preavviso.') ?></small></p>
 		</div>
@@ -211,117 +212,11 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				<div class="form-text" id="mlet-explain-">
 					<p><?=__('Seleziona l\'area del team che più ti interessa e qui compariranno delle linee guida su cosa scrivere.') ?></p>
 				</div>
-				<div class="form-text d-none" id="mlet-explain-Riparazione-hardware">
-					<p><?=__('Descrivi qualsiasi tua esperienza di riparazione di computer (fissi o portatili), o assemblaggio, o saldatura di componenti elettronici.')?></p>
-					<p><?=__('Se non sai qualcosa, cosa fai per imparare in autonomia? Puoi anche fornire degli esempi.')?></p>
-					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
-					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a riparare computer.')?></p>
-					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
-				</div>
-				<div class="form-text d-none" id="mlet-explain-Elettronica">
-					<p><?=__('Uno degli obiettivi del team è la progettazione di strumenti elettronici per la diagnostica a basso livello e il riuso dell\'hardware recuperato.') ?></p>
-					<p><?=__('Qual è il tuo rapporto con il mondo dell\'elettronica? Ti interessa di più l\'elettronica digitale o analogica (specialmente di potenza) o ti interessano entrambe?') ?></p>
-					<p><?=__('Se hai mai realizzato qualche circuito o progetto oltre a quelli nei laboratori didattici, parlane con riferimento anche al metodo con cui è stato realizzato (breadboard, millefori, circuito stampato, componenti through-hole o SMD, etc...).')?></p>
-					<p><?=__('Indica anche se hai dimestichezza con qualche software di Electronic Design Automation (progettazione, simulazione, test e verifica, etc...).') ?></p>
-					<p><?=__('Menziona anche quanto tempo potresti dedicare al team e se fai qualcos\'altro di interessante nel tempo libero oltre a progettare circuiti.') ?></p>
-					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
-				</div>
-				<div class="form-text d-none" id="mlet-explain-Sysadmin">
-					<p><?=__('Il compito dei sysadmin è assicurarsi che gli strumenti informatici a cui il team si appoggia per le sue operazioni siano al massimo della loro efficienza.') ?></p>
-					<p><?=__('Per fare questo gestiscono i server che ospitano i nostri servizi, collaborano con gli sviluppatori per deployare e aggiornare i software che creiamo, monitorano lo stato di salute della nostra infrastruttura e si assicurano che i nostri dati siano protetti da attacchi e perdite') ?></p>
-					<p><?=__('I sysadmin seguono l\'intero ciclo di vita dei servizi, dalla configurazione del server tramite Ansible, passando per la containerizzazione e gestione dei servizi, alle normali procedure di manutenzione.') ?></p>
-					<p><?=__('Le competenze esercitate sono una generale conoscenza di Ansible e della containerizzazione, familiarità con la gestione e configurazione di software per server comuni come Nginx, PHP e MariaDB/PostgreSQL e maneggevolezza con il terminale Linux.') ?></p>
-					<p><?=__('Se hai esperienza con alcune di queste cose, parlane liberamente.')?></p>
-					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre ad amministrare server.')?></p>
-					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
-				</div>
-				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-Python">
-					<p><?=__('Descrivi qualsiasi tua esperienza nel programmare in Python, e se hai un account su Github non esitare a condividerlo nella tua lettera!')?></p>
-					<p><?=__('Molti degli strumenti interni del team sono stati creati con python, per esempio la <a href="https://github.com/WEEE-Open/peracotta" target="_blank">Peracotta</a> ed il <a href="https://github.com/WEEE-Open/pesto" target="_blank">Pesto</a>. Se conosci come lavorare con qt ed interagire con API, sei la persona che stiamo cercando!')?></p>
-					<p><?=__('Potresti menzionare se hai mai usato virtual environments, collaborato con qualcuno su un progetto software, o se sai scrivere in altri linguaggi che usiamo nel team, come JavaScript, PHP e Bash o altri ancora.')?></p>
-					<p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
-					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
-					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
-					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
-				</div>
-				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-PHP">
-					<p><?=__('I principali progetti PHP del team sono <a href="https://github.com/WEEE-Open/tarallo" target="_blank">Tarallo</a>, <a href="https://github.com/WEEE-Open/WEEEHire-ng" target="_blank">WEEEHire</a> e <a href="https://github.com/WEEE-Open/crauto" target="_blank">crauto</a>, puoi darci già un\'occhiata per sapere a cosa vai incontro.')?></p>
-					<p><?=__('Descrivi qualsiasi tua esperienza nel programmare in PHP, e se hai un account su Github non esitare a condividerlo nella tua lettera!')?></p>
-					<p><?=__('Va bene anche "per l\'esame di ... ho creato un programma che fa ..." o "ho fatto il sito web per la panetteria all\'angolo".') ?></p>
-					<p><?=__('Se conosci anche altri linguaggi non esitare a condividere la tua esperienza.') ?></p>
-					<p><?=__('Puoi anche menzionare se conosci altri linguaggi di programmazione o hai mai partecipato ad altri progetti collaborativi.')?></p>
-					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
-					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
-					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
-				</div>
-				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-JavaScript">
-					<p><?=__('Da un paio d\'anni abbiamo iniziato a migrare alcuni dei nostri progetti a Node.js. Cerchiamo persone capaci di lavorare con express, MySQL e creare API.')?></p>
-					<p><?=__('Parla di qualsiasi tua esperienza riguardante l\'utilizzo di JavaScript (backend, app NodeJS, e frontend, sia vanilla JS, sia framework, in particolare Vue.js). Conosci altri linguaggi che usiamo in team, come Python, PHP e Bash, o altri ancora? Menzionali pure! E se hai un account su Github non esitare a condividerlo nella tua lettera!')?></p>
-					<p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
-					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
-					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
-					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
-				</div>
-				<div class="form-text d-none" id="mlet-explain-Sviluppo-software-Vuejs">
-					<p><?=__('Da un paio d\'anni abbiamo iniziato a migrare alcuni dei nostri progetti a Vue.js. Cerchiamo persone capaci di creare SPA e PWA con Vue.js integrate con servizi backend.')?></p>
-					<p><?=__('Parla di qualsiasi tua esperienza riguardante l\'utilizzo di JavaScript (frontend, vanilla JS, Vue.js or any other framework, e backend, NodeJS). Conosci altri linguaggi che usiamo in team, come Python, PHP e Bash, o altri ancora? Menzionali pure! E se hai un account su Github non esitare a condividerlo nella tua lettera!')?></p>
-					<p><?=__('Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack Overflow, etc...)?')?></p>
-					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
-					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a digitare codice.')?></p>
-					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
-				</div>
-				<div class="form-text d-none" id="mlet-explain-Riuso-creativo">
-					<p><?=__('Non tutti i computer che ci arrivano sono riparabili, ma vorremmo comunque minimizzare la quantità di materiale che finisce nel bidone.')?></p>
-					<p><?=__('Se hai manualità e/o esperienze nel riuso creativo e/o making è il momento di dirlo.')?></p>
-					<p><?=__('Puoi anche aggiungere se hai idee su come potremmo riutilizzare <i>case</i> vuoti, schede madri dall\'estetica peculiare o i piatti a specchio di hard disk rotti.') ?></p>
-					<p><?=__('Accenna anche a che metodo seguiresti per progettare queste cose.')?></p>
-					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero.')?></p>
-					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
-				</div>
-				<div class="form-text d-none" id="mlet-explain-Machine-Learning-Engineer">
-					<p><?=__('Dal 2021-2022, grazie all\'esperienza acquisita da alcuni membri del team in materia, e al lancio del nostro progetto di software per studenti, cerchiamo una figura che possa occuparsi della creazione di alcuni modelli volti a migliorare l\'esperienza utente delle piattaforme web che abbiamo intenzione di sviluppare, in particolare nell\'ambito del Natural Language Processing.')?></p>
-					<p><?=__('Se hai delle conoscenze riguardo a qualcuno tra Python, PyTorch, Tensorflow, Keras, Jupyter Notebook e GitHub, stiamo cercando proprio te!')?></p>
-					<p><?=__('Se in più sai ricercare paper scientifici su nuove tecnologie su ArXiv o simili, o hai intenzione di imparare a farlo, fantastico!') ?></p>
-					<p><?=__('Se hai mai usato Linux, parlane liberamente: su tutti i computer che ripariamo installiamo Linux.')?></p>
-					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero oltre a progettare intelligenze artificiali.')?></p>
-					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire, e se hai già lavorato su qualche progetto non esitare a condividerne il link nella tua lettera!.')?></p>
-				</div>
-				<div class="form-text d-none" id="mlet-explain-Comunicazione-e-social">
-					<p><?=__('Hai buone capacità di comunicazione e organizzazione, ti piace il nostro team e vuoi aiutarci a migliorare la nostra immagine? Questo è il posto che fa per te!')?></p>
-					<p><?=__('Cerchiamo qualcuno che possa svolgere le seguenti mansioni:')?></p>
-					<ul>
-						<li><?=__('Scrittura e pubblicazione di post e storie per i nostri social')?></li>
-						<li><?=__('Programmazione temporale dei contenuti')?></li>
-						<li><?=__('Definizione della strategia di comunicazione in generale')?></li>
-						<li><?=__('Brainstorming di idee per podcast e video tematici')?></li>
-						<li><?=__('Intrattenimento di rapporti con terzi, altre associazioni e ospiti')?></li>
-					</ul>
-					<p><?=__('Ti troverai a lavorare in sinergia con i creatori di contenuti digitali, che si occuperanno di produrre materiale grafico e video (o potrai occupartene tu stesso se ti va e ne sei capace).')?></p>
-					<p><?=__('Ora parlaci di te.')?></p>
-					<p><?=__('Descrivi qualsiasi tua esperienza nel gestire pagine o profili (e.g. personali, di attività commerciali, di <i>meme</i> nonsense, etc...) sui social network, in particolare Facebook e Instagram.')?></p>
-					<p><?=__('Menziona anche i risultati raggiunti con tali attività promozionali, se possibile.')?></p>
-					<p><?=__('Se dovessi spiegare in due righe cosa fa il team, cosa diresti?')?></p>
-					<p><?=__('Indica anche quanto tempo potresti dedicare a queste attività e se hai qualche altro interesse.')?></p>
-					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
-				</div>
-				<div class="form-text d-none" id="mlet-explain-Creazione-di-contenuti-digitali">
-					<p><?=__('Sprigiona la tua vena creativa entrando nel nostro team! Abbiamo bisogno di figure che si occupino di realizzare:')?></p>
-					<ul>
-						<li><?=__('Design di manifesti, infografiche, biglietti da visita')?></li>
-						<li><?=__('Elementi grafici per pagine web e social network')?></li>
-						<li><?=__('Sfondi, icone e immagini personalizzate per i nostri software')?></li>
-						<li><?=__('Redesign e modding dei case dei computer riparati')?></li>
-						<li><?=__('Jingle e motivi musicali per i nostri video')?></li>
-					</ul>
-					<p><?=__('Se <strong>almeno una</strong>, o più di una, di queste attività di interessano, questo è il ruolo adatto.')?></p>
-					<p><?=__('Parla di qualsiasi esperienza artistica, inclusi progetti personali (anche piccoli) o esami sostenuti.')?></p>
-					<p><?=__('Se vuoi mostrarci alcuni dei tuoi lavori passati, abbozzi, concepts o hai idee su come migliorare il volto del team, non esitare!')?></p>
-					<p><?=__('Menziona anche quanto tempo potresti dedicare alle attività in team e se fai altro di interessante nel tempo libero.')?></p>
-					<p><?=__('Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti sembra rilevante dire.')?></p>
-				</div>
-				<div class="form-text d-none" id="mlet-explain-Altro">
-					<p><?=__('Stupiscici.')?></p>
-				</div>
+				<?php foreach ($positions as $position) : ?>
+					<div class="form-text d-none" id="mlet-explain-<?= $position['id'] ?>">
+						<?= Markdown::defaultTransform($position['description'] ?? '') ?>
+					</div>
+				<?php endforeach; ?>
 			</div>
 			<textarea id="letter" name="letter" cols="40" rows="8" required="required" class="form-control"></textarea>
 		</div>

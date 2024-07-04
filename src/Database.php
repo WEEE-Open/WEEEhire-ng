@@ -873,35 +873,66 @@ class Database
 	 * 
 	 * @return array Array of associative arrays with id, availability, printable name and description
 	 */
-	public function getPositions($lang)
+	public function getPositions($lang = null)
 	{
 		if ($lang) {
-			$stmt = $this->db->prepare('SELECT 
-					p.id AS id,
+			$stmt = $this->db->prepare("SELECT 
+					p.id,
 					p.available,
-					MAX(CASE 
-						WHEN t.id LIKE 'position.' || p.id || '.name' THEN t.value 
-						ELSE NULL 
-					END) AS name,
-					MAX(CASE 
-						WHEN t.id LIKE 'position.' || p.id || '.description' THEN t.value 
-						ELSE NULL 
-					END) AS description
+					t_name.value AS name,
+					t_desc.value AS description
 				FROM 
 					positions p
 				LEFT JOIN 
-					translations t
-				ON 
-					t.id LIKE 'position.' || p.id || '.%'
-				GROUP BY 
-					p.id, p.available;');
+					translations t_name ON t_name.id = 'position.' || p.id || '.name' AND t_name.lang = :lang
+				LEFT JOIN 
+					translations t_desc ON t_desc.id = 'position.' || p.id || '.description' AND t_desc.lang = :lang");
 			$stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
 		} else {
-			$stmt = $this->db->prepare('SELECT id, availability FROM positions');
+			$stmt = $this->db->prepare('SELECT id, available FROM positions');
 		}
 		$result = $stmt->execute();
 
-		return $result->fetchArray(SQLITE3_ASSOC);
+		$positions = [];
+		while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+			$positions[] = $row;
+		}
+		return $positions;
+	}
+
+	/**
+	 * Get available positions
+	 * @param string $lang Language (optional), if not set, won't provide name or description
+	 * 
+	 * @return array Array of associative arrays with id, availability, printable name and description
+	 */
+	public function getAvailablePositions($lang = null)
+	{
+		if ($lang) {
+			$stmt = $this->db->prepare("SELECT 
+					p.id,
+					p.available,
+					t_name.value AS name,
+					t_desc.value AS description
+				FROM 
+					positions p
+				LEFT JOIN 
+					translations t_name ON t_name.id = 'position.' || p.id || '.name' AND t_name.lang = :lang
+				LEFT JOIN 
+					translations t_desc ON t_desc.id = 'position.' || p.id || '.description' AND t_desc.lang = :lang
+				WHERE 
+					p.available = 1");
+			$stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
+		} else {
+			$stmt = $this->db->prepare('SELECT id, available FROM positions');
+		}
+		$result = $stmt->execute();
+		
+		$positions = [];
+		while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+			$positions[] = $row;
+		}
+		return $positions;
 	}
 
 	/**
@@ -912,33 +943,25 @@ class Database
 	 * 
 	 * @return array Associative array with id, availability, printable name and description
 	 */
-	public function getPosition($id, $lang)
+	public function getPosition($id, $lang = null)
 	{
 		if ($lang) {
-			$stmt = $this->db->prepare('SELECT 
-					p.id AS id,
+			$stmt = $this->db->prepare("SELECT 
+					p.id,
 					p.available,
-					MAX(CASE 
-						WHEN t.id LIKE 'position.' || p.id || '.name' THEN t.value 
-						ELSE NULL 
-					END) AS name,
-					MAX(CASE 
-						WHEN t.id LIKE 'position.' || p.id || '.description' THEN t.value 
-						ELSE NULL 
-					END) AS description
+					t_name.value AS name,
+					t_desc.value AS description
 				FROM 
 					positions p
 				LEFT JOIN 
-					translations t
-				ON 
-					t.id LIKE 'position.' || p.id || '.%'
+					translations t_name ON t_name.id = 'position.' || p.id || '.name' AND t_name.lang = :lang
+				LEFT JOIN 
+					translations t_desc ON t_desc.id = 'position.' || p.id || '.description' AND t_desc.lang = :lang
 				WHERE
-					p.id = :id
-				GROUP BY 
-					p.id, p.available;');
+					p.id = :id");
 			$stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
 		} else {
-			$stmt = $this->db->prepare('SELECT id, availability FROM positions WHERE id = :id');
+			$stmt = $this->db->prepare('SELECT id, available FROM positions WHERE id = :id');
 		}
 		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 		$result = $stmt->execute();

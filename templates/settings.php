@@ -6,8 +6,8 @@
 /** @var $rolesAvailable String */
 
 $this->layout('base', ['title' => __('Opzioni WEEEHire'), 'logoHref' => 'settings.php']);
-require_once 'roles.php';
-$allRoles = getRoles();
+
+$allRoles = [];
 if ($rolesAvailable === null) {
 	$roles = [];
 } else {
