@@ -16,11 +16,22 @@ class PageIndex implements RequestHandlerInterface
 		$db = new Database();
 
 		$expiry = $db->getConfigValue('expiry');
-		$rolesAvailable = $db->getConfigValue('rolesAvailable');
-		$rolesAvailableCount = $rolesAvailable ? count(explode('|', $rolesAvailable)) : 0;
+		$positions = $db->getPositions();
 
-		if ($rolesAvailableCount === 0) {
+		if (count($positions) === 0) {
 			$expiry = 1;
+		} else {
+			// check that there is at least one position available
+			$isAtLeastOneAvailable = false;
+			for ($i = 0; $i < count($positions); $i++) {
+				if ($positions[$i]['available'] == 1) {
+					$isAtLeastOneAvailable = true;
+					break;
+				}
+			}
+			if (!$isAtLeastOneAvailable) {
+				$expiry = 1;
+			}
 		}
 
 		// Get from DB -> if "unixtime.now >= expiry date" then candidate_close : else show the form

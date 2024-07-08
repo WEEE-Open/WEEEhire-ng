@@ -40,14 +40,16 @@ class PageSettings implements RequestHandlerInterface
 				} catch (Exception $e) {
 					$error = $e->getMessage();
 				}
-			} elseif (isset($POST['rolesReset'])) {
-				// Make all roles unavailable
-				$db->unsetConfigValue('rolesAvailable');
-				$changed = true;
-			} elseif (isset($POST['roles'])) {
-				// Set available roles
-				$rolesRule = implode('|', $POST['roles']);
-				$db->setConfigValue('rolesAvailable', $rolesRule);
+			} elseif (isset($POST['positions'])) {
+				// Positions
+				$positions = $db->getPositions();
+				foreach ($positions as $position) {
+					$available = isset($POST['position-' . $position['id']]);
+					if ($available == ($position['available'] == 1)) {
+						continue;
+					}
+					$db->setPositionAvailability($position['id'], $available ? 1 : 0);
+				}
 				$changed = true;
 			} elseif (isset($POST['notifyEmail'])) {
 				if ($POST['notifyEmail'] === 'false') {
@@ -80,7 +82,7 @@ class PageSettings implements RequestHandlerInterface
 				'expiry'           => $expiry,
 				'error'            => $error,
 				'sendMail'         => (int) $db->getConfigValue('notifyEmail'),
-				'rolesAvailable' => $db->getConfigValue('rolesAvailable')
+				'positions' => $db->getPositions(Template::getLocale() ?? 'en_US')
 			]));
 	}
 }

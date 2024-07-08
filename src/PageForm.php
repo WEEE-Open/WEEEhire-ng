@@ -21,7 +21,7 @@ class PageForm implements RequestHandlerInterface
 		$positions = $db->getPositions(Template::getLocale() ?? 'en_US'); // [ ['id' => 1, 'name' => 'name', 'description' => 'description', 'available' => 1], ...]]
 
 		if (count($positions) === 0) {
-			//$expiry = 1;
+			$expiry = 1;
 		} else {
 			// check that there is at least one position available
 			$isAtLeastOneAvailable = false;

@@ -45,4 +45,16 @@
 		});
 	</script>
 <?php endif; ?>
+<script>
+	$(document).ready(function() {
+		$('.autoresize').each(function() {
+			function autoresize() {
+				$(this).height(0);
+				$(this).height(this.scrollHeight);
+			}
+			$(this).on('input', autoresize.bind(this));
+			autoresize.call(this);
+		});
+	});
+</script>
 </html>

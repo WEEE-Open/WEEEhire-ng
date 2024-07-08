@@ -93,3 +93,7 @@ a.disabled {
 .hidden {
 	display: none !important;
 }
+
+.autoresize {
+	resize: none;
+}

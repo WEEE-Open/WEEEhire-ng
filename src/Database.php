@@ -963,10 +963,59 @@ class Database
 		} else {
 			$stmt = $this->db->prepare('SELECT id, available FROM positions WHERE id = :id');
 		}
-		$stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 
 		return $result->fetchArray(SQLITE3_ASSOC);
+	}
+
+	/**
+	 * Add a new position
+	 * 
+	 * @param string $id Position ID
+	 * @param int $available Availability
+	 */
+	public function setPositionAvailability($id, $available)
+	{
+		$stmt = $this->db->prepare('UPDATE positions SET available=:available WHERE id=:id');
+		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
+		$stmt->bindValue(':available', $available, SQLITE3_INTEGER);
+		$result = $stmt->execute();
+		if ($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	/**
+	 * Update a position id
+	 * 
+	 * @param string $oldId Old position ID
+	 * @param string $newId New position ID
+	 */
+	public function updatePositionId($oldId, $newId)
+	{
+		$stmt = $this->db->prepare('UPDATE positions SET id=:newId WHERE id=:oldId');
+		$stmt->bindValue(':oldId', $oldId, SQLITE3_TEXT);
+		$stmt->bindValue(':newId', $newId, SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if ($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	/**
+	 * Delete a positionù
+	 * 
+	 * @param int $id Position ID
+	 */
+	public function deletePosition($id)
+	{
+		$stmt = $this->db->prepare('DELETE FROM positions WHERE id = :id');
+		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if ($result === false) {
+			throw new DatabaseException();
+		}
 	}
 
 	/**

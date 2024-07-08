@@ -3,17 +3,10 @@
 /** @var $myuser string */
 /** @var $expiry String */
 /** @var $sendMail String */
-/** @var $rolesAvailable String */
+/** @var $positions	 String */
 
 $this->layout('base', ['title' => __('Opzioni WEEEHire'), 'logoHref' => 'settings.php']);
 
-$allRoles = [];
-if ($rolesAvailable === null) {
-	$roles = [];
-} else {
-	$roles = explode('|', $rolesAvailable);
-	$roles = array_combine($roles, $roles);
-}
 $currentFileName = basename(__FILE__);
 
 ?>
@@ -59,40 +52,21 @@ $currentFileName = basename(__FILE__);
 	<hr>
 	<h4 class="mb-3"><i><?=__('Modifica i ruoli disponibili per i nuovi candidati')?></i></h4>
 	<form method="post">
-		<div class="row justify-content-between">
-			<div class="col">
-				<div class="row">
-					<div class="col border-right">
-						<h5 class="text-success"><?=__('Ruoli disponibili')?></h5>
-						<?php foreach ($allRoles as $value => $role) : ?>
-							<?php if (isset($roles[$value])) : ?>
-								<p><?= $this->e($role) ?></p>
-							<?php endif; ?>
-						<?php endforeach; ?>
-					</div>
-					<div class="col border-right">
-						<h5 class="text-danger"><?=__('Ruoli non disponibili')?></h5>
-						<?php foreach ($allRoles as $value => $role) : ?>
-							<?php if (!isset($roles[$value])) : ?>
-								<p><?= $this->e($role) ?></p>
-							<?php endif; ?>
-						<?php endforeach; ?>
+		<input type="hidden" name="positions" value="true">
+		<div class="container-fluid">
+			<?php foreach ($positions as $position) : ?>
+				<div class="row align-items-center">
+					<input class="col-md-auto" type="checkbox" name="position-<?=$position['id']?>" id="position-<?=$position['id']?>" <?=$position['available'] == 1 ? 'checked' : ''?>>
+					<label class="col" for="position-<?=$position['id']?>"><?=$position['name']?> (<?=$position['id']?>)</label>
+					<div class="col-md-auto btn">
+						<a href="position.php?id=<?=$position['id']?>" class="btn btn-outline-primary"><?=__('Modifica')?></a>
 					</div>
 				</div>
-			</div>
-			<div class="col ml-3">
-				<div class="row">
-					<label for="roles"><?= __('Seleziona i ruoli da rendere disponibili') ?></label>
-					<select size="<?= count($allRoles) ?>" class="custom-select mb-2" multiple name="roles[]" id="roles">
-						<?php foreach ($allRoles as $value => $role) : ?>
-							<option <?= isset($roles[$value]) ? 'selected' : '' ?> value="<?= $this->e($value) ?>"><?= $this->e($role) ?></option>
-						<?php endforeach; ?>
-					</select>
-				</div>
-				<div class="row justify-content-between mt-3">
-					<button type="submit" class="btn btn-primary mb-md-0 mb-2"><?=__('Conferma')?></button>
-					<button type="submit" class="btn btn-warning" name="rolesReset" value="true"><?=__('Rendi tutti non disponibili')?></button>
-				</div>
+			<?php endforeach ?>
+		</div>
+		<div class="form-group row">
+			<div class="col-12">
+				<button type="submit" class="btn btn-primary"><?=__('Salva')?></button>
 			</div>
 		</div>
 	</form>

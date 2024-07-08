@@ -9,7 +9,7 @@ use Psr\Http\Message\UriInterface;
 
 class Template
 {
-	private const SUPPORTED_LOCALES = ['en-US', 'it-IT'];
+	const SUPPORTED_LOCALES = ['en-US', 'it-IT'];
 
 
 	public static function getNormalizedLocale(string $locale): ?string
