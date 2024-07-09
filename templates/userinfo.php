@@ -61,12 +61,7 @@ if (isset($edit) && $edit) {
 		<div class="form-group">
 			<button type="submit" name="edit" value="true" class="btn btn-primary"><?php echo __('Aggiorna dati')?></button>
 			<a class="btn btn-secondary"
-					href="<?=$this->e(
-						\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl(
-							$globalRequestUri,
-							['edit' => null]
-						)
-					)?>"><?=__('Annulla')?></a>
+					href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri, ['edit' => null]))?>"><?=__('Annulla')?></a>
 		</div>
 	<?php endif ?>
 </form>

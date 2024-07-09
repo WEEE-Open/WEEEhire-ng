@@ -1,27 +1,13 @@
 <?php
 /**
- * @var $user WEEEOpen\WEEEhire\User 
- */
-/**
- * @var $edit bool 
- */
-/**
- * @var $recruiters string[][] 
- */
-/**
- * @var $evaluations string[][] 
- */
-/**
- * @var $uid string 
- */
-/**
- * @var $cn string 
- */
-/**
- * @var \Psr\Http\Message\UriInterface $globalRequestUri 
- */
-/**
- * @var array $notes 
+ * @var $user WEEEOpen\WEEEhire\User
+ * @var $edit bool
+ * @var $recruiters string[][]
+ * @var $evaluations string[][]
+ * @var $uid string
+ * @var $cn string
+ * @var \Psr\Http\Message\UriInterface $globalRequestUri
+ * @var array $notes
  */
 
 $titleShort = sprintf(__('%s %s (%s)'), $this->e($user->name), $this->e($user->surname), $this->e($user->matricola));
@@ -31,19 +17,19 @@ require_once 'stars.php';
 ?>
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="candidates.php"><?php echo __('Candidati')?></a></li>
-		<li class="breadcrumb-item active" aria-current="page"><?php echo $titleShort?></li>
+		<li class="breadcrumb-item"><a href="candidates.php"><?=__('Candidati')?></a></li>
+		<li class="breadcrumb-item active" aria-current="page"><?=$titleShort?></li>
 	</ol>
 </nav>
 
 <?php if ($user->status === true) : ?>
 	<?php if (!$user->emailed) : ?>
 		<div class="alert alert-warning" role="alert">
-		<?php echo __('Candidatura approvata, <a href="#email-form">ma email non ancora inviata</a>')?>
+		<?=__('Candidatura approvata, <a href="#email-form">ma email non ancora inviata</a>')?>
 		</div>
 	<?php else : ?>
 		<div class="alert alert-success" role="alert">
-		<?php echo sprintf(
+		<?=sprintf(
 			__('Candidatura approvata, <a href="%s">passa al colloquio</a>'),
 			'interviews.php?id=' . $user->id
 		) // It's an int, no risks here ?>
@@ -51,20 +37,20 @@ require_once 'stars.php';
 	<?php endif ?>
 <?php elseif ($user->status === false) : ?>
 	<div class="alert alert-danger" role="alert">
-	<?php echo __('Candidatura rifiutata')?>
+	<?=__('Candidatura rifiutata')?>
 	</div>
 <?php elseif ($user->status === null && $user->hold === true) : ?>
 	<div class="alert alert-warning" role="alert">
-	<?php echo __('Candidatura rimandata')?>
+	<?=__('Candidatura rimandata')?>
 	</div>
 <?php endif ?>
 <?php if ($user->published) : ?>
 	<div class="alert alert-info" role="alert">
-	<?php echo __('Risultati pubblicati, ti consiglio di non modificarli')?>
+	<?=__('Risultati pubblicati, ti consiglio di non modificarli')?>
 	</div>
 <?php endif ?>
 
-<?php echo $this->fetch('userinfo', ['user' => $user, 'edit' => $edit, 'evaluations' => $evaluations, 'uid' => $uid])?>
+<?=$this->fetch('userinfo', ['user' => $user, 'edit' => $edit, 'evaluations' => $evaluations, 'uid' => $uid])?>
 
 <?php if (!$edit) :
 	$total = 0;
@@ -83,41 +69,41 @@ require_once 'stars.php';
 	}
 	?>
 <div class="row">
-	<div class="col"><h4><?php echo __('Valutazioni')?></h4></div>
+	<div class="col"><h4><?=__('Valutazioni')?></h4></div>
 	<?php if (count($evaluations) === 0) : ?>
 		<div id="votesresult" class="col"></div>
 	<?php else : ?>
-		<div id="votesresult" class="col"><p class="text-right"><?php echo sprintf(__('Valutazione:&nbsp;%s&nbsp;%s'), $avg, stars($avg))?></p>
+		<div id="votesresult" class="col"><p class="text-right"><?=sprintf(__('Valutazione:&nbsp;%s&nbsp;%s'), $avg, stars($avg))?></p>
 		</div>
 	<?php endif ?>
 </div>
 <table id="votestable" class="table table-striped">
 	<thead>
 	<tr>
-		<th scope="col"><?php echo __('Nome valutatore')?></th>
-		<th scope="col"><?php echo __('Voto')?></th>
-		<th scope="col" class="d-none d-md-table-cell"><?php echo __('Data')?></th>
-		<th scope="col"><?php echo __('Azioni')?></th>
+		<th scope="col"><?=__('Nome valutatore')?></th>
+		<th scope="col"><?=__('Voto')?></th>
+		<th scope="col" class="d-none d-md-table-cell"><?=__('Data')?></th>
+		<th scope="col"><?=__('Azioni')?></th>
 	</tr>
 	</thead>
 	<tbody>
 	<?php foreach ($evaluations as $evaluation) : ?>
 		<tr class="voterow">
-			<td><?php echo sprintf(__('%s (%s)'), $evaluation['name_evaluator'], $evaluation['id_evaluator'])?></td>
-			<td class="align-middle"><?php echo $evaluation['vote']?>&nbsp;<?php echo stars($evaluation['vote'])?></td>
-			<td class="d-none d-md-table-cell"><?php echo date('Y-m-d H:i', $evaluation['date'])?></td>
+			<td><?=sprintf(__('%s (%s)'), $evaluation['name_evaluator'], $evaluation['id_evaluator'])?></td>
+			<td class="align-middle"><?=$evaluation['vote']?>&nbsp;<?=stars($evaluation['vote'])?></td>
+			<td class="d-none d-md-table-cell"><?=date('Y-m-d H:i', $evaluation['date'])?></td>
 			<td>
 				<form method="post">
-					<input type="hidden" name="id_evaluation" value="<?php echo $evaluation['id_evaluation']?>" />
+					<input type="hidden" name="id_evaluation" value="<?=$evaluation['id_evaluation']?>" />
 					<button type="submit" name="unvote"
-							class="btn btn-outline-danger btn-sm"><?php echo __('Elimina 🗑')?></button>
+							class="btn btn-outline-danger btn-sm"><?=__('Elimina 🗑')?></button>
 				</form>
 			</td>
 		</tr>
 	<?php endforeach; ?>
 	<?php if (!$voted) : ?>
 		<tr id="showvotesbuttonrow">
-			<td colspan="4" class="text-center"><button id="showvotesbutton" class="btn btn-secondary"><?php echo __('Mostra (spoiler!)') ?></button></td>
+			<td colspan="4" class="text-center"><button id="showvotesbutton" class="btn btn-secondary"><?=__('Mostra (spoiler!)') ?></button></td>
 		</tr>
 		<script>
 			"use strict";
@@ -138,11 +124,11 @@ require_once 'stars.php';
 			}
 		</script>
 		<tr class="myvoterow">
-			<td><?php echo sprintf(__('%s (%s)'), $cn, $uid)?></td>
+			<td><?=sprintf(__('%s (%s)'), $cn, $uid)?></td>
 			<td colspan="3">
 				<form method="post">
 					<div class="form-row row">
-						<label for="FormControlVote" class="sr-only"><?php echo __('Voto')?></label>
+						<label for="FormControlVote" class="sr-only"><?=__('Voto')?></label>
 						<div class="col-8">
 							<select name="vote" class="form-control star-color" id="FormControlVote">
 								<option value="1">1 ★</option>
@@ -154,7 +140,7 @@ require_once 'stars.php';
 						</div>
 						<div class="col-4">
 							<button type="submit" name="voteButton" value="true"
-									class="btn btn-outline-primary"><?php echo __('Vota')?></button>
+									class="btn btn-outline-primary"><?=__('Vota')?></button>
 						</div>
 					</div>
 				</form>
@@ -164,8 +150,8 @@ require_once 'stars.php';
 	</tbody>
 </table>
 
-<h4 class="mt-5"><?php echo __('Note') ?></h4>
-	<?php echo $this->fetch('notes', ['notes' => $notes]); ?>
+<h4 class="mt-5"><?=__('Note') ?></h4>
+	<?=$this->fetch('notes', ['notes' => $notes]); ?>
 	<?php
 	$userNoted = false;
 	foreach ($notes as $note) {
@@ -179,102 +165,97 @@ require_once 'stars.php';
 <form method="post" class="mt-3">
 	<?php if (!$userNoted) : ?>
 	<div class="form-group">
-		<label for="notes"><b><?php echo __('Aggiungi nota') ?></b></label>
+		<label for="notes"><b><?=__('Aggiungi nota') ?></b></label>
 		<textarea id="notes" name="note" cols="40" rows="3"
 				class="form-control"></textarea>
 	</div>
 	<div class="form-group text-center">
 		<button name="saveNote" value="true" type="submit"
-				class="btn btn-outline-primary my-1 mx-1"><?php echo __('Aggiungi nota')?></button>
+				class="btn btn-outline-primary my-1 mx-1"><?=__('Aggiungi nota')?></button>
 	<?php else : ?>
 		<!-- open div bacause there is close div tag in below -->
 		<div class="form-group text-center">
 	<?php endif; ?>
 		<a class="btn btn-outline-secondary my-1 mx-1"
-				href="<?php echo $this->e(
-					\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl(
-						$globalRequestUri,
-						['edit' => 'true']
-					)
-					  )?>"><?php echo __('Modifica dati')?></a>
+				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri, ['edit' => 'true']))?>"><?=__('Modifica dati')?></a>
 	</div>
 	<div class="form-group text-center justify-content-center row">
 		<div class="btn-toolbar">
-			<a href="/candidates.php?id=<?php echo (int) $user->prev_not_evaluated_user ?>" class="btn btn-outline-primary mr-1 ml-1 <?php echo $user->prev_not_evaluated_user == null ? 'disabled' : '' ?>"><span class="fas fa-arrow-circle-left"></span>&nbsp;<?php echo __('Precedente da valutare')?></a>
-			<a href="/candidates.php?id=<?php echo (int) $user->prev_user ?>" class="btn btn-outline-secondary mr-1 ml-1 <?php echo $user->prev_user == null ? 'disabled' : '' ?>"><span class="fas fa-arrow-circle-left"></span>&nbsp;<?php echo __('Precedente')?></a>
-			<a href="/candidates.php?id=<?php echo (int) $user->next_user ?>" class="btn btn-outline-secondary mr-1 ml-1 <?php echo $user->next_user == null ? 'disabled' : '' ?>"><?php echo __('Successivo') ?>&nbsp;<span class="fas fa-arrow-circle-right"></span></a>
-			<a href="/candidates.php?id=<?php echo (int) $user->next_not_evaluated_user ?>" class="btn btn-outline-primary mr-1 ml-1 <?php echo $user->next_not_evaluated_user == null ? 'disabled' : '' ?>"><?php echo __('Successivo da valutare') ?>&nbsp;<span class="fas fa-arrow-circle-right"></span></a>
+			<a href="/candidates.php?id=<?=(int) $user->prev_not_evaluated_user ?>" class="btn btn-outline-primary mr-1 ml-1 <?=$user->prev_not_evaluated_user == null ? 'disabled' : '' ?>"><span class="fas fa-arrow-circle-left"></span>&nbsp;<?=__('Precedente da valutare')?></a>
+			<a href="/candidates.php?id=<?=(int) $user->prev_user ?>" class="btn btn-outline-secondary mr-1 ml-1 <?=$user->prev_user == null ? 'disabled' : '' ?>"><span class="fas fa-arrow-circle-left"></span>&nbsp;<?=__('Precedente')?></a>
+			<a href="/candidates.php?id=<?=(int) $user->next_user ?>" class="btn btn-outline-secondary mr-1 ml-1 <?=$user->next_user == null ? 'disabled' : '' ?>"><?=__('Successivo') ?>&nbsp;<span class="fas fa-arrow-circle-right"></span></a>
+			<a href="/candidates.php?id=<?=(int) $user->next_not_evaluated_user ?>" class="btn btn-outline-primary mr-1 ml-1 <?=$user->next_not_evaluated_user == null ? 'disabled' : '' ?>"><?=__('Successivo da valutare') ?>&nbsp;<span class="fas fa-arrow-circle-right"></span></a>
 		</div>
 
 	</div>
 	<?php $status = $user->getCandidateStatus(); ?>
 	<?php if ($status === \WEEEOpen\WEEEHire\User::STATUS_NEW_HOLD || $status === \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD) : ?>
 	<div class="form-group">
-		<label for="visiblenotes"><b><?php echo __('Motivazioni (visibili alla persona interessata)')?></b></label>
+		<label for="visiblenotes"><b><?=__('Motivazioni (visibili alla persona interessata)')?></b></label>
 		<textarea id="visiblenotes" name="visiblenotes" cols="40" rows="3"
-				class="form-control"><?php echo $this->e($user->visiblenotes)?></textarea>
+				class="form-control"><?=$this->e($user->visiblenotes)?></textarea>
 	</div>
 	<?php endif ?>
 	<div class="form-group text-center">
 	<?php switch ($status) :
-	default:
-	case \WEEEOpen\WEEEHire\User::STATUS_NEW:
-		?>
-			<div data-toggle="modal" data-target="#resendEmailModal"
-					class="btn btn-outline-secondary my-1 mx-1"><?php echo __('Rinvia email')?></div>
-			<button name="approve" value="true" type="submit"
-					class="btn btn-success my-1 mx-1"><?php echo __('Approva candidatura')?></button>
-			<button name="reject" value="true" type="submit"
-					class="btn btn-danger my-1 mx-1"><?php echo __('Rifiuta candidatura')?></button>
-			<button name="holdon" value="true" type="submit"
-					class="btn btn-secondary my-1 mx-1"><?php echo __('Metti in lista d\'attesa')?></button>
-		<?php
-		break;
-	case \WEEEOpen\WEEEHire\User::STATUS_NEW_APPROVED:
-		?>
-			<button name="limbo" value="true" type="submit"
-					class="btn btn-warning my-1 mx-1"><?php echo __('Rimanda nel limbo')?></button>
-		<?php
-		break;
-	case \WEEEOpen\WEEEHire\User::STATUS_NEW_REJECTED:
-		?>
-			<button name="publishnow" value="true" type="submit"
-					class="btn btn-primary my-1 mx-1"><?php echo __('Pubblica')?></button>
-			<button name="limbo" value="true" type="submit"
-					class="btn btn-warning my-1 mx-1"><?php echo __('Rimanda nel limbo')?></button>
-		<?php
-		break;
-	case \WEEEOpen\WEEEHire\User::STATUS_NEW_HOLD:
-		?>
-		<!-- TODO: add stuff for email, remove "publish now" (or leave it to skip the email) -->
-			<button name="publishnow" value="true" type="submit"
-					class="btn btn-primary my-1 mx-1"><?php echo __('Pubblica')?></button>
-			<button name="holdoff" value="true" type="submit"
-					class="btn btn-secondary my-1 mx-1"><?php echo __('Togli dalla lista d\'attesa')?></button>
-			<button name="savevisiblenotes" value="true" type="submit"
-					class="btn btn-outline-primary my-1 mx-1"><?php echo __('Salva motivazioni')?></button>
-		<?php
-		break;
-	case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_APPROVED:
-		?>
-		<?php
-		break;
-	case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED:
-		?>
-			<button name="holdon" value="true" type="submit"
-					class="btn btn-secondary my-1 mx-1"><?php echo __('Metti in lista d\'attesa')?></button>
-		<?php
-		break;
-	case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD:
-		?>
-			<button name="approvefromhold" value="true" type="submit"
-					class="btn btn-success my-1 mx-1"><?php echo __('Approva candidatura')?></button>
-			<button name="reject" value="true" type="submit"
-						class="btn btn-danger my-1 mx-1"><?php echo __('Rifiuta candidatura definitivamente')?></button>
-			<button name="savevisiblenotes" value="true" type="submit"
-					class="btn btn-outline-warning my-1 mx-1"><?php echo __('Salva motivazioni')?></button>
-		<?php
-		break;
+		default:
+		case \WEEEOpen\WEEEHire\User::STATUS_NEW:
+			?>
+				<div data-toggle="modal" data-target="#resendEmailModal"
+						class="btn btn-outline-secondary my-1 mx-1"><?=__('Rinvia email')?></div>
+				<button name="approve" value="true" type="submit"
+						class="btn btn-success my-1 mx-1"><?=__('Approva candidatura')?></button>
+				<button name="reject" value="true" type="submit"
+						class="btn btn-danger my-1 mx-1"><?=__('Rifiuta candidatura')?></button>
+				<button name="holdon" value="true" type="submit"
+						class="btn btn-secondary my-1 mx-1"><?=__('Metti in lista d\'attesa')?></button>
+			<?php
+			break;
+		case \WEEEOpen\WEEEHire\User::STATUS_NEW_APPROVED:
+			?>
+				<button name="limbo" value="true" type="submit"
+						class="btn btn-warning my-1 mx-1"><?=__('Rimanda nel limbo')?></button>
+			<?php
+			break;
+		case \WEEEOpen\WEEEHire\User::STATUS_NEW_REJECTED:
+			?>
+				<button name="publishnow" value="true" type="submit"
+						class="btn btn-primary my-1 mx-1"><?=__('Pubblica')?></button>
+				<button name="limbo" value="true" type="submit"
+						class="btn btn-warning my-1 mx-1"><?=__('Rimanda nel limbo')?></button>
+			<?php
+			break;
+		case \WEEEOpen\WEEEHire\User::STATUS_NEW_HOLD:
+			?>
+			<!-- TODO: add stuff for email, remove "publish now" (or leave it to skip the email) -->
+				<button name="publishnow" value="true" type="submit"
+						class="btn btn-primary my-1 mx-1"><?=__('Pubblica')?></button>
+				<button name="holdoff" value="true" type="submit"
+						class="btn btn-secondary my-1 mx-1"><?=__('Togli dalla lista d\'attesa')?></button>
+				<button name="savevisiblenotes" value="true" type="submit"
+						class="btn btn-outline-primary my-1 mx-1"><?=__('Salva motivazioni')?></button>
+			<?php
+			break;
+		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_APPROVED:
+			?>
+			<?php
+			break;
+		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_REJECTED:
+			?>
+				<button name="holdon" value="true" type="submit"
+						class="btn btn-secondary my-1 mx-1"><?=__('Metti in lista d\'attesa')?></button>
+			<?php
+			break;
+		case \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD:
+			?>
+				<button name="approvefromhold" value="true" type="submit"
+						class="btn btn-success my-1 mx-1"><?=__('Approva candidatura')?></button>
+				<button name="reject" value="true" type="submit"
+							class="btn btn-danger my-1 mx-1"><?=__('Rifiuta candidatura definitivamente')?></button>
+				<button name="savevisiblenotes" value="true" type="submit"
+						class="btn btn-outline-warning my-1 mx-1"><?=__('Salva motivazioni')?></button>
+			<?php
+			break;
 	endswitch; ?>
 	</div>
 </form>
@@ -282,18 +263,18 @@ require_once 'stars.php';
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><?php echo __('Conferma')?></h5>
+				<h5 class="modal-title"><?=__('Conferma')?></h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<p><?php echo __('Sei sicuro di voler rinviare l\'email di candidatura?')?></p>
+				<p><?=__('Sei sicuro di voler rinviare l\'email di candidatura?')?></p>
 			</div>
 			<form method="post" class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal"><?php echo __('Annulla')?></button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal"><?=__('Annulla')?></button>
 				<input type="hidden" name="resendemail" value="true">
-				<input type="submit" class="btn btn-outline-danger" value="<?php echo __('Invia')?>"></input>
+				<input type="submit" class="btn btn-outline-danger" value="<?=__('Invia')?>"></input>
 			</form>
 		</div>
 	</div>
@@ -302,7 +283,7 @@ require_once 'stars.php';
 <?php if (!$edit && !$user->emailed && $user->status === true) : ?>
 	<form method="post" id="email-form">
 		<div class="form-group">
-			<label for="recruiter"><?php echo __('Recruiter')?></label>
+			<label for="recruiter"><?=__('Recruiter')?></label>
 			<select id="recruiter" name="recruiter" required="required" class="form-control">
 				<?php
 				$hit = false;
@@ -310,11 +291,11 @@ require_once 'stars.php';
 					if ($user->recruiter === $recruiter[0]) :
 						$hit = true;
 						?>
-						<option value="<?php echo $this->e($recruiter[1]) . '|' . $this->e($recruiter[0])?>"
-								selected><?php echo $this->e($recruiter[0])?> (@<?php echo $this->e($recruiter[1])?>)
+						<option value="<?=$this->e($recruiter[1]) . '|' . $this->e($recruiter[0])?>"
+								selected><?=$this->e($recruiter[0])?> (@<?=$this->e($recruiter[1])?>)
 						</option>
 					<?php else : ?>
-						<option value="<?php echo $this->e($recruiter[1]) . '|' . $this->e($recruiter[0])?>"><?php echo $this->e($recruiter[0])?> (@<?php echo $this->e($recruiter[1])?>)</option>
+						<option value="<?=$this->e($recruiter[1]) . '|' . $this->e($recruiter[0])?>"><?=$this->e($recruiter[0])?> (@<?=$this->e($recruiter[1])?>)</option>
 					<?php endif;
 				endforeach; ?>
 				<?php if (!$hit) : ?>
@@ -323,14 +304,14 @@ require_once 'stars.php';
 			</select>
 		</div>
 		<div class="form-group">
-			<label><?php echo __('Lingua e template')?></label>
+			<label><?=__('Lingua e template')?></label>
 			<div class="row">
 				<div class="col-md-3 col-lg-2">
 					<button class="btn btn-outline-secondary mr-1 mb-2 mr-md-0 mb-md-0" id="email-it-btn">it-IT</button>
 					<button class="btn btn-outline-secondary mb-2 mb-md-0" id="email-en-btn">en-US</button>
 				</div>
 				<div class="col-md-9 col-lg-10">
-				<select aria-label="<?php echo __('Template')?>" class="custom-select" id="email-custom-select" onchange="templatize()">
+				<select aria-label="<?=__('Template')?>" class="custom-select" id="email-custom-select" onchange="templatize()">
 					<option value="default" selected>Email standard</option>
 					<option value="programmer">Programmatore</option>
 					<option value="sysadmin">Sysadmin</option>
@@ -343,18 +324,18 @@ require_once 'stars.php';
 			</div>
 		</div>
 		<div class="form-group row">
-			<label class="col-md-2 col-lg-1 col-form-label" for="subject"><b><?php echo __('Oggetto')?></b></label>
+			<label class="col-md-2 col-lg-1 col-form-label" for="subject"><b><?=__('Oggetto')?></b></label>
 			<div class="col-md-10 col-lg-11">
 				<input type="text" id="subject" name="subject" class="form-control" required>
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="email"><b><?php echo __('Email')?></b></label>
+			<label for="email"><b><?=__('Email')?></b></label>
 			<textarea id="email" name="email" rows="10" class="form-control" required></textarea>
 		</div>
 		<div class="form-group text-center">
 			<button name="publishnow" value="true" type="submit"
-					class="btn btn-primary my-1 mx-1"><?php echo __('Pubblica e manda email')?></button>
+					class="btn btn-primary my-1 mx-1"><?=__('Pubblica e manda email')?></button>
 		</div>
 	</form>
 	<script>
@@ -445,13 +426,13 @@ We may ask you to do some terminal exercises, remember to have one ready!`
 	</script>
 <?php elseif ($user->emailed && $user->published && $user->status === true) : ?>
 	<div class="alert alert-info" role="alert">
-	<?php echo sprintf(__('Mail inviata da %s'), $user->recruiter);?>
+	<?=sprintf(__('Mail inviata da %s'), $user->recruiter);?>
 	</div>
 <?php endif ?>
 <?php if (!$edit && $user->status === true) : ?>
 	<?php if ($user->invitelink !== null) : ?>
 		<div class="alert alert-info" role="alert">
-		<?php echo sprintf(__('Link d\'invito: %s'), $user->invitelink);?>
+		<?=sprintf(__('Link d\'invito: %s'), $user->invitelink);?>
 		</div>
 	<?php endif ?>
 <?php endif ?>

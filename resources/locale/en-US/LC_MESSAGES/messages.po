@@ -8,51 +8,53 @@
 # SPDX-FileCopyrightText: 2024 quel _tale
 # SPDX-FileCopyrightText: 2024 quel _tale
 # SPDX-FileCopyrightText: 2024 quel _tale
+# SPDX-FileCopyrightText: 2024 enrico <asd@weeeopen.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 23:13+0100\n"
-"PO-Revision-Date: 2024-03-14 23:14+0100\n"
-"Last-Translator: quel_tale <lvps@users.noreply.github.com>\n"
-"Language-Team: Italian <>\n"
+"POT-Creation-Date: 2024-07-09 11:27+0200\n"
+"PO-Revision-Date: 2024-07-09 11:37+0200\n"
+"Last-Translator: enrico <asd@weeeopen.it>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.05.0\n"
 
-#: templates/adminnavbar.php:9
+#: templates/adminnavbar.php:15
 #, php-format
 msgid "Ciao, %s (%s)"
 msgstr "Hi, %s (%s)"
 
-#: templates/adminnavbar.php:13 templates/candidate.php:18
-#: templates/candidates.php:9 templates/candidates.php:23
-#: templates/interviews.php:6
+#: templates/adminnavbar.php:19 templates/candidate.php:20
+#: templates/candidates.php:15 templates/candidates.php:29
+#: templates/interviews.php:12
 msgid "Candidati"
 msgstr "Candidates"
 
-#: templates/adminnavbar.php:16 templates/interview.php:16
+#: templates/adminnavbar.php:22 templates/interview.php:18
 msgid "Colloqui"
 msgstr "Interviews"
 
-#: templates/adminnavbar.php:19 templates/candidate.php:267
-#: templates/candidates.php:31 templates/interview.php:51
-#: templates/interviewsbyrecruiter.php:7 templates/interviewsbyrecruiter.php:26
+#: templates/adminnavbar.php:25 templates/candidate.php:286
+#: templates/candidates.php:37 templates/interview.php:53
+#: templates/interviewsbyrecruiter.php:15
+#: templates/interviewsbyrecruiter.php:34
 msgid "Recruiter"
 msgstr "Recruiter"
 
-#: templates/adminnavbar.php:22
+#: templates/adminnavbar.php:28
 msgid "Impostazioni"
 msgstr "Settings"
 
-#: templates/adminnavbar.php:25 templates/logout.php:3 templates/logout.php:5
+#: templates/adminnavbar.php:31 templates/logout.php:3 templates/logout.php:5
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base.php:12 templates/index.php:6
+#: templates/base.php:20 templates/index.php:8
 msgid "Entra in WEEE Open"
 msgstr "Join WEEE Open"
 
@@ -70,295 +72,314 @@ msgid ""
 "futuro."
 msgstr "Sorry, but applications are closed right now. Try again in the future."
 
-#: templates/candidate.php:11 templates/interview.php:9
+#: templates/candidate.php:13 templates/interview.php:11
 #, php-format
 msgid "%s %s (%s)"
 msgstr "%s %s (%s)"
 
-#: templates/candidate.php:12
+#: templates/candidate.php:14
 #, php-format
 msgid "%s - Candidatura"
 msgstr "%s's application"
 
-#: templates/candidate.php:26
+#: templates/candidate.php:28
 msgid ""
 "Candidatura approvata, <a href=\"#email-form\">ma email non ancora inviata</"
 "a>"
 msgstr "Application approved, <a href=\"%s\">but email not yet sent</a>"
 
-#: templates/candidate.php:31
+#: templates/candidate.php:33
 #, php-format
 msgid "Candidatura approvata, <a href=\"%s\">passa al colloquio</a>"
 msgstr "Application approved, <a href=\"%s\">go to the interview page</a>"
 
-#: templates/candidate.php:38
+#: templates/candidate.php:40
 msgid "Candidatura rifiutata"
 msgstr "Candidate rejected"
 
-#: templates/candidate.php:42
+#: templates/candidate.php:44
 msgid "Candidatura rimandata"
 msgstr "Candidate postponed"
 
-#: templates/candidate.php:47
+#: templates/candidate.php:49
 msgid "Risultati pubblicati, ti consiglio di non modificarli"
 msgstr "Results already published, I suggest you don't edit them"
 
-#: templates/candidate.php:70
+#: templates/candidate.php:72
 msgid "Valutazioni"
 msgstr "Evaluations"
 
-#: templates/candidate.php:74
+#: templates/candidate.php:76
 #, php-format
 msgid "Valutazione:&nbsp;%s&nbsp;%s"
 msgstr "Evaluation:&nbsp;%s&nbsp;%s"
 
-#: templates/candidate.php:81
+#: templates/candidate.php:83
 msgid "Nome valutatore"
 msgstr "Voter name"
 
-#: templates/candidate.php:82 templates/candidate.php:129
-#: templates/candidates.php:29
+#: templates/candidate.php:84 templates/candidate.php:131
+#: templates/candidates.php:35
 msgid "Voto"
 msgstr "Evaluation"
 
-#: templates/candidate.php:83 templates/interview.php:73
-#: templates/interviews.php:142 templates/notes.php:12
+#: templates/candidate.php:85 templates/interview.php:75
+#: templates/interviews.php:151 templates/notes.php:14
 msgid "Data"
 msgstr "Date"
 
-#: templates/candidate.php:84 templates/notes.php:15
+#: templates/candidate.php:86 templates/notes.php:17
 msgid "Azioni"
 msgstr "Actions"
 
-#: templates/candidate.php:90 templates/candidate.php:125
+#: templates/candidate.php:92 templates/candidate.php:127
 #, php-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: templates/candidate.php:97
+#: templates/candidate.php:99
 msgid "Elimina 🗑"
 msgstr "Delete 🗑"
 
-#: templates/candidate.php:104 templates/candidates.php:129
+#: templates/candidate.php:106 templates/candidates.php:137
 msgid "Mostra (spoiler!)"
 msgstr "Show (spoiler!)"
 
-#: templates/candidate.php:141
+#: templates/candidate.php:143
 msgid "Vota"
 msgstr "Vote"
 
-#: templates/candidate.php:151 templates/interview.php:132
+#: templates/candidate.php:153 templates/interview.php:131
 msgid "Note"
 msgstr "Notes"
 
-#: templates/candidate.php:166 templates/candidate.php:172
-#: templates/interview.php:146 templates/interview.php:152
+#: templates/candidate.php:168 templates/candidate.php:174
+#: templates/interview.php:145 templates/interview.php:151
 msgid "Aggiungi nota"
 msgstr "Add note"
 
-#: templates/candidate.php:181 templates/interview.php:129
+#: templates/candidate.php:180 templates/interview.php:128
 msgid "Modifica dati"
 msgstr "Edit info"
 
-#: templates/candidate.php:185
+#: templates/candidate.php:184
 msgid "Precedente da valutare"
 msgstr "Previous to be evaluated"
 
-#: templates/candidate.php:186
+#: templates/candidate.php:185
 msgid "Precedente"
 msgstr "Previous"
 
-#: templates/candidate.php:187
+#: templates/candidate.php:186
 msgid "Successivo"
 msgstr "Next"
 
-#: templates/candidate.php:188
+#: templates/candidate.php:187
 msgid "Successivo da valutare"
 msgstr "Next to be evaluated"
 
-#: templates/candidate.php:195
+#: templates/candidate.php:194
 msgid "Motivazioni (visibili alla persona interessata)"
 msgstr "Motivation (visible to this person)"
 
-#: templates/candidate.php:206
+#: templates/candidate.php:205
 msgid "Rinvia email"
 msgstr "Send email again"
 
-#: templates/candidate.php:208 templates/candidate.php:253
+#: templates/candidate.php:207 templates/candidate.php:252
 msgid "Approva candidatura"
 msgstr "Approve"
 
-#: templates/candidate.php:210
+#: templates/candidate.php:209
 msgid "Rifiuta candidatura"
 msgstr "Reject"
 
-#: templates/candidate.php:212 templates/candidate.php:247
-#: templates/interview.php:172
+#: templates/candidate.php:211 templates/candidate.php:246
+#: templates/interview.php:171
 msgid "Metti in lista d'attesa"
 msgstr "Put on hold"
 
-#: templates/candidate.php:218 templates/candidate.php:226
-#: templates/interview.php:180
+#: templates/candidate.php:217 templates/candidate.php:225
+#: templates/interview.php:179
 msgid "Rimanda nel limbo"
 msgstr "Send back to limbo"
 
-#: templates/candidate.php:224 templates/candidate.php:233
+#: templates/candidate.php:223 templates/candidate.php:232
 msgid "Pubblica"
 msgstr "Publish"
 
-#: templates/candidate.php:235 templates/interview.php:169
+#: templates/candidate.php:234 templates/interview.php:168
 msgid "Togli dalla lista d'attesa"
 msgstr "Remove from hold"
 
-#: templates/candidate.php:237 templates/candidate.php:257
+#: templates/candidate.php:236 templates/candidate.php:256
 msgid "Salva motivazioni"
 msgstr "Save motivation"
 
-#: templates/candidate.php:255
+#: templates/candidate.php:254
 msgid "Rifiuta candidatura definitivamente"
 msgstr "Reject, at last"
 
-#: templates/candidate.php:288
+#: templates/candidate.php:266 templates/position.php:117
+#: templates/settings.php:51 templates/settings.php:55
+msgid "Conferma"
+msgstr "Confirm"
+
+#: templates/candidate.php:272
+msgid "Sei sicuro di voler rinviare l'email di candidatura?"
+msgstr "Are you sure you wish to send the email again?"
+
+#: templates/candidate.php:275 templates/position.php:127
+#: templates/settings.php:110 templates/userinfo.php:64
+msgid "Annulla"
+msgstr "Cancel"
+
+#: templates/candidate.php:277 templates/form.php:240
+msgid "Invia"
+msgstr "Send"
+
+#: templates/candidate.php:307
 msgid "Lingua e template"
 msgstr "Language and template"
 
-#: templates/candidate.php:295
+#: templates/candidate.php:314
 msgid "Template"
 msgstr "Template"
 
-#: templates/candidate.php:308
+#: templates/candidate.php:327
 msgid "Oggetto"
 msgstr "Subject"
 
-#: templates/candidate.php:314
+#: templates/candidate.php:333
 msgid "Email"
 msgstr "Email"
 
-#: templates/candidate.php:319
+#: templates/candidate.php:338
 msgid "Pubblica e manda email"
 msgstr "Publish and send email"
 
-#: templates/candidate.php:410
+#: templates/candidate.php:429
 #, php-format
 msgid "Mail inviata da %s"
 msgstr "Mail sent by %s"
 
-#: templates/candidate.php:416 templates/interview.php:187
+#: templates/candidate.php:435 templates/interview.php:186
 #, php-format
 msgid "Link d'invito: %s"
 msgstr "Invite link: %s"
 
-#: templates/candidates.php:27 templates/form.php:50
-#: templates/interviews.php:26 templates/interviews.php:106
-#: templates/interviews.php:141 templates/userinfo.php:14
+#: templates/candidates.php:33 templates/form.php:53
+#: templates/interviews.php:32 templates/interviews.php:112
+#: templates/interviews.php:150 templates/position.php:80
+#: templates/settings.php:101 templates/userinfo.php:20
 msgid "Nome"
 msgstr "Name"
 
-#: templates/candidates.php:28 templates/form.php:193
-#: templates/interviews.php:27 templates/interviews.php:107
-#: templates/userinfo.php:43
+#: templates/candidates.php:34 templates/form.php:196
+#: templates/interviews.php:33 templates/interviews.php:113
+#: templates/userinfo.php:49
 msgid "Interesse"
 msgstr "Preference"
 
-#: templates/candidates.php:30
+#: templates/candidates.php:36
 msgid "Inviato"
 msgstr "Sent"
 
-#: templates/candidates.php:32 templates/interviews.php:30
+#: templates/candidates.php:38 templates/interviews.php:36
 msgid "Stato"
 msgstr "Status"
 
-#: templates/candidates.php:47 templates/interviews.php:47
+#: templates/candidates.php:55 templates/interviews.php:53
 msgid "Da decidere"
 msgstr "To be decided"
 
-#: templates/candidates.php:53
+#: templates/candidates.php:61
 msgid "Approvata, da pubblicare"
 msgstr "Approved, not yet published"
 
-#: templates/candidates.php:59
+#: templates/candidates.php:67
 msgid "Rifiutata, da pubblicare"
 msgstr "Rejected, not yet published"
 
-#: templates/candidates.php:65 templates/interviews.php:49
+#: templates/candidates.php:73 templates/interviews.php:55
 msgid "In lista d'attesa"
 msgstr "On hold"
 
-#: templates/candidates.php:71
+#: templates/candidates.php:79
 msgid "Approvata, pubblicata"
 msgstr "Approved, published"
 
-#: templates/candidates.php:77
+#: templates/candidates.php:85
 msgid "Rifiutata, pubblicata"
 msgstr "Rejected, published"
 
-#: templates/candidates.php:83
+#: templates/candidates.php:91
 msgid "In lista d'attesa, pubblicata"
 msgstr "On hold, published"
 
-#: templates/candidates.php:163
+#: templates/candidates.php:171
 msgid "Pubblica rifiutati"
 msgstr "Publish rejected"
 
-#: templates/candidates.php:175
+#: templates/candidates.php:183
 msgid "Cancella"
 msgstr "Delete"
 
-#: templates/candidates.php:176
+#: templates/candidates.php:184
 msgid "Cancella candidati più vecchi di tot giorni (solo pubblicati)"
 msgstr "Delete older than n days (published only)"
 
-#: templates/candidates.php:181
+#: templates/candidates.php:189
 #, php-format
 msgid "%d candidato in totale"
 msgid_plural "%d candidati totali"
 msgstr[0] "%d candidate"
 msgstr[1] "%d candidates"
 
-#: templates/candidates.php:182
+#: templates/candidates.php:190
 #, php-format
 msgid "%d da valutare"
 msgid_plural "%d da valutare"
 msgstr[0] "%d to be decided"
 msgstr[1] "%d to be decided"
 
-#: templates/candidates.php:183 templates/interviews.php:126
+#: templates/candidates.php:191 templates/interviews.php:132
 #, php-format
 msgid "%d approvato"
 msgid_plural "%d approvati"
 msgstr[0] "%d approved"
 msgstr[1] "%d approved"
 
-#: templates/candidates.php:184 templates/interviews.php:127
+#: templates/candidates.php:192 templates/interviews.php:133
 #, php-format
 msgid "%d rifiutato"
 msgid_plural "%d rifiutati"
 msgstr[0] "%d rejected"
 msgstr[1] "%d rejected"
 
-#: templates/candidates.php:185
+#: templates/candidates.php:193
 #, php-format
 msgid "%d da pubblicare"
 msgid_plural "%d da pubblicare"
 msgstr[0] "%d to be published"
 msgstr[1] "%d to be published"
 
-#: templates/candidates.php:186
+#: templates/candidates.php:194
 #, php-format
 msgid "%d pubblicato"
 msgid_plural "%d pubblicati"
 msgstr[0] "%d published"
 msgstr[1] "%d published"
 
-#: templates/confirm_email.php:7
+#: templates/confirm_email.php:13
 msgid "Candidatura in WEEE Open"
 msgstr "Your application to WEEE Open"
 
-#: templates/confirm_email.php:9
+#: templates/confirm_email.php:15
 msgid "Ciao!"
 msgstr "Hi!"
 
-#: templates/confirm_email.php:10
+#: templates/confirm_email.php:16
 #, php-format
 msgid ""
 "Abbiamo ricevuto la tua candidatura per il team WEEE Open, questa è la "
@@ -367,7 +388,7 @@ msgstr ""
 "We have received your application for the WEEE Open team, this is the web "
 "page where you’ll be able to check the status of your application: %s"
 
-#: templates/confirm_email.php:11
+#: templates/confirm_email.php:17
 msgid ""
 "Se la domanda sarà approvata, riceverai un'email sempre a questo indirizzo "
 "con scritto chi contattare per passare al colloquio. Le stesse informazioni "
@@ -377,11 +398,11 @@ msgstr ""
 "address with our contacts to to schedule an interview with someone from our "
 "team. The same information will be available at the web page linked above."
 
-#: templates/confirm_email.php:12
+#: templates/confirm_email.php:18
 msgid "Buona fortuna ;)"
 msgstr "Good luck ;)"
 
-#: templates/confirm_email.php:14
+#: templates/confirm_email.php:20
 msgid ""
 "Nota: se hai già ricevuto un email come questa, il link sulla precedente "
 "email non è più valido. Usa il link sopra per verificare lo stato della tua "
@@ -391,7 +412,7 @@ msgstr ""
 "email is expired. Use the new link above to check the status of your "
 "application."
 
-#: templates/confirm_email.php:16
+#: templates/confirm_email.php:22
 #, php-format
 msgid ""
 "Se non hai inviato tu questa candidatura e presumi che questa e-mail ti sia "
@@ -402,7 +423,7 @@ msgstr ""
 "sent to you by mistake, you can ignore it. If the issue persists, please, "
 "contact us at the following e-mail address: %s"
 
-#: templates/confirm_email.php:17
+#: templates/confirm_email.php:23
 msgid "Il software WEEEHire per conto del team WEEE Open"
 msgstr "The WEEEHire software on behalf of WEEE Open Team"
 
@@ -425,51 +446,51 @@ msgid ""
 msgstr ""
 "All other roles allow you to participated from home, entirely or partially."
 
-#: templates/day.php:6
+#: templates/day.php:8
 msgid "Lunedì"
 msgstr "Monday"
 
-#: templates/day.php:9
+#: templates/day.php:11
 msgid "Martedì"
 msgstr "Tuesday"
 
-#: templates/day.php:12
+#: templates/day.php:14
 msgid "Mercoledì"
 msgstr "Wednesday"
 
-#: templates/day.php:15
+#: templates/day.php:17
 msgid "Giovedì"
 msgstr "Thursday"
 
-#: templates/day.php:18
+#: templates/day.php:20
 msgid "Venerdì"
 msgstr "Friday"
 
-#: templates/day.php:21
+#: templates/day.php:23
 msgid "Sabato"
 msgstr "Saturday"
 
-#: templates/day.php:24
+#: templates/day.php:26
 msgid "Domenica"
 msgstr "Sunday"
 
-#: templates/error.php:4 templates/error.php:7
+#: templates/error.php:6 templates/error.php:9
 msgid "Errore"
 msgstr "Error"
 
-#: templates/form.php:13
+#: templates/form.php:16
 msgid "Compila il questionario"
 msgstr "Fill the application form"
 
-#: templates/form.php:21
+#: templates/form.php:24
 msgid "Riempi tutti i campi del form, per favore"
 msgstr "Fill the entire form, please"
 
-#: templates/form.php:24
+#: templates/form.php:27
 msgid "È necessario prestare il consenso per procedere"
 msgstr "You need to agree to the terms to proceed"
 
-#: templates/form.php:28
+#: templates/form.php:31
 #, php-format
 msgid ""
 "Errore di connessione al database. Se il problema persiste, puoi contattarci "
@@ -478,7 +499,7 @@ msgstr ""
 "Error connecting to database. If the problem continues, you can contact us "
 "at %s"
 
-#: templates/form.php:33
+#: templates/form.php:36
 msgid ""
 "Hai già inviato una candidatura con questa matricola. Puoi controllare la "
 "pagina con lo stato dal link che ti abbiamo mandato via email. Per favore "
@@ -493,7 +514,7 @@ msgstr ""
 "polito.it/en_us/contattaci/\" target=\"_blank\">send us a message through "
 "the website</a> or tell us during the interview."
 
-#: templates/form.php:37
+#: templates/form.php:40
 #, php-format
 msgid ""
 "Si è rotto qualcosa (o hai rotto qualcosa?) durante l'invio. Puoi "
@@ -502,59 +523,59 @@ msgstr ""
 "Something broke (or you did broke something?) while submitting the form. You "
 "can contact us at %s and tell us what happened, if you want."
 
-#: templates/form.php:54 templates/userinfo.php:19
+#: templates/form.php:57 templates/userinfo.php:25
 msgid "Cognome"
 msgstr "Surname"
 
-#: templates/form.php:61 templates/userinfo.php:31
+#: templates/form.php:64 templates/userinfo.php:37
 msgid "Anno"
 msgstr "Year"
 
-#: templates/form.php:65
+#: templates/form.php:68
 msgid "1º Triennale"
 msgstr "1st Bachelor's degree"
 
-#: templates/form.php:66
+#: templates/form.php:69
 msgid "2º Triennale"
 msgstr "2nd Bachelor's degree"
 
-#: templates/form.php:67
+#: templates/form.php:70
 msgid "3º Triennale"
 msgstr "3rd Bachelor's degree"
 
-#: templates/form.php:68
+#: templates/form.php:71
 msgid "1º Magistrale"
 msgstr "1st Master's degree"
 
-#: templates/form.php:69
+#: templates/form.php:72
 msgid "2º Magistrale"
 msgstr "2nd Master's degree"
 
-#: templates/form.php:70 templates/form.php:161
+#: templates/form.php:73 templates/form.php:164
 msgid "Dottorato"
 msgstr "PhD"
 
-#: templates/form.php:73 templates/userinfo.php:26
+#: templates/form.php:76 templates/userinfo.php:32
 msgid "Corso di laurea"
 msgstr "Academic Program"
 
-#: templates/form.php:77 templates/form.php:109
+#: templates/form.php:80 templates/form.php:112
 msgid "Ingegneria"
 msgstr "Engineering"
 
-#: templates/form.php:102 templates/form.php:141
+#: templates/form.php:105 templates/form.php:144
 msgid "Design"
 msgstr "Design"
 
-#: templates/form.php:105 templates/form.php:144
+#: templates/form.php:108 templates/form.php:147
 msgid "Architettura e pianificazione urbanistica"
 msgstr "Architecture and urban planning"
 
-#: templates/form.php:188 templates/userinfo.php:38
+#: templates/form.php:191 templates/userinfo.php:44
 msgid "Matricola"
 msgstr "Matricola"
 
-#: templates/form.php:205
+#: templates/form.php:208
 msgid ""
 "Al momento alcune aree del team sono al completo, è possibile candidarsi "
 "solo nelle aree selezionabili dall'elenco. In futuro le aree disponibili "
@@ -564,11 +585,11 @@ msgstr ""
 "only for areas that can be selected in the list. Available areas might "
 "change without notice."
 
-#: templates/form.php:209 templates/userinfo.php:50
+#: templates/form.php:212 templates/userinfo.php:56
 msgid "Lettera motivazionale"
 msgstr "Motivational letter"
 
-#: templates/form.php:212
+#: templates/form.php:215
 msgid ""
 "Seleziona l'area del team che più ti interessa e qui compariranno delle "
 "linee guida su cosa scrivere."
@@ -576,543 +597,27 @@ msgstr ""
 "Select the area of the team that you like and you'll see some guidelines for "
 "the letter here."
 
-#: templates/form.php:215
-msgid ""
-"Descrivi qualsiasi tua esperienza di riparazione di computer (fissi o "
-"portatili), o assemblaggio, o saldatura di componenti elettronici."
-msgstr ""
-"Describe anything about your experience in computer repairs (desktop or "
-"laptops), or building computers, or soldering of electronic components."
-
-#: templates/form.php:216
-msgid ""
-"Se non sai qualcosa, cosa fai per imparare in autonomia? Puoi anche fornire "
-"degli esempi."
-msgstr ""
-"If you don't know something, what do you do to learn it yourself, usually? "
-"You can give us some examples as well."
-
-#: templates/form.php:217 templates/form.php:243 templates/form.php:253
-#: templates/form.php:261 templates/form.php:269 templates/form.php:285
-msgid ""
-"Se hai mai usato Linux, parlane liberamente: su tutti i computer che "
-"ripariamo installiamo Linux."
-msgstr ""
-"If you ever used Linux, feel free to talk about it: we install Linux on "
-"every computer that we repair."
-
-#: templates/form.php:218
-msgid ""
-"Menziona anche quanto tempo potresti dedicare alle attività in team e se fai "
-"altro di interessante nel tempo libero oltre a riparare computer."
-msgstr ""
-"Mention how much time you have for team activities, too, and if you have any "
-"other hobby or interests other than repairing computers."
-
-#: templates/form.php:219 templates/form.php:227 templates/form.php:236
-#: templates/form.php:245 templates/form.php:255 templates/form.php:263
-#: templates/form.php:271 templates/form.php:279 templates/form.php:305
-#: templates/form.php:320
-msgid ""
-"Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti "
-"sembra rilevante dire."
-msgstr ""
-"These <strong>are just guidelines</strong>, write anything that you consider "
-"relevant."
-
-#: templates/form.php:222
-msgid ""
-"Uno degli obiettivi del team è la progettazione di strumenti elettronici per "
-"la diagnostica a basso livello e il riuso dell'hardware recuperato."
-msgstr ""
-"One of the goals of the team is to develop electronic tools for low-level "
-"hardware diagnostics and the reuse of recovered hardware."
-
-#: templates/form.php:223
-msgid ""
-"Qual è il tuo rapporto con il mondo dell'elettronica? Ti interessa di più "
-"l'elettronica digitale o analogica (specialmente di potenza) o ti "
-"interessano entrambe?"
-msgstr ""
-"What's your relationship with electronics? Are you more interested in "
-"digital or analog (especially power) electronics do you like both equally?"
-
-#: templates/form.php:224
-msgid ""
-"Se hai mai realizzato qualche circuito o progetto oltre a quelli nei "
-"laboratori didattici, parlane con riferimento anche al metodo con cui è "
-"stato realizzato (breadboard, millefori, circuito stampato, componenti "
-"through-hole o SMD, etc...)."
-msgstr ""
-"If you ever made any electronic circuit or project other than those for "
-"academic courses, tell us. Explain also the method you've used to build them "
-"(breadboard, prototype board, PCB, through-hole components or SMD, etc...)"
-
-#: templates/form.php:225
-msgid ""
-"Indica anche se hai dimestichezza con qualche software di Electronic Design "
-"Automation (progettazione, simulazione, test e verifica, etc...)."
-msgstr ""
-"Tell us if you have experience with any Electronic Design Automation "
-"software (project, simulation, test and verification, etc...)."
-
-#: templates/form.php:226
-msgid ""
-"Menziona anche quanto tempo potresti dedicare al team e se fai qualcos'altro "
-"di interessante nel tempo libero oltre a progettare circuiti."
-msgstr ""
-"Mention how much time you have for team activities, too, and if you have any "
-"other hobby or interests other than designing circuits."
-
-#: templates/form.php:230
-msgid ""
-"Il compito dei sysadmin è assicurarsi che gli strumenti informatici a cui il "
-"team si appoggia per le sue operazioni siano al massimo della loro "
-"efficienza."
-msgstr ""
-"Our sysadmins ensure that IT tools - which are essential for the team - are "
-"operating at peak efficiency."
-
-#: templates/form.php:231
-msgid ""
-"Per fare questo gestiscono i server che ospitano i nostri servizi, "
-"collaborano con gli sviluppatori per deployare e aggiornare i software che "
-"creiamo, monitorano lo stato di salute della nostra infrastruttura e si "
-"assicurano che i nostri dati siano protetti da attacchi e perdite"
-msgstr ""
-"To do this, they manage our servers, collaborate with developers to deploy "
-"and update the software we made, monitor the health of our infrastructure "
-"and ensure that our data is safe from attacks and other disasters"
-
-#: templates/form.php:232
-msgid ""
-"I sysadmin seguono l'intero ciclo di vita dei servizi, dalla configurazione "
-"del server tramite Ansible, passando per la containerizzazione e gestione "
-"dei servizi, alle normali procedure di manutenzione."
-msgstr ""
-"Sysadmins oversee the entire service life cycle, from server configuration "
-"through Ansible, to containerization and service management, to routine "
-"maintenance procedures."
-
-#: templates/form.php:233
-msgid ""
-"Le competenze esercitate sono una generale conoscenza di Ansible e della "
-"containerizzazione, familiarità con la gestione e configurazione di software "
-"per server comuni come Nginx, PHP e MariaDB/PostgreSQL e maneggevolezza con "
-"il terminale Linux."
-msgstr ""
-"The competences you will use are general knowledge of Ansible and containes, "
-"familiarity with managing and configuring common server software like Nginx, "
-"PHP and MariaDB/PostgreSQL, and familiarity with the Linux terminal."
-
-#: templates/form.php:234
-msgid "Se hai esperienza con alcune di queste cose, parlane liberamente."
-msgstr ""
-"If you have any experience with this stuff, it's time to talk about it."
-
-#: templates/form.php:235
-msgid ""
-"Menziona anche quanto tempo potresti dedicare alle attività in team e se fai "
-"altro di interessante nel tempo libero oltre ad amministrare server."
-msgstr ""
-"Mention how much time you have for team activities, too, and if you have any "
-"other hobby or interests other than managing servers."
-
-#: templates/form.php:239
-msgid ""
-"Descrivi qualsiasi tua esperienza nel programmare in Python, e se hai un "
-"account su Github non esitare a condividerlo nella tua lettera!"
-msgstr ""
-"Describe any prior experience you have in coding in Python, and don't "
-"hesitate sharing your Github account in your letter if you have one!"
-
-#: templates/form.php:240
-msgid ""
-"Molti degli strumenti interni del team sono stati creati con python, per "
-"esempio la <a href=\"https://github.com/WEEE-Open/peracotta\" "
-"target=\"_blank\">Peracotta</a> ed il <a href=\"https://github.com/WEEE-Open/"
-"pesto\" target=\"_blank\">Pesto</a>. Se conosci come lavorare con qt ed "
-"interagire con API, sei la persona che stiamo cercando!"
-msgstr ""
-"Many of the team's internal toold have been created with python, for example "
-"<a href=\"https://github.com/WEEE-Open/peracotta\" "
-"target=\"_blank\">Peracotta</a> ed il <a href=\"https://github.com/WEEE-Open/"
-"pesto\" target=\"_blank\">Pesto</a>. If you know how to work with Qt and how "
-"to integrate with APIs, you are the member we are looking for!"
-
-#: templates/form.php:241
-msgid ""
-"Potresti menzionare se hai mai usato virtual environments, collaborato con "
-"qualcuno su un progetto software, o se sai scrivere in altri linguaggi che "
-"usiamo nel team, come JavaScript, PHP e Bash o altri ancora."
-msgstr ""
-"You could mention if you have ever used virtual environments, collaborated "
-"with someone else on a software project, or if you can code in other "
-"programming languages."
-
-#: templates/form.php:242 templates/form.php:260 templates/form.php:268
-msgid ""
-"Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire "
-"tutorial su internet, iniziare a scrivere codice e cercare man mano su Stack "
-"Overflow, etc...)?"
-msgstr ""
-"Besides attending lectures, what do you do to learn? E.g. watching or "
-"reading tutorials online, starting to write code and looking things up on "
-"Stack Overflow as you go, etc..."
-
-#: templates/form.php:244 templates/form.php:254 templates/form.php:262
-#: templates/form.php:270
-msgid ""
-"Menziona anche quanto tempo potresti dedicare alle attività in team e se fai "
-"altro di interessante nel tempo libero oltre a digitare codice."
-msgstr ""
-"Mention how much time you have for team activities, too, and if you have any "
-"other hobby or interests other than typing code."
-
-#: templates/form.php:248
-msgid ""
-"I principali progetti PHP del team sono <a href=\"https://github.com/WEEE-"
-"Open/tarallo\" target=\"_blank\">Tarallo</a>, <a href=\"https://github.com/"
-"WEEE-Open/WEEEHire-ng\" target=\"_blank\">WEEEHire</a> e <a href=\"https://"
-"github.com/WEEE-Open/crauto\" target=\"_blank\">crauto</a>, puoi darci già "
-"un'occhiata per sapere a cosa vai incontro."
-msgstr ""
-"Our main PHP projects are <a href=\"https://github.com/WEEE-Open/tarallo\" "
-"target=\"_blank\">Tarallo</a>, <a href=\"https://github.com/WEEE-Open/"
-"WEEEHire-ng\" target=\"_blank\">WEEEHire</a> and <a href=\"https://github."
-"com/WEEE-Open/crauto\" target=\"_blank\">crauto</a>, you can have a look so "
-"you know what you're going to work on."
-
-#: templates/form.php:249
-#, fuzzy
-msgid ""
-"Descrivi qualsiasi tua esperienza nel programmare in PHP, e se hai un "
-"account su Github non esitare a condividerlo nella tua lettera!"
-msgstr ""
-"Describe any prior experience you have in coding in Python, and don't "
-"hesitate sharing your Github account in your letter if you have one!"
-
-#: templates/form.php:250
-#, fuzzy
-msgid ""
-"Va bene anche \"per l'esame di ... ho creato un programma che fa ...\" o "
-"\"ho fatto il sito web per la panetteria all'angolo\"."
-msgstr ""
-"Tell us about your experience developing software in PHP or for the web in "
-"general. It's also fine to say \"for the ... exam I've created a program "
-"that does ...\" or \"I've made a website for the bakery near my house\"."
-
-#: templates/form.php:251
-msgid ""
-"Se conosci anche altri linguaggi non esitare a condividere la tua esperienza."
-msgstr "If you also know other languages don't hesitate to tell us about it."
-
-#: templates/form.php:252
-msgid ""
-"Puoi anche menzionare se conosci altri linguaggi di programmazione o hai mai "
-"partecipato ad altri progetti collaborativi."
-msgstr ""
-"You can also mention whether you know other programming languages or have "
-"ever participated to other collaborative projects."
-
-#: templates/form.php:258
-msgid ""
-"Da un paio d'anni abbiamo iniziato a migrare alcuni dei nostri progetti a "
-"Node.js. Cerchiamo persone capaci di lavorare con express, MySQL e creare "
-"API."
-msgstr ""
-"Since a couple of years, we've started to migrate some of our projects to "
-"Node.js. We are looking for people capable of working with express, MySQL "
-"and create APIs."
-
-#: templates/form.php:259
-#, fuzzy
-msgid ""
-"Parla di qualsiasi tua esperienza riguardante l'utilizzo di JavaScript "
-"(backend, app NodeJS, e frontend, sia vanilla JS, sia framework, in "
-"particolare Vue.js). Conosci altri linguaggi che usiamo in team, come "
-"Python, PHP e Bash, o altri ancora? Menzionali pure! E se hai un account su "
-"Github non esitare a condividerlo nella tua lettera!"
-msgstr ""
-"Talk about any of your experiences using JavaScript (frontend - especially "
-"ReactJS and Angular -, backend, NodeJS app) or Docker. Do you know any other "
-"languages we use in our team, such as Python, PHP and Bash, or even more? "
-"Mention them here! And if you have a GitHub account don’t hesitate sharing "
-"it in your letter!"
-
-#: templates/form.php:266
-msgid ""
-"Da un paio d'anni abbiamo iniziato a migrare alcuni dei nostri progetti a "
-"Vue.js. Cerchiamo persone capaci di creare SPA e PWA con Vue.js integrate "
-"con servizi backend."
-msgstr ""
-"Since a couple of years, we've started to migrate some of out projects to "
-"Vue.js. We are looking for people capable of creating SPAs and PWAs with Vue."
-"js integrated with backend services."
-
-#: templates/form.php:267
-#, fuzzy
-msgid ""
-"Parla di qualsiasi tua esperienza riguardante l'utilizzo di JavaScript "
-"(frontend, vanilla JS, Vue.js or any other framework, e backend, NodeJS). "
-"Conosci altri linguaggi che usiamo in team, come Python, PHP e Bash, o altri "
-"ancora? Menzionali pure! E se hai un account su Github non esitare a "
-"condividerlo nella tua lettera!"
-msgstr ""
-"Talk about any of your experiences using JavaScript (frontend - especially "
-"ReactJS and Angular -, backend, NodeJS app) or Docker. Do you know any other "
-"languages we use in our team, such as Python, PHP and Bash, or even more? "
-"Mention them here! And if you have a GitHub account don’t hesitate sharing "
-"it in your letter!"
-
-#: templates/form.php:274
-msgid ""
-"Non tutti i computer che ci arrivano sono riparabili, ma vorremmo comunque "
-"minimizzare la quantità di materiale che finisce nel bidone."
-msgstr ""
-"Not all the computers that we get are repairable, but we'd still like to "
-"minimize the quantity of stuff that goes into the trash can."
-
-#: templates/form.php:275
-msgid ""
-"Se hai manualità e/o esperienze nel riuso creativo e/o making è il momento "
-"di dirlo."
-msgstr ""
-"If you have any DIY skills and/or experiences in creative reuse and/or "
-"\"making\" this is the moment to tell us."
-
-#: templates/form.php:276
-msgid ""
-"Puoi anche aggiungere se hai idee su come potremmo riutilizzare <i>case</i> "
-"vuoti, schede madri dall'estetica peculiare o i piatti a specchio di hard "
-"disk rotti."
-msgstr ""
-"You can also add some ideas (if you have any) on how we could reuse empty "
-"cases, particularly beautiful motherboards or shiny plates from broken hard "
-"disk drives."
-
-#: templates/form.php:277
-msgid "Accenna anche a che metodo seguiresti per progettare queste cose."
-msgstr "Point out which method you'd follow to develop these projects, too."
-
-#: templates/form.php:278 templates/form.php:319
-msgid ""
-"Menziona anche quanto tempo potresti dedicare alle attività in team e se fai "
-"altro di interessante nel tempo libero."
-msgstr ""
-"Mention how much time you have for team activities, too, and if you have any "
-"other hobby or interests."
-
-#: templates/form.php:282
-msgid ""
-"Dal 2021-2022, grazie all'esperienza acquisita da alcuni membri del team in "
-"materia, e al lancio del nostro progetto di software per studenti, cerchiamo "
-"una figura che possa occuparsi della creazione di alcuni modelli volti a "
-"migliorare l'esperienza utente delle piattaforme web che abbiamo intenzione "
-"di sviluppare, in particolare nell'ambito del Natural Language Processing."
-msgstr ""
-"From 2021-2022, thanks to the experience gained by some team members on the "
-"subject, and the launch of our project of software for students, we are "
-"looking for a figure who can take care of the creation of some models aimed "
-"at improving the user experience of the web platforms we intend to develop, "
-"in particular in the field of Natural Language Processing."
-
-#: templates/form.php:283
-msgid ""
-"Se hai delle conoscenze riguardo a qualcuno tra Python, PyTorch, Tensorflow, "
-"Keras, Jupyter Notebook e GitHub, stiamo cercando proprio te!"
-msgstr ""
-"If you know any of Python, PyTorch, Tensorflow, Keras, Jupyter Notebook and "
-"GitHub, we are looking for you!"
-
-#: templates/form.php:284
-msgid ""
-"Se in più sai ricercare paper scientifici su nuove tecnologie su ArXiv o "
-"simili, o hai intenzione di imparare a farlo, fantastico!"
-msgstr ""
-"If you can also research scientific papers on new technologies on ArXiv or "
-"similar platforms, or you want to learn how to do it, great!"
-
-#: templates/form.php:286
-msgid ""
-"Menziona anche quanto tempo potresti dedicare alle attività in team e se fai "
-"altro di interessante nel tempo libero oltre a progettare intelligenze "
-"artificiali."
-msgstr ""
-"Mention how much time you have for team activities, too, and if you have any "
-"other hobby or interests besides designing AIs."
-
-#: templates/form.php:287
-msgid ""
-"Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti "
-"sembra rilevante dire, e se hai già lavorato su qualche progetto non esitare "
-"a condividerne il link nella tua lettera!."
-msgstr ""
-"These <strong>are just guidelines</strong>, write anything that you consider "
-"relevant, and if you have already worked on some project do not hesitate to "
-"share the link in your letter!"
-
-#: templates/form.php:290
-msgid ""
-"Hai buone capacità di comunicazione e organizzazione, ti piace il nostro "
-"team e vuoi aiutarci a migliorare la nostra immagine? Questo è il posto che "
-"fa per te!"
-msgstr ""
-"Do you have good communication and organizational skills, you like our team "
-"and you want to help us improve our public image? This is the right place!"
-
-#: templates/form.php:291
-msgid "Cerchiamo qualcuno che possa svolgere le seguenti mansioni:"
-msgstr "We are looking for someone to perform the following tasks:"
-
-#: templates/form.php:293
-msgid "Scrittura e pubblicazione di post e storie per i nostri social"
-msgstr "Write and publish posts/stories for our social media"
-
-#: templates/form.php:294
-msgid "Programmazione temporale dei contenuti"
-msgstr "Organize temporal scheduling of contents"
-
-#: templates/form.php:295
-msgid "Definizione della strategia di comunicazione in generale"
-msgstr "Define the communication strategy in general"
-
-#: templates/form.php:296
-msgid "Brainstorming di idee per podcast e video tematici"
-msgstr "Come up with new ideas for podcasts and videos"
-
-#: templates/form.php:297
-msgid "Intrattenimento di rapporti con terzi, altre associazioni e ospiti"
-msgstr "Maintain relations with third parties, other associations and guests"
-
-#: templates/form.php:299
-msgid ""
-"Ti troverai a lavorare in sinergia con i creatori di contenuti digitali, che "
-"si occuperanno di produrre materiale grafico e video (o potrai occupartene "
-"tu stesso se ti va e ne sei capace)."
-msgstr ""
-"You will work together with digital content creators, who will provide "
-"graphic and video resources (or you can make them yourself, if you have the "
-"skills)."
-
-#: templates/form.php:300
-msgid "Ora parlaci di te."
-msgstr "Now tell us about yourself."
-
-#: templates/form.php:301
-msgid ""
-"Descrivi qualsiasi tua esperienza nel gestire pagine o profili (e.g. "
-"personali, di attività commerciali, di <i>meme</i> nonsense, etc...) sui "
-"social network, in particolare Facebook e Instagram."
-msgstr ""
-"Describe any experience you have in managing pages or profiles (e.g. "
-"personal, business, of random <i>memes</i>, etc...) on social networks, in "
-"particular Facebook and Instagram."
-
-#: templates/form.php:302
-msgid ""
-"Menziona anche i risultati raggiunti con tali attività promozionali, se "
-"possibile."
-msgstr ""
-"Mention also the results you achieved with such promotional activities, if "
-"you can."
-
-#: templates/form.php:303
-msgid "Se dovessi spiegare in due righe cosa fa il team, cosa diresti?"
-msgstr ""
-"If you had to explain in a few lines what does the team do, what would you "
-"write?"
-
-#: templates/form.php:304
-msgid ""
-"Indica anche quanto tempo potresti dedicare a queste attività e se hai "
-"qualche altro interesse."
-msgstr ""
-"Mention how much time you have for team activities, too, and if you have any "
-"other hobby or interests."
-
-#: templates/form.php:308
-msgid ""
-"Sprigiona la tua vena creativa entrando nel nostro team! Abbiamo bisogno di "
-"figure che si occupino di realizzare:"
-msgstr ""
-"Unleash your inner creativity by joining our team! We are looking for people "
-"that will produce:"
-
-#: templates/form.php:310
-msgid "Design di manifesti, infografiche, biglietti da visita"
-msgstr "Designs for posters, infographics, business cards"
-
-#: templates/form.php:311
-msgid "Elementi grafici per pagine web e social network"
-msgstr "Graphic elements for web pages and social networks"
-
-#: templates/form.php:312
-msgid "Sfondi, icone e immagini personalizzate per i nostri software"
-msgstr "Backgrounds, icons and custom images for our software"
-
-#: templates/form.php:313
-msgid "Redesign e modding dei case dei computer riparati"
-msgstr "Redesigns and modding of repaired computer cases"
-
-#: templates/form.php:314
-msgid "Jingle e motivi musicali per i nostri video"
-msgstr "Jingles and music for our videos"
-
-#: templates/form.php:316
-msgid ""
-"Se <strong>almeno una</strong>, o più di una, di queste attività di "
-"interessano, questo è il ruolo adatto."
-msgstr ""
-"If you're interested in <strong>at least one</strong>, or more than one, of "
-"these activities, this is the role for you."
-
-#: templates/form.php:317
-msgid ""
-"Parla di qualsiasi esperienza artistica, inclusi progetti personali (anche "
-"piccoli) o esami sostenuti."
-msgstr ""
-"Tell us about any experience you have with arts, including personal projects "
-"(even small ones) or exams."
-
-#: templates/form.php:318
-msgid ""
-"Se vuoi mostrarci alcuni dei tuoi lavori passati, abbozzi, concepts o hai "
-"idee su come migliorare il volto del team, non esitare!"
-msgstr ""
-"If you want to show us some of your past works, sketches, concepts or you "
-"have any idea on how to improve the teams public \"face\", do not hesitate "
-"and tell us!"
-
-#: templates/form.php:323
-msgid "Stupiscici."
-msgstr "Surprise us."
-
-#: templates/form.php:331
+#: templates/form.php:228
 msgid ""
 "Una conferma della tua candidatura verrà inviata all'indirizzo <span "
 "id=\"generatedEmailAddr\"></span>."
 msgstr ""
 "A confirmation email will be sent to <span id=\"generatedEmailAddr\"></span>."
 
-#: templates/form.php:332
+#: templates/form.php:229
 #, php-format
 msgid ""
 "Visualizza le <a href=\"%s\">Informazioni sul trattamento dei dati "
 "personali</a>."
 msgstr "View <a href=\"%s\">Privacy Policy</a>."
 
-#: templates/form.php:338
+#: templates/form.php:235
 msgid ""
 "Ho letto le Informazioni sul trattamento dei dati personali e accetto le "
 "condizioni lì delineate"
 msgstr "I read the Privacy Policy and accept its conditions"
 
-#: templates/form.php:343
-msgid "Invia"
-msgstr "Send"
-
-#: templates/index.php:7
+#: templates/index.php:9
 msgid ""
 "Compila il questionario per fare richiesta di ammissione in team. Premi il "
 "bottone qui sotto per iniziare."
@@ -1120,62 +625,62 @@ msgstr ""
 "Fill the application form if you want to join the team. Press the button "
 "below to start."
 
-#: templates/index.php:41
+#: templates/index.php:43
 msgid "Le candidature si chiuderanno tra meno di un'ora, affrettati!"
 msgstr "Applications will close in less than an hour, hurry up!"
 
-#: templates/index.php:43
+#: templates/index.php:45
 msgid "Le candidature si chiuderanno tra 1 ora."
 msgstr "Applications will close in 1 hour."
 
-#: templates/index.php:45
+#: templates/index.php:47
 msgid "Le candidature si chiuderanno tra ${hours} ore."
 msgstr "Applications will close in ${hours} hours."
 
-#: templates/index.php:49
+#: templates/index.php:51
 msgid "Le candidature si chiuderanno tra 1 giorno."
 msgstr "Applications will close in 1 day."
 
-#: templates/index.php:51
+#: templates/index.php:53
 msgid "Le candidature si chiuderanno tra 1 giorno e 1 ora."
 msgstr "Applications will close in 1 day and 1 hour."
 
-#: templates/index.php:53
+#: templates/index.php:55
 msgid "Le candidature si chiuderanno tra 1 giorno e ${hours} ore."
 msgstr "Applications will close in 1 day and ${hours} hours."
 
-#: templates/index.php:57
+#: templates/index.php:59
 msgid "Le candidature si chiuderanno tra ${days} giorni."
 msgstr "Applications will close in ${days} days."
 
-#: templates/index.php:59
+#: templates/index.php:61
 msgid "Le candidature si chiuderanno tra ${days} giorni e 1 ora."
 msgstr "Applications will close in ${days} days and 1 hour."
 
-#: templates/index.php:61
+#: templates/index.php:63
 msgid "Le candidature si chiuderanno tra ${days} giorni e ${hours} ore."
 msgstr "Applications will close in ${days} days and ${hours} hours."
 
-#: templates/interview.php:10
+#: templates/interview.php:12
 #, php-format
 msgid "%s - Colloquio"
 msgstr "%s's interview"
 
-#: templates/interview.php:23
+#: templates/interview.php:25
 #, php-format
 msgid "Colloquio superato secondo %s"
 msgstr "Interview passed according to %s"
 
-#: templates/interview.php:27
+#: templates/interview.php:29
 #, php-format
 msgid "Colloquio fallito secondo %s"
 msgstr "Interview failed according to %s"
 
-#: templates/interview.php:33
+#: templates/interview.php:35
 msgid "Colloquio da fissare"
 msgstr "Interview to be scheduled"
 
-#: templates/interview.php:38
+#: templates/interview.php:40
 #, php-format
 msgid ""
 "Colloquio fissato per il %s alle %s con <a href=\"https://t.me/%s\">%s</a>. "
@@ -1184,112 +689,112 @@ msgstr ""
 "Interview scheduled for %s at %s with <a href=\"https://t.me/%s\">%s</a>. <a "
 "href=\"%s\">🗓 Add to calendar.</a>"
 
-#: templates/interview.php:79 templates/interviews.php:28
+#: templates/interview.php:81 templates/interviews.php:34
 msgid "Ora"
 msgstr "Time"
 
-#: templates/interview.php:87
+#: templates/interview.php:89
 msgid "Fissa colloquio"
 msgstr "Schedule interview"
 
-#: templates/interview.php:89
+#: templates/interview.php:91
 msgid "Annulla colloquio"
 msgstr "Cancel interview"
 
-#: templates/interview.php:158
+#: templates/interview.php:157
 msgid "Commenti vari post-colloquio"
 msgstr "Comments on the interview"
 
-#: templates/interview.php:163
+#: templates/interview.php:162
 msgid "Salva commenti"
 msgstr "Save comments"
 
-#: templates/interview.php:175
+#: templates/interview.php:174
 msgid "Colloquio passato"
 msgstr "Interview passed"
 
-#: templates/interview.php:177 templates/interviews.php:60
+#: templates/interview.php:176 templates/interviews.php:66
 msgid "Colloquio fallito"
 msgstr "Interview failed"
 
-#: templates/interview.php:192
+#: templates/interview.php:191
 msgid "Genera link d'invito"
 msgstr "Generate an invite link"
 
-#: templates/interviewsbyrecruiter.php:31
+#: templates/interviewsbyrecruiter.php:39
 msgid "Mostra vecchi colloqui"
 msgstr "Show old interviews"
 
-#: templates/interviewsbyrecruiter.php:66 templates/interviews.php:83
+#: templates/interviewsbyrecruiter.php:74 templates/interviews.php:89
 #, php-format
 msgid "Giorno %s (%s)"
 msgstr "%s (%s)"
 
-#: templates/interviewsbyrecruiter.php:72
+#: templates/interviewsbyrecruiter.php:80
 #, php-format
 msgid "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
 msgstr "<a href=\"interviews.php?id=%d\">%s</a> (%s)"
 
-#: templates/interviews.php:22
+#: templates/interviews.php:28
 msgid "Colloqui fissati"
 msgstr "Scheduled interviews"
 
-#: templates/interviews.php:29
+#: templates/interviews.php:35
 msgid "Tenuto da"
 msgstr "Done by"
 
-#: templates/interviews.php:56
+#: templates/interviews.php:62
 msgid "Colloquio superato, con link d'invito"
 msgstr "Interview passed, with invite link"
 
-#: templates/interviews.php:56
+#: templates/interviews.php:62
 msgid "Colloquio superato"
 msgstr "Interview passed"
 
-#: templates/interviews.php:102
+#: templates/interviews.php:108
 msgid "Colloqui da fissare"
 msgstr "Interviews to be scheduled"
 
-#: templates/interviews.php:108
+#: templates/interviews.php:114
 msgid "Recruiter che ha approvato"
 msgstr "Recruiter that approved"
 
-#: templates/interviews.php:123
+#: templates/interviews.php:129
 #, php-format
 msgid "%d candidato per il colloquio"
 msgid_plural "%d candidati per i colloqui"
 msgstr[0] "%d candidate for interview"
 msgstr[1] "%d candidates for interviews"
 
-#: templates/interviews.php:124
+#: templates/interviews.php:130
 #, php-format
 msgid "%d da fissare"
 msgid_plural "%d da fissare"
 msgstr[0] "%d to be scheduled"
 msgstr[1] "%d to be scheduled"
 
-#: templates/interviews.php:125
+#: templates/interviews.php:131
 #, php-format
 msgid "%d colloquio fissato"
 msgid_plural "%d colloqui fissati"
 msgstr[0] "%d interview scheduled"
 msgstr[1] "%d interviews scheduled"
 
-#: templates/interviews.php:128
+#: templates/interviews.php:134
 #, php-format
 msgid "%d da invitare"
 msgid_plural "%d da invitare"
 msgstr[0] "%d to invite"
 msgstr[1] "%d to invite"
 
-#: templates/interviews.php:129
+#: templates/interviews.php:135
 #, php-format
 msgid "%d invitato"
 msgid_plural "%d invitati"
 msgstr[0] "%d invited"
 msgstr[1] "%d invited"
 
-#: templates/interviews.php:137
+#: templates/interviews.php:146
 msgid "Candidati con data esame sicurezza"
 msgstr "Candidates with safery exam date"
 
@@ -1297,156 +802,140 @@ msgstr "Candidates with safery exam date"
 msgid "Logout completato"
 msgstr "Logout done"
 
-#: templates/notes.php:6
+#: templates/notes.php:8
 msgid "Testo"
 msgstr "Text"
 
-#: templates/notes.php:9
+#: templates/notes.php:11
 msgid "Autore"
 msgstr "Author"
 
-#: templates/notes.php:35
+#: templates/notes.php:37 templates/position.php:53 templates/position.php:69
+#: templates/position.php:109 templates/settings.php:72
 msgid "Modifica"
 msgstr "Edit"
 
-#: templates/notes.php:43
+#: templates/notes.php:45
 msgid "Nessuna nota"
 msgstr "No notes"
+
+#: templates/position.php:25 templates/position.php:39
+msgid "Modifica posizione"
+msgstr "Edit position"
+
+#: templates/position.php:41
+msgid "Modifica id"
+msgstr "Edit id"
+
+#: templates/position.php:57
+msgid "Modifica index"
+msgstr "Edit index"
+
+#: templates/position.php:74
+msgid "Modifica nome"
+msgstr "Edit name"
+
+#: templates/position.php:89
+msgid "Modifica descrizione"
+msgstr "Edit description"
+
+#: templates/position.php:90
+msgid "Ricorda che puoi usare il Markdown per formattare il testo"
+msgstr "Remember that you can use Markdown to format the text"
+
+#: templates/position.php:95
+msgid "Descrizione"
+msgstr "Description"
+
+#: templates/position.php:106 templates/position.php:129
+#: templates/settings.php:57
+msgid "Elimina"
+msgstr "Delete"
+
+#: templates/position.php:123
+msgid "Sei sicuro di voler eliminare questa posizione?"
+msgstr "Are you sure you'd like to delete this position?"
+
+#: templates/position.php:124
+msgid "Questa azione non può essere annullata."
+msgstr "This action cannot be undone."
 
 #: templates/privacy.php:3
 msgid "Informazioni sul trattamento dei dati personali"
 msgstr "Privacy Policy"
 
-#: templates/roles.php:6
-msgid "Riparazione hardware"
-msgstr "Hardware Repairs"
-
-#: templates/roles.php:7
-msgid "Elettronica"
-msgstr "Electronics"
-
-#: templates/roles.php:8
-msgid "Sviluppo software Python"
-msgstr "Software Development (Python)"
-
-#: templates/roles.php:9
-msgid "Sviluppo software PHP"
-msgstr "Software Development (PHP)"
-
-#: templates/roles.php:10
-msgid "Sviluppo software JavaScript"
-msgstr "Software Development (JavaScript)"
-
-#: templates/roles.php:11
-#, fuzzy
-msgid "Sviluppo software Vue.js"
-msgstr "Software Development (PHP)"
-
-#: templates/roles.php:12
-msgid "Machine Learning Engineer"
-msgstr "Machine Learning Engineer"
-
-#: templates/roles.php:13
-msgid "Sysadmin"
-msgstr "Sysadmin"
-
-#: templates/roles.php:14
-msgid "Comunicazione e social"
-msgstr "Communication and social media"
-
-#: templates/roles.php:15
-msgid "Creazione di contenuti digitali"
-msgstr "Digital content creation"
-
-#: templates/roles.php:16
-msgid "Riuso creativo"
-msgstr "Creative Reuse"
-
-#: templates/roles.php:17
-msgid "Altro"
-msgstr "Other"
-
-#: templates/settings.php:8 templates/settings.php:29
+#: templates/settings.php:18 templates/settings.php:32
 msgid "Opzioni WEEEHire"
 msgstr "WEEEHire options"
 
-#: templates/settings.php:31
+#: templates/settings.php:34
 msgid "Modifica scadenza candidature"
 msgstr "Edit applications expiry time"
 
-#: templates/settings.php:37
+#: templates/settings.php:40
 #, php-format
 msgid "Scadenza Candidature <b>(%s)</b>"
 msgstr "Applications expiry <b>(%s)</b>"
 
-#: templates/settings.php:38
+#: templates/settings.php:41
 msgid "nessuna scadenza"
 msgstr "no expiry"
 
-#: templates/settings.php:38
+#: templates/settings.php:41
 msgid "alle 00:00"
 msgstr "at 00:00"
 
-#: templates/settings.php:48 templates/settings.php:52
-#: templates/settings.php:93
-msgid "Conferma"
-msgstr "Confirm"
-
-#: templates/settings.php:54
-msgid "Elimina"
-msgstr "Delete"
-
-#: templates/settings.php:60
+#: templates/settings.php:63
 msgid "Modifica i ruoli disponibili per i nuovi candidati"
 msgstr "Edit roles available to new applicants"
 
-#: templates/settings.php:66
-msgid "Ruoli disponibili"
-msgstr "Available roles"
+#: templates/settings.php:79
+msgid "Salva"
+msgstr "Save"
 
-#: templates/settings.php:74
-msgid "Ruoli non disponibili"
-msgstr "Unavailable roles"
+#: templates/settings.php:83
+msgid "Crea nuova posizione"
+msgstr "Create new position"
 
-#: templates/settings.php:85
-msgid "Seleziona i ruoli da rendere disponibili"
-msgstr "Select roles that should be available"
+#: templates/settings.php:92
+msgid "Nuova posizione"
+msgstr "New position"
 
-#: templates/settings.php:94
-msgid "Rendi tutti non disponibili"
-msgstr "Make all unavailable"
+#: templates/settings.php:111
+msgid "Crea"
+msgstr "Create"
 
-#: templates/settings.php:100
+#: templates/settings.php:117
 msgid "Invia email a noi quando arriva una nuova candidatura"
 msgstr "Send an email to us when a new application arrives"
 
-#: templates/settings.php:105
+#: templates/settings.php:122
 #, php-format
 msgid ""
 "Viene inviata un'email a %s ogni volta che riceviamo una nuova candidatura."
 msgstr "An email is sent to %s every time we receive a new application."
 
-#: templates/settings.php:107
+#: templates/settings.php:124
 msgid "Non riceviamo notifiche per le nuove candidature."
 msgstr "We do not receive any notifications for new applications."
 
-#: templates/settings.php:114
+#: templates/settings.php:131
 msgid "Disattiva email"
 msgstr "Disable email"
 
-#: templates/settings.php:116
+#: templates/settings.php:133
 msgid "Attiva email"
 msgstr "Enable email"
 
-#: templates/status.php:7 templates/status.php:10
+#: templates/status.php:13 templates/status.php:16
 msgid "Stato della richiesta"
 msgstr "Application status"
 
-#: templates/status.php:12
+#: templates/status.php:18
 msgid "Ammesso/a al colloquio"
 msgstr "Admitted to the interview"
 
-#: templates/status.php:13
+#: templates/status.php:19
 #, php-format
 msgid ""
 "Ti abbiamo mandato un'email per informarti, ma se non fosse arrivata per "
@@ -1457,52 +946,552 @@ msgstr ""
 "contact %1$s (<a href=\"https://t.me/%2$s\">@%2$s</a>) on Telegram to "
 "schedule an interview."
 
-#: templates/status.php:15
+#: templates/status.php:21
 msgid "Domanda respinta"
 msgstr "Rejected"
 
-#: templates/status.php:17
+#: templates/status.php:23
 msgid "Richiesta sospesa"
 msgstr "Postponed"
 
-#: templates/status.php:19
+#: templates/status.php:25
 msgid "Valutazione in corso"
 msgstr "Evaluation in progress"
 
-#: templates/status.php:20
+#: templates/status.php:26
 msgid ""
 "Salva questa pagina nei preferiti e torna a controllare lo stato più avanti."
 msgstr ""
 "Save this page in your favorites and come back later to check the status."
 
-#: templates/status.php:26
+#: templates/status.php:32
 #, php-format
 msgid "Candidatura inviata il %1$s alle %2$s"
 msgstr "Form sent on %1$s at %2$s"
 
-#: templates/status.php:31
+#: templates/status.php:37
 msgid "Motivazioni:"
 msgstr "Motivation:"
 
-#: templates/status.php:36
+#: templates/status.php:42
 msgid "Elimina candidatura"
 msgstr "Delete my application"
 
-#: templates/status.php:38
+#: templates/status.php:44
 msgid "Scarica tutti i miei dati"
 msgstr "Download all my data"
 
-#: templates/status.php:41
+#: templates/status.php:47
 msgid "Visto come siamo GDPR-compliant?"
 msgstr "We're very GDPR-compliant, aren't we?"
 
-#: templates/userinfo.php:56
+#: templates/userinfo.php:62
 msgid "Aggiorna dati"
 msgstr "Update info"
 
-#: templates/userinfo.php:61
-msgid "Annulla"
-msgstr "Cancel"
+#~ msgid ""
+#~ "Descrivi qualsiasi tua esperienza di riparazione di computer (fissi o "
+#~ "portatili), o assemblaggio, o saldatura di componenti elettronici."
+#~ msgstr ""
+#~ "Describe anything about your experience in computer repairs (desktop or "
+#~ "laptops), or building computers, or soldering of electronic components."
+
+#~ msgid ""
+#~ "Se non sai qualcosa, cosa fai per imparare in autonomia? Puoi anche "
+#~ "fornire degli esempi."
+#~ msgstr ""
+#~ "If you don't know something, what do you do to learn it yourself, "
+#~ "usually? You can give us some examples as well."
+
+#~ msgid ""
+#~ "Se hai mai usato Linux, parlane liberamente: su tutti i computer che "
+#~ "ripariamo installiamo Linux."
+#~ msgstr ""
+#~ "If you ever used Linux, feel free to talk about it: we install Linux on "
+#~ "every computer that we repair."
+
+#~ msgid ""
+#~ "Menziona anche quanto tempo potresti dedicare alle attività in team e se "
+#~ "fai altro di interessante nel tempo libero oltre a riparare computer."
+#~ msgstr ""
+#~ "Mention how much time you have for team activities, too, and if you have "
+#~ "any other hobby or interests other than repairing computers."
+
+#~ msgid ""
+#~ "Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti "
+#~ "sembra rilevante dire."
+#~ msgstr ""
+#~ "These <strong>are just guidelines</strong>, write anything that you "
+#~ "consider relevant."
+
+#~ msgid ""
+#~ "Uno degli obiettivi del team è la progettazione di strumenti elettronici "
+#~ "per la diagnostica a basso livello e il riuso dell'hardware recuperato."
+#~ msgstr ""
+#~ "One of the goals of the team is to develop electronic tools for low-level "
+#~ "hardware diagnostics and the reuse of recovered hardware."
+
+#~ msgid ""
+#~ "Qual è il tuo rapporto con il mondo dell'elettronica? Ti interessa di più "
+#~ "l'elettronica digitale o analogica (specialmente di potenza) o ti "
+#~ "interessano entrambe?"
+#~ msgstr ""
+#~ "What's your relationship with electronics? Are you more interested in "
+#~ "digital or analog (especially power) electronics do you like both equally?"
+
+#~ msgid ""
+#~ "Se hai mai realizzato qualche circuito o progetto oltre a quelli nei "
+#~ "laboratori didattici, parlane con riferimento anche al metodo con cui è "
+#~ "stato realizzato (breadboard, millefori, circuito stampato, componenti "
+#~ "through-hole o SMD, etc...)."
+#~ msgstr ""
+#~ "If you ever made any electronic circuit or project other than those for "
+#~ "academic courses, tell us. Explain also the method you've used to build "
+#~ "them (breadboard, prototype board, PCB, through-hole components or SMD, "
+#~ "etc...)"
+
+#~ msgid ""
+#~ "Indica anche se hai dimestichezza con qualche software di Electronic "
+#~ "Design Automation (progettazione, simulazione, test e verifica, etc...)."
+#~ msgstr ""
+#~ "Tell us if you have experience with any Electronic Design Automation "
+#~ "software (project, simulation, test and verification, etc...)."
+
+#~ msgid ""
+#~ "Menziona anche quanto tempo potresti dedicare al team e se fai "
+#~ "qualcos'altro di interessante nel tempo libero oltre a progettare "
+#~ "circuiti."
+#~ msgstr ""
+#~ "Mention how much time you have for team activities, too, and if you have "
+#~ "any other hobby or interests other than designing circuits."
+
+#~ msgid ""
+#~ "Il compito dei sysadmin è assicurarsi che gli strumenti informatici a cui "
+#~ "il team si appoggia per le sue operazioni siano al massimo della loro "
+#~ "efficienza."
+#~ msgstr ""
+#~ "Our sysadmins ensure that IT tools - which are essential for the team - "
+#~ "are operating at peak efficiency."
+
+#~ msgid ""
+#~ "Per fare questo gestiscono i server che ospitano i nostri servizi, "
+#~ "collaborano con gli sviluppatori per deployare e aggiornare i software "
+#~ "che creiamo, monitorano lo stato di salute della nostra infrastruttura e "
+#~ "si assicurano che i nostri dati siano protetti da attacchi e perdite"
+#~ msgstr ""
+#~ "To do this, they manage our servers, collaborate with developers to "
+#~ "deploy and update the software we made, monitor the health of our "
+#~ "infrastructure and ensure that our data is safe from attacks and other "
+#~ "disasters"
+
+#~ msgid ""
+#~ "I sysadmin seguono l'intero ciclo di vita dei servizi, dalla "
+#~ "configurazione del server tramite Ansible, passando per la "
+#~ "containerizzazione e gestione dei servizi, alle normali procedure di "
+#~ "manutenzione."
+#~ msgstr ""
+#~ "Sysadmins oversee the entire service life cycle, from server "
+#~ "configuration through Ansible, to containerization and service "
+#~ "management, to routine maintenance procedures."
+
+#~ msgid ""
+#~ "Le competenze esercitate sono una generale conoscenza di Ansible e della "
+#~ "containerizzazione, familiarità con la gestione e configurazione di "
+#~ "software per server comuni come Nginx, PHP e MariaDB/PostgreSQL e "
+#~ "maneggevolezza con il terminale Linux."
+#~ msgstr ""
+#~ "The competences you will use are general knowledge of Ansible and "
+#~ "containes, familiarity with managing and configuring common server "
+#~ "software like Nginx, PHP and MariaDB/PostgreSQL, and familiarity with the "
+#~ "Linux terminal."
+
+#~ msgid "Se hai esperienza con alcune di queste cose, parlane liberamente."
+#~ msgstr ""
+#~ "If you have any experience with this stuff, it's time to talk about it."
+
+#~ msgid ""
+#~ "Menziona anche quanto tempo potresti dedicare alle attività in team e se "
+#~ "fai altro di interessante nel tempo libero oltre ad amministrare server."
+#~ msgstr ""
+#~ "Mention how much time you have for team activities, too, and if you have "
+#~ "any other hobby or interests other than managing servers."
+
+#~ msgid ""
+#~ "Descrivi qualsiasi tua esperienza nel programmare in Python, e se hai un "
+#~ "account su Github non esitare a condividerlo nella tua lettera!"
+#~ msgstr ""
+#~ "Describe any prior experience you have in coding in Python, and don't "
+#~ "hesitate sharing your Github account in your letter if you have one!"
+
+#~ msgid ""
+#~ "Molti degli strumenti interni del team sono stati creati con python, per "
+#~ "esempio la <a href=\"https://github.com/WEEE-Open/peracotta\" "
+#~ "target=\"_blank\">Peracotta</a> ed il <a href=\"https://github.com/WEEE-"
+#~ "Open/pesto\" target=\"_blank\">Pesto</a>. Se conosci come lavorare con qt "
+#~ "ed interagire con API, sei la persona che stiamo cercando!"
+#~ msgstr ""
+#~ "Many of the team's internal toold have been created with python, for "
+#~ "example <a href=\"https://github.com/WEEE-Open/peracotta\" "
+#~ "target=\"_blank\">Peracotta</a> ed il <a href=\"https://github.com/WEEE-"
+#~ "Open/pesto\" target=\"_blank\">Pesto</a>. If you know how to work with Qt "
+#~ "and how to integrate with APIs, you are the member we are looking for!"
+
+#~ msgid ""
+#~ "Potresti menzionare se hai mai usato virtual environments, collaborato "
+#~ "con qualcuno su un progetto software, o se sai scrivere in altri "
+#~ "linguaggi che usiamo nel team, come JavaScript, PHP e Bash o altri ancora."
+#~ msgstr ""
+#~ "You could mention if you have ever used virtual environments, "
+#~ "collaborated with someone else on a software project, or if you can code "
+#~ "in other programming languages."
+
+#~ msgid ""
+#~ "Oltre a seguire le lezioni, che metodo usi per imparare (e.g. seguire "
+#~ "tutorial su internet, iniziare a scrivere codice e cercare man mano su "
+#~ "Stack Overflow, etc...)?"
+#~ msgstr ""
+#~ "Besides attending lectures, what do you do to learn? E.g. watching or "
+#~ "reading tutorials online, starting to write code and looking things up on "
+#~ "Stack Overflow as you go, etc..."
+
+#~ msgid ""
+#~ "Menziona anche quanto tempo potresti dedicare alle attività in team e se "
+#~ "fai altro di interessante nel tempo libero oltre a digitare codice."
+#~ msgstr ""
+#~ "Mention how much time you have for team activities, too, and if you have "
+#~ "any other hobby or interests other than typing code."
+
+#~ msgid ""
+#~ "I principali progetti PHP del team sono <a href=\"https://github.com/WEEE-"
+#~ "Open/tarallo\" target=\"_blank\">Tarallo</a>, <a href=\"https://github."
+#~ "com/WEEE-Open/WEEEHire-ng\" target=\"_blank\">WEEEHire</a> e <a "
+#~ "href=\"https://github.com/WEEE-Open/crauto\" target=\"_blank\">crauto</"
+#~ "a>, puoi darci già un'occhiata per sapere a cosa vai incontro."
+#~ msgstr ""
+#~ "Our main PHP projects are <a href=\"https://github.com/WEEE-Open/"
+#~ "tarallo\" target=\"_blank\">Tarallo</a>, <a href=\"https://github.com/"
+#~ "WEEE-Open/WEEEHire-ng\" target=\"_blank\">WEEEHire</a> and <a "
+#~ "href=\"https://github.com/WEEE-Open/crauto\" target=\"_blank\">crauto</"
+#~ "a>, you can have a look so you know what you're going to work on."
+
+#, fuzzy
+#~ msgid ""
+#~ "Descrivi qualsiasi tua esperienza nel programmare in PHP, e se hai un "
+#~ "account su Github non esitare a condividerlo nella tua lettera!"
+#~ msgstr ""
+#~ "Describe any prior experience you have in coding in Python, and don't "
+#~ "hesitate sharing your Github account in your letter if you have one!"
+
+#, fuzzy
+#~ msgid ""
+#~ "Va bene anche \"per l'esame di ... ho creato un programma che fa ...\" o "
+#~ "\"ho fatto il sito web per la panetteria all'angolo\"."
+#~ msgstr ""
+#~ "Tell us about your experience developing software in PHP or for the web "
+#~ "in general. It's also fine to say \"for the ... exam I've created a "
+#~ "program that does ...\" or \"I've made a website for the bakery near my "
+#~ "house\"."
+
+#~ msgid ""
+#~ "Se conosci anche altri linguaggi non esitare a condividere la tua "
+#~ "esperienza."
+#~ msgstr ""
+#~ "If you also know other languages don't hesitate to tell us about it."
+
+#~ msgid ""
+#~ "Puoi anche menzionare se conosci altri linguaggi di programmazione o hai "
+#~ "mai partecipato ad altri progetti collaborativi."
+#~ msgstr ""
+#~ "You can also mention whether you know other programming languages or have "
+#~ "ever participated to other collaborative projects."
+
+#~ msgid ""
+#~ "Da un paio d'anni abbiamo iniziato a migrare alcuni dei nostri progetti a "
+#~ "Node.js. Cerchiamo persone capaci di lavorare con express, MySQL e creare "
+#~ "API."
+#~ msgstr ""
+#~ "Since a couple of years, we've started to migrate some of our projects to "
+#~ "Node.js. We are looking for people capable of working with express, MySQL "
+#~ "and create APIs."
+
+#, fuzzy
+#~ msgid ""
+#~ "Parla di qualsiasi tua esperienza riguardante l'utilizzo di JavaScript "
+#~ "(backend, app NodeJS, e frontend, sia vanilla JS, sia framework, in "
+#~ "particolare Vue.js). Conosci altri linguaggi che usiamo in team, come "
+#~ "Python, PHP e Bash, o altri ancora? Menzionali pure! E se hai un account "
+#~ "su Github non esitare a condividerlo nella tua lettera!"
+#~ msgstr ""
+#~ "Talk about any of your experiences using JavaScript (frontend - "
+#~ "especially ReactJS and Angular -, backend, NodeJS app) or Docker. Do you "
+#~ "know any other languages we use in our team, such as Python, PHP and "
+#~ "Bash, or even more? Mention them here! And if you have a GitHub account "
+#~ "don’t hesitate sharing it in your letter!"
+
+#~ msgid ""
+#~ "Da un paio d'anni abbiamo iniziato a migrare alcuni dei nostri progetti a "
+#~ "Vue.js. Cerchiamo persone capaci di creare SPA e PWA con Vue.js integrate "
+#~ "con servizi backend."
+#~ msgstr ""
+#~ "Since a couple of years, we've started to migrate some of out projects to "
+#~ "Vue.js. We are looking for people capable of creating SPAs and PWAs with "
+#~ "Vue.js integrated with backend services."
+
+#, fuzzy
+#~ msgid ""
+#~ "Parla di qualsiasi tua esperienza riguardante l'utilizzo di JavaScript "
+#~ "(frontend, vanilla JS, Vue.js or any other framework, e backend, NodeJS). "
+#~ "Conosci altri linguaggi che usiamo in team, come Python, PHP e Bash, o "
+#~ "altri ancora? Menzionali pure! E se hai un account su Github non esitare "
+#~ "a condividerlo nella tua lettera!"
+#~ msgstr ""
+#~ "Talk about any of your experiences using JavaScript (frontend - "
+#~ "especially ReactJS and Angular -, backend, NodeJS app) or Docker. Do you "
+#~ "know any other languages we use in our team, such as Python, PHP and "
+#~ "Bash, or even more? Mention them here! And if you have a GitHub account "
+#~ "don’t hesitate sharing it in your letter!"
+
+#~ msgid ""
+#~ "Non tutti i computer che ci arrivano sono riparabili, ma vorremmo "
+#~ "comunque minimizzare la quantità di materiale che finisce nel bidone."
+#~ msgstr ""
+#~ "Not all the computers that we get are repairable, but we'd still like to "
+#~ "minimize the quantity of stuff that goes into the trash can."
+
+#~ msgid ""
+#~ "Se hai manualità e/o esperienze nel riuso creativo e/o making è il "
+#~ "momento di dirlo."
+#~ msgstr ""
+#~ "If you have any DIY skills and/or experiences in creative reuse and/or "
+#~ "\"making\" this is the moment to tell us."
+
+#~ msgid ""
+#~ "Puoi anche aggiungere se hai idee su come potremmo riutilizzare <i>case</"
+#~ "i> vuoti, schede madri dall'estetica peculiare o i piatti a specchio di "
+#~ "hard disk rotti."
+#~ msgstr ""
+#~ "You can also add some ideas (if you have any) on how we could reuse empty "
+#~ "cases, particularly beautiful motherboards or shiny plates from broken "
+#~ "hard disk drives."
+
+#~ msgid "Accenna anche a che metodo seguiresti per progettare queste cose."
+#~ msgstr "Point out which method you'd follow to develop these projects, too."
+
+#~ msgid ""
+#~ "Menziona anche quanto tempo potresti dedicare alle attività in team e se "
+#~ "fai altro di interessante nel tempo libero."
+#~ msgstr ""
+#~ "Mention how much time you have for team activities, too, and if you have "
+#~ "any other hobby or interests."
+
+#~ msgid ""
+#~ "Dal 2021-2022, grazie all'esperienza acquisita da alcuni membri del team "
+#~ "in materia, e al lancio del nostro progetto di software per studenti, "
+#~ "cerchiamo una figura che possa occuparsi della creazione di alcuni "
+#~ "modelli volti a migliorare l'esperienza utente delle piattaforme web che "
+#~ "abbiamo intenzione di sviluppare, in particolare nell'ambito del Natural "
+#~ "Language Processing."
+#~ msgstr ""
+#~ "From 2021-2022, thanks to the experience gained by some team members on "
+#~ "the subject, and the launch of our project of software for students, we "
+#~ "are looking for a figure who can take care of the creation of some models "
+#~ "aimed at improving the user experience of the web platforms we intend to "
+#~ "develop, in particular in the field of Natural Language Processing."
+
+#~ msgid ""
+#~ "Se hai delle conoscenze riguardo a qualcuno tra Python, PyTorch, "
+#~ "Tensorflow, Keras, Jupyter Notebook e GitHub, stiamo cercando proprio te!"
+#~ msgstr ""
+#~ "If you know any of Python, PyTorch, Tensorflow, Keras, Jupyter Notebook "
+#~ "and GitHub, we are looking for you!"
+
+#~ msgid ""
+#~ "Se in più sai ricercare paper scientifici su nuove tecnologie su ArXiv o "
+#~ "simili, o hai intenzione di imparare a farlo, fantastico!"
+#~ msgstr ""
+#~ "If you can also research scientific papers on new technologies on ArXiv "
+#~ "or similar platforms, or you want to learn how to do it, great!"
+
+#~ msgid ""
+#~ "Menziona anche quanto tempo potresti dedicare alle attività in team e se "
+#~ "fai altro di interessante nel tempo libero oltre a progettare "
+#~ "intelligenze artificiali."
+#~ msgstr ""
+#~ "Mention how much time you have for team activities, too, and if you have "
+#~ "any other hobby or interests besides designing AIs."
+
+#~ msgid ""
+#~ "Queste <strong>sono solo linee guida</strong>, scrivi tutto ciò che ti "
+#~ "sembra rilevante dire, e se hai già lavorato su qualche progetto non "
+#~ "esitare a condividerne il link nella tua lettera!."
+#~ msgstr ""
+#~ "These <strong>are just guidelines</strong>, write anything that you "
+#~ "consider relevant, and if you have already worked on some project do not "
+#~ "hesitate to share the link in your letter!"
+
+#~ msgid ""
+#~ "Hai buone capacità di comunicazione e organizzazione, ti piace il nostro "
+#~ "team e vuoi aiutarci a migliorare la nostra immagine? Questo è il posto "
+#~ "che fa per te!"
+#~ msgstr ""
+#~ "Do you have good communication and organizational skills, you like our "
+#~ "team and you want to help us improve our public image? This is the right "
+#~ "place!"
+
+#~ msgid "Cerchiamo qualcuno che possa svolgere le seguenti mansioni:"
+#~ msgstr "We are looking for someone to perform the following tasks:"
+
+#~ msgid "Scrittura e pubblicazione di post e storie per i nostri social"
+#~ msgstr "Write and publish posts/stories for our social media"
+
+#~ msgid "Programmazione temporale dei contenuti"
+#~ msgstr "Organize temporal scheduling of contents"
+
+#~ msgid "Definizione della strategia di comunicazione in generale"
+#~ msgstr "Define the communication strategy in general"
+
+#~ msgid "Brainstorming di idee per podcast e video tematici"
+#~ msgstr "Come up with new ideas for podcasts and videos"
+
+#~ msgid "Intrattenimento di rapporti con terzi, altre associazioni e ospiti"
+#~ msgstr ""
+#~ "Maintain relations with third parties, other associations and guests"
+
+#~ msgid ""
+#~ "Ti troverai a lavorare in sinergia con i creatori di contenuti digitali, "
+#~ "che si occuperanno di produrre materiale grafico e video (o potrai "
+#~ "occupartene tu stesso se ti va e ne sei capace)."
+#~ msgstr ""
+#~ "You will work together with digital content creators, who will provide "
+#~ "graphic and video resources (or you can make them yourself, if you have "
+#~ "the skills)."
+
+#~ msgid "Ora parlaci di te."
+#~ msgstr "Now tell us about yourself."
+
+#~ msgid ""
+#~ "Descrivi qualsiasi tua esperienza nel gestire pagine o profili (e.g. "
+#~ "personali, di attività commerciali, di <i>meme</i> nonsense, etc...) sui "
+#~ "social network, in particolare Facebook e Instagram."
+#~ msgstr ""
+#~ "Describe any experience you have in managing pages or profiles (e.g. "
+#~ "personal, business, of random <i>memes</i>, etc...) on social networks, "
+#~ "in particular Facebook and Instagram."
+
+#~ msgid ""
+#~ "Menziona anche i risultati raggiunti con tali attività promozionali, se "
+#~ "possibile."
+#~ msgstr ""
+#~ "Mention also the results you achieved with such promotional activities, "
+#~ "if you can."
+
+#~ msgid "Se dovessi spiegare in due righe cosa fa il team, cosa diresti?"
+#~ msgstr ""
+#~ "If you had to explain in a few lines what does the team do, what would "
+#~ "you write?"
+
+#~ msgid ""
+#~ "Indica anche quanto tempo potresti dedicare a queste attività e se hai "
+#~ "qualche altro interesse."
+#~ msgstr ""
+#~ "Mention how much time you have for team activities, too, and if you have "
+#~ "any other hobby or interests."
+
+#~ msgid ""
+#~ "Sprigiona la tua vena creativa entrando nel nostro team! Abbiamo bisogno "
+#~ "di figure che si occupino di realizzare:"
+#~ msgstr ""
+#~ "Unleash your inner creativity by joining our team! We are looking for "
+#~ "people that will produce:"
+
+#~ msgid "Design di manifesti, infografiche, biglietti da visita"
+#~ msgstr "Designs for posters, infographics, business cards"
+
+#~ msgid "Elementi grafici per pagine web e social network"
+#~ msgstr "Graphic elements for web pages and social networks"
+
+#~ msgid "Sfondi, icone e immagini personalizzate per i nostri software"
+#~ msgstr "Backgrounds, icons and custom images for our software"
+
+#~ msgid "Redesign e modding dei case dei computer riparati"
+#~ msgstr "Redesigns and modding of repaired computer cases"
+
+#~ msgid "Jingle e motivi musicali per i nostri video"
+#~ msgstr "Jingles and music for our videos"
+
+#~ msgid ""
+#~ "Se <strong>almeno una</strong>, o più di una, di queste attività di "
+#~ "interessano, questo è il ruolo adatto."
+#~ msgstr ""
+#~ "If you're interested in <strong>at least one</strong>, or more than one, "
+#~ "of these activities, this is the role for you."
+
+#~ msgid ""
+#~ "Parla di qualsiasi esperienza artistica, inclusi progetti personali "
+#~ "(anche piccoli) o esami sostenuti."
+#~ msgstr ""
+#~ "Tell us about any experience you have with arts, including personal "
+#~ "projects (even small ones) or exams."
+
+#~ msgid ""
+#~ "Se vuoi mostrarci alcuni dei tuoi lavori passati, abbozzi, concepts o hai "
+#~ "idee su come migliorare il volto del team, non esitare!"
+#~ msgstr ""
+#~ "If you want to show us some of your past works, sketches, concepts or you "
+#~ "have any idea on how to improve the teams public \"face\", do not "
+#~ "hesitate and tell us!"
+
+#~ msgid "Stupiscici."
+#~ msgstr "Surprise us."
+
+#~ msgid "Riparazione hardware"
+#~ msgstr "Hardware Repairs"
+
+#~ msgid "Elettronica"
+#~ msgstr "Electronics"
+
+#~ msgid "Sviluppo software Python"
+#~ msgstr "Software Development (Python)"
+
+#~ msgid "Sviluppo software PHP"
+#~ msgstr "Software Development (PHP)"
+
+#~ msgid "Sviluppo software JavaScript"
+#~ msgstr "Software Development (JavaScript)"
+
+#, fuzzy
+#~ msgid "Sviluppo software Vue.js"
+#~ msgstr "Software Development (PHP)"
+
+#~ msgid "Machine Learning Engineer"
+#~ msgstr "Machine Learning Engineer"
+
+#~ msgid "Sysadmin"
+#~ msgstr "Sysadmin"
+
+#~ msgid "Comunicazione e social"
+#~ msgstr "Communication and social media"
+
+#~ msgid "Creazione di contenuti digitali"
+#~ msgstr "Digital content creation"
+
+#~ msgid "Riuso creativo"
+#~ msgstr "Creative Reuse"
+
+#~ msgid "Altro"
+#~ msgstr "Other"
+
+#~ msgid "Ruoli disponibili"
+#~ msgstr "Available roles"
+
+#~ msgid "Ruoli non disponibili"
+#~ msgstr "Unavailable roles"
+
+#~ msgid "Seleziona i ruoli da rendere disponibili"
+#~ msgstr "Select roles that should be available"
+
+#~ msgid "Rendi tutti non disponibili"
+#~ msgstr "Make all unavailable"
 
 #~ msgid ""
 #~ "Dal 2021-2022 abbiamo lanciato un programma per il miglioramento della "
