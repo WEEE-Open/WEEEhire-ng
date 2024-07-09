@@ -11,9 +11,9 @@ class Email
 	 * Send an email from noreply@join.weeeopen.it
 	 * If TEST_MODE is enabled, no email is sent and this method prints the contents on the console instead.
 	 *
-	 * @param string $to Address
+	 * @param string $to      Address
 	 * @param string $subject Subject line
-	 * @param string $body Email body, plain text only
+	 * @param string $body    Email body, plain text only
 	 */
 	public static function sendMail(string $to, string $subject, string $body)
 	{

@@ -1,15 +1,23 @@
 <?php
-/** @var string $title */
-/** @var bool $datatables */
-/** @var bool $fontAwesome */
-/** @var string $logoHref */
+/**
+ * @var string $title
+ */
+/**
+ * @var bool $datatables
+ */
+/**
+ * @var bool $fontAwesome
+ */
+/**
+ * @var string $logoHref
+ */
 ?><!doctype html>
-<html lang="<?=$_SESSION['locale']?>">
+<html lang="<?php echo $_SESSION['locale']?>">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-	<title><?=$this->e($title)?> - <?=__('Entra in WEEE Open')?></title>
+	<title><?php echo $this->e($title)?> - <?php echo __('Entra in WEEE Open')?></title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="weee.css">
@@ -23,9 +31,9 @@
 	<?php endif; ?>
 </head>
 <body>
-<?=$this->fetch('navbar', ['logoHref' => $logoHref ?? '/'])?>
+<?php echo $this->fetch('navbar', ['logoHref' => $logoHref ?? '/'])?>
 <div class="container">
-	<?=$this->section('content')?>
+	<?php echo $this->section('content')?>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

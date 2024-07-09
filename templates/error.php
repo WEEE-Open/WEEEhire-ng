@@ -1,8 +1,10 @@
 <?php
 
-/** @var $message string */
+/**
+ * @var $message string
+ */
 $this->layout('base', ['title' => __('Errore')])
 ?>
 
-<h1><?=__('Errore')?></h1>
-<p class="alert alert-danger"><?=$message?></p>
+<h1><?php echo __('Errore')?></h1>
+<p class="alert alert-danger"><?php echo $message?></p>

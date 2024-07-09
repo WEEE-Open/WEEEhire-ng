@@ -48,7 +48,7 @@ class PageForm implements RequestHandlerInterface
 		if ($request->getMethod() === 'POST') {
 			$POST = $request->getParsedBody();
 			$checkboxes = [
-				'mandatorycheckbox_0',
+			'mandatorycheckbox_0',
 			];
 			foreach ($checkboxes as $attr) {
 				if (!isset($POST[$attr]) || $POST[$attr] !== 'true') {
@@ -57,17 +57,26 @@ class PageForm implements RequestHandlerInterface
 			}
 
 			$attrs = [
-				'name',
-				'surname',
-				'degreecourse',
-				'year',
-				'matricola',
-				'area',
-				'letter'
+			'name',
+			'surname',
+			'degreecourse',
+			'year',
+			'matricola',
+			'area',
+			'letter'
 			];
 			$user = new User();
 			foreach ($attrs as $attr) {
 				if (isset($POST[$attr]) && $POST[$attr] !== '') {
+					if ($attr === 'area') {
+						$indexs = array_column($positions, 'id');
+						$index = array_search($POST[$attr], $indexs);
+						if ($index !== false) {
+							$POST[$attr] = $positions[$index]['name'];
+						} else {
+							// You are a special one, aren't you? this was a challange, if you found out that you can submit any value for the area field, you'll get extra points during the interview, use this box to have fun with your position name, eg. "I'm a hacker", "fsociety"
+						}
+					}
 					$user->$attr = $POST[$attr];
 					if (is_string($user->$attr)) {
 						$user->$attr = trim($user->$attr);

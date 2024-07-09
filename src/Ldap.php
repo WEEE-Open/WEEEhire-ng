@@ -46,17 +46,21 @@ class Ldap
 			error_log('Test mode enabled, returning sample data');
 
 			return [
-				['Alice', 'ali'],
-				['Bob', 'b0b'],
-				['Mario Rossi', 'test'],
+			['Alice', 'ali'],
+			['Bob', 'b0b'],
+			['Mario Rossi', 'test'],
 			];
 		}
 
 		if ($this->apcu) {
 			$cached = false;
-			/** @noinspection PhpComposerExtensionStubsInspection */
+			/**
+	   * @noinspection PhpComposerExtensionStubsInspection
+*/
 			$recruiters = apcu_fetch('recruiters', $cached);
-			/** @noinspection PhpComposerExtensionStubsInspection */
+			/**
+	   * @noinspection PhpComposerExtensionStubsInspection
+*/
 			if ($cached) {
 				return $recruiters;
 			}
@@ -89,7 +93,9 @@ class Ldap
 			}
 			ksort($recruiters, SORT_STRING | SORT_FLAG_CASE);
 			if ($this->apcu) {
-				/** @noinspection PhpComposerExtensionStubsInspection */
+				/**
+		  * @noinspection PhpComposerExtensionStubsInspection
+*/
 				apcu_store('recruiters', $recruiters, 3600); // 1 hour
 			}
 
@@ -110,20 +116,20 @@ class Ldap
 		$normalizedSurname = Utils::normalizeCase($user->surname);
 
 		$add = [
-			'cn'                      => $normalizedName . ' ' . $normalizedSurname, // Mandatory attribute
-			'objectclass'             => [
-				'inviteCodeContainer',
-				'schacLinkageIdentifiers',
-				'schacPersonalCharacteristics',
-				'telegramAccount',
-				'weeeOpenPerson',
-			],
-			'givenname'               => $normalizedName,
-			'sn'                      => $normalizedSurname,
-			'mail'                    => Utils::politoMail($user->matricola),
-			'schacpersonaluniquecode' => $user->matricola,
-			'degreecourse'            => $user->degreecourse,
-			'weeeOpenUniqueId'        => $inviteCode,
+		'cn'                      => $normalizedName . ' ' . $normalizedSurname, // Mandatory attribute
+		'objectclass'             => [
+		'inviteCodeContainer',
+		'schacLinkageIdentifiers',
+		'schacPersonalCharacteristics',
+		'telegramAccount',
+		'weeeOpenPerson',
+		],
+		'givenname'               => $normalizedName,
+		'sn'                      => $normalizedSurname,
+		'mail'                    => Utils::politoMail($user->matricola),
+		'schacpersonaluniquecode' => $user->matricola,
+		'degreecourse'            => $user->degreecourse,
+		'weeeOpenUniqueId'        => $inviteCode,
 		];
 
 		if (TEST_MODE) {

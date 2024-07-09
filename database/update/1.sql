@@ -1,6 +1,7 @@
 
 create table if not exists positions (
 	id varchar not null primary key,
+	idx integer not null,
 	available integer not null
 );
 
@@ -11,19 +12,19 @@ create table if not exists translations (
 	unique(id, lang)
 );
 
-insert into positions (id, available) values 
-	('hardware-repair', 1),
-	('electronics', 1),
-	('python-software-dev', 1),
-	('php-software-dev', 1),
-	('javascript-software-dev', 1),
-	('vuejs-software-dev', 1),
-	('machine-learning-engineer', 1),
-	('sysadmin', 1),
-	('communication-and-social', 1),
-	('digital-content-creation', 1),
-	('creative-reuse', 1),
-	('other', 1);
+insert into positions (id, idx, available) values 
+	('hardware-repair', 0, 1),
+	('electronics', 1, 1),
+	('python-software-dev', 2, 1),
+	('php-software-dev', 3, 1),
+	('javascript-software-dev', 4, 1),
+	('vuejs-software-dev', 5, 1),
+	('machine-learning-engineer', 6, 1),
+	('sysadmin', 7, 1),
+	('communication-and-social', 8, 1),
+	('digital-content-creation', 9, 1),
+	('creative-reuse', 10, 1),
+	('other', 11, 1);
 
 insert into translations (id, lang, value) values 
 	('position.hardware-repair.name', 'it-IT', 'Riparazione hardware'),

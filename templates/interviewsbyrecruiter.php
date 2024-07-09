@@ -1,9 +1,17 @@
 <?php
 
-/** @var $interviews DateTime[][][]|string[][][] */
-/** @var $myname string */
-/** @var $myuser string */
-/** @var $showOldInterviews bool */
+/**
+ * @var $interviews DateTime[][][]|string[][][]
+ */
+/**
+ * @var $myname string
+ */
+/**
+ * @var $myuser string
+ */
+/**
+ * @var $showOldInterviews bool
+ */
 $this->layout('base', ['title' => __('Recruiter'), 'logoHref' => 'interviews.php?byrecruiter=true']);
 
 $later = [];
@@ -21,14 +29,14 @@ try {
 $today = $dt->format('Y-m-d');
 ?>
 
-<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser, 'currentFileName' => $currentFileName])?>
+<?php echo $this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser, 'currentFileName' => $currentFileName])?>
 <div class="d-flex justify-content-between">
-	<h1><?=__('Recruiter')?></h1>
+	<h1><?php echo __('Recruiter')?></h1>
 	<div class="d-flex align-items-center">
 		<div class="form-check">
 			<input class="form-check-input" type="checkbox" name="showOldInterviews" id="showOldInterviews">
 			<label class="form-check-label" for="showOldInterviews">
-				<?= __('Mostra vecchi colloqui') ?>
+				<?php echo __('Mostra vecchi colloqui') ?>
 			</label>
 		</div>
 	</div>
@@ -62,15 +70,15 @@ foreach ($interviews as $interviewer => $ints) {
 		if ($date !== $prevdate) {
 			$prevdate = $date;
 			?>
-			<li class="list-group-item list-group-item-secondary <?= $old ?>">
-				<?= sprintf(__('Giorno %s (%s)'), $date, $this->fetch('day', ['day' => $int['when']->format('N')])) ?>
+			<li class="list-group-item list-group-item-secondary <?php echo $old ?>">
+			<?php echo sprintf(__('Giorno %s (%s)'), $date, $this->fetch('day', ['day' => $int['when']->format('N')])) ?>
 			</li>
 			<?php
 		}
 		?>
-		<li class="list-group-item d-flex justify-content-between align-items-center <?=$statusClass?> <?= $old ?>">
-			<span><?=sprintf(__('<a href="interviews.php?id=%d">%s</a> (%s)'), $this->e($int['id']), $this->e($int['name']), $this->e($int['area']))?></span>
-			<a class="badge badge-primary" href="/interviews.php?id=<?=$this->e($int['id'])?>&download"><?=$time?></a>
+		<li class="list-group-item d-flex justify-content-between align-items-center <?php echo $statusClass?> <?php echo $old ?>">
+			<span><?php echo sprintf(__('<a href="interviews.php?id=%d">%s</a> (%s)'), $this->e($int['id']), $this->e($int['name']), $this->e($int['area']))?></span>
+			<a class="badge badge-primary" href="/interviews.php?id=<?php echo $this->e($int['id'])?>&download"><?php echo $time?></a>
 		</li>
 		<?php
 	}

@@ -22,6 +22,7 @@ class Database
 	/**
 	 * ⚠️ THIS METHOD IS UNSAFE, NEVER EXPOSE IT, ONLY FOR DB UPGRADE ⚠️
 	 * Get the SQLite3 object
+	 *
 	 * @return SQLite3
 	 */
 
@@ -91,9 +92,11 @@ class Database
 	 */
 	public function getUser(string $id): ?User
 	{
-		$stmt = $this->db->prepare('SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status,
+		$stmt = $this->db->prepare(
+			'SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status,
                                                  hold, recruiter, recruitertg, submitted, emailed, invitelink, visiblenotes
-                                                 FROM users WHERE id = :id LIMIT 1');
+                                                 FROM users WHERE id = :id LIMIT 1'
+		);
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if ($result === false) {
@@ -107,23 +110,23 @@ class Database
 		$user = new User();
 		foreach (
 			[
-				'id',
-				'name',
-				'surname',
-				'degreecourse',
-				'year',
-				'matricola',
-				'area',
-				'letter',
-				'published',
-				'status',
-				'hold',
-				'recruiter',
-				'recruitertg',
-				'submitted',
-				'visiblenotes',
-				'emailed',
-				'invitelink',
+			'id',
+			'name',
+			'surname',
+			'degreecourse',
+			'year',
+			'matricola',
+			'area',
+			'letter',
+			'published',
+			'status',
+			'hold',
+			'recruiter',
+			'recruitertg',
+			'submitted',
+			'visiblenotes',
+			'emailed',
+			'invitelink',
 			] as $attr
 		) {
 			$user->$attr = $row[$attr];
@@ -140,7 +143,8 @@ class Database
 	public function getPrevAndNextUser(User $user, string $myself): ?User
 	{
 		$id = $user->id;
-		$stmt = $this->db->prepare('SELECT
+		$stmt = $this->db->prepare(
+			'SELECT
                                                  (
                                                     SELECT MAX(prev_users.id) 
                                                     FROM users as prev_users
@@ -173,7 +177,8 @@ class Database
                                                                                 AND next_evaluation.id_evaluator = :self
                                                                                 )
                                                  ) AS next_not_evaluated_user
-                                                 FROM users WHERE id = :id LIMIT 1');
+                                                 FROM users WHERE id = :id LIMIT 1'
+		);
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$stmt->bindValue(':self', $myself, SQLITE3_TEXT);
 		$result = $stmt->execute();
@@ -187,10 +192,10 @@ class Database
 		}
 		foreach (
 			[
-				'prev_user',
-				'next_user',
-				'prev_not_evaluated_user',
-				'next_not_evaluated_user',
+			'prev_user',
+			'next_user',
+			'prev_not_evaluated_user',
+			'next_not_evaluated_user',
 			] as $attr
 		) {
 			$user->$attr = $row[$attr];
@@ -244,7 +249,7 @@ class Database
 	 * Set a value in the config table
 	 *
 	 * @param string $option Key for the value
-	 * @param string $value Value to set
+	 * @param string $value  Value to set
 	 */
 	public function setConfigValue(string $option, string $value)
 	{
@@ -273,12 +278,12 @@ class Database
 			$compact = [];
 			while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 				$compact[] = [
-					'id_evaluation'  => $row['id_evaluation'],
-					'id_user'        => $row['ref_user_id'],
-					'id_evaluator'   => $row['id_evaluator'],
-					'name_evaluator' => $row['desc_evaluator'],
-					'date'           => $row['date'],
-					'vote'           => $row['vote'],
+				 'id_evaluation'  => $row['id_evaluation'],
+				 'id_user'        => $row['ref_user_id'],
+				 'id_evaluator'   => $row['id_evaluator'],
+				 'name_evaluator' => $row['desc_evaluator'],
+				 'date'           => $row['date'],
+				 'vote'           => $row['vote'],
 				];
 			}
 
@@ -291,10 +296,10 @@ class Database
 	/**
 	 * Set evaluation for a candidate, by a recruiter
 	 *
-	 * @param int $userId User ID
-	 * @param string $idEvaluator ID of the evaluator/recruiter (LDAP uid attribute)
+	 * @param int    $userId        User ID
+	 * @param string $idEvaluator   ID of the evaluator/recruiter (LDAP uid attribute)
 	 * @param string $descEvaluator Evaluator/recruiter description (LDAP cn attribute, aka full name)
-	 * @param int $vote Vote
+	 * @param int    $vote          Vote
 	 */
 	public function setEvaluation(int $userId, string $idEvaluator, string $descEvaluator, int $vote)
 	{
@@ -328,7 +333,7 @@ class Database
 	/**
 	 * Check that a token is valid
 	 *
-	 * @param int $id User ID
+	 * @param int    $id    User ID
 	 * @param string $token Token
 	 *
 	 * @return bool Valid or not
@@ -391,17 +396,17 @@ class Database
 		$compact = [];
 		while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			$compact[] = [
-				'id'           => $row['id'],
-				'name'         => $row['name'] . ' ' . $row['surname'],
-				'area'         => $row['area'],
-				'recruiter'    => $row['recruiter'],
-				'hold'         => (bool) $row['hold'],
-				'published'    => (bool) $row['published'],
-				'myvote'       => $row['myvote'] === null ? null : (int) $row['myvote'],
-				'status'       => $row['status'] === null ? null : (bool) $row['status'],
-				'submitted'    => $row['submitted'],
-				'evaluation'   => $votes[$row['id']] ?? null,
-				'has_note'     => $row['has_note'], // convert candidate_id to has_note
+			'id'           => $row['id'],
+			'name'         => $row['name'] . ' ' . $row['surname'],
+			'area'         => $row['area'],
+			'recruiter'    => $row['recruiter'],
+			'hold'         => (bool) $row['hold'],
+			'published'    => (bool) $row['published'],
+			'myvote'       => $row['myvote'] === null ? null : (int) $row['myvote'],
+			'status'       => $row['status'] === null ? null : (bool) $row['status'],
+			'submitted'    => $row['submitted'],
+			'evaluation'   => $votes[$row['id']] ?? null,
+			'has_note'     => $row['has_note'], // convert candidate_id to has_note
 			];
 		}
 
@@ -412,8 +417,8 @@ class Database
 	 * Save notes.
 	 *
 	 * @param string $author
-	 * @param int $candidate User ID
-	 * @param string $note Notes
+	 * @param int    $candidate User ID
+	 * @param string $note      Notes
 	 * @param string $type
 	 */
 	public function saveNotes(string $author, int $candidate, string $note)
@@ -436,7 +441,7 @@ class Database
 	/**
 	 * Update note.
 	 *
-	 * @param int $id User ID
+	 * @param int    $id   User ID
 	 * @param string $note Notes
 	 * @param string $type
 	 */
@@ -461,8 +466,8 @@ class Database
 	/**
 	 * Retrieve notes on a candidate
 	 *
-	 * @param int $candidateId
-	 * @param string $type
+	 * @param  int    $candidateId
+	 * @param  string $type
 	 * @return array
 	 */
 	public function getNotesByCandidateId(int $candidateId)
@@ -486,7 +491,7 @@ class Database
 	/**
 	 * Save the visible notes.
 	 *
-	 * @param int $id User ID
+	 * @param int    $id    User ID
 	 * @param string $notes Notes
 	 */
 	public function saveVisibleNotes(int $id, string $notes)
@@ -507,8 +512,8 @@ class Database
 	/**
 	 * Set candidate status
 	 *
-	 * @param int $id User ID
-	 * @param bool|null $status True for approved, False for rejected, null to unset
+	 * @param int         $id        User ID
+	 * @param bool|null   $status    True for approved, False for rejected, null to unset
 	 * @param string|null $recruiter Recruiter that made this difficult choice
 	 */
 	public function setStatus(int $id, ?bool $status, ?string $recruiter)
@@ -534,7 +539,7 @@ class Database
 	/**
 	 * Set the "hold" status of candidates (waiting list)
 	 *
-	 * @param int $id User ID
+	 * @param int  $id   User ID
 	 * @param bool $hold True to put on hold, false to not put on hold
 	 */
 	public function setHold(int $id, bool $hold)
@@ -551,9 +556,9 @@ class Database
 	/**
 	 * Set if status is published and visible or not
 	 *
-	 * @param int $id User ID
+	 * @param int  $id        User ID
 	 * @param bool $published True for published and visible, false for not published (only admins can see it)
-	 * @see setStatus
+	 * @see   setStatus
 	 */
 	public function setPublished(int $id, bool $published)
 	{
@@ -569,7 +574,7 @@ class Database
 	/**
 	 * Set recruiter for a user
 	 *
-	 * @param int $id User ID
+	 * @param int    $id   User ID
 	 * @param string $name Recruiter full name
 	 * @param string $tgid Recruiter Telegram nickname
 	 */
@@ -588,7 +593,7 @@ class Database
 	/**
 	 * Set invite link for a candidate. Use after generating such a link.
 	 *
-	 * @param int $id User ID
+	 * @param int    $id     User ID
 	 * @param string $invite Invite link
 	 */
 	public function setInviteLink(int $id, string $invite)
@@ -605,7 +610,7 @@ class Database
 	/**
 	 * Set candidate as "emailed" or not, when approved.
 	 *
-	 * @param int $id User ID
+	 * @param int  $id      User ID
 	 * @param bool $emailed The email has been sent or not
 	 */
 	public function setEmailed(int $id, bool $emailed)
@@ -648,7 +653,7 @@ class Database
 	/**
 	 * Delete candidates older than X days, if they are published
 	 *
-	 * @param int $days Days
+	 * @param int  $days       Days
 	 * @param bool $deleteHold Also delete candidates put on hold (default false)
 	 */
 	public function deleteOlderThan(int $days, bool $deleteHold = false)
@@ -712,10 +717,10 @@ class Database
 	/**
 	 * Set date and time for an interview
 	 *
-	 * @param int $id User ID
-	 * @param string|null $recruiter Recruiter full name
-	 * @param string|null $recruitertg Recruiter Telegram nickname
-	 * @param DateTime|null $when When the interview is scheduled
+	 * @param int           $id          User ID
+	 * @param string|null   $recruiter   Recruiter full name
+	 * @param string|null   $recruitertg Recruiter Telegram nickname
+	 * @param DateTime|null $when        When the interview is scheduled
 	 */
 	public function setInterviewSchedule(int $id, ?string $recruiter, ?string $recruitertg, ?DateTime $when)
 	{
@@ -737,9 +742,9 @@ class Database
 	/**
 	 * Set data for an interview
 	 *
-	 * @param int $id User ID
+	 * @param int         $id        User ID
 	 * @param string|null $questions Questions to ask and notes
-	 * @param string|null $answers Answers given by the candidate and comments
+	 * @param string|null $answers   Answers given by the candidate and comments
 	 */
 	public function setInterviewData(int $id, ?string $answers)
 	{
@@ -755,7 +760,7 @@ class Database
 	/**
 	 * Set interview status. Yeah.
 	 *
-	 * @param int $id User ID
+	 * @param int       $id     User ID
 	 * @param bool|null $status True for approved, false for rejected, null to unset
 	 */
 	public function setInterviewStatus(int $id, ?bool $status)
@@ -821,17 +826,17 @@ class Database
 			}
 
 			$compact[] = [
-				'id'              => $row['id'],
-				'name'            => $row['name'] . ' ' . $row['surname'],
-				'area'            => $row['area'],
-				'interviewer'     => $row['interviewer'],
-				'hold'            => $row['hold'],
-				'recruiter'       => $row['recruiter'],
-				'interviewstatus' => $row['interviewstatus'] === null ? null : (bool) $row['interviewstatus'],
-				'answers'         => (bool) $row['al'],
-				'when'            => $when,
-				'invite'          => (bool) $row['il'],
-				'safetyTestDate'  => $safetyTestDate
+			'id'              => $row['id'],
+			'name'            => $row['name'] . ' ' . $row['surname'],
+			'area'            => $row['area'],
+			'interviewer'     => $row['interviewer'],
+			'hold'            => $row['hold'],
+			'recruiter'       => $row['recruiter'],
+			'interviewstatus' => $row['interviewstatus'] === null ? null : (bool) $row['interviewstatus'],
+			'answers'         => (bool) $row['al'],
+			'when'            => $when,
+			'invite'          => (bool) $row['il'],
+			'safetyTestDate'  => $safetyTestDate
 			];
 		}
 
@@ -856,11 +861,11 @@ class Database
 				$compact[$row['interviewer']] = [];
 			}
 			$compact[$row['interviewer']][] = [
-				'id'     => $row['id'],
-				'name'   => $row['name'] . ' ' . $row['surname'],
-				'area'   => $row['area'],
-				'when'   => $dt,
-				'status' => $row['status'] === null ? null : (bool) $row['status'],
+			'id'     => $row['id'],
+			'name'   => $row['name'] . ' ' . $row['surname'],
+			'area'   => $row['area'],
+			'when'   => $dt,
+			'status' => $row['status'] === null ? null : (bool) $row['status'],
 			];
 		}
 
@@ -869,15 +874,18 @@ class Database
 
 	/**
 	 * Get all positions
+	 *
 	 * @param string $lang Language (optional), if not set, won't provide name or description
-	 * 
+	 *
 	 * @return array Array of associative arrays with id, availability, printable name and description
 	 */
 	public function getPositions($lang = null)
 	{
 		if ($lang) {
-			$stmt = $this->db->prepare("SELECT 
+			$stmt = $this->db->prepare(
+				"SELECT 
 					p.id,
+					p.idx,
 					p.available,
 					t_name.value AS name,
 					t_desc.value AS description
@@ -886,10 +894,13 @@ class Database
 				LEFT JOIN 
 					translations t_name ON t_name.id = 'position.' || p.id || '.name' AND t_name.lang = :lang
 				LEFT JOIN 
-					translations t_desc ON t_desc.id = 'position.' || p.id || '.description' AND t_desc.lang = :lang");
+					translations t_desc ON t_desc.id = 'position.' || p.id || '.description' AND t_desc.lang = :lang
+				ORDER BY
+					p.idx ASC"
+			);
 			$stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
 		} else {
-			$stmt = $this->db->prepare('SELECT id, available FROM positions');
+			$stmt = $this->db->prepare('SELECT id, idx, available FROM positions');
 		}
 		$result = $stmt->execute();
 
@@ -902,15 +913,18 @@ class Database
 
 	/**
 	 * Get available positions
+	 *
 	 * @param string $lang Language (optional), if not set, won't provide name or description
-	 * 
+	 *
 	 * @return array Array of associative arrays with id, availability, printable name and description
 	 */
 	public function getAvailablePositions($lang = null)
 	{
 		if ($lang) {
-			$stmt = $this->db->prepare("SELECT 
+			$stmt = $this->db->prepare(
+				"SELECT 
 					p.id,
+					p.idx,
 					p.available,
 					t_name.value AS name,
 					t_desc.value AS description
@@ -921,13 +935,16 @@ class Database
 				LEFT JOIN 
 					translations t_desc ON t_desc.id = 'position.' || p.id || '.description' AND t_desc.lang = :lang
 				WHERE 
-					p.available = 1");
+					p.available = 1
+				ORDER BY
+					p.idx ASC"
+			);
 			$stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
 		} else {
-			$stmt = $this->db->prepare('SELECT id, available FROM positions');
+			$stmt = $this->db->prepare('SELECT id, idx, available FROM positions');
 		}
 		$result = $stmt->execute();
-		
+
 		$positions = [];
 		while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			$positions[] = $row;
@@ -937,17 +954,19 @@ class Database
 
 	/**
 	 * Get a single position
-	 * 
-	 * @param int $id Position ID
+	 *
+	 * @param int    $id   Position ID
 	 * @param string $lang Language (optional), if not set, won't provide name or description
-	 * 
+	 *
 	 * @return array Associative array with id, availability, printable name and description
 	 */
 	public function getPosition($id, $lang = null)
 	{
 		if ($lang) {
-			$stmt = $this->db->prepare("SELECT 
+			$stmt = $this->db->prepare(
+				"SELECT 
 					p.id,
+					p.idx,
 					p.available,
 					t_name.value AS name,
 					t_desc.value AS description
@@ -958,10 +977,11 @@ class Database
 				LEFT JOIN 
 					translations t_desc ON t_desc.id = 'position.' || p.id || '.description' AND t_desc.lang = :lang
 				WHERE
-					p.id = :id");
+					p.id = :id"
+			);
 			$stmt->bindValue(':lang', $lang, SQLITE3_TEXT);
 		} else {
-			$stmt = $this->db->prepare('SELECT id, available FROM positions WHERE id = :id');
+			$stmt = $this->db->prepare('SELECT id, idx, available FROM positions WHERE id = :id');
 		}
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
 		$result = $stmt->execute();
@@ -971,9 +991,9 @@ class Database
 
 	/**
 	 * Add a new position
-	 * 
-	 * @param string $id Position ID
-	 * @param int $available Availability
+	 *
+	 * @param string $id        Position ID
+	 * @param int    $available Availability
 	 */
 	public function setPositionAvailability($id, $available)
 	{
@@ -987,8 +1007,25 @@ class Database
 	}
 
 	/**
+	 * Add a new position
+	 *
+	 * @param string $id Position ID
+	 *
+	 * @throws DatabaseException
+	 */
+	public function addPosition($id)
+	{
+		$stmt = $this->db->prepare('INSERT INTO positions (id, available, idx) VALUES (:id, 0, (SELECT MAX(idx) + 1 FROM positions))');
+		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if ($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	/**
 	 * Update a position id
-	 * 
+	 *
 	 * @param string $oldId Old position ID
 	 * @param string $newId New position ID
 	 */
@@ -1004,8 +1041,25 @@ class Database
 	}
 
 	/**
+	 * Update a position index
+	 *
+	 * @param string $id    Position ID
+	 * @param int    $index Position index
+	 */
+	public function updatePositionIndex($id, $index)
+	{
+		$stmt = $this->db->prepare('UPDATE positions SET idx=:index WHERE id=:id');
+		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
+		$stmt->bindValue(':index', $index, SQLITE3_INTEGER);
+		$result = $stmt->execute();
+		if ($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	/**
 	 * Delete a positionù
-	 * 
+	 *
 	 * @param int $id Position ID
 	 */
 	public function deletePosition($id)
@@ -1020,10 +1074,10 @@ class Database
 
 	/**
 	 * Get a translation
-	 * 
-	 * @param string $id Translation ID
+	 *
+	 * @param string $id   Translation ID
 	 * @param string $lang Language
-	 * 
+	 *
 	 * @return array Associative array with value
 	 */
 	public function getTranslation($id, $lang)
@@ -1038,13 +1092,13 @@ class Database
 
 	/**
 	 * Update a translation
-	 * 
-	 * @param string $id Translation ID
-	 * @param string $lang Language
+	 *
+	 * @param string $id    Translation ID
+	 * @param string $lang  Language
 	 * @param string $value Translation value
-	 * 
+	 *
 	 * @throws DatabaseException
-	 * 
+	 *
 	 * @return void
 	 */
 	public function updateTranslation($id, $lang, $value)
@@ -1059,19 +1113,23 @@ class Database
 		}
 	}
 
-	/** @noinspection PhpDocMissingThrowsInspection */
+	/**
+	 * @noinspection PhpDocMissingThrowsInspection
+	 */
 	/**
 	 * Convert timestamp to a DateTime
 	 *
-	 * @param int $timestamp Unix Timestamp
-	 * @param DateTimeZone|null $dtz Timezone, null for default
+	 * @param int               $timestamp Unix Timestamp
+	 * @param DateTimeZone|null $dtz       Timezone, null for default
 	 *
 	 * @return DateTime
 	 */
 	private function timestampToTime(int $timestamp, ?DateTimeZone $dtz = null): DateTime
 	{
 		$dtz = $dtz ?? new DateTimeZone('Europe/Rome');
-		/** @noinspection PhpUnhandledExceptionInspection */
+		/**
+	* @noinspection PhpUnhandledExceptionInspection
+*/
 		$dt = new DateTime('now', $dtz);
 		$dt->setTimestamp($timestamp);
 
@@ -1096,7 +1154,7 @@ class Database
 	}
 
 	/**
-	 * @param User|null $user
+	 * @param User|null    $user
 	 * @param \SQLite3Stmt $stmt
 	 */
 	private function bindUserParameters(?User $user, \SQLite3Stmt $stmt): void

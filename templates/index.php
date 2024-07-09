@@ -1,16 +1,18 @@
 <?php
-/** @var $expiry int */
+/**
+ * @var $expiry int
+ */
 
 $this->layout('base', ['title' => 'WEEElcome']) ?>
 
-<h1><?=__('Entra in WEEE Open')?></h1>
-<p><?=__('Compila il questionario per fare richiesta di ammissione in team. Premi il bottone qui sotto per iniziare.')?></p>
+<h1><?php echo __('Entra in WEEE Open')?></h1>
+<p><?php echo __('Compila il questionario per fare richiesta di ammissione in team. Premi il bottone qui sotto per iniziare.')?></p>
 <?php //$this->insert('covid') ?>
 <div class="col-md-12 text-center">
 	<?php if ($_SESSION['locale'] === 'en-US') : ?>
-		<a class="btn btn-lg btn-primary the-button" href="form.php">Begin (in English)</a><a class="btn btn-lg btn-outline-secondary the-button" href="language.php?l=it-IT&from=<?=rawurlencode('/form.php')?>">Inizia (in italiano)</a>
+		<a class="btn btn-lg btn-primary the-button" href="form.php">Begin (in English)</a><a class="btn btn-lg btn-outline-secondary the-button" href="language.php?l=it-IT&from=<?php echo rawurlencode('/form.php')?>">Inizia (in italiano)</a>
 	<?php else : ?>
-		<a class="btn btn-lg btn-primary the-button" href="form.php">Inizia (in italiano)</a><a class="btn btn-lg btn-outline-secondary the-button" href="language.php?l=en-US&from=<?=rawurlencode('/form.php')?>">Begin (in English)</a>
+		<a class="btn btn-lg btn-primary the-button" href="form.php">Inizia (in italiano)</a><a class="btn btn-lg btn-outline-secondary the-button" href="language.php?l=en-US&from=<?php echo rawurlencode('/form.php')?>">Begin (in English)</a>
 	<?php endif; ?>
 </div>
 <?php if ($expiry !== null) : ?>
@@ -38,27 +40,27 @@ $this->layout('base', ['title' => 'WEEElcome']) ?>
 				// Display the result in the element with id="demo"
 				if(days === 0) {
 					if(hours === 0) {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra meno di un\'ora, affrettati!') ?>`;
+						timer.textContent = `<?php echo __('Le candidature si chiuderanno tra meno di un\'ora, affrettati!') ?>`;
 					} else if(hours === 1) {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra 1 ora.') ?>`;
+						timer.textContent = `<?php echo __('Le candidature si chiuderanno tra 1 ora.') ?>`;
 					} else {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra ${hours} ore.') ?>`;
+						timer.textContent = `<?php echo __('Le candidature si chiuderanno tra ${hours} ore.') ?>`;
 					}
 				} else if(days === 1) {
 					if(hours === 0) {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra 1 giorno.') ?>`;
+						timer.textContent = `<?php echo __('Le candidature si chiuderanno tra 1 giorno.') ?>`;
 					} else if(hours === 1) {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra 1 giorno e 1 ora.') ?>`;
+						timer.textContent = `<?php echo __('Le candidature si chiuderanno tra 1 giorno e 1 ora.') ?>`;
 					} else {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra 1 giorno e ${hours} ore.') ?>`;
+						timer.textContent = `<?php echo __('Le candidature si chiuderanno tra 1 giorno e ${hours} ore.') ?>`;
 					}
 				} else {
 					if(hours === 0) {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra ${days} giorni.') ?>`;
+						timer.textContent = `<?php echo __('Le candidature si chiuderanno tra ${days} giorni.') ?>`;
 					} else if(hours === 1) {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra ${days} giorni e 1 ora.') ?>`;
+						timer.textContent = `<?php echo __('Le candidature si chiuderanno tra ${days} giorni e 1 ora.') ?>`;
 					} else {
-						timer.textContent = `<?= __('Le candidature si chiuderanno tra ${days} giorni e ${hours} ore.') ?>`;
+						timer.textContent = `<?php echo __('Le candidature si chiuderanno tra ${days} giorni e ${hours} ore.') ?>`;
 					}
 				}
 

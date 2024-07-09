@@ -1,6 +1,8 @@
 <?php
 
-/** @var string|null $positions */
+/**
+ * @var string|null $positions
+ */
 
 use Michelf\Markdown;
 
@@ -16,31 +18,31 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 <div class="col-md-12">
 	<?php if (isset($error)) : ?>
 		<div class="alert alert-danger">
-			<?php
-			switch ($error) {
-				case 'form':
-					echo __('Riempi tutti i campi del form, per favore');
-					break;
-				case 'consent':
-					echo __('È necessario prestare il consenso per procedere');
-					break;
-				case 'db':
-					echo sprintf(
-						__('Errore di connessione al database. Se il problema persiste, puoi contattarci all\'indirizzo %s'),
-						WEEEHIRE_EMAIL_FALLBACK
-					);
-					break;
-				case 'duplicate':
-					echo sprintf(__('Hai già inviato una candidatura con questa matricola. Puoi controllare la pagina con lo stato dal link che ti abbiamo mandato via email. Per favore non inviare più di una candidatura a testa, se vuoi candidarti per più di un\'area puoi <a href="https://weeeopen.polito.it/contattaci/" target="_blank">inviarci un messaggio tramite il sito</a> o dircelo durante il colloquio.'));
-					break;
-				default:
-					echo sprintf(
-						__('Si è rotto qualcosa (o hai rotto qualcosa?) durante l\'invio. Puoi contattarci a %s e spiegarci cos\'è successo, se vuoi.'),
-						WEEEHIRE_EMAIL_FALLBACK
-					);
-					break;
-			}
-			?>
+		<?php
+		switch ($error) {
+			case 'form':
+				echo __('Riempi tutti i campi del form, per favore');
+				break;
+			case 'consent':
+				echo __('È necessario prestare il consenso per procedere');
+				break;
+			case 'db':
+				echo sprintf(
+					__('Errore di connessione al database. Se il problema persiste, puoi contattarci all\'indirizzo %s'),
+					WEEEHIRE_EMAIL_FALLBACK
+				);
+				break;
+			case 'duplicate':
+				echo sprintf(__('Hai già inviato una candidatura con questa matricola. Puoi controllare la pagina con lo stato dal link che ti abbiamo mandato via email. Per favore non inviare più di una candidatura a testa, se vuoi candidarti per più di un\'area puoi <a href="https://weeeopen.polito.it/contattaci/" target="_blank">inviarci un messaggio tramite il sito</a> o dircelo durante il colloquio.'));
+				break;
+			default:
+				echo sprintf(
+					__('Si è rotto qualcosa (o hai rotto qualcosa?) durante l\'invio. Puoi contattarci a %s e spiegarci cos\'è successo, se vuoi.'),
+					WEEEHIRE_EMAIL_FALLBACK
+				);
+				break;
+		}
+		?>
 		</div>
 	<?php endif ?>
 
@@ -48,34 +50,34 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 
 	<form method="post">
 		<div class="form-group row">
-			<label for="name" class="col-md-2 col-lg-1 col-form-label"><?=__('Nome')?></label>
+			<label for="name" class="col-md-2 col-lg-1 col-form-label"><?php echo __('Nome')?></label>
 			<div class="col-md-4 col-lg-4">
 				<input id="name" name="name" type="text" required="required" class="form-control">
 			</div>
-			<label for="surname" class="col-md-2 col-lg-1 col-form-label"><?=__('Cognome')?></label>
+			<label for="surname" class="col-md-2 col-lg-1 col-form-label"><?php echo __('Cognome')?></label>
 			<div class="col-md-4 col-lg-6">
 				<input id="surname" name="surname" type="text" required="required" class="form-control">
 			</div>
 		</div>
 
 		<div class="form-group row">
-			<label for="year" class="col-md-1 col-form-label"><?=__('Anno')?></label>
+			<label for="year" class="col-md-1 col-form-label"><?php echo __('Anno')?></label>
 			<div class="col-md-2 col-lg-4">
 				<select id="year" name="year" required="required" class="form-control">
 					<option value selected disabled class="d-none"></option>
-					<option value="1º Triennale"><?=__('1º Triennale')?></option>
-					<option value="2º Triennale"><?=__('2º Triennale')?></option>
-					<option value="3º Triennale"><?=__('3º Triennale')?></option>
-					<option value="1º Magistrale"><?=__('1º Magistrale')?></option>
-					<option value="2º Magistrale"><?=__('2º Magistrale')?></option>
-					<option value="Dottorato"><?=__('Dottorato')?></option>
+					<option value="1º Triennale"><?php echo __('1º Triennale')?></option>
+					<option value="2º Triennale"><?php echo __('2º Triennale')?></option>
+					<option value="3º Triennale"><?php echo __('3º Triennale')?></option>
+					<option value="1º Magistrale"><?php echo __('1º Magistrale')?></option>
+					<option value="2º Magistrale"><?php echo __('2º Magistrale')?></option>
+					<option value="Dottorato"><?php echo __('Dottorato')?></option>
 				</select>
 			</div>
-			<label for="degreecourse" class="col-md-2 col-lg-1 col-form-label"><?=__('Corso di laurea')?></label>
+			<label for="degreecourse" class="col-md-2 col-lg-1 col-form-label"><?php echo __('Corso di laurea')?></label>
 			<div class="col-md-7 col-lg-6">
 				<select id="degreecourse" name="degreecourse" required="required" class="form-control">
 					<option hidden disabled class="default"></option>
-					<optgroup label="<?= __('Ingegneria') ?>" data-level="bachelor">
+					<optgroup label="<?php echo __('Ingegneria') ?>" data-level="bachelor">
 						<option value="Automotive Engineering">Automotive Engineering</option>
 						<option value="Computer Engineering">Computer Engineering</option>
 						<option value="Electronic And Communications Engineering">Electronic And Communications Engineering</option>
@@ -100,14 +102,14 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 						<option value="Matematica Per L'ingegneria">Matematica Per L'ingegneria</option>
 						<option value="Mechanical Engineering">Mechanical Engineering</option>
 					</optgroup>
-					<optgroup label="<?= __('Design') ?>" data-level="bachelor">
+					<optgroup label="<?php echo __('Design') ?>" data-level="bachelor">
 						<option value="Design E Comunicazione Visiva">Design E Comunicazione Visiva</option>
 					</optgroup>
-					<optgroup label="<?= __('Architettura e pianificazione urbanistica') ?>" data-level="bachelor">
+					<optgroup label="<?php echo __('Architettura e pianificazione urbanistica') ?>" data-level="bachelor">
 						<option value="Architettura">Architettura</option>
 						<option value="Pianificazione Territoriale, Urbanistica E Paesaggistico-ambientale">Pianificazione Territoriale, Urbanistica E Paesaggistico-ambientale</option>
 					</optgroup>
-					<optgroup label="<?= __('Ingegneria') ?>" data-level="master">
+					<optgroup label="<?php echo __('Ingegneria') ?>" data-level="master">
 						<option value="Building Engineering">Building Engineering</option>
 						<option value="Civil Engineering">Civil Engineering</option>
 						<option value="Computer Engineering">Computer Engineering</option>
@@ -139,10 +141,10 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 						<option value="Physics Of Complex Systems (Fisica Dei Sistemi Complessi)">Physics Of Complex Systems (Fisica Dei Sistemi Complessi)</option>
 						<option value="Physics Of Complex Systems">Physics Of Complex Systems</option>
 					</optgroup>
-					<optgroup label="<?= __('Design') ?>" data-level="master">
+					<optgroup label="<?php echo __('Design') ?>" data-level="master">
 						<option value="Design Sistemico">Design Sistemico</option>
 					</optgroup>
-					<optgroup label="<?= __('Architettura e pianificazione urbanistica') ?>" data-level="master">
+					<optgroup label="<?php echo __('Architettura e pianificazione urbanistica') ?>" data-level="master">
 						<option value="Architecture Construction City">Architecture Construction City</option>
 						<option value="Architecture For Heritage">Architecture For Heritage</option>
 						<option value="Architecture For Sustainability">Architecture For Sustainability</option>
@@ -159,7 +161,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 						<option value="Progettazione Delle Aree Verdi E Del Paesaggio">Progettazione Delle Aree Verdi E Del Paesaggio</option>
 						<option value="Territorial, Urban, Environmental And Landscape Planning">Territorial, Urban, Environmental And Landscape Planning</option>
 					</optgroup>
-					<optgroup label="<?=__('Dottorato')?>" data-level="phd">
+					<optgroup label="<?php echo __('Dottorato')?>" data-level="phd">
 						<option value="Dottorato in Ambiente E Territorio">Dottorato in Ambiente E Territorio</option>
 						<option value="Dottorato in Architettura. Storia E Progetto">Dottorato in Architettura. Storia E Progetto</option>
 						<option value="Dottorato in Beni Architettonici E Paesaggistici">Dottorato in Beni Architettonici E Paesaggistici</option>
@@ -186,35 +188,35 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="matricola" class="col-md-2 col-lg-1 col-form-label"><?=__('Matricola')?></label>
+			<label for="matricola" class="col-md-2 col-lg-1 col-form-label"><?php echo __('Matricola')?></label>
 			<div class="col-md-3 col-lg-4">
 				<input id="matricola" name="matricola" placeholder="s123456" type="text" required="required"
 						class="form-control">
 			</div>
-			<label for="area" class="col-md-2 col-lg-1 col-form-label"><?=__('Interesse')?></label>
+			<label for="area" class="col-md-2 col-lg-1 col-form-label"><?php echo __('Interesse')?></label>
 			<div class="col-md-5 col-lg-6">
 				<select id="area" name="area" required="required" class="form-control">
 					<option value selected disabled class="d-none"></option>
 					<?php foreach ($positions as $position) : ?>
-						<option <?= $position['available'] == 1 ? '' : 'disabled' ?> value="<?= $this->e($position['id']) ?>"><?= $this->e($position['name']) ?></option>
+						<option <?php echo $position['available'] == 1 ? '' : 'disabled' ?> value="<?php echo $this->e($position['id']) ?>"><?php echo $this->e($position['name']) ?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>
 		</div>
 		<?php if ($totalUnavailable != 0) : ?>
 		<div class="form-group">
-			<p><small><?= __('Al momento alcune aree del team sono al completo, è possibile candidarsi solo nelle aree selezionabili dall\'elenco. In futuro le aree disponibili potrebbero cambiare senza preavviso.') ?></small></p>
+			<p><small><?php echo __('Al momento alcune aree del team sono al completo, è possibile candidarsi solo nelle aree selezionabili dall\'elenco. In futuro le aree disponibili potrebbero cambiare senza preavviso.') ?></small></p>
 		</div>
 		<?php endif; ?>
 		<div class="form-group">
-			<label for="letter"><b><?=__('Lettera motivazionale')?></b></label>
+			<label for="letter"><b><?php echo __('Lettera motivazionale')?></b></label>
 			<div id="mlet-explain">
 				<div class="form-text" id="mlet-explain-">
-					<p><?=__('Seleziona l\'area del team che più ti interessa e qui compariranno delle linee guida su cosa scrivere.') ?></p>
+					<p><?php echo __('Seleziona l\'area del team che più ti interessa e qui compariranno delle linee guida su cosa scrivere.') ?></p>
 				</div>
 				<?php foreach ($positions as $position) : ?>
-					<div class="form-text d-none" id="mlet-explain-<?= $position['id'] ?>">
-						<?= Markdown::defaultTransform($position['description'] ?? '') ?>
+					<div class="form-text d-none" id="mlet-explain-<?php echo $position['id'] ?>">
+					<?php echo Markdown::defaultTransform($position['description'] ?? '') ?>
 					</div>
 				<?php endforeach; ?>
 			</div>
@@ -223,19 +225,19 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 		<div class="form-group">
 			<div>
 				<div id="checkboxesHelpBlock" class="form-text text-muted">
-					<span class="form-text text-muted" id="generatedEmailAddrText" class="hidden"> <?= __('Una conferma della tua candidatura verrà inviata all\'indirizzo <span id="generatedEmailAddr"></span>.') ?></span>
-					<span><?=sprintf(__('Visualizza le <a href="%s">Informazioni sul trattamento dei dati personali</a>.'), 'privacy.php')?></span>
+					<span class="form-text text-muted" id="generatedEmailAddrText" class="hidden"> <?php echo __('Una conferma della tua candidatura verrà inviata all\'indirizzo <span id="generatedEmailAddr"></span>.') ?></span>
+					<span><?php echo sprintf(__('Visualizza le <a href="%s">Informazioni sul trattamento dei dati personali</a>.'), 'privacy.php')?></span>
 				</div>
 				<div class="form-check">
 					<input name="mandatorycheckbox_0" id="mandatorycheckbox_0" type="checkbox" class="form-check-input"
 							value="true" aria-describedby="checkboxesHelpBlock" required="required">
 					<label for="mandatorycheckbox_0"
-							class="form-check-label"><?=__('Ho letto le Informazioni sul trattamento dei dati personali e accetto le condizioni lì delineate')?></label>
+							class="form-check-label"><?php echo __('Ho letto le Informazioni sul trattamento dei dati personali e accetto le condizioni lì delineate')?></label>
 				</div>
 			</div>
 		</div>
 		<div class="form-group">
-			<button type="submit" class="btn btn-primary"><?=__('Invia')?></button>
+			<button type="submit" class="btn btn-primary"><?php echo __('Invia')?></button>
 		</div>
 	</form>
 </div>

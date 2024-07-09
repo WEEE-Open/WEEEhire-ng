@@ -38,21 +38,21 @@ class PageStatus implements RequestHandlerInterface
 			// GDPR data download button
 			$attributes = (array) $user;
 			$downloadable = [
-				'name',
-				'surname',
-				'degreecourse',
-				'year',
-				'matricola',
-				'area',
-				'letter'
+			'name',
+			'surname',
+			'degreecourse',
+			'year',
+			'matricola',
+			'area',
+			'letter'
 			];
 			// Filter out other attributes
 			$attributes = array_intersect_key($attributes, array_combine($downloadable, $downloadable));
 
 			$headers = [
-				'Content-Transfer-Encoding' => 'Binary',
-				'Content-Description' => 'File Transfer',
-				'Content-Disposition' => 'attachment; filename=weeehire.json',
+			'Content-Transfer-Encoding' => 'Binary',
+			'Content-Description' => 'File Transfer',
+			'Content-Disposition' => 'attachment; filename=weeehire.json',
 			];
 			return new JsonResponse($attributes, 200, $headers, JsonResponse::DEFAULT_JSON_FLAGS | JSON_PRETTY_PRINT);
 		} elseif (isset($GET['delete'])) {
