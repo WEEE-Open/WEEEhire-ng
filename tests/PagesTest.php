@@ -12,7 +12,6 @@ abstract class PagesTest extends TestCase {
 		require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 		$db = new Database();
 		$db->unsetConfigValue('expiry');
-		$db->setConfigValue('rolesAvailable', 'Sviluppo software PHP|Sviluppo software Python|Elettronica');
 		$db->unsetConfigValue('notifyEmail');
 	}
 

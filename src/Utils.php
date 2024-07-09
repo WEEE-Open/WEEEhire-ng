@@ -10,8 +10,8 @@ class Utils
 	/**
 	 * Add or remove query parameters from a URL
 	 *
-	 * @param UriInterface $uri Current URI, may contain query parameters
-	 * @param array $parameters Parameters to modify. Key is name, value is the value or null to delete it. Other parameters left untouched.
+	 * @param UriInterface $uri        Current URI, may contain query parameters
+	 * @param array        $parameters Parameters to modify. Key is name, value is the value or null to delete it. Other parameters left untouched.
 	 *
 	 * @return string resulting URL
 	 */

@@ -1,8 +1,14 @@
 <?php
 
-/** @var $link string */
-/** @var $subject bool */
-/** @var $resend bool */
+/**
+ * @var $link string
+ */
+/**
+ * @var $subject bool
+ */
+/**
+ * @var $resend bool
+ */
 if ($subject) {
 	echo __('Candidatura in WEEE Open');
 } else {

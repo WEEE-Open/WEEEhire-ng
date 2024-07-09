@@ -5,7 +5,9 @@ namespace WEEEOpen\WEEEHire;
 class Interview
 {
 	public $id;
-	/** @noinspection PhpFullyQualifiedNameUsageInspection */
+	/**
+	 * @noinspection PhpFullyQualifiedNameUsageInspection
+	 */
 	/**
 	 * @var $when \DateTime|null Date of the interview
 	 */

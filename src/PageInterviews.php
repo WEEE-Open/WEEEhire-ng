@@ -50,38 +50,48 @@ class PageInterviews implements RequestHandlerInterface
 					$optionalNotes = "";
 				}
 
-				$ical = new VCalendar([
+				$ical = new VCalendar(
+					[
 					'VEVENT' => [
-						'SUMMARY' => "Colloquio con $user->name $user->surname",
-						'UID' => $user->id,
-						'DTSTART' => $interview->when,
-						'DTEND' => (clone $interview->when)->add(new \DateInterval('PT30M')),
-						'DESCRIPTION' => "Colloquio per $user->area.$optionalNotes",
+					'SUMMARY' => "Colloquio con $user->name $user->surname",
+					'UID' => $user->id,
+					'DTSTART' => $interview->when,
+					'DTEND' => (clone $interview->when)->add(new \DateInterval('PT30M')),
+					'DESCRIPTION' => "Colloquio per $user->area.$optionalNotes",
 					]
-				]);
-				/** @noinspection PhpUndefinedFieldInspection */
-				/** @noinspection PhpMethodParametersCountMismatchInspection */
+					]
+				);
+				/**
+	   * @noinspection PhpUndefinedFieldInspection
+*/
+				/**
+	   * @noinspection PhpMethodParametersCountMismatchInspection
+*/
 				$ical->VEVENT->add(
 					'URL',
 					Utils::appendQueryParametersToRelativeUrl($request->getUri(), ['download' => null]),
 					[
-						'VALUE' => 'URI',
+					'VALUE' => 'URI',
 					]
 				);
-				/** @noinspection PhpUndefinedFieldInspection */
-				/** @noinspection PhpMethodParametersCountMismatchInspection */
+				/**
+	   * @noinspection PhpUndefinedFieldInspection
+*/
+				/**
+	   * @noinspection PhpMethodParametersCountMismatchInspection
+*/
 				$ical->VEVENT->add(
 					'ORGANIZER',
 					'https://t.me/' . $interview->recruitertg,
 					[
-						'CN' => $interview->recruiter,
+					'CN' => $interview->recruiter,
 					]
 				);
 
 				$headers = [
-					'Content-Type' => 'text/calendar; charset=utf-8',
-					'Content-Description' => 'File Transfer',
-					'Content-Disposition' => "attachment; filename=\"colloquio $user->name $user->surname.ics\"",
+				 'Content-Type' => 'text/calendar; charset=utf-8',
+				 'Content-Description' => 'File Transfer',
+				 'Content-Disposition' => "attachment; filename=\"colloquio $user->name $user->surname.ics\"",
 				];
 
 				return new TextResponse($ical->serialize(), 200, $headers);
@@ -94,13 +104,16 @@ class PageInterviews implements RequestHandlerInterface
 
 			// Interview page not available?
 			if (!$user->status || !$user->published) {
-				$page = $template->render('error', [
+				$page = $template->render(
+					'error',
+					[
 					'message' => sprintf(
 						__('È necessario approvare e pubblicare la candidatura di %s per accedere a questa pagina. Torna alla <a href="/candidates.php?id=%d">pagina di gestione candidato</a>.'),
 						htmlspecialchars($user->name, ENT_QUOTES | ENT_HTML5),
 						$user->id
 					)
-				]);
+					]
+				);
 				return new HtmlResponse($page, 400);
 			}
 
@@ -115,9 +128,9 @@ class PageInterviews implements RequestHandlerInterface
 
 			// A form has been submitted
 			if ($request->getMethod() === 'POST') {
-				$POST = $request->getParsedBody();
-				$changed = false;
-				$note = $POST['note'] ?? '';
+				   $POST = $request->getParsedBody();
+				   $changed = false;
+				   $note = $POST['note'] ?? '';
 
 				if (isset($POST['edit'])) {
 					// Update personal details, same as candidates.php
@@ -139,21 +152,21 @@ class PageInterviews implements RequestHandlerInterface
 					$db->setInviteLink($id, $link);
 					$changed = true;
 				} elseif (isset($POST['setinterview']) && isset($POST['when1']) && isset($POST['when2']) && isset($POST['recruiter'])) {
-					// Schedule an interview
-					$recruiter = $POST['recruiter'];
+					 // Schedule an interview
+					 $recruiter = $POST['recruiter'];
 					if (strlen($recruiter) <= 0 || strpos($recruiter, '|') === false) {
-						return new HtmlResponse($template->render('error', ['message' => 'Select a recruiter']), 400);
+								return new HtmlResponse($template->render('error', ['message' => 'Select a recruiter']), 400);
 					}
-					// Split recruiter name and telegram account
-					$recruiter = explode('|', $recruiter, 2);
-					// Glue date and time together
+					 // Split recruiter name and telegram account
+					 $recruiter = explode('|', $recruiter, 2);
+					 // Glue date and time together
 					$when = DateTime::createFromFormat(
 						"Y-m-d H:i",
 						$POST['when1'] . ' ' . $POST['when2'],
 						new DateTimeZone('Europe/Rome')
 					);
-					$db->setInterviewSchedule($interview->id, $recruiter[1], $recruiter[0], $when);
-					$changed = true;
+					 $db->setInterviewSchedule($interview->id, $recruiter[1], $recruiter[0], $when);
+					 $changed = true;
 				} elseif (isset($POST['unsetinterview'])) {
 					// Unschedule an interview
 					$db->setInterviewSchedule($interview->id, null, null, null);
@@ -200,22 +213,25 @@ class PageInterviews implements RequestHandlerInterface
 			}
 
 			// Render the page
-			$page = $template->render('interview', [
+			$page = $template->render(
+				'interview',
+				[
 				'user'       => $user,
 				'interview'  => $interview,
 				'edit'       => isset($GET['edit']),
 				'recruiters' => $ldap->getRecruiters(),
 				'notes'      => $notes,
-			]);
+				]
+			);
 
 			return new HtmlResponse($page);
 		} else {
 			// No id parameter => list of interviews
 
 			// No buttons here to submit anything
-			//	if($request->getMethod() === 'POST') {
+			//    if($request->getMethod() === 'POST') {
 			//
-			//	}
+			//    }
 
 			if (isset($GET['byrecruiter'])) {
 				// List of interviews by recruiter
@@ -224,10 +240,10 @@ class PageInterviews implements RequestHandlerInterface
 				$page = $template->render(
 					'interviewsbyrecruiter',
 					[
-						'interviews' => $interviews,
-						'myuser' => $_SESSION['uid'],
-						'myname' => $_SESSION['cn'],
-						'showOldInterviews' => ( isset($GET['showOldInterviews']) && $GET['showOldInterviews'] === 'on' )
+					'interviews' => $interviews,
+					'myuser' => $_SESSION['uid'],
+					'myname' => $_SESSION['cn'],
+					'showOldInterviews' => ( isset($GET['showOldInterviews']) && $GET['showOldInterviews'] === 'on' )
 					]
 				);
 				return new HtmlResponse($page);

@@ -2,5 +2,5 @@
 
 $this->layout('base', ['title' => __('Logout')]) ?>
 
-<h1><?=__('Logout')?></h1>
-<p><?=__('Logout completato')?></p>
+<h1><?php echo __('Logout')?></h1>
+<p><?php echo __('Logout completato')?></p>

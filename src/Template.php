@@ -9,7 +9,7 @@ use Psr\Http\Message\UriInterface;
 
 class Template
 {
-	private const SUPPORTED_LOCALES = ['en-US', 'it-IT'];
+	public const SUPPORTED_LOCALES = ['en-US', 'it-IT'];
 
 
 	public static function getNormalizedLocale(string $locale): ?string
@@ -31,8 +31,8 @@ class Template
 	/**
 	 * Prepare the template engine and configure Motranslator if no session is available
 	 *
-	 * @param string $locale Template locale (language)
-	 * @param UriInterface $uri Request URI, needed by almost every template
+	 * @param string       $locale Template locale (language)
+	 * @param UriInterface $uri    Request URI, needed by almost every template
 	 *
 	 * @return Engine Plates template engine
 	 */
@@ -85,10 +85,12 @@ class Template
 	 *
 	 * @return string
 	 */
-	private static function getLocale(): string
+	public static function getLocale(): string
 	{
 		// Must be here, or $_SESSION is not available
-		session_start();
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
 		if (isset($_SESSION['locale'])) {
 			return $_SESSION['locale'];
 		}
@@ -122,7 +124,9 @@ class Template
 			return 'en-US';
 		}
 
-		/** @noinspection PhpUndefinedMethodInspection */
+		/**
+	* @noinspection PhpUndefinedMethodInspection
+*/
 		$lowercaseLocale = $bestLanguage->getType();
 		if (strlen($lowercaseLocale) == 5 && $lowercaseLocale[2] == '-') {
 			// gettext (or motranslator) expects the part after the dash to be uppercase

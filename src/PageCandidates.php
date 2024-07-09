@@ -36,7 +36,7 @@ class PageCandidates implements RequestHandlerInterface
 			$user = $db->getUser($id);
 
 			if ($user === null) {
-				return new HtmlResponse($template->render('error', ['message' => 'Invalid user ID']), 404);
+				   return new HtmlResponse($template->render('error', ['message' => 'Invalid user ID']), 404);
 			}
 
 			// A form has been submitted
@@ -67,9 +67,9 @@ class PageCandidates implements RequestHandlerInterface
 				} elseif (isset($POST['resendemail'])) {
 					if ($status === User::STATUS_NEW) {
 						try {
-							$token = $db->regenerateToken($id);
+								  $token = $db->regenerateToken($id);
 						} catch (DatabaseException $e) {
-							return new HtmlResponse($template->render('error', ['message' => 'Database error']), 500);
+							   return new HtmlResponse($template->render('error', ['message' => 'Database error']), 500);
 						} catch (\Exception $e) {
 							return new HtmlResponse($template->render('error', ['message' => 'User does not exists']), 404);
 						}
@@ -101,7 +101,7 @@ class PageCandidates implements RequestHandlerInterface
 						$subject = $POST['subject'] ?? '';
 						$recruiter = $POST['recruiter'] ?? '';
 						if (strlen($email) <= 0) {
-							return new HtmlResponse($template->render('error', ['message' => 'Write an email']), 400);
+								  return new HtmlResponse($template->render('error', ['message' => 'Write an email']), 400);
 						}
 						if (strlen($subject) <= 0) {
 							return new HtmlResponse(
@@ -168,13 +168,13 @@ class PageCandidates implements RequestHandlerInterface
 			$page = $template->render(
 				'candidate',
 				[
-					'user'        => $user,
-					'edit'        => isset($GET['edit']),  // candidates.php?id=123&edit, allows editing of personal data
-					'recruiters'  => $ldap->getRecruiters(),
-					'evaluations' => $db->getEvaluation($id),
-					'uid'         => $_SESSION['uid'],
-					'cn'          => $_SESSION['cn'],
-					'notes'       => $db->getNotesByCandidateId($id)
+				'user'        => $user,
+				'edit'        => isset($GET['edit']),  // candidates.php?id=123&edit, allows editing of personal data
+				'recruiters'  => $ldap->getRecruiters(),
+				'evaluations' => $db->getEvaluation($id),
+				'uid'         => $_SESSION['uid'],
+				'cn'          => $_SESSION['cn'],
+				'notes'       => $db->getNotesByCandidateId($id)
 				]
 			);
 			return new HtmlResponse($page);

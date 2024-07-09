@@ -1,10 +1,12 @@
 <?php
-/** @var $user WEEEOpen\WEEEhire\User */
-/** @var $interview WEEEOpen\WEEEhire\Interview */
-/** @var $edit bool */
-/** @var $recruiters string[][] */
-/** @var \Psr\Http\Message\UriInterface $globalRequestUri */
-/** @var array $notes */
+/**
+ * @var $user WEEEOpen\WEEEhire\User
+ * @var $interview WEEEOpen\WEEEhire\Interview
+ * @var $edit bool
+ * @var $recruiters string[][]
+ * @var \Psr\Http\Message\UriInterface $globalRequestUri
+ * @var array $notes
+ */
 
 $titleShort = sprintf(__('%s %s (%s)'), $this->e($user->name), $this->e($user->surname), $this->e($user->matricola));
 $title = sprintf(__('%s - Colloquio'), $titleShort);
@@ -20,28 +22,28 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 
 <?php if ($interview->status === true) : ?>
 	<div class="alert alert-success" role="alert">
-		<?=sprintf(__('Colloquio superato secondo %s'), $interview->recruiter)?>
+	<?=sprintf(__('Colloquio superato secondo %s'), $interview->recruiter)?>
 	</div>
 <?php elseif ($interview->status === false) : ?>
 	<div class="alert alert-danger" role="alert">
-		<?=sprintf(__('Colloquio fallito secondo %s'), $interview->recruiter)?>
+	<?=sprintf(__('Colloquio fallito secondo %s'), $interview->recruiter)?>
 	</div>
 <?php endif ?>
 
 <?php if ($interview->when === null) : ?>
 	<div class="alert alert-warning" role="alert">
-		<?=__('Colloquio da fissare')?>
+	<?=__('Colloquio da fissare')?>
 	</div>
 <?php else : ?>
 	<div class="alert alert-info" role="alert">
-		<?=sprintf(
-			__('Colloquio fissato per il %s alle %s con <a href="https://t.me/%s">%s</a>. <a href="%s">🗓 Aggiungi al calendario.</a>'),
-			$interview->when->format('Y-m-d'),
-			$interview->when->format('H:i'),
-			$interview->recruitertg,
-			$interview->recruiter,
-			$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri, ['download' => 'true']))
-		)?>
+	<?=sprintf(
+		__('Colloquio fissato per il %s alle %s con <a href="https://t.me/%s">%s</a>. <a href="%s">🗓 Aggiungi al calendario.</a>'),
+		$interview->when->format('Y-m-d'),
+		$interview->when->format('H:i'),
+		$interview->recruitertg,
+		$interview->recruiter,
+		$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri, ['download' => 'true']))
+	)?>
 	</div>
 <?php endif ?>
 
@@ -93,29 +95,29 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 
 <?php if ($interview->status === true && !$edit) : /* ?>
 	<form method="post">
-		<div class="form-group row">
-			<label for="safetyTestDate1" class="col-md-1 col-form-label"><?=__('Data')?></label>
-			<div class="col-md-2">
+	<div class="form-group row">
+	<label for="safetyTestDate1" class="col-md-1 col-form-label"><?=__('Data')?></label>
+	<div class="col-md-2">
 				<input type="date" id="safetyTestDate1" name="safetyTestDate1" required="required" class="form-control"
 						placeholder="YYYY-MM-DD"
 						value="<?=$interview->safetyTestDate === null ? '' : $interview->safetyTestDate->format('Y-m-d')?>">
-			</div>
-			<label for="safetyTestDate2" class="col-md-1 col-form-label"><?=__('Ora')?></label>
-			<div class="col-md-2">
+	</div>
+	<label for="safetyTestDate2" class="col-md-1 col-form-label"><?=__('Ora')?></label>
+	<div class="col-md-2">
 				<input type="time" id="safetyTestDate2" name="safetyTestDate2" required="required" class="form-control" placeholder="HH:MM"
 						value="<?=$interview->safetyTestDate === null ? '' : $interview->safetyTestDate->format('H:i')?>">
-			</div>
-			<div class="col-md-3">
-			<button name="setsafetyTestDate" value="true" type="submit"
+	</div>
+	<div class="col-md-3">
+	<button name="setsafetyTestDate" value="true" type="submit"
 					class="btn btn-primary"><?=__('Fissa esame della sicurezza')?></button>
-			</div>
-			<div class="col-md-3">
-			<button name="unsetsafetyTestDate" value="true" type="submit"
+	</div>
+	<div class="col-md-3">
+	<button name="unsetsafetyTestDate" value="true" type="submit"
 					class="btn btn-outline-danger"><?=__('Cancella esame della sicurezza')?></button>
-			</div>
-		</div>
+	</div>
+	</div>
 	</form>
-<?php */
+	<?php */
 endif ?>
 
 <?=$this->fetch('userinfo', ['user' => $user, 'edit' => $edit])?>
@@ -123,14 +125,11 @@ endif ?>
 <?php if (!$edit) : ?>
 	<div class="form-group">
 		<a class="btn btn-outline-secondary"
-				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl(
-					$globalRequestUri,
-					['edit' => 'true']
-				))?>"><?=__('Modifica dati')?></a>
+				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri, ['edit' => 'true']))?>"><?=__('Modifica dati')?></a>
 	</div>
 
-	<h4 class="mt-5"><?= __('Note') ?></h4>
-	<?= $this->fetch('notes', ['notes' => $notes]); ?>
+	<h4 class="mt-5"><?=__('Note') ?></h4>
+	<?=$this->fetch('notes', ['notes' => $notes]); ?>
 	<?php
 	$userNoted = false;
 	foreach ($notes as $note) {
@@ -143,7 +142,7 @@ endif ?>
 	<?php if (!$userNoted) : ?>
 	<form method="post" class="mt-3">
 		<div class="form-group">
-			<label for="notes"><b><?= __('Aggiungi nota') ?></b></label>
+			<label for="notes"><b><?=__('Aggiungi nota') ?></b></label>
 			<textarea id="notes" name="note" cols="40" rows="3"
 					class="form-control"></textarea>
 		</div>
@@ -163,30 +162,30 @@ endif ?>
 			<button name="saveInterviewComments" value="true" type="submit" class="btn btn-outline-primary"><?=__('Salva commenti')?></button>
 		</div>
 		<div class="form-group text-center">
-			<?php if ($interview->status === null && $interview->recruiter !== null && $interview->when !== null) : ?>
-				<?php if ($interview->hold) : ?>
-					<button name="popHold" value="true" type="submit"
-							class="btn btn-info"><?=__('Togli dalla lista d\'attesa')?></button>
-				<?php else : ?>
-					<button name="pushHold" value="true" type="submit"
-							class="btn btn-info"><?=__('Metti in lista d\'attesa')?></button>
-				<?php endif; ?>
-				<button name="approve" value="true" type="submit"
-						class="btn btn-success"><?=__('Colloquio passato')?></button>
-				<button name="reject" value="true" type="submit"
-						class="btn btn-danger"><?=__('Colloquio fallito')?></button>
-			<?php elseif ($interview->recruiter !== null && $interview->when !== null) : ?>
-				<button name="limbo" value="true" type="submit"
-						class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
-			<?php endif ?>
+	<?php if ($interview->status === null && $interview->recruiter !== null && $interview->when !== null) : ?>
+		<?php if ($interview->hold) : ?>
+			<button name="popHold" value="true" type="submit"
+					class="btn btn-info"><?=__('Togli dalla lista d\'attesa')?></button>
+		<?php else : ?>
+			<button name="pushHold" value="true" type="submit"
+					class="btn btn-info"><?=__('Metti in lista d\'attesa')?></button>
+		<?php endif; ?>
+		<button name="approve" value="true" type="submit"
+				class="btn btn-success"><?=__('Colloquio passato')?></button>
+		<button name="reject" value="true" type="submit"
+				class="btn btn-danger"><?=__('Colloquio fallito')?></button>
+	<?php elseif ($interview->recruiter !== null && $interview->when !== null) : ?>
+		<button name="limbo" value="true" type="submit"
+				class="btn btn-warning"><?=__('Rimanda nel limbo')?></button>
+	<?php endif ?>
 		</div>
 	</form>
 	<form method="post">
-		<?php if ($user->invitelink !== null) : ?>
+	<?php if ($user->invitelink !== null) : ?>
 			<div class="alert alert-info" role="alert">
-				<?=sprintf(__('Link d\'invito: %s'), $user->invitelink);?>
+		<?=sprintf(__('Link d\'invito: %s'), $user->invitelink);?>
 			</div>
-		<?php endif ?>
+	<?php endif ?>
 		<div class="form-group text-center">
 			<button name="invite" value="true" type="submit"
 					class="btn btn-primary"><?=__('Genera link d\'invito')?></button>

@@ -1,7 +1,11 @@
 <?php
 
-/** @var $link string */
-/** @var $user \WEEEOpen\WEEEHire\User */
+/**
+ * @var $link string
+ */
+/**
+ * @var $user \WEEEOpen\WEEEHire\User
+ */
 
 $saluti1 = [
 	'Ciao persone,',

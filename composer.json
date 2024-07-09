@@ -16,7 +16,8 @@
     "phpmailer/phpmailer": "^6.1",
     "laminas/laminas-diactoros": "^2.2",
     "laminas/laminas-httphandlerrunner": "^1.1",
-    "sabre/vobject": "^4.0"
+    "sabre/vobject": "^4.0",
+    "michelf/php-markdown": "^2.0"
   },
   "suggest": {
     "ext-apcu": "Caches LDAP results avoiding continuous lookups"

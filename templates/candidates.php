@@ -1,8 +1,14 @@
 <?php
 
-/** @var $users array */
-/** @var $myname string */
-/** @var $myuser string */
+/**
+ * @var $users array
+ */
+/**
+ * @var $myname string
+ */
+/**
+ * @var $myuser string
+ */
 
 use WEEEOpen\WEEEHire\User;
 
@@ -18,23 +24,25 @@ $currentFileName = basename(__FILE__);
 require_once 'stars.php';
 ?>
 
-<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser, 'currentFileName' => $currentFileName])?>
+<?php echo $this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser, 'currentFileName' => $currentFileName])?>
 
-<h1><?=__('Candidati')?></h1>
+<h1><?php echo __('Candidati')?></h1>
 <table id="candidates" class="table" data-search="true">
 	<thead class="thead-dark">
 	<tr>
-		<th><?=__('Nome')?></th>
-		<th data-sortable="true"><?=__('Interesse')?></th>
-		<th data-sortable="true"><?=__('Voto')?></th>
-		<th data-sortable="true"><?=__('Inviato')?></th>
-		<th data-sortable="true"><?=__('Recruiter')?></th>
-		<th data-sortable="true"><?=__('Stato')?></th>
+		<th><?php echo __('Nome')?></th>
+		<th data-sortable="true"><?php echo __('Interesse')?></th>
+		<th data-sortable="true"><?php echo __('Voto')?></th>
+		<th data-sortable="true"><?php echo __('Inviato')?></th>
+		<th data-sortable="true"><?php echo __('Recruiter')?></th>
+		<th data-sortable="true"><?php echo __('Stato')?></th>
 	</tr>
 	</thead>
 	<tbody>
 	<?php foreach ($users as $user) :
-		/** @var User $user */
+		/**
+ * @var User $user
+*/
 		$date = date('Y-m-d H:i', $user['submitted']);
 		$total++;
 		$status = WEEEOpen\WEEEHire\User::computeCandidateStatus($user['published'], $user['status'], $user['hold']);
@@ -101,13 +109,13 @@ require_once 'stars.php';
 			$statusCell .= '&nbsp;' . $statusCellIcons;
 		}
 		?>
-		<tr <?=$trcolor?>>
-			<td><a href="/candidates.php?id=<?= $user['id'] ?>"><?= $this->e($user['name']) ?></a></td>
-			<td><?=$this->e($user['area'])?></td>
-			<td class="stars <?= $user['myvote'] === null && $user['evaluation'] !== null ? 'notmine' : '' ?>"><?=$user['evaluation'] === null ? '' : sprintf('%3.1f', $user['evaluation']) . '&nbsp;' . stars($user['evaluation'])?></td>
-			<td><?=$date?></td>
-			<td><?=$this->e($user['recruiter'])?></td>
-			<td <?=$tdcolor?>><?=$statusCell?></td>
+		<tr <?php echo $trcolor?>>
+			<td><a href="/candidates.php?id=<?php echo $user['id'] ?>"><?php echo $this->e($user['name']) ?></a></td>
+			<td><?php echo $this->e($user['area'])?></td>
+			<td class="stars <?php echo $user['myvote'] === null && $user['evaluation'] !== null ? 'notmine' : '' ?>"><?php echo $user['evaluation'] === null ? '' : sprintf('%3.1f', $user['evaluation']) . '&nbsp;' . stars($user['evaluation'])?></td>
+			<td><?php echo $date?></td>
+			<td><?php echo $this->e($user['recruiter'])?></td>
+			<td <?php echo $tdcolor?>><?php echo $statusCell?></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>
@@ -126,7 +134,7 @@ require_once 'stars.php';
 			button.classList.add("btn-secondary");
 			button.classList.add("p-1");
 			button.classList.add("spoiler");
-			button.textContent = "<?=__('Mostra (spoiler!)')?>";
+			button.textContent = "<?php echo __('Mostra (spoiler!)')?>";
 			td.appendChild(button);
 
 			spoilers.push(stars);
@@ -160,7 +168,7 @@ require_once 'stars.php';
 	<div class="form-row mt-3">
 		<div class="form-group col-md-2">
 			<button type="submit" value="true" name="publishallrejected"
-					class="btn btn-outline-dark"><?=__('Pubblica rifiutati')?></button>
+					class="btn btn-outline-dark"><?php echo __('Pubblica rifiutati')?></button>
 		</div>
 	</div>
 </form>
@@ -172,16 +180,16 @@ require_once 'stars.php';
 		</div>
 		<div class="form-group col-md-10">
 			<button type="submit" value="true" name="deleteolderthan"
-					class="btn btn-outline-danger mr-2"><?=__('Cancella')?></button>
-			<label for="deleteolderthandays"><?=__('Cancella candidati più vecchi di tot giorni (solo pubblicati)')?></label>
+					class="btn btn-outline-danger mr-2"><?php echo __('Cancella')?></button>
+			<label for="deleteolderthandays"><?php echo __('Cancella candidati più vecchi di tot giorni (solo pubblicati)')?></label>
 		</div>
 	</div>
 </form>
 <ul class="list-group mt-3">
-	<li class="list-group-item"><?=sprintf(_ngettext('%d candidato in totale', '%d candidati totali', $total), $total);?></li>
-	<li class="list-group-item list-group-item-primary"><?=sprintf(_ngettext('%d da valutare', '%d da valutare', $tobe), $tobe);?></li>
-	<li class="list-group-item list-group-item-success"><?=sprintf(_ngettext('%d approvato', '%d approvati', $approved), $approved);?></li>
-	<li class="list-group-item list-group-item-danger"><?=sprintf(_ngettext('%d rifiutato', '%d rifiutati', $rejected), $rejected);?></li>
-	<li class="list-group-item"><?=sprintf(_ngettext('%d da pubblicare', '%d da pubblicare', $topublish), $topublish);?></li>
-	<li class="list-group-item"><?=sprintf(_ngettext('%d pubblicato', '%d pubblicati', $published), $published);?></li>
+	<li class="list-group-item"><?php echo sprintf(_ngettext('%d candidato in totale', '%d candidati totali', $total), $total);?></li>
+	<li class="list-group-item list-group-item-primary"><?php echo sprintf(_ngettext('%d da valutare', '%d da valutare', $tobe), $tobe);?></li>
+	<li class="list-group-item list-group-item-success"><?php echo sprintf(_ngettext('%d approvato', '%d approvati', $approved), $approved);?></li>
+	<li class="list-group-item list-group-item-danger"><?php echo sprintf(_ngettext('%d rifiutato', '%d rifiutati', $rejected), $rejected);?></li>
+	<li class="list-group-item"><?php echo sprintf(_ngettext('%d da pubblicare', '%d da pubblicare', $topublish), $topublish);?></li>
+	<li class="list-group-item"><?php echo sprintf(_ngettext('%d pubblicato', '%d pubblicati', $published), $published);?></li>
 </ul>

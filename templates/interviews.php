@@ -1,8 +1,14 @@
 <?php
 
-/** @var $interviews DateTime[][]|string[][] */
-/** @var $myname string */
-/** @var $myuser string */
+/**
+ * @var $interviews DateTime[][]|string[][]
+ */
+/**
+ * @var $myname string
+ */
+/**
+ * @var $myuser string
+ */
 $this->layout('base', ['title' => __('Candidati'), 'fontAwesome' => true, 'logoHref' => 'interviews.php']);
 $total = 0;
 $approved = 0;
@@ -17,17 +23,17 @@ $hasSafetyTestDate = [];
 $prevdate = null;
 ?>
 
-<?=$this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser, 'currentFileName' => $currentFileName])?>
+<?php echo $this->fetch('adminnavbar', ['name' => $myname, 'user' => $myuser, 'currentFileName' => $currentFileName])?>
 
-<h2><?=__('Colloqui fissati')?></h2>
+<h2><?php echo __('Colloqui fissati')?></h2>
 <table id="interviews" class="table">
 	<thead class="thead-dark">
 	<tr>
-		<th><?=__('Nome')?></th>
-		<th><?=__('Interesse')?></th>
-		<th><?=__('Ora')?></th>
-		<th><?=__('Tenuto da')?></th>
-		<th><?=__('Stato')?></th>
+		<th><?php echo __('Nome')?></th>
+		<th><?php echo __('Interesse')?></th>
+		<th><?php echo __('Ora')?></th>
+		<th><?php echo __('Tenuto da')?></th>
+		<th><?php echo __('Stato')?></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -80,7 +86,7 @@ $prevdate = null;
 			$prevdate = $date;
 			?>
 			<tr class="table-secondary days text-dark">
-				<td colspan="5"><?=sprintf(__('Giorno %s (%s)'), $date, $this->fetch('day', ['day' => $int['when']->format('N')]))?></td>
+				<td colspan="5"><?php echo sprintf(__('Giorno %s (%s)'), $date, $this->fetch('day', ['day' => $int['when']->format('N')]))?></td>
 			</tr>
 			<?php
 		}
@@ -89,64 +95,67 @@ $prevdate = null;
 		}
 
 		?>
-		<tr <?=$trcolor?>>
-			<td><a href="/interviews.php?id=<?=$int['id']?>"><?=$this->e($int['name'])?></a></td>
-			<td><?=$this->e($int['area'])?></td>
-			<td><?=$time?></td>
-			<td><?=$this->e($int['interviewer'])?></td>
-			<td><?=$statusCell?></td>
+		<tr <?php echo $trcolor?>>
+			<td><a href="/interviews.php?id=<?php echo $int['id']?>"><?php echo $this->e($int['name'])?></a></td>
+			<td><?php echo $this->e($int['area'])?></td>
+			<td><?php echo $time?></td>
+			<td><?php echo $this->e($int['interviewer'])?></td>
+			<td><?php echo $statusCell?></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>
 </table>
-<h2><?=__('Colloqui da fissare')?></h2>
+<h2><?php echo __('Colloqui da fissare')?></h2>
 <table id="interviews" class="table">
 	<thead class="thead-dark">
 	<tr>
-		<th><?=__('Nome')?></th>
-		<th><?=__('Interesse')?></th>
-		<th><?=__('Recruiter che ha approvato')?></th>
+		<th><?php echo __('Nome')?></th>
+		<th><?php echo __('Interesse')?></th>
+		<th><?php echo __('Recruiter che ha approvato')?></th>
 	</tr>
 	</thead>
 	<tbody>
 	<?php foreach ($later as $int) : ?>
 		<tr>
-			<td><a href="/interviews.php?id=<?=$int['id']?>"><?=$this->e($int['name'])?></a></td>
-			<td><?=$this->e($int['area'])?></td>
-			<td><?=$this->e($int['recruiter'])?></td>
+			<td><a href="/interviews.php?id=<?php echo $int['id']?>"><?php echo $this->e($int['name'])?></a></td>
+			<td><?php echo $this->e($int['area'])?></td>
+			<td><?php echo $this->e($int['recruiter'])?></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>
 </table>
 
 <ul class="list-group my-3">
-	<li class="list-group-item"><?=sprintf(_ngettext('%d candidato per il colloquio', '%d candidati per i colloqui', $total), $total);?></li>
-	<li class="list-group-item list-group-item-primary"><?=sprintf(_ngettext('%d da fissare', '%d da fissare', $toschedule), $toschedule);?></li>
-	<li class="list-group-item"><?=sprintf(_ngettext('%d colloquio fissato', '%d colloqui fissati', $scheduled), $scheduled);?></li>
-	<li class="list-group-item list-group-item-success"><?=sprintf(_ngettext('%d approvato', '%d approvati', $approved), $approved);?></li>
-	<li class="list-group-item list-group-item-danger"><?=sprintf(_ngettext('%d rifiutato', '%d rifiutati', $rejected), $rejected);?></li>
-	<li class="list-group-item"><?=sprintf(_ngettext('%d da invitare', '%d da invitare', $toinvite), $toinvite);?></li>
-	<li class="list-group-item list-group-item-success"><?=sprintf(_ngettext('%d invitato', '%d invitati', $invited), $invited);?></li>
+	<li class="list-group-item"><?php echo sprintf(_ngettext('%d candidato per il colloquio', '%d candidati per i colloqui', $total), $total);?></li>
+	<li class="list-group-item list-group-item-primary"><?php echo sprintf(_ngettext('%d da fissare', '%d da fissare', $toschedule), $toschedule);?></li>
+	<li class="list-group-item"><?php echo sprintf(_ngettext('%d colloquio fissato', '%d colloqui fissati', $scheduled), $scheduled);?></li>
+	<li class="list-group-item list-group-item-success"><?php echo sprintf(_ngettext('%d approvato', '%d approvati', $approved), $approved);?></li>
+	<li class="list-group-item list-group-item-danger"><?php echo sprintf(_ngettext('%d rifiutato', '%d rifiutati', $rejected), $rejected);?></li>
+	<li class="list-group-item"><?php echo sprintf(_ngettext('%d da invitare', '%d da invitare', $toinvite), $toinvite);?></li>
+	<li class="list-group-item list-group-item-success"><?php echo sprintf(_ngettext('%d invitato', '%d invitati', $invited), $invited);?></li>
 </ul>
 <?php
-usort($hasSafetyTestDate, function ($a, $b) {
-	return $a['safetyTestDate'] <=> $b['safetyTestDate'];
-});
+usort(
+	$hasSafetyTestDate,
+	function ($a, $b) {
+		return $a['safetyTestDate'] <=> $b['safetyTestDate'];
+	}
+);
 ?>
 
-<h2><?=__('Candidati con data esame sicurezza')?></h2>
+<h2><?php echo __('Candidati con data esame sicurezza')?></h2>
 <table class="table">
 	<thead class="thead-dark">
 	<tr>
-		<th><?=__('Nome')?></th>
-		<th><?=__('Data')?></th>
+		<th><?php echo __('Nome')?></th>
+		<th><?php echo __('Data')?></th>
 	</tr>
 	</thead>
 	<tbody>
 	<?php foreach ($hasSafetyTestDate as $exam) : ?>
 		<tr>
-			<td><a href="/interviews.php?id=<?=$exam['id']?>"><?=$this->e($int['name'])?></a></td>
-			<td><?=$this->e($exam['safetyTestDate']->format('Y-m-d H:i'))?></td>
+			<td><a href="/interviews.php?id=<?php echo $exam['id']?>"><?php echo $this->e($int['name'])?></a></td>
+			<td><?php echo $this->e($exam['safetyTestDate']->format('Y-m-d H:i'))?></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>

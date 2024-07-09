@@ -40,15 +40,25 @@ class PageSettings implements RequestHandlerInterface
 				} catch (Exception $e) {
 					$error = $e->getMessage();
 				}
-			} elseif (isset($POST['rolesReset'])) {
-				// Make all roles unavailable
-				$db->unsetConfigValue('rolesAvailable');
+			} elseif (isset($POST['positions'])) {
+				// Positions
+				$positions = $db->getPositions();
+				foreach ($positions as $position) {
+					$available = isset($POST['position-' . $position['id']]);
+					if ($available == ($position['available'] == 1)) {
+						continue;
+					}
+					$db->setPositionAvailability($position['id'], $available ? 1 : 0);
+				}
 				$changed = true;
-			} elseif (isset($POST['roles'])) {
-				// Set available roles
-				$rolesRule = implode('|', $POST['roles']);
-				$db->setConfigValue('rolesAvailable', $rolesRule);
-				$changed = true;
+			} elseif (isset($POST['newPositionName'])) {
+				$id = preg_replace('/[^a-z-]/', '', preg_replace('/ /', '-', strtolower($POST['newPositionName'])));
+				$db->addPosition($id);
+				foreach (Template::SUPPORTED_LOCALES as $locale) {
+					$db->updateTranslation('position.' . $id . '.name', $POST['newPositionName'], $locale);
+					$db->updateTranslation('position.' . $id . '.description', '', $locale);
+				} // setting translations to a default string, we'll edit it right after
+				return new RedirectResponse('position.php?id=' . $id, 303);
 			} elseif (isset($POST['notifyEmail'])) {
 				if ($POST['notifyEmail'] === 'false') {
 					$email = '0';
@@ -70,17 +80,24 @@ class PageSettings implements RequestHandlerInterface
 
 		// Get the timestamp in correct format
 		if ($expiry !== null) {
-			/** @noinspection PhpUnhandledExceptionInspection */
+			/**
+	   * @noinspection PhpUnhandledExceptionInspection
+*/
 			$expiry = (new DateTime('now', new DateTimeZone('Europe/Rome')))->setTimestamp($expiry);
 		}
 
-		return new HtmlResponse($template->render('settings', [
+		return new HtmlResponse(
+			$template->render(
+				'settings',
+				[
 				'myuser'           => $_SESSION['uid'],
 				'myname'           => $_SESSION['cn'],
 				'expiry'           => $expiry,
 				'error'            => $error,
 				'sendMail'         => (int) $db->getConfigValue('notifyEmail'),
-				'rolesAvailable' => $db->getConfigValue('rolesAvailable')
-			]));
+				'positions' => $db->getPositions(Template::getLocale() ?? 'en_US')
+				]
+			)
+		);
 	}
 }
