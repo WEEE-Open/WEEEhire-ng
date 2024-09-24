@@ -55,8 +55,8 @@ class PageSettings implements RequestHandlerInterface
 				$id = preg_replace('/[^a-z-]/', '', preg_replace('/ /', '-', strtolower($POST['newPositionName'])));
 				$db->addPosition($id);
 				foreach (Template::SUPPORTED_LOCALES as $locale) {
-					$db->updateTranslation('position.' . $id . '.name', $POST['newPositionName'], $locale);
-					$db->updateTranslation('position.' . $id . '.description', '', $locale);
+					$db->updateTranslation('position.' . $id . '.name', $locale, $POST['newPositionName']);
+					$db->updateTranslation('position.' . $id . '.description', $locale, '');
 				} // setting translations to a default string, we'll edit it right after
 				return new RedirectResponse('position.php?id=' . $id, 303);
 			} elseif (isset($POST['notifyEmail'])) {
