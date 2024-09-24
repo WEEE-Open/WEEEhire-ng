@@ -53,7 +53,7 @@ class PagePosition implements RequestHandlerInterface
 				// Delete position
 				$db->deletePosition($_GET['id']);
 				return new RedirectResponse('settings.php', 303);
-			} 
+			}
 			if (isset($POST['id'])) {
 				// Update the id of the position
 				// Make sure the id is url safe (aka keep only lowercase letters and dashes) and replace spaces with dashes
@@ -67,12 +67,12 @@ class PagePosition implements RequestHandlerInterface
 						return new RedirectResponse('position.php?id=' . $newId, 303);
 					}
 				}
-			} 
+			}
 			if (isset($POST['index'])) {
 				// Update the index of the position
 				$db->updatePositionIndex($_GET['id'], $POST['index']);
 				$changed = true;
-			} 
+			}
 			if (isset($POST['translation'])) {
 				// Figure out which translation has been changed and update it
 				foreach (Template::SUPPORTED_LOCALES as $locale) {

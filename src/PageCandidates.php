@@ -7,6 +7,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
+use Laminas\Diactoros\Response\TextResponse;
+use Laminas\Diactoros\Response\JsonResponse;
 
 class PageCandidates implements RequestHandlerInterface
 {
@@ -197,6 +199,63 @@ class PageCandidates implements RequestHandlerInterface
 			}
 
 			$users = $db->getUsersWithNotesAndEvaluations($_SESSION['uid']);
+			if (isset($GET['format'])) {
+				$usersWithDetails = [];
+				foreach ($users as $user) {
+					$userInfo = $db->getUser($user["id"]); // 'id', 'name', 'surname', 'degreecourse', 'year', 'matricola','area', 'letter', 'published', 'status', 'hold', 'recruiter', 'recruitertg', 'submitted', 'visiblenotes', 'emailed', 'invitelink'
+					$interviewInfo = $db->getInterview($user["id"]); // "id","when","status","recruiter","recruitertg","answers","hold","safetyTestDate"
+					$details = [
+						"id" => $userInfo->id,
+						"name" => $userInfo->name,
+						"surname" => $userInfo->surname,
+						"degreeCourse" => $userInfo->degreecourse,
+						"year" => $userInfo->year,
+						"matricola" => $userInfo->matricola,
+						"area" => $userInfo->area,
+						"letter" => $userInfo->letter,
+						"submitted" => $userInfo->submitted,
+						"hold" => $userInfo->hold ? 'Yes' : 'No',
+						"published" => $userInfo->published ? 'Yes' : 'No',
+						"recruiter" => $userInfo->recruiter,
+						"recruiterTg" => $userInfo->recruitertg,
+						"visibleNotes" => $userInfo->visiblenotes,
+						"emailed" => $userInfo->emailed ? 'Yes' : 'No',
+						"inviteLink" => $userInfo->invitelink,
+						"interviewNotes" => $interviewInfo->answers,
+						"interviewHold" => $interviewInfo->hold ? 'Yes' : 'No',
+						"saftyTestDate" => $interviewInfo->safetyTestDate,
+					];
+					if ($userInfo->status === true) {
+						$details["applicationStatus"] = 'Approved';
+					} elseif ($userInfo->status === false) {
+						$details["applicationStatus"] = 'Rejected';
+					} else {
+						$details["applicationStatus"] = 'Pending';
+					}
+					if ($interviewInfo->status === true) {
+						$details["interviewStatus"] = 'Approved';
+					} elseif ($interviewInfo->status === false) {
+						$details["interviewStatus"] = 'Rejected';
+					} else {
+						$details["interviewStatus"] = 'Pending';
+					}
+					if ($interviewInfo->when !== null) {
+						$details["interviewDate"] = $interviewInfo->when->format('Y-m-d H:i');
+					} else {
+						$details["interviewDate"] = null;
+					}
+					$usersWithDetails[] = $details;
+				}
+				if ($GET['format'] == 'csv') {
+					$csv = "Id, Name, Surname, Degree Course, Year, Matricola, Area, Letter, Submitted, Hold, Published, Recruiter, Recruiter Telegram, Visible Notes, Emailed, Invite Link, Interview Notes, Interview Hold, Safety Test Date, Application Status, Interview Status, Interview Date\n";
+					foreach ($usersWithDetails as $user) {
+						$csv .= '"' . $user['id'] . '","' . $user['name'] . '","' . $user['surname'] . '","' . $user['degreeCourse'] . '","' . $user['year'] . '","' . $user['matricola'] . '","' . $user['area'] . '","' . $user['letter'] . '","' . $user['submitted'] . '","' . $user['hold'] . '","' . $user['published'] . '","' . $user['recruiter'] . '","' . $user['recruiterTg'] . '","' . $user['visibleNotes'] . '","' . $user['emailed'] . '","' . $user['inviteLink'] . '","' . $user['interviewNotes'] . '","' . $user['interviewHold'] . '","' . $user['saftyTestDate'] . '","' . $user['applicationStatus'] . '","' . $user['interviewStatus'] . '","' . $user['interviewDate'] . "\"\n";
+					}
+					return new TextResponse($csv, 200, ['Content-Type' => 'text/csv']);
+				} elseif ($GET['format'] == 'json') {
+					return new JsonResponse($usersWithDetails);
+				}
+			}
 			return new HtmlResponse($template->render('candidates', ['users' => $users, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]));
 		}
 	}
