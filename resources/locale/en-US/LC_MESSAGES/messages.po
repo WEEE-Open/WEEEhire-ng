@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2021, 2023, 2024 WEEE Open
+# SPDX-FileCopyrightText: 2021, 2023, 2024, 2025 WEEE Open
 # This file is distributed under the same license as the WEEEHire-ng package.
 #
 # SPDX-FileCopyrightText: 2024 quel _tale
@@ -13,16 +13,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-09 11:27+0200\n"
-"PO-Revision-Date: 2024-07-09 11:37+0200\n"
-"Last-Translator: enrico <asd@weeeopen.it>\n"
-"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"POT-Creation-Date: 2025-09-29 16:15+0200\n"
+"PO-Revision-Date: 2025-09-29 16:59+0200\n"
+"Last-Translator: enrico\n"
+"Language-Team: Italian <kde-i18n-doc@kde.org>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.05.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: templates/adminnavbar.php:15
 #, php-format
@@ -54,7 +54,7 @@ msgstr "Settings"
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base.php:20 templates/index.php:8
+#: templates/base.php:20 templates/index.php:11
 msgid "Entra in WEEE Open"
 msgstr "Join WEEE Open"
 
@@ -86,7 +86,8 @@ msgstr "%s's application"
 msgid ""
 "Candidatura approvata, <a href=\"#email-form\">ma email non ancora inviata</"
 "a>"
-msgstr "Application approved, <a href=\"%s\">but email not yet sent</a>"
+msgstr ""
+"Application approved, <a href=\"#email-form\">but email not yet sent</a>"
 
 #: templates/candidate.php:33
 #, php-format
@@ -220,7 +221,7 @@ msgstr "Save motivation"
 msgid "Rifiuta candidatura definitivamente"
 msgstr "Reject, at last"
 
-#: templates/candidate.php:266 templates/position.php:117
+#: templates/candidate.php:266 templates/position.php:136
 #: templates/settings.php:51 templates/settings.php:55
 msgid "Conferma"
 msgstr "Confirm"
@@ -229,12 +230,12 @@ msgstr "Confirm"
 msgid "Sei sicuro di voler rinviare l'email di candidatura?"
 msgstr "Are you sure you wish to send the email again?"
 
-#: templates/candidate.php:275 templates/position.php:127
+#: templates/candidate.php:275 templates/position.php:146
 #: templates/settings.php:110 templates/userinfo.php:64
 msgid "Annulla"
 msgstr "Cancel"
 
-#: templates/candidate.php:277 templates/form.php:240
+#: templates/candidate.php:277 templates/form.php:242
 msgid "Invia"
 msgstr "Send"
 
@@ -270,7 +271,7 @@ msgstr "Invite link: %s"
 
 #: templates/candidates.php:33 templates/form.php:53
 #: templates/interviews.php:32 templates/interviews.php:112
-#: templates/interviews.php:150 templates/position.php:80
+#: templates/interviews.php:150 templates/position.php:84
 #: templates/settings.php:101 templates/userinfo.php:20
 msgid "Nome"
 msgstr "Name"
@@ -510,9 +511,9 @@ msgid ""
 msgstr ""
 "You already applied with this student ID (matricola). You can check the "
 "status page with the link you received via email. Please do not apply twice, "
-"if you want to apply for multiple roles you can <a href=\"https://weeeopen."
-"polito.it/en_us/contattaci/\" target=\"_blank\">send us a message through "
-"the website</a> or tell us during the interview."
+"if you want to apply for multiple roles you can <a href=\"https://"
+"weeeopen.polito.it/en_us/contattaci/\" target=\"_blank\">send us a message "
+"through the website</a> or tell us during the interview."
 
 #: templates/form.php:40
 #, php-format
@@ -575,7 +576,7 @@ msgstr "Architecture and urban planning"
 msgid "Matricola"
 msgstr "Matricola"
 
-#: templates/form.php:208
+#: templates/form.php:210
 msgid ""
 "Al momento alcune aree del team sono al completo, è possibile candidarsi "
 "solo nelle aree selezionabili dall'elenco. In futuro le aree disponibili "
@@ -585,11 +586,11 @@ msgstr ""
 "only for areas that can be selected in the list. Available areas might "
 "change without notice."
 
-#: templates/form.php:212 templates/userinfo.php:56
+#: templates/form.php:214 templates/userinfo.php:56
 msgid "Lettera motivazionale"
 msgstr "Motivational letter"
 
-#: templates/form.php:215
+#: templates/form.php:217
 msgid ""
 "Seleziona l'area del team che più ti interessa e qui compariranno delle "
 "linee guida su cosa scrivere."
@@ -597,27 +598,27 @@ msgstr ""
 "Select the area of the team that you like and you'll see some guidelines for "
 "the letter here."
 
-#: templates/form.php:228
+#: templates/form.php:230
 msgid ""
 "Una conferma della tua candidatura verrà inviata all'indirizzo <span "
 "id=\"generatedEmailAddr\"></span>."
 msgstr ""
 "A confirmation email will be sent to <span id=\"generatedEmailAddr\"></span>."
 
-#: templates/form.php:229
+#: templates/form.php:231
 #, php-format
 msgid ""
 "Visualizza le <a href=\"%s\">Informazioni sul trattamento dei dati "
 "personali</a>."
 msgstr "View <a href=\"%s\">Privacy Policy</a>."
 
-#: templates/form.php:235
+#: templates/form.php:237
 msgid ""
 "Ho letto le Informazioni sul trattamento dei dati personali e accetto le "
 "condizioni lì delineate"
 msgstr "I read the Privacy Policy and accept its conditions"
 
-#: templates/index.php:9
+#: templates/index.php:12
 msgid ""
 "Compila il questionario per fare richiesta di ammissione in team. Premi il "
 "bottone qui sotto per iniziare."
@@ -625,41 +626,45 @@ msgstr ""
 "Fill the application form if you want to join the team. Press the button "
 "below to start."
 
-#: templates/index.php:43
+#: templates/index.php:46
 msgid "Le candidature si chiuderanno tra meno di un'ora, affrettati!"
 msgstr "Applications will close in less than an hour, hurry up!"
 
-#: templates/index.php:45
+#: templates/index.php:48
 msgid "Le candidature si chiuderanno tra 1 ora."
 msgstr "Applications will close in 1 hour."
 
-#: templates/index.php:47
+#: templates/index.php:50
 msgid "Le candidature si chiuderanno tra ${hours} ore."
 msgstr "Applications will close in ${hours} hours."
 
-#: templates/index.php:51
+#: templates/index.php:54
 msgid "Le candidature si chiuderanno tra 1 giorno."
 msgstr "Applications will close in 1 day."
 
-#: templates/index.php:53
+#: templates/index.php:56
 msgid "Le candidature si chiuderanno tra 1 giorno e 1 ora."
 msgstr "Applications will close in 1 day and 1 hour."
 
-#: templates/index.php:55
+#: templates/index.php:58
 msgid "Le candidature si chiuderanno tra 1 giorno e ${hours} ore."
 msgstr "Applications will close in 1 day and ${hours} hours."
 
-#: templates/index.php:59
+#: templates/index.php:62
 msgid "Le candidature si chiuderanno tra ${days} giorni."
 msgstr "Applications will close in ${days} days."
 
-#: templates/index.php:61
+#: templates/index.php:64
 msgid "Le candidature si chiuderanno tra ${days} giorni e 1 ora."
 msgstr "Applications will close in ${days} days and 1 hour."
 
-#: templates/index.php:63
+#: templates/index.php:66
 msgid "Le candidature si chiuderanno tra ${days} giorni e ${hours} ore."
 msgstr "Applications will close in ${days} days and ${hours} hours."
+
+#: templates/index.php:81
+msgid "Posizioni disponibili:"
+msgstr "Available roles:"
 
 #: templates/interview.php:12
 #, php-format
@@ -810,8 +815,8 @@ msgstr "Text"
 msgid "Autore"
 msgstr "Author"
 
-#: templates/notes.php:37 templates/position.php:53 templates/position.php:69
-#: templates/position.php:109 templates/settings.php:72
+#: templates/notes.php:37 templates/position.php:57 templates/position.php:73
+#: templates/position.php:128 templates/settings.php:72
 msgid "Modifica"
 msgstr "Edit"
 
@@ -819,44 +824,52 @@ msgstr "Edit"
 msgid "Nessuna nota"
 msgstr "No notes"
 
-#: templates/position.php:25 templates/position.php:39
+#: templates/position.php:29 templates/position.php:43
 msgid "Modifica posizione"
 msgstr "Edit position"
 
-#: templates/position.php:41
+#: templates/position.php:45
 msgid "Modifica id"
 msgstr "Edit id"
 
-#: templates/position.php:57
+#: templates/position.php:61
 msgid "Modifica index"
 msgstr "Edit index"
 
-#: templates/position.php:74
+#: templates/position.php:78
 msgid "Modifica nome"
 msgstr "Edit name"
 
-#: templates/position.php:89
-msgid "Modifica descrizione"
-msgstr "Edit description"
+#: templates/position.php:93
+msgid "Modifica sintesi"
+msgstr "Edit summary"
 
-#: templates/position.php:90
+#: templates/position.php:94 templates/position.php:109
 msgid "Ricorda che puoi usare il Markdown per formattare il testo"
 msgstr "Remember that you can use Markdown to format the text"
 
-#: templates/position.php:95
+#: templates/position.php:99
+msgid "Sintesi"
+msgstr "Summary"
+
+#: templates/position.php:108
+msgid "Modifica descrizione"
+msgstr "Edit description"
+
+#: templates/position.php:114
 msgid "Descrizione"
 msgstr "Description"
 
-#: templates/position.php:106 templates/position.php:129
+#: templates/position.php:125 templates/position.php:148
 #: templates/settings.php:57
 msgid "Elimina"
 msgstr "Delete"
 
-#: templates/position.php:123
+#: templates/position.php:142
 msgid "Sei sicuro di voler eliminare questa posizione?"
 msgstr "Are you sure you'd like to delete this position?"
 
-#: templates/position.php:124
+#: templates/position.php:143
 msgid "Questa azione non può essere annullata."
 msgstr "This action cannot be undone."
 
@@ -1163,8 +1176,8 @@ msgstr "Update info"
 
 #~ msgid ""
 #~ "I principali progetti PHP del team sono <a href=\"https://github.com/WEEE-"
-#~ "Open/tarallo\" target=\"_blank\">Tarallo</a>, <a href=\"https://github."
-#~ "com/WEEE-Open/WEEEHire-ng\" target=\"_blank\">WEEEHire</a> e <a "
+#~ "Open/tarallo\" target=\"_blank\">Tarallo</a>, <a href=\"https://"
+#~ "github.com/WEEE-Open/WEEEHire-ng\" target=\"_blank\">WEEEHire</a> e <a "
 #~ "href=\"https://github.com/WEEE-Open/crauto\" target=\"_blank\">crauto</"
 #~ "a>, puoi darci già un'occhiata per sapere a cosa vai incontro."
 #~ msgstr ""
@@ -1484,9 +1497,6 @@ msgstr "Update info"
 #~ msgid "Ruoli disponibili"
 #~ msgstr "Available roles"
 
-#~ msgid "Ruoli non disponibili"
-#~ msgstr "Unavailable roles"
-
 #~ msgid "Seleziona i ruoli da rendere disponibili"
 #~ msgstr "Select roles that should be available"
 
@@ -1533,9 +1543,9 @@ msgstr "Update info"
 #~ "lavorando per creare <a href=\"https://github.com/weee-open/skeeelled\" "
 #~ "target=\"_blank\">skeeelled</a> (migliore e-learning per tutti i 40'000 "
 #~ "studenti del Poli), e abbiamo instaurato una collaborazione con gli "
-#~ "sviluppatori dell'estensione per browser <a href=\"https://chrome.google."
-#~ "com/webstore/detail/politools/fbbjhoaakfhbggkegckmjafkffaofnkd?hl=it\" "
-#~ "target=\"_blank\">PoliTools</a>."
+#~ "sviluppatori dell'estensione per browser <a href=\"https://"
+#~ "chrome.google.com/webstore/detail/politools/"
+#~ "fbbjhoaakfhbggkegckmjafkffaofnkd?hl=it\" target=\"_blank\">PoliTools</a>."
 #~ msgstr ""
 #~ "In 2021-2022 we have launched a new project to improve the quality of "
 #~ "life of students (<a href=“https://weeeopen.polito.it/skeeell” "
@@ -1616,4 +1626,3 @@ msgstr "Update info"
 #~ "and you want to get down to server administration, tell us something "
 #~ "about yourself and your experience with Linux, servers or computers in "
 #~ "general."
-
