@@ -195,11 +195,11 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			</div>
 			<label for="area" class="col-md-2 col-lg-1 col-form-label"><?php echo __('Interesse')?></label>
 			<div class="col-md-5 col-lg-6">
-				<select id="area" name="area" required="required" class="form-control" <?= isset($_GET['position']) ? 'value="' . $this->e($_GET['position']) . '"' : "" ?>>
+				<select id="area" name="area" required="required" class="form-control" >
 					<option value selected disabled class="d-none"></option>
 					<?php foreach ($positions as $position) : ?>
 						<?php if ($position['available'] == 1): ?>
-							<option value="<?php echo $this->e($position['id']) ?>"><?php echo $this->e($position['name']) ?></option>
+							<option value="<?php echo $this->e($position['id']) ?>" <?= isset($_GET['position']) && $_GET['position'] == $position['id'] ? "selected" : "" ?>><?php echo $this->e($position['name']) ?></option>
 						<?php endif; ?>
 					<?php endforeach; ?>
 				</select>
