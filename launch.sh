@@ -8,7 +8,7 @@ function check_or_exit {
 
 check_or_exit sqlite3
 check_or_exit docker
-check_or_exit docker-compose
+check_or_exit docker compose
 
 echo "Creating database file"
 if [[ ! -f database/weeehire.db ]]; then
@@ -23,15 +23,15 @@ fi
 
 if [[ $# -eq 1 ]]; then
 	if [[ $1 == "d" ]] || [[ $1 == "detach" ]]; then
-		docker-compose up -d
+		docker compose up -d
 	elif [[ $1 == "p" ]] || [[ $1 == "php" ]]; then
-		docker-compose up -d
-		docker-compose logs -f app
-		docker-compose down
+		docker compose up -d
+		docker compose logs -f app
+		docker compose down
 	else
 		echo "Invalid parameter $1" >&2
 		exit 1
 	fi
 else
-	docker-compose up
+	docker compose up
 fi
