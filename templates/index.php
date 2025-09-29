@@ -13,9 +13,9 @@ $this->layout('base', ['title' => 'WEEElcome']) ?>
 <?php //$this->insert('covid') ?>
 <div class="col-md-12 d-flex flex-column flex-md-row mb-2 justify-content-center">
 	<?php if ($_SESSION['locale'] === 'en-US') : ?>
-		<a class="btn btn-lg btn-primary mx-2 mb-2 ms-md-2" href="form.php">Begin (in English)</a><a class="btn btn-lg btn-outline-secondary mx-2 mb-2 ms-md-2" href="language.php?l=it-IT&from=<?= rawurlencode('/form.php')?>">Inizia (in italiano)</a>
+		<a class="btn btn-lg btn-primary mx-2 mb-2 ms-md-2" href="form.php">Begin (in English)</a><a class="btn btn-lg btn-outline-secondary mx-2 mb-2 ms-md-2" href="language.php?l=it-IT&from=<?= rawurlencode('/form.php')?>">Inizia (in Italiano)</a>
 	<?php else : ?>
-		<a class="btn btn-lg btn-primary mx-2 mb-2 ms-md-2" href="form.php">Inizia (in italiano)</a><a class="btn btn-lg btn-outline-secondary mx-2 mb-2 ms-md-2" href="language.php?l=en-US&from=<?= rawurlencode('/form.php')?>">Begin (in English)</a>
+		<a class="btn btn-lg btn-primary mx-2 mb-2 ms-md-2" href="form.php">Inizia (in Italiano)</a><a class="btn btn-lg btn-outline-secondary mx-2 mb-2 ms-md-2" href="language.php?l=en-US&from=<?= rawurlencode('/form.php')?>">Begin (in English)</a>
 	<?php endif; ?>
 </div>
 <?php if ($expiry !== null) : ?>
@@ -90,9 +90,9 @@ $this->layout('base', ['title' => 'WEEElcome']) ?>
 			</p>
 			<div class="col-md-12 d-flex flex-column flex-md-row justify-content-md-end">
 				<?php if ($_SESSION['locale'] === 'en-US') : ?>
-					<a class="btn btn-primary mx-2 mb-2 mb-md-0" href="form.php?position=<?=$this->e($position['id'])?>">Apply (in English)</a><a class="btn btn-outline-secondary mx-2 ms-md-2" href="language.php?l=it-IT&from=<?= rawurlencode('/form.php?position=' . $this->e($position['id']))?>">Candidati (in italiano)</a>
+					<a class="btn btn-primary mx-2 mb-2 mb-md-0" href="form.php?position=<?=$this->e($position['id'])?>">Apply (in English)</a><a class="btn btn-outline-secondary mx-2 ms-md-2" href="language.php?l=it-IT&from=<?= rawurlencode('/form.php?position=' . $this->e($position['id']))?>">Candidati (in Italiano)</a>
 				<?php else : ?>
-					<a class="btn btn-primary mx-2 ms-md-2" href="form.php?position=<?=$this->e($position['id'])?>"">Canditati (in italiano)</a><a class="btn btn-outline-secondary mx-2 ms-md-2" href="language.php?l=en-US&from=<?= rawurlencode('/form.php?position=' . $this->e($position['id']))?>">Apply (in English)</a>
+					<a class="btn btn-primary mx-2 ms-md-2" href="form.php?position=<?=$this->e($position['id'])?>"">Canditati (in Italiano)</a><a class="btn btn-outline-secondary mx-2 ms-md-2" href="language.php?l=en-US&from=<?= rawurlencode('/form.php?position=' . $this->e($position['id']))?>">Apply (in English)</a>
 				<?php endif; ?>
 			</div>
 		</dd>
