@@ -13,9 +13,9 @@ $this->layout('base', ['title' => 'WEEElcome']) ?>
 <?php //$this->insert('covid') ?>
 <div class="col-md-12 d-flex flex-column flex-md-row mb-2 justify-content-center">
 	<?php if ($_SESSION['locale'] === 'en-US') : ?>
-		<a class="btn btn-lg btn-primary mx-2 mb-2 ms-md-2" href="form.php">Begin (in English)</a><a class="btn btn-lg btn-outline-secondary mx-2 mb-2 ms-md-2" href="language.php?l=it-IT&from=<?= rawurlencode('/form.php')?>">Inizia</a>
+		<a class="btn btn-lg btn-primary mx-2 mb-2 ms-md-2" href="form.php">Begin</a><a class="btn btn-lg btn-outline-secondary mx-2 mb-2 ms-md-2" href="language.php?l=it-IT&from=<?= rawurlencode('/form.php')?>">Inizia</a>
 	<?php else : ?>
-		<a class="btn btn-lg btn-primary mx-2 mb-2 ms-md-2" href="form.php">Inizia (in Italiano)</a><a class="btn btn-lg btn-outline-secondary mx-2 mb-2 ms-md-2" href="language.php?l=en-US&from=<?= rawurlencode('/form.php')?>">Begin</a>
+		<a class="btn btn-lg btn-primary mx-2 mb-2 ms-md-2" href="form.php">Inizia</a><a class="btn btn-lg btn-outline-secondary mx-2 mb-2 ms-md-2" href="language.php?l=en-US&from=<?= rawurlencode('/form.php')?>">Begin</a>
 	<?php endif; ?>
 </div>
 <?php if ($expiry !== null) : ?>
