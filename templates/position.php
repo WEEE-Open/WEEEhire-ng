@@ -17,6 +17,10 @@
  */
 
 /**
+ * @var $summaryTranslations
+ */
+
+/**
  * @var $descriptionTranslations
  */
 
@@ -82,6 +86,21 @@ $currentFileName = basename(__FILE__);
 				</div>
 				<div class="col-sm-6 col-lg-3">
 					<input type="text" class="form-control" name="name-<?php echo $locale ?>" id="name-<?php echo $locale ?>" value="<?php echo $nameTranslations[$locale] ?>">
+				</div>
+			</div>
+		<?php endforeach; ?>
+		<hr>
+		<h4 class="mb-3"><i><?php echo __('Modifica sintesi') ?></i></h4>
+		<p><i><?php echo __('Ricorda che puoi usare il Markdown per formattare il testo') ?></i></p>
+		<?php foreach (Template::SUPPORTED_LOCALES as $locale) : ?>
+			<div class="form-group row">
+				<div class="col-sm-12 col-lg-6">
+					<label for="summary-<?php echo $locale ?>">
+			<?php echo __('Sintesi') ?> (<?php echo $locale ?>)
+					</label>
+				</div>
+				<div class="col-sm-6 col-lg-6">
+					<textarea class="form-control autoresize" name="summary-<?php echo $locale ?>" id="summary-<?php echo $locale ?>"><?php echo $summaryTranslations[$locale] ?></textarea>
 				</div>
 			</div>
 		<?php endforeach; ?>

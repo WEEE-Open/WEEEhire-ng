@@ -369,6 +369,7 @@ create trigger if not exists delete_positions_translation
 	begin
 		delete from translations where id = 'position.' || old.id || '.name';
 		delete from translations where id = 'position.' || old.id || '.description';
+		delete from translations where id = 'position.' || old.id || '.summary';
 	end;
 
 create trigger if not exists update_positions_translation
@@ -376,7 +377,8 @@ create trigger if not exists update_positions_translation
 	begin
 		update translations set id = 'position.' || new.id || '.name' where id = 'position.' || old.id || '.name';
 		update translations set id = 'position.' || new.id || '.description' where id = 'position.' || old.id || '.description';
+        update translations set id = 'position.' || new.id || '.summary' where id = 'position.' || old.id || '.summary';
 	end;
 
 -- Be careful not to change this line other than the number of the version, this is parsed with regex by the updater
-insert into config (id, value) values ('SchemaVersion', '1');
+insert into config (id, value) values ('SchemaVersion', '2');

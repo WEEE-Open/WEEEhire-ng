@@ -888,11 +888,14 @@ class Database
 					p.idx,
 					p.available,
 					t_name.value AS name,
+					t_summ.value AS summary,
 					t_desc.value AS description
 				FROM 
 					positions p
 				LEFT JOIN 
 					translations t_name ON t_name.id = 'position.' || p.id || '.name' AND t_name.lang = :lang
+				LEFT JOIN 
+					translations t_summ ON t_summ.id = 'position.' || p.id || '.summary' AND t_summ.lang = :lang
 				LEFT JOIN 
 					translations t_desc ON t_desc.id = 'position.' || p.id || '.description' AND t_desc.lang = :lang
 				ORDER BY
@@ -927,11 +930,14 @@ class Database
 					p.idx,
 					p.available,
 					t_name.value AS name,
+					t_summ.value AS summary,
 					t_desc.value AS description
 				FROM 
 					positions p
 				LEFT JOIN 
 					translations t_name ON t_name.id = 'position.' || p.id || '.name' AND t_name.lang = :lang
+				LEFT JOIN 
+					translations t_summ ON t_summ.id = 'position.' || p.id || '.summary' AND t_summ.lang = :lang
 				LEFT JOIN 
 					translations t_desc ON t_desc.id = 'position.' || p.id || '.description' AND t_desc.lang = :lang
 				WHERE 

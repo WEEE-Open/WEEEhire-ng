@@ -30,12 +30,17 @@ class PagePosition implements RequestHandlerInterface
 		}
 
 		$nameTranslations = [];
+		$summaryTranslations = [];
 		$descriptionTranslations = [];
 
 		foreach (Template::SUPPORTED_LOCALES as $locale) {
 			$nameTranslations[$locale] = $db->getTranslation("position." . $_GET['id'] . ".name", $locale);
 			if ($nameTranslations[$locale] !== false) {
 				$nameTranslations[$locale] = $nameTranslations[$locale]['value'];
+			}
+			$summaryTranslations[$locale] = $db->getTranslation("position." . $_GET['id'] . ".summary", $locale);
+			if ($summaryTranslations[$locale] !== false) {
+				$summaryTranslations[$locale] = $summaryTranslations[$locale]['value'];
 			}
 			$descriptionTranslations[$locale] = $db->getTranslation("position." . $_GET['id'] . ".description", $locale);
 			if ($descriptionTranslations[$locale] !== false) {
@@ -79,6 +84,9 @@ class PagePosition implements RequestHandlerInterface
 					if (isset($POST['name-' . $locale]) && $POST['name-' . $locale] !== $nameTranslations[$locale]) {
 						$db->updateTranslation("position." . $_GET['id'] . ".name", $locale, $POST['name-' . $locale]);
 					}
+					if (isset($POST['summary-' . $locale]) && $POST['summary-' . $locale] !== $summaryTranslations[$locale]) {
+						$db->updateTranslation("position." . $_GET['id'] . ".summary", $locale, $POST['summary-' . $locale]);
+					}
 					if (isset($POST['description-' . $locale]) && $POST['description-' . $locale] !== $descriptionTranslations[$locale]) {
 						$db->updateTranslation("position." . $_GET['id'] . ".description", $locale, $POST['description-' . $locale]);
 					}
@@ -101,6 +109,7 @@ class PagePosition implements RequestHandlerInterface
 				'myname'           => $_SESSION['cn'],
 				'position' => $position,
 				'nameTranslations' => $nameTranslations,
+				'summaryTranslations' => $summaryTranslations,
 				'descriptionTranslations' => $descriptionTranslations,
 				'error' => $error
 				]

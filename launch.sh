@@ -8,7 +8,6 @@ function check_or_exit {
 
 check_or_exit sqlite3
 check_or_exit docker
-check_or_exit docker compose
 
 echo "Creating database file"
 if [[ ! -f database/weeehire.db ]]; then

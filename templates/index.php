@@ -1,18 +1,21 @@
 <?php
 /**
  * @var $expiry int
+ * @var $positions array
  */
+
+use Michelf\Markdown;
 
 $this->layout('base', ['title' => 'WEEElcome']) ?>
 
 <h1><?php echo __('Entra in WEEE Open')?></h1>
 <p><?php echo __('Compila il questionario per fare richiesta di ammissione in team. Premi il bottone qui sotto per iniziare.')?></p>
 <?php //$this->insert('covid') ?>
-<div class="col-md-12 text-center">
+<div class="col-md-12 d-flex flex-column flex-md-row mb-2 justify-content-center">
 	<?php if ($_SESSION['locale'] === 'en-US') : ?>
-		<a class="btn btn-lg btn-primary the-button" href="form.php">Begin (in English)</a><a class="btn btn-lg btn-outline-secondary the-button" href="language.php?l=it-IT&from=<?php echo rawurlencode('/form.php')?>">Inizia (in italiano)</a>
+		<a class="btn btn-lg btn-primary mx-2 mb-2 ms-md-2" href="form.php">Begin (in English)</a><a class="btn btn-lg btn-outline-secondary mx-2 mb-2 ms-md-2" href="language.php?l=it-IT&from=<?= rawurlencode('/form.php')?>">Inizia (in italiano)</a>
 	<?php else : ?>
-		<a class="btn btn-lg btn-primary the-button" href="form.php">Inizia (in italiano)</a><a class="btn btn-lg btn-outline-secondary the-button" href="language.php?l=en-US&from=<?php echo rawurlencode('/form.php')?>">Begin (in English)</a>
+		<a class="btn btn-lg btn-primary mx-2 mb-2 ms-md-2" href="form.php">Inizia (in italiano)</a><a class="btn btn-lg btn-outline-secondary mx-2 mb-2 ms-md-2" href="language.php?l=en-US&from=<?= rawurlencode('/form.php')?>">Begin (in English)</a>
 	<?php endif; ?>
 </div>
 <?php if ($expiry !== null) : ?>
@@ -75,3 +78,25 @@ $this->layout('base', ['title' => 'WEEElcome']) ?>
 		})();
 	</script>
 <?php endif; ?>
+<h2 class="pb-3"><?=__('Posizioni disponibili:')?></h2>
+<dl>
+	<?php foreach ($positions as $position) : ?>
+		<dt>
+			<h4><?=$position['name']?></h4>
+		</dt>
+		<dd>
+			<p>
+				<?= Markdown::defaultTransform($position['summary'] ?? '') ?>
+			</p>
+			<div class="col-md-12 d-flex flex-column flex-md-row justify-content-md-end">
+				<?php if ($_SESSION['locale'] === 'en-US') : ?>
+					<a class="btn btn-primary mx-2 mb-2 mb-md-0" href="form.php?position=<?=$this->e($position['id'])?>">Apply (in English)</a><a class="btn btn-outline-secondary mx-2 ms-md-2" href="language.php?l=it-IT&from=<?= rawurlencode('/form.php?position=' . $this->e($position['id']))?>">Candidati (in italiano)</a>
+				<?php else : ?>
+					<a class="btn btn-primary mx-2 ms-md-2" href="form.php?position=<?=$this->e($position['id'])?>"">Canditati (in italiano)</a><a class="btn btn-outline-secondary mx-2 ms-md-2" href="language.php?l=en-US&from=<?= rawurlencode('/form.php?position=' . $this->e($position['id']))?>">Apply (in English)</a>
+				<?php endif; ?>
+			</div>
+		</dd>
+		<hr>
+	<?php endforeach; ?>
+</dl>
+<div class="py-4"></div>

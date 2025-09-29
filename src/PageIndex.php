@@ -29,7 +29,9 @@ class PageIndex implements RequestHandlerInterface
 					break;
 				}
 			}
-			if (!$isAtLeastOneAvailable) {
+			if ($isAtLeastOneAvailable) {
+				$positions = $db->getAvailablePositions(Template::getLocale() ?? 'en_US');
+			} else {
 				$expiry = 1;
 			}
 		}
@@ -38,7 +40,7 @@ class PageIndex implements RequestHandlerInterface
 		if ($expiry !== null && time() >= $expiry) {
 			return new HtmlResponse($template->render('candidate_close'));
 		} else {
-			return new HtmlResponse($template->render('index', ['expiry' => $expiry]));
+			return new HtmlResponse($template->render('index', ['expiry' => $expiry, 'positions' => $positions]));
 		}
 	}
 }
