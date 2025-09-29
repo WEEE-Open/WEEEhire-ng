@@ -198,7 +198,9 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				<select id="area" name="area" required="required" class="form-control">
 					<option value selected disabled class="d-none"></option>
 					<?php foreach ($positions as $position) : ?>
-						<option <?php echo $position['available'] == 1 ? '' : 'disabled' ?> value="<?php echo $this->e($position['id']) ?>"><?php echo $this->e($position['name']) ?></option>
+						<?php if ($position['available'] == 1): ?>
+							<option value="<?php echo $this->e($position['id']) ?>"><?php echo $this->e($position['name']) ?></option>
+						<?php endif; ?>
 					<?php endforeach; ?>
 				</select>
 			</div>
