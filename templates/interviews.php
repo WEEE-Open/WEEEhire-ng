@@ -142,21 +142,3 @@ usort(
 	}
 );
 ?>
-
-<h2><?php echo __('Candidati con data esame sicurezza')?></h2>
-<table class="table">
-	<thead class="thead-dark">
-	<tr>
-		<th><?php echo __('Nome')?></th>
-		<th><?php echo __('Data')?></th>
-	</tr>
-	</thead>
-	<tbody>
-	<?php foreach ($hasSafetyTestDate as $exam) : ?>
-		<tr>
-			<td><a href="/interviews.php?id=<?php echo $exam['id']?>"><?php echo $this->e($int['name'])?></a></td>
-			<td><?php echo $this->e($exam['safetyTestDate']->format('Y-m-d H:i'))?></td>
-		</tr>
-	<?php endforeach; ?>
-	</tbody>
-</table>

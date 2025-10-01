@@ -49,7 +49,7 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 
 <?php if ($interview->status === null && !$edit) : ?>
 	<form method="post">
-		<div class="form-group row">
+		<div class="mb-3 row">
 			<label for="recruiter" class="col-md-1"><?=__('Recruiter')?></label>
 			<div class="col-md-5">
 				<select id="recruiter" name="recruiter" required="required" class="form-control">
@@ -84,7 +84,7 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 						value="<?=$interview->when === null ? '' : $interview->when->format('H:i')?>">
 			</div>
 		</div>
-		<div class="form-group text-center">
+		<div class="mb-3 text-center">
 			<button name="setinterview" value="true" type="submit"
 					class="btn btn-primary"><?=__('Fissa colloquio')?></button>
 			<button name="unsetinterview" value="true" type="submit"
@@ -93,37 +93,10 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 	</form>
 <?php endif ?>
 
-<?php if ($interview->status === true && !$edit) : /* ?>
-	<form method="post">
-	<div class="form-group row">
-	<label for="safetyTestDate1" class="col-md-1 col-form-label"><?=__('Data')?></label>
-	<div class="col-md-2">
-				<input type="date" id="safetyTestDate1" name="safetyTestDate1" required="required" class="form-control"
-						placeholder="YYYY-MM-DD"
-						value="<?=$interview->safetyTestDate === null ? '' : $interview->safetyTestDate->format('Y-m-d')?>">
-	</div>
-	<label for="safetyTestDate2" class="col-md-1 col-form-label"><?=__('Ora')?></label>
-	<div class="col-md-2">
-				<input type="time" id="safetyTestDate2" name="safetyTestDate2" required="required" class="form-control" placeholder="HH:MM"
-						value="<?=$interview->safetyTestDate === null ? '' : $interview->safetyTestDate->format('H:i')?>">
-	</div>
-	<div class="col-md-3">
-	<button name="setsafetyTestDate" value="true" type="submit"
-					class="btn btn-primary"><?=__('Fissa esame della sicurezza')?></button>
-	</div>
-	<div class="col-md-3">
-	<button name="unsetsafetyTestDate" value="true" type="submit"
-					class="btn btn-outline-danger"><?=__('Cancella esame della sicurezza')?></button>
-	</div>
-	</div>
-	</form>
-	<?php */
-endif ?>
-
 <?=$this->fetch('userinfo', ['user' => $user, 'edit' => $edit])?>
 
 <?php if (!$edit) : ?>
-	<div class="form-group">
+	<div class="mb-3">
 		<a class="btn btn-outline-secondary"
 				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri, ['edit' => 'true']))?>"><?=__('Modifica dati')?></a>
 	</div>
@@ -141,27 +114,27 @@ endif ?>
 	?>
 	<?php if (!$userNoted) : ?>
 	<form method="post" class="mt-3">
-		<div class="form-group">
+		<div class="mb-3">
 			<label for="notes"><b><?=__('Aggiungi nota') ?></b></label>
 			<textarea id="notes" name="note" cols="40" rows="3"
 					class="form-control"></textarea>
 		</div>
-		<div class="form-group text-center">
+		<div class="mb-3 text-center">
 			<button name="saveNote" value="true" type="submit"
 					class="btn btn-outline-primary my-1 mx-1"><?=__('Aggiungi nota')?></button>
 		</div>
 	</form>
 	<?php endif; ?>
 	<form method="post">
-		<div class="form-group">
+		<div class="mb-3">
 			<label for="answers"><?=__('Commenti vari post-colloquio')?></label>
 			<textarea id="answers" name="answers" cols="40" rows="10"
 					class="form-control"><?=$this->e($interview->answers)?></textarea>
 		</div>
-		<div class="form-group text-center">
+		<div class="mb-3 text-center">
 			<button name="saveInterviewComments" value="true" type="submit" class="btn btn-outline-primary"><?=__('Salva commenti')?></button>
 		</div>
-		<div class="form-group text-center">
+		<div class="mb-3 text-center">
 	<?php if ($interview->status === null && $interview->recruiter !== null && $interview->when !== null) : ?>
 		<?php if ($interview->hold) : ?>
 			<button name="popHold" value="true" type="submit"
@@ -186,7 +159,7 @@ endif ?>
 		<?=sprintf(__('Link d\'invito: %s'), $user->invitelink);?>
 			</div>
 	<?php endif ?>
-		<div class="form-group text-center">
+		<div class="mb-3 text-center">
 			<button name="invite" value="true" type="submit"
 					class="btn btn-primary"><?=__('Genera link d\'invito')?></button>
 		</div>

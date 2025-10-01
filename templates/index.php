@@ -88,11 +88,11 @@ $this->layout('base', ['title' => 'WEEElcome']) ?>
 			<p>
 				<?= Markdown::defaultTransform($position['summary'] ?? '') ?>
 			</p>
-			<div class="col-md-12 d-flex flex-column flex-md-row justify-content-md-end">
+			<div class="col-md-12 d-flex flex-column flex-md-row justify-content-md-end gap-2">
 				<?php if ($_SESSION['locale'] === 'en-US') : ?>
-					<a class="btn btn-primary mx-2 mb-2 mb-md-0" href="form.php?position=<?=$this->e($position['id'])?>">Apply</a><a class="btn btn-outline-secondary mx-2 ms-md-2" href="language.php?l=it-IT&from=<?= rawurlencode('/form.php?position=' . $this->e($position['id']))?>">Candidati</a>
+					<a class="btn btn-primary" href="form.php?position=<?=$this->e($position['id'])?>">Apply</a><a class="btn btn-outline-secondary" href="language.php?l=it-IT&from=<?= rawurlencode('/form.php?position=' . $this->e($position['id']))?>">Candidati</a>
 				<?php else : ?>
-					<a class="btn btn-primary mx-2 ms-md-2" href="form.php?position=<?=$this->e($position['id'])?>"">Candidati</a><a class="btn btn-outline-secondary mx-2 ms-md-2" href="language.php?l=en-US&from=<?= rawurlencode('/form.php?position=' . $this->e($position['id']))?>">Apply</a>
+					<a class="btn btn-primary" href="form.php?position=<?=$this->e($position['id'])?>"">Candidati</a><a class="btn btn-outline-secondary" href="language.php?l=en-US&from=<?= rawurlencode('/form.php?position=' . $this->e($position['id']))?>">Apply</a>
 				<?php endif; ?>
 			</div>
 		</dd>

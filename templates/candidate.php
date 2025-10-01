@@ -164,39 +164,38 @@ require_once 'stars.php';
 
 <form method="post" class="mt-3">
 	<?php if (!$userNoted) : ?>
-	<div class="form-group">
+	<div class="mb-3">
 		<label for="notes"><b><?=__('Aggiungi nota') ?></b></label>
 		<textarea id="notes" name="note" cols="40" rows="3"
 				class="form-control"></textarea>
 	</div>
-	<div class="form-group text-center">
+	<div class="mb-3 text-center">
 		<button name="saveNote" value="true" type="submit"
 				class="btn btn-outline-primary my-1 mx-1"><?=__('Aggiungi nota')?></button>
 	<?php else : ?>
 		<!-- open div bacause there is close div tag in below -->
-		<div class="form-group text-center">
+		<div class="mb-3 text-center">
 	<?php endif; ?>
 		<a class="btn btn-outline-secondary my-1 mx-1"
 				href="<?=$this->e(\WEEEOpen\WEEEHire\Utils::appendQueryParametersToRelativeUrl($globalRequestUri, ['edit' => 'true']))?>"><?=__('Modifica dati')?></a>
 	</div>
-	<div class="form-group text-center justify-content-center row">
-		<div class="btn-toolbar">
+	<div class="mb-3 text-center row">
+		<div class="btn-toolbar justify-content-center gap-2">
 			<a href="/candidates.php?id=<?=(int) $user->prev_not_evaluated_user ?>" class="btn btn-outline-primary mr-1 ml-1 <?=$user->prev_not_evaluated_user == null ? 'disabled' : '' ?>"><span class="fas fa-arrow-circle-left"></span>&nbsp;<?=__('Precedente da valutare')?></a>
 			<a href="/candidates.php?id=<?=(int) $user->prev_user ?>" class="btn btn-outline-secondary mr-1 ml-1 <?=$user->prev_user == null ? 'disabled' : '' ?>"><span class="fas fa-arrow-circle-left"></span>&nbsp;<?=__('Precedente')?></a>
 			<a href="/candidates.php?id=<?=(int) $user->next_user ?>" class="btn btn-outline-secondary mr-1 ml-1 <?=$user->next_user == null ? 'disabled' : '' ?>"><?=__('Successivo') ?>&nbsp;<span class="fas fa-arrow-circle-right"></span></a>
 			<a href="/candidates.php?id=<?=(int) $user->next_not_evaluated_user ?>" class="btn btn-outline-primary mr-1 ml-1 <?=$user->next_not_evaluated_user == null ? 'disabled' : '' ?>"><?=__('Successivo da valutare') ?>&nbsp;<span class="fas fa-arrow-circle-right"></span></a>
 		</div>
-
 	</div>
 	<?php $status = $user->getCandidateStatus(); ?>
 	<?php if ($status === \WEEEOpen\WEEEHire\User::STATUS_NEW_HOLD || $status === \WEEEOpen\WEEEHire\User::STATUS_PUBLISHED_HOLD) : ?>
-	<div class="form-group">
+	<div class="mb-3">
 		<label for="visiblenotes"><b><?=__('Motivazioni (visibili alla persona interessata)')?></b></label>
 		<textarea id="visiblenotes" name="visiblenotes" cols="40" rows="3"
 				class="form-control"><?=$this->e($user->visiblenotes)?></textarea>
 	</div>
 	<?php endif ?>
-	<div class="form-group text-center">
+	<div class="mb-3 text-center">
 	<?php switch ($status) :
 		default:
 		case \WEEEOpen\WEEEHire\User::STATUS_NEW:
@@ -282,7 +281,7 @@ require_once 'stars.php';
 <?php endif ?>
 <?php if (!$edit && !$user->emailed && $user->status === true) : ?>
 	<form method="post" id="email-form">
-		<div class="form-group">
+		<div class="mb-3">
 			<label for="recruiter"><?=__('Recruiter')?></label>
 			<select id="recruiter" name="recruiter" required="required" class="form-control">
 				<?php
@@ -303,7 +302,7 @@ require_once 'stars.php';
 				<?php endif ?>
 			</select>
 		</div>
-		<div class="form-group">
+		<div class="mb-3">
 			<label><?=__('Lingua e template')?></label>
 			<div class="row">
 				<div class="col-md-3 col-lg-2">
@@ -311,7 +310,7 @@ require_once 'stars.php';
 					<button class="btn btn-outline-secondary mb-2 mb-md-0" id="email-en-btn">en-US</button>
 				</div>
 				<div class="col-md-9 col-lg-10">
-				<select aria-label="<?=__('Template')?>" class="custom-select" id="email-custom-select" onchange="templatize()">
+				<select aria-label="<?=__('Template')?>" class="form-select" id="email-custom-select" onchange="templatize()">
 					<option value="default" selected>Email standard</option>
 					<option value="programmer">Programmatore</option>
 					<option value="sysadmin">Sysadmin</option>
@@ -323,17 +322,17 @@ require_once 'stars.php';
 				</div>
 			</div>
 		</div>
-		<div class="form-group row">
+		<div class="mb-3 row">
 			<label class="col-md-2 col-lg-1 col-form-label" for="subject"><b><?=__('Oggetto')?></b></label>
 			<div class="col-md-10 col-lg-11">
 				<input type="text" id="subject" name="subject" class="form-control" required>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="mb-3">
 			<label for="email"><b><?=__('Email')?></b></label>
 			<textarea id="email" name="email" rows="10" class="form-control" required></textarea>
 		</div>
-		<div class="form-group text-center">
+		<div class="mb-3 text-center">
 			<button name="publishnow" value="true" type="submit"
 					class="btn btn-primary my-1 mx-1"><?=__('Pubblica e manda email')?></button>
 		</div>

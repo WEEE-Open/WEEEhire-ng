@@ -33,30 +33,24 @@ $currentFileName = basename(__FILE__);
 	<hr>
 	<h4><i><?php echo __('Modifica scadenza candidature')?></i></h4>
 	<form method="post">
-		<div class="form-group row">
-			<div class="<?php echo $expiry === null ? 'col-sm-12 col-lg-8' : 'col-sm-12 col-lg-6'?>">
+		<div class="mb-3 row align-items-center">
+			<div class="col-12 col-md mb-2 mb-md-0">
 				<label for="expiry">
-					<?php echo sprintf(
-						__('Scadenza Candidature <b>(%s)</b>'),
-						$expiry === null ? __('nessuna scadenza') : $expiry->format('d-m-Y') . ' ' . __('alle 00:00')
-					)?>
+					<?=	__('Scadenza Candidature')?>
+					<b>(<?= $expiry === null ? __('nessuna scadenza') : $expiry->format('d-m-Y') . ' ' . __('alle 00:00') ?>)</b>
 				</label>
 			</div>
-			<div class="col-sm-6 col-lg-3">
+			<div class="col-12 col-md-auto d-flex gap-2">
 				<input type="date" class="form-control" name="expiry" id="expiry"
 						value="<?php echo $expiry === null ? '' : $expiry->format('Y-m-d');?>">
-			</div>
-			<?php if ($expiry === null) : ?>
-				<div class="col-sm-6 col-lg-1 mt-3 mt-sm-0">
+				<?php if ($expiry === null) : ?>
 					<button type="submit" class="btn btn-primary"><?php echo __('Conferma')?></button>
-				</div>
-			<?php else : ?>
-				<div class="col-sm-6 col-lg-3 mt-3 mt-sm-0">
+				<?php else : ?>
 					<button type="submit" class="btn btn-primary"><?php echo __('Conferma')?></button>
 					<button type="submit" class="btn btn-outline-danger" name="noexpiry"
-							value="true">&#x274C;<?php echo __('Elimina')?></button>
-				</div>
-			<?php endif ?>
+						value="true">&#x274C;<?php echo __('Elimina')?></button>
+				<?php endif ?>
+			</div>
 		</div>
 	</form>
 	<hr>
@@ -74,7 +68,7 @@ $currentFileName = basename(__FILE__);
 				</div>
 			<?php endforeach ?>
 		</div>
-		<div class="form-group row">
+		<div class="mb-3 row">
 			<div class="col">
 				<button type="submit" class="btn btn-primary"><?php echo __('Salva')?></button>
 			</div>
@@ -95,7 +89,7 @@ $currentFileName = basename(__FILE__);
 					</button>
 				</div>
 				<div class="modal-body">
-					<div class="form-group row">
+					<div class="mb-3 row">
 						<div class="col-sm-12 col-lg-4">
 							<label for="newPositionName">
 								<?php echo __('Nome')?>
@@ -116,7 +110,7 @@ $currentFileName = basename(__FILE__);
 	<hr>
 	<h4 class="mb-3"><i><?php echo __('Invia email a noi quando arriva una nuova candidatura')?></i></h4>
 	<form method="post">
-		<div class="form-group row">
+		<div class="mb-3 row">
 			<div class="col-12">
 			<?php if ($sendMail) : ?>
 				<p><?php echo sprintf(__('Viene inviata un\'email a %s ogni volta che riceviamo una nuova candidatura.'), WEEEHIRE_EMAIL_FALLBACK) ?></p>
@@ -125,7 +119,7 @@ $currentFileName = basename(__FILE__);
 			<?php endif; ?>
 			</div>
 		</div>
-		<div class="form-group row">
+		<div class="mb-3 row">
 			<div class="col-12">
 			<?php if ($sendMail) : ?>
 				<button type="submit" class="btn btn-outline-danger" name="notifyEmail" value="false"><?php echo __('Disattiva email')?></button>

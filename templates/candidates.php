@@ -165,8 +165,8 @@ require_once 'stars.php';
 
 
 <form method="post">
-	<div class="form-row mt-3">
-		<div class="form-group col-md-2">
+	<div class="form-row my-3">
+		<div>
 			<button type="submit" value="true" name="publishallrejected"
 					class="btn btn-outline-dark"><?php echo __('Pubblica rifiutati')?></button>
 		</div>
@@ -174,11 +174,11 @@ require_once 'stars.php';
 </form>
 
 <form method="post">
-	<div class="form-row">
-		<div class="form-group col-md-2">
+	<div class="row">
+		<div class="mb-3 col-md-2">
 			<input name="days" id="deleteolderthandays" type="number" min="0" value="30" class="form-control" required>
 		</div>
-		<div class="form-group col-md-10">
+		<div class="mb-3 col-md-10">
 			<button type="submit" value="true" name="deleteolderthan"
 					class="btn btn-outline-danger mr-2"><?php echo __('Cancella')?></button>
 			<label for="deleteolderthandays"><?php echo __('Cancella candidati più vecchi di tot giorni (solo pubblicati)')?></label>

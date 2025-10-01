@@ -49,21 +49,21 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 	<?php //$this->insert('covid') ?>
 
 	<form method="post">
-		<div class="form-group row">
-			<label for="name" class="col-md-2 col-lg-1 col-form-label"><?php echo __('Nome')?></label>
-			<div class="col-md-4 col-lg-4">
+		<div class="mb-3 row">
+			<div class="col-md-12 col-lg-6">
+				<label for="name" class="form-label"><?php echo __('Nome')?></label>
 				<input id="name" name="name" type="text" required="required" class="form-control">
 			</div>
-			<label for="surname" class="col-md-2 col-lg-1 col-form-label"><?php echo __('Cognome')?></label>
-			<div class="col-md-4 col-lg-6">
+			<div class="col-md-12 col-lg-6">
+				<label for="surname" class="form-label"><?php echo __('Cognome')?></label>
 				<input id="surname" name="surname" type="text" required="required" class="form-control">
 			</div>
 		</div>
 
-		<div class="form-group row">
-			<label for="year" class="col-md-1 col-form-label"><?php echo __('Anno')?></label>
-			<div class="col-md-2 col-lg-4">
-				<select id="year" name="year" required="required" class="form-control">
+		<div class="mb-3 row">
+			<div class="col-md-12 col-lg-6">
+				<label for="year" class="form-label"><?php echo __('Anno')?></label>
+				<select id="year" name="year" required="required" class="form-select">
 					<option value selected disabled class="d-none"></option>
 					<option value="1º Triennale"><?php echo __('1º Triennale')?></option>
 					<option value="2º Triennale"><?php echo __('2º Triennale')?></option>
@@ -73,9 +73,9 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<option value="Dottorato"><?php echo __('Dottorato')?></option>
 				</select>
 			</div>
-			<label for="degreecourse" class="col-md-2 col-lg-1 col-form-label"><?php echo __('Corso di laurea')?></label>
-			<div class="col-md-7 col-lg-6">
-				<select id="degreecourse" name="degreecourse" required="required" class="form-control">
+			<div class="col-md-12 col-lg-6">
+				<label for="degreecourse" class="form-label"><?php echo __('Corso di laurea')?></label>
+				<select id="degreecourse" name="degreecourse" required="required" class="form-select">
 					<option hidden disabled class="default"></option>
 					<optgroup label="<?php echo __('Ingegneria') ?>" data-level="bachelor">
 						<option value="Automotive Engineering">Automotive Engineering</option>
@@ -187,15 +187,15 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				</select>
 			</div>
 		</div>
-		<div class="form-group row">
-			<label for="matricola" class="col-md-2 col-lg-1 col-form-label"><?php echo __('Matricola')?></label>
-			<div class="col-md-3 col-lg-4">
+		<div class="mb-3 row">
+			<div class="col-md-12 col-lg-6">
+				<label for="matricola" class="form-label"><?php echo __('Matricola')?></label>
 				<input id="matricola" name="matricola" placeholder="s123456" type="text" required="required"
 						class="form-control">
 			</div>
-			<label for="area" class="col-md-2 col-lg-1 col-form-label"><?php echo __('Interesse')?></label>
-			<div class="col-md-5 col-lg-6">
-				<select id="area" name="area" required="required" class="form-control" >
+			<div class="col-md-12 col-lg-6">
+				<label for="area" class="form-label"><?php echo __('Interesse')?></label>
+				<select id="area" name="area" required="required" class="form-select" >
 					<option value selected disabled class="d-none"></option>
 					<?php foreach ($positions as $position) : ?>
 						<?php if ($position['available'] == 1): ?>
@@ -206,11 +206,11 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			</div>
 		</div>
 		<?php if ($totalUnavailable != 0) : ?>
-		<div class="form-group">
+		<div class="mb-3">
 			<p><small><?php echo __('Al momento alcune aree del team sono al completo, è possibile candidarsi solo nelle aree selezionabili dall\'elenco. In futuro le aree disponibili potrebbero cambiare senza preavviso.') ?></small></p>
 		</div>
 		<?php endif; ?>
-		<div class="form-group">
+		<div class="mb-3">
 			<label for="letter"><b><?php echo __('Lettera motivazionale')?></b></label>
 			<div id="mlet-explain">
 				<div class="form-text" id="mlet-explain-">
@@ -224,7 +224,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 			</div>
 			<textarea id="letter" name="letter" cols="40" rows="8" required="required" class="form-control"></textarea>
 		</div>
-		<div class="form-group">
+		<div class="mb-3">
 			<div>
 				<div id="checkboxesHelpBlock" class="form-text text-muted">
 					<span class="form-text text-muted" id="generatedEmailAddrText" class="hidden"> <?php echo __('Una conferma della tua candidatura verrà inviata all\'indirizzo <span id="generatedEmailAddr"></span>.') ?></span>
@@ -238,7 +238,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				</div>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="mb-3">
 			<button type="submit" class="btn btn-primary"><?php echo __('Invia')?></button>
 		</div>
 	</form>

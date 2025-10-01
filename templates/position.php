@@ -44,8 +44,8 @@ $currentFileName = basename(__FILE__);
 	<hr>
 	<h4><i><?php echo __('Modifica id') ?></i></h4>
 	<form method="post">
-		<div class="form-group row">
-			<div class="col-sm-12 col-lg-8">
+		<div class="mb-3 row">
+			<div class="col-sm-12 col-lg-7">
 				<label for="id">
 					Id
 				</label>
@@ -60,8 +60,8 @@ $currentFileName = basename(__FILE__);
 	</form>
 	<h4><i><?php echo __('Modifica index') ?></i></h4>
 	<form method="post">
-		<div class="form-group row">
-			<div class="col-sm-12 col-lg-8">
+		<div class="mb-3 row">
+			<div class="col-sm-12 col-lg-7">
 				<label for="index">
 					Index
 				</label>
@@ -78,8 +78,8 @@ $currentFileName = basename(__FILE__);
 		<h4 class="mb-3"><i><?php echo __('Modifica nome') ?></i></h4>
 		<input type="hidden" name="translation" value="true">
 		<?php foreach (Template::SUPPORTED_LOCALES as $locale) : ?>
-			<div class="form-group row">
-				<div class="col-sm-12 col-lg-8">
+			<div class="mb-3 row">
+				<div class="col-sm-12 col-lg-7">
 					<label for="name-<?php echo $locale ?>">
 			<?php echo __('Nome') ?> (<?php echo $locale ?>)
 					</label>
@@ -93,7 +93,7 @@ $currentFileName = basename(__FILE__);
 		<h4 class="mb-3"><i><?php echo __('Modifica sintesi') ?></i></h4>
 		<p><i><?php echo __('Ricorda che puoi usare il Markdown per formattare il testo') ?></i></p>
 		<?php foreach (Template::SUPPORTED_LOCALES as $locale) : ?>
-			<div class="form-group row">
+			<div class="mb-3 row">
 				<div class="col-sm-12 col-lg-6">
 					<label for="summary-<?php echo $locale ?>">
 			<?php echo __('Sintesi') ?> (<?php echo $locale ?>)
@@ -108,7 +108,7 @@ $currentFileName = basename(__FILE__);
 		<h4 class="mb-3"><i><?php echo __('Modifica descrizione') ?></i></h4>
 		<p><i><?php echo __('Ricorda che puoi usare il Markdown per formattare il testo') ?></i></p>
 		<?php foreach (Template::SUPPORTED_LOCALES as $locale) : ?>
-			<div class="form-group row">
+			<div class="mb-3 row">
 				<div class="col-sm-12 col-lg-6">
 					<label for="description-<?php echo $locale ?>">
 			<?php echo __('Descrizione') ?> (<?php echo $locale ?>)
@@ -120,7 +120,7 @@ $currentFileName = basename(__FILE__);
 			</div>
 		<?php endforeach; ?>
 		<hr>
-		<div class="form-group row">
+		<div class="mb-3 row">
 			<div class="col">
 				<div class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal"><?php echo __('Elimina') ?></div>
 			</div>
