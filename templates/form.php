@@ -49,19 +49,19 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 	<?php //$this->insert('covid') ?>
 
 	<form method="post">
-		<div class="mb-3 row">
-			<div class="col-md-12 col-lg-6">
+		<div class="row">
+			<div class="mb-3 col-md-12 col-lg-6">
 				<label for="name" class="form-label"><?php echo __('Nome')?></label>
 				<input id="name" name="name" type="text" required="required" class="form-control">
 			</div>
-			<div class="col-md-12 col-lg-6">
+			<div class="mb-3 col-md-12 col-lg-6">
 				<label for="surname" class="form-label"><?php echo __('Cognome')?></label>
 				<input id="surname" name="surname" type="text" required="required" class="form-control">
 			</div>
 		</div>
 
-		<div class="mb-3 row">
-			<div class="col-md-12 col-lg-6">
+		<div class="row">
+			<div class="mb-3 col-md-12 col-lg-6">
 				<label for="year" class="form-label"><?php echo __('Anno')?></label>
 				<select id="year" name="year" required="required" class="form-select">
 					<option value selected disabled class="d-none"></option>
@@ -73,7 +73,7 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 					<option value="Dottorato"><?php echo __('Dottorato')?></option>
 				</select>
 			</div>
-			<div class="col-md-12 col-lg-6">
+			<div class="mb-3 col-md-12 col-lg-6">
 				<label for="degreecourse" class="form-label"><?php echo __('Corso di laurea')?></label>
 				<select id="degreecourse" name="degreecourse" required="required" class="form-select">
 					<option hidden disabled class="default"></option>
@@ -187,13 +187,13 @@ $this->layout('base', ['title' => __('Compila il questionario')]) ?>
 				</select>
 			</div>
 		</div>
-		<div class="mb-3 row">
-			<div class="col-md-12 col-lg-6">
+		<div class="row">
+			<div class="mb-3 col-md-12 col-lg-6">
 				<label for="matricola" class="form-label"><?php echo __('Matricola')?></label>
 				<input id="matricola" name="matricola" placeholder="s123456" type="text" required="required"
 						class="form-control">
 			</div>
-			<div class="col-md-12 col-lg-6">
+			<div class="mb-3 col-md-12 col-lg-6">
 				<label for="area" class="form-label"><?php echo __('Interesse')?></label>
 				<select id="area" name="area" required="required" class="form-select" >
 					<option value selected disabled class="d-none"></option>
