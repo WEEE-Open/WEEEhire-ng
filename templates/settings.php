@@ -73,7 +73,7 @@ $currentFileName = basename(__FILE__);
 				<button type="submit" class="btn btn-primary"><?php echo __('Salva')?></button>
 			</div>
 			<div class="col-md-auto">
-				<div class="btn btn-secondary" data-toggle="modal" data-target="#newPositionModal">
+				<div class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newPositionModal">
 					<div><?php echo __('Crea nuova posizione')?></div>
 				</div>
 			</div>
@@ -84,9 +84,7 @@ $currentFileName = basename(__FILE__);
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title"><?php echo __('Nuova posizione')?></h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<div class="mb-3 row">
