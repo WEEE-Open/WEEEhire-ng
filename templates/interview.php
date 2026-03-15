@@ -8,6 +8,9 @@
  * @var array $notes
  */
 
+use WEEEOpen\WEEEHire\Template;
+use Michelf\Markdown;
+
 $titleShort = sprintf(__('%s %s (%s)'), $this->e($user->name), $this->e($user->surname), $this->e($user->matricola));
 $title = sprintf(__('%s - Colloquio'), $titleShort);
 $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
@@ -153,18 +156,53 @@ $this->layout('base', ['title' => $title, 'logoHref' => 'candidates.php']);
 	<?php endif ?>
 		</div>
 	</form>
-	<form method="post">
-	<?php if ($user->invitelink !== null) : ?>
-			<div class="alert alert-info" role="alert">
-		<?=sprintf(__('Link d\'invito: %s'), $user->invitelink);?>
-			</div>
-	<?php endif ?>
-		<div class="mb-3 text-center">
-			<button name="invite" value="true" type="submit"
-					class="btn btn-primary"><?=__('Genera link d\'invito')?></button>
+	<?php if ($interview->status === true) : ?>
+		<?php if ($user->invitelink !== null) : ?>
+		<div class="alert alert-info" role="alert">
+			<p><?=__('Messaggio d\'invito:')?></p>
+			<?php foreach (Template::SUPPORTED_LOCALES as $locale) : ?>
+				<div id="accept-<?=$locale ?>">
+					<?= Markdown::defaultTransform($acceptedMessage[$locale]) ?>
+				</div>
+				<button type="button" class="btn btn-info mb-3" data-copy-id="accept-<?=$locale ?>"><?=__('Copia') ?> (<?=$locale ?>)</button>
+			<?php endforeach ?>
 		</div>
-	</form>
+		<?php else : ?>
+		<form method="post">
+			<div class="mb-3 text-center">
+				<button name="invite" value="true" type="submit"
+						class="btn btn-primary"><?=__('Genera link d\'invito')?></button>
+			</div>
+		</form>
+		<?php endif ?>
+	<?php elseif ($interview->status === false) : ?>
+		<div class="alert alert-danger" role="alert">
+			<p><?=__('Messaggio di rifiuto:')?></p>
+			<?php foreach (Template::SUPPORTED_LOCALES as $locale) : ?>
+				<div id="reject-<?=$locale ?>">
+					<?= Markdown::defaultTransform($rejectedMessage[$locale]) ?>
+				</div>
+				<button type="button" class="btn btn-danger mb-3" data-copy-id="reject-<?=$locale ?>"><?=__('Copia') ?> (<?=$locale ?>)</button>
+			<?php endforeach ?>
+		</div>
+	<?php endif ?>
 <?php endif ?>
 
+<script>
+document.querySelectorAll('[data-copy-id]').forEach(b => b.addEventListener("click", async (event) => {
+	const element = document.getElementById(event.target.dataset.copyId);
 
+	const html = element.outerHTML;
+	const text = element.innerText;
+
+	console.log(html, text);
+
+	const clipboardItem = new ClipboardItem({
+		"text/html": new Blob([html], { type: "text/html" }),
+		"text/plain": new Blob([text], { type: "text/plain" })
+	});
+
+	await navigator.clipboard.write([clipboardItem]);
+}));
+</script>
 <script src="resize.js"></script>

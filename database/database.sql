@@ -380,5 +380,11 @@ create trigger if not exists update_positions_translation
         update translations set id = 'position.' || new.id || '.summary' where id = 'position.' || old.id || '.summary';
 	end;
 
+insert into translations (id, lang, value) values 
+	('templates.messages.accepted', 'it-IT', 'Congratulazioni, sei stato accettato! Registra il tuo account qua: ${inviteLink} '),
+	('templates.messages.accepted', 'en-US', 'Congrats, you have been accepted! Please register your account here: ${inviteLink} '),
+	('templates.messages.rejected', 'it-IT', 'Mi spiace ma non hai superato il colloquio.'),
+	('templates.messages.rejected', 'en-US', 'I''m sorry but you haven''t passed the interview.');
+
 -- Be careful not to change this line other than the number of the version, this is parsed with regex by the updater
-insert into config (id, value) values ('SchemaVersion', '2');
+insert into config (id, value) values ('SchemaVersion', '3');

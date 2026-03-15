@@ -67,6 +67,14 @@ class PageSettings implements RequestHandlerInterface
 				}
 				$db->setConfigValue('notifyEmail', $email);
 				$changed = true;
+			} elseif (isset($POST['messages'])) {
+				foreach (Template::SUPPORTED_LOCALES as $locale) {
+					if (isset($POST["accepted-message-$locale"]))
+						$db->updateTranslation('templates.messages.accepted', $locale, $POST["accepted-message-$locale"]);
+					if (isset($POST["rejected-message-$locale"]))
+						$db->updateTranslation('templates.messages.rejected', $locale, $POST["rejected-message-$locale"]);
+				}
+				$changed = true;
 			}
 
 			if ($changed) {
@@ -86,6 +94,23 @@ class PageSettings implements RequestHandlerInterface
 			$expiry = (new DateTime('now', new DateTimeZone('Europe/Rome')))->setTimestamp($expiry);
 		}
 
+		$acceptedMessage = [];
+		$rejectedMessage = [];
+		foreach (Template::SUPPORTED_LOCALES as $locale) {
+			$acceptedMessage[$locale] = $db->getTranslation("templates.messages.accepted", $locale);
+			if ($acceptedMessage[$locale] !== false) {
+				$acceptedMessage[$locale] = $acceptedMessage[$locale]['value'];
+			} else {
+				$acceptedMessage[$locale] = "\${inviteLink}";
+			}
+			$rejectedMessage[$locale] = $db->getTranslation("templates.messages.rejected", $locale);
+			if ($rejectedMessage[$locale] !== false) {
+				$rejectedMessage[$locale] = $rejectedMessage[$locale]['value'];
+			} else {
+				$rejectedMessage[$locale] = "";
+			}
+		}
+
 		return new HtmlResponse(
 			$template->render(
 				'settings',
@@ -95,7 +120,9 @@ class PageSettings implements RequestHandlerInterface
 				'expiry'           => $expiry,
 				'error'            => $error,
 				'sendMail'         => (int) $db->getConfigValue('notifyEmail'),
-				'positions' => $db->getPositions(Template::getLocale() ?? 'en_US')
+				'positions' => $db->getPositions(Template::getLocale() ?? 'en_US'),
+				'acceptedMessage' => $acceptedMessage,
+				'rejectedMessage' => $rejectedMessage
 				]
 			)
 		);

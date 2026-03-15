@@ -15,6 +15,8 @@
  * @var $positions     String
  */
 
+use WEEEOpen\WEEEHire\Template;
+
 $this->layout('base', ['title' => __('Opzioni WEEEHire'), 'logoHref' => 'settings.php']);
 
 $currentFileName = basename(__FILE__);
@@ -125,6 +127,50 @@ $currentFileName = basename(__FILE__);
 				<button type="submit" class="btn btn-outline-success" name="notifyEmail" value="true"><?php echo __('Attiva email')?></button>
 			<?php endif; ?>
 			</div>
+		</div>
+	</form>
+	<hr>
+	<h4 class="mb-3"><i><?php echo __('Messaggi precompilati')?></i></h4>
+	<div class="mb-3 row">
+		<div class="col-12">
+			<p>
+				<?=__('Puoi usare ${parametro}, per riempire automaticamente i campi. I parametri disponibili sono:') ?>
+				<ul>
+					<li>inviteLink - <?=__('Link d\'invito (solo per in caso il membro sia stato approvato)') ?></li>
+					<li>firstname - <?=__('Nome del candidato') ?></li>
+					<li>interviewerName - <?=__('Nome del recruiter') ?></li>
+				</ul>
+			</p>
+		</div>
+	</div>
+	<p><i><?=__('Ricorda che puoi usare il Markdown per formattare il testo') ?></i></p>
+	<form method="post">
+		<?php foreach (Template::SUPPORTED_LOCALES as $locale) : ?>
+			<div class="mb-3 row">
+				<div class="col-sm-12 col-lg-6">
+					<label for="accepted-message-<?=$locale ?>">
+						<?=__('Messaggio accettato') ?> (<?=$locale ?>)
+					</label>
+				</div>
+				<div class="col-sm-6 col-lg-6">
+					<textarea class="form-control autoresize" name="accepted-message-<?=$locale ?>" id="accepted-message-<?=$locale ?>"><?=$acceptedMessage[$locale] ?></textarea>
+				</div>
+			</div>
+		<?php endforeach; ?>
+		<?php foreach (Template::SUPPORTED_LOCALES as $locale) : ?>
+			<div class="mb-3 row">
+				<div class="col-sm-12 col-lg-6">
+					<label for="rejected-message-<?=$locale ?>">
+						<?=__('Messaggio rifiutato') ?> (<?=$locale ?>)
+					</label>
+				</div>
+				<div class="col-sm-6 col-lg-6">
+					<textarea class="form-control autoresize" name="rejected-message-<?=$locale ?>" id="rejected-message-<?=$locale ?>"><?=$rejectedMessage[$locale] ?></textarea>
+				</div>
+			</div>
+		<?php endforeach; ?>
+		<div class="col-md-auto">
+			<button type="submit" class="btn btn-primary" name="messages" value="true"><?=__('Modifica') ?></button>
 		</div>
 	</form>
 </div>

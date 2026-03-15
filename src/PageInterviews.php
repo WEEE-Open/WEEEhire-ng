@@ -212,17 +212,51 @@ class PageInterviews implements RequestHandlerInterface
 				}
 			}
 
-			// Render the page
-			$page = $template->render(
-				'interview',
-				[
+			$pageParams = [
 				'user'       => $user,
 				'interview'  => $interview,
 				'edit'       => isset($GET['edit']),
 				'recruiters' => $ldap->getRecruiters(),
 				'notes'      => $notes,
-				]
-			);
+			];
+
+			if ($interview->status === false) {
+				$messageParameters = [
+					'firstname' => $user->name,
+					'interviewerName' => $interview->recruiter,
+				];
+				$rejectedMessage = [];
+				foreach (Template::SUPPORTED_LOCALES as $locale) {
+					$rejectedMessage[$locale] = $db->getTranslation("templates.messages.rejected", $locale);
+					if ($rejectedMessage[$locale] !== false) {
+						$rejectedMessage[$locale] = Template::replaceTagsInTemplate($rejectedMessage[$locale]['value'],$messageParameters);
+					} else {
+						$rejectedMessage[$locale] = "";
+					}
+				}
+				$pageParams["rejectedMessage"] = $rejectedMessage;
+			} elseif ($interview->status === true && $user->invitelink !== null) {
+				$messageParameters = [
+					'inviteLink' => $user->invitelink,
+					'firstname' => $user->name,
+					'interviewerName' => $interview->recruiter,
+				];
+				$acceptedMessage = [];
+				foreach (Template::SUPPORTED_LOCALES as $locale) {
+					$acceptedMessage[$locale] = $db->getTranslation("templates.messages.accepted", $locale);
+					if ($acceptedMessage[$locale] !== false) {
+						$acceptedMessage[$locale] = $acceptedMessage[$locale]['value'];
+					} else {
+						$acceptedMessage[$locale] = "\${inviteLink}";
+					}
+					$acceptedMessage[$locale] = Template::replaceTagsInTemplate($acceptedMessage[$locale], $messageParameters);
+				}
+				$pageParams['acceptedMessage'] = $acceptedMessage;
+			}
+
+			// Render the page
+			$page = $template->render('interview', $pageParams);
+			
 
 			return new HtmlResponse($page);
 		} else {

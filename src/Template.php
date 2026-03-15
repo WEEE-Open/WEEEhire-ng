@@ -135,4 +135,38 @@ class Template
 			return $lowercaseLocale;
 		}
 	}
+
+	/**
+	 * Replaces ${string} petters in a string with given values
+	 * 
+	 * @param string 	$template
+	 * @param string[] 	$values
+	 * 
+	 * @return string
+	 */
+	static public function replaceTagsInTemplate($template, $values): string {
+		$offset = 0;
+
+		while (preg_match('/\$\{([^}]+)\}/', $template, $match, PREG_OFFSET_CAPTURE, $offset)) {
+			$fullMatch = $match[0][0];
+			$start = $match[0][1];
+			$key = $match[1][0];
+			$length = strlen($fullMatch);
+
+			if (array_key_exists($key, $values)) {
+				$replacement = $values[$key];
+
+				$template =
+					substr($template, 0, $start) .
+					$replacement .
+					substr($template, $start + $length);
+
+				$offset = $start + strlen($replacement);
+			} else {
+				$offset = $start + $length;
+			}
+		}
+
+		return $template;
+	}
 }
