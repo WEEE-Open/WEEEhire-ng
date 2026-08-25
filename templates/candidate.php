@@ -200,7 +200,7 @@ require_once 'stars.php';
 		default:
 		case \WEEEOpen\WEEEHire\User::STATUS_NEW:
 			?>
-				<div data-toggle="modal" data-target="#resendEmailModal"
+				<div data-bs-toggle="modal" data-bs-target="#resendEmailModal"
 						class="btn btn-outline-secondary my-1 mx-1"><?=__('Rinvia email')?></div>
 				<button name="approve" value="true" type="submit"
 						class="btn btn-success my-1 mx-1"><?=__('Approva candidatura')?></button>
@@ -263,15 +263,13 @@ require_once 'stars.php';
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title"><?=__('Conferma')?></h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<p><?=__('Sei sicuro di voler rinviare l\'email di candidatura?')?></p>
 			</div>
 			<form method="post" class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal"><?=__('Annulla')?></button>
+				<button type="button" class="btn btn-primary" data-bs-dismiss="modal"><?=__('Annulla')?></button>
 				<input type="hidden" name="resendemail" value="true">
 				<input type="submit" class="btn btn-outline-danger" value="<?=__('Invia')?>"></input>
 			</form>
