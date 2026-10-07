@@ -78,7 +78,7 @@ foreach ($interviews as $interviewer => $ints) {
 		?>
 		<li class="list-group-item d-flex justify-content-between align-items-center <?php echo $statusClass?> <?php echo $old ?>">
 			<span><?php echo sprintf(__('<a href="interviews.php?id=%d">%s</a> (%s)'), $this->e($int['id']), $this->e($int['name']), $this->e($int['area']))?></span>
-			<a class="badge badge-primary" href="/interviews.php?id=<?php echo $this->e($int['id'])?>&download"><?php echo $time?></a>
+			<a class="badge bg-primary" href="/interviews.php?id=<?php echo $this->e($int['id'])?>&download"><?php echo $time?></a>
 		</li>
 		<?php
 	}
