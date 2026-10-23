@@ -6,7 +6,7 @@
   "license": "MIT",
   "require": {
     "league/plates": "3.*",
-    "jumbojett/openid-connect-php": "^1.0.2",
+    "jumbojett/openid-connect-php": "dev-master#3067281",
     "ext-ldap": "*",
     "ext-mbstring": "*",
     "ext-json": "*",
