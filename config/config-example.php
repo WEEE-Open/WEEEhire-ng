@@ -18,6 +18,7 @@ env_or_default('TEST_MODE', true);  # Bypasses authentication and does not send 
 env_or_default('WEEEHIRE_EMAIL_FALLBACK', 'example@example.com');
 env_or_default('WEEEHIRE_INVITE_LINK', 'https://example.com/register.php?invite=');
 env_or_default('WEEEHIRE_SELF_LINK', 'https://weeehire.example.com');
+env_or_default('WEEEHIRE_DB', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'weeehire.db');
 env_or_default('WEEEHIRE_LDAP_URL', 'ldaps://ldap.example.com');
 env_or_default('WEEEHIRE_LDAP_BIND_DN', 'cn=weeehire,ou=Services,dc=example,dc=com');
 env_or_default('WEEEHIRE_LDAP_PASSWORD', 'f00b4r');
