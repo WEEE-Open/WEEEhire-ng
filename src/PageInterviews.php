@@ -62,10 +62,10 @@ class PageInterviews implements RequestHandlerInterface
 					]
 				);
 				/**
-	   * @noinspection PhpUndefinedFieldInspection
+				* @noinspection PhpUndefinedFieldInspection
 */
 				/**
-	   * @noinspection PhpMethodParametersCountMismatchInspection
+				* @noinspection PhpMethodParametersCountMismatchInspection
 */
 				$ical->VEVENT->add(
 					'URL',
@@ -75,10 +75,10 @@ class PageInterviews implements RequestHandlerInterface
 					]
 				);
 				/**
-	   * @noinspection PhpUndefinedFieldInspection
+				* @noinspection PhpUndefinedFieldInspection
 */
 				/**
-	   * @noinspection PhpMethodParametersCountMismatchInspection
+				* @noinspection PhpMethodParametersCountMismatchInspection
 */
 				$ical->VEVENT->add(
 					'ORGANIZER',
@@ -128,9 +128,9 @@ class PageInterviews implements RequestHandlerInterface
 
 			// A form has been submitted
 			if ($request->getMethod() === 'POST') {
-				   $POST = $request->getParsedBody();
-				   $changed = false;
-				   $note = $POST['note'] ?? '';
+					  $POST = $request->getParsedBody();
+					  $changed = false;
+					  $note = $POST['note'] ?? '';
 
 				if (isset($POST['edit'])) {
 					// Update personal details, same as candidates.php
@@ -155,7 +155,7 @@ class PageInterviews implements RequestHandlerInterface
 					 // Schedule an interview
 					 $recruiter = $POST['recruiter'];
 					if (strlen($recruiter) <= 0 || strpos($recruiter, '|') === false) {
-								return new HtmlResponse($template->render('error', ['message' => 'Select a recruiter']), 400);
+							  return new HtmlResponse($template->render('error', ['message' => 'Select a recruiter']), 400);
 					}
 					 // Split recruiter name and telegram account
 					 $recruiter = explode('|', $recruiter, 2);
@@ -213,23 +213,23 @@ class PageInterviews implements RequestHandlerInterface
 			}
 
 			$pageParams = [
-				'user'       => $user,
-				'interview'  => $interview,
-				'edit'       => isset($GET['edit']),
-				'recruiters' => $ldap->getRecruiters(),
-				'notes'      => $notes,
+			'user'       => $user,
+			'interview'  => $interview,
+			'edit'       => isset($GET['edit']),
+			'recruiters' => $ldap->getRecruiters(),
+			'notes'      => $notes,
 			];
 
 			if ($interview->status === false) {
 				$messageParameters = [
-					'firstname' => $user->name,
-					'interviewerName' => $interview->recruiter,
+				'firstname' => $user->name,
+				'interviewerName' => $interview->recruiter,
 				];
 				$rejectedMessage = [];
 				foreach (Template::SUPPORTED_LOCALES as $locale) {
 					$rejectedMessage[$locale] = $db->getTranslation("templates.messages.rejected", $locale);
 					if ($rejectedMessage[$locale] !== false) {
-						$rejectedMessage[$locale] = Template::replaceTagsInTemplate($rejectedMessage[$locale]['value'],$messageParameters);
+						$rejectedMessage[$locale] = Template::replaceTagsInTemplate($rejectedMessage[$locale]['value'], $messageParameters);
 					} else {
 						$rejectedMessage[$locale] = "";
 					}
@@ -237,9 +237,9 @@ class PageInterviews implements RequestHandlerInterface
 				$pageParams["rejectedMessage"] = $rejectedMessage;
 			} elseif ($interview->status === true && $user->invitelink !== null) {
 				$messageParameters = [
-					'inviteLink' => $user->invitelink,
-					'firstname' => $user->name,
-					'interviewerName' => $interview->recruiter,
+				'inviteLink' => $user->invitelink,
+				'firstname' => $user->name,
+				'interviewerName' => $interview->recruiter,
 				];
 				$acceptedMessage = [];
 				foreach (Template::SUPPORTED_LOCALES as $locale) {
@@ -256,7 +256,7 @@ class PageInterviews implements RequestHandlerInterface
 
 			// Render the page
 			$page = $template->render('interview', $pageParams);
-			
+
 
 			return new HtmlResponse($page);
 		} else {
@@ -284,7 +284,16 @@ class PageInterviews implements RequestHandlerInterface
 			} else {
 				// List of all interviews in chronological order
 				$interviews = $db->getAllInterviewsForTable();
-				$page = $template->render('interviews', ['interviews' => $interviews, 'myuser' => $_SESSION['uid'], 'myname' => $_SESSION['cn']]);
+				$ghostdays = $db->getConfigValue('ghostdays');
+
+				$page = $template->render(
+					'interviews',
+					[
+					'interviews' => $interviews,
+					'ghostdays'  => $ghostdays,
+					'myuser'      => $_SESSION['uid'],
+					'myname'      => $_SESSION['cn']]
+				);
 				return new HtmlResponse($page);
 			}
 		}

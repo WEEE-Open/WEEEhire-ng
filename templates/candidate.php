@@ -29,10 +29,8 @@ require_once 'stars.php';
 		</div>
 	<?php else : ?>
 		<div class="alert alert-success" role="alert">
-		<?=sprintf(
-			__('Candidatura approvata, <a href="%s">passa al colloquio</a>'),
-			'interviews.php?id=' . $user->id
-		) // It's an int, no risks here ?>
+		<span><?=sprintf(__('Candidatura approvata, <a href="%s">passa al colloquio</a>'), 'interviews.php?id=' . $user->id) // It's an int, no risks here ?></span><br>
+		<span><?=sprintf(__('Email mandata il: %s, (%d giorni fa)'), date('Y-m-d H:i:s', $user->timeofapproval), intdiv(time() - $user->timeofapproval, 86400))?></span>
 		</div>
 	<?php endif ?>
 <?php elseif ($user->status === false) : ?>

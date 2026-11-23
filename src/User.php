@@ -29,6 +29,8 @@ class User
 
 	public $notes;
 
+	public $timeofapproval;
+
 	/**
 	 * @var $published bool Result published or not
 	 */

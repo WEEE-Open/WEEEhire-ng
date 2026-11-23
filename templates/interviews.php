@@ -9,10 +9,16 @@
 /**
  * @var $myuser string
  */
+/**
+ *
+ *
+ * @var int $ghostdays
+ */
 $this->layout('base', ['title' => __('Candidati'), 'fontAwesome' => true, 'logoHref' => 'interviews.php']);
 $total = 0;
 $approved = 0;
 $rejected = 0;
+$ghosted = 0;
 $toschedule = 0;
 $scheduled = 0;
 $invited = 0;
@@ -115,8 +121,20 @@ $prevdate = null;
 	</tr>
 	</thead>
 	<tbody>
+	<?php $currentdate = time()?>
 	<?php foreach ($later as $int) : ?>
-		<tr>
+		<?php
+		$isghosted = false;
+
+		if ($ghostdays !== null && $ghostdays > 0 && $ghostdays !== '' && !empty($int['timeofapproval'])) {
+			if (intdiv($currentdate - (int)$int['timeofapproval'], 86400) > $ghostdays) {
+				$isghosted = true;
+				$ghosted++;
+				$toschedule--;
+			}
+		}
+		?>
+		<tr<?php echo $isghosted ? ' class="table-warning"' : '' ?>>
 			<td><a href="/interviews.php?id=<?php echo $int['id']?>"><?php echo $this->e($int['name'])?></a></td>
 			<td><?php echo $this->e($int['area'])?></td>
 			<td><?php echo $this->e($int['recruiter'])?></td>
@@ -131,6 +149,7 @@ $prevdate = null;
 	<li class="list-group-item"><?php echo sprintf(_ngettext('%d colloquio fissato', '%d colloqui fissati', $scheduled), $scheduled);?></li>
 	<li class="list-group-item list-group-item-success"><?php echo sprintf(_ngettext('%d approvato', '%d approvati', $approved), $approved);?></li>
 	<li class="list-group-item list-group-item-danger"><?php echo sprintf(_ngettext('%d rifiutato', '%d rifiutati', $rejected), $rejected);?></li>
+	<li class="list-group-item list-group-item-warning"><?php echo sprintf(_ngettext('%d ghosted', '%d ghosted', $ghosted), $ghosted);?></li>
 	<li class="list-group-item"><?php echo sprintf(_ngettext('%d da invitare', '%d da invitare', $toinvite), $toinvite);?></li>
 	<li class="list-group-item list-group-item-success"><?php echo sprintf(_ngettext('%d invitato', '%d invitati', $invited), $invited);?></li>
 </ul>

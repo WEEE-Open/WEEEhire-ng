@@ -1,18 +1,34 @@
 <?php
+
 /**
- * @var $myname string
+ *
+ *
+ * @var string $myname
  */
 /**
- * @var $myuser string
+ *
+ *
+ * @var string $myuser
  */
 /**
- * @var $expiry String
+ *
+ *
+ * @var string $expiry
  */
 /**
- * @var $sendMail String
+ *
+ *
+ * @var string $sendMail
  */
 /**
- * @var $positions     String
+ *
+ *
+ * @var string $positions
+ */
+/**
+ *
+ *
+ * @var int $ghostdays
  */
 
 use WEEEOpen\WEEEHire\Template;
@@ -38,8 +54,8 @@ $currentFileName = basename(__FILE__);
 		<div class="mb-3 row align-items-center">
 			<div class="col-12 col-md mb-2 mb-md-0">
 				<label for="expiry">
-					<?=	__('Scadenza Candidature')?>
-					<b>(<?= $expiry === null ? __('nessuna scadenza') : $expiry->format('d-m-Y') . ' ' . __('alle 00:00') ?>)</b>
+					<?php echo    __('Scadenza Candidature')?>
+					<b>(<?php echo $expiry === null ? __('nessuna scadenza') : $expiry->format('d-m-Y') . ' ' . __('alle 23:59') ?>)</b>
 				</label>
 			</div>
 			<div class="col-12 col-md-auto d-flex gap-2">
@@ -52,6 +68,32 @@ $currentFileName = basename(__FILE__);
 					<button type="submit" class="btn btn-outline-danger" name="noexpiry"
 						value="true">&#x274C;<?php echo __('Elimina')?></button>
 				<?php endif ?>
+			</div>
+		</div>
+	</form>
+	<h4><i><?php echo __('Modifica Giorni Ghost')?></i></h4>
+	<form method="post">
+		<div class="mb-3 row align-items-center">
+			<div class="col-12 col-md mb-2 mb-md-0">
+				<label for="ghostdays">
+					<?php echo __('Impostazione Giorni Ghost: ')?>
+					<b>
+						<?php
+						if ($ghostdays === null || $ghostdays === '') {
+							echo __('Non Definito');
+						} elseif ($ghostdays === 0) {
+							echo __('Disattivato');
+						} else {
+							echo __($ghostdays);
+						}
+						?>
+					</b>
+				</label>
+			</div>
+			<div class="col-12 col-md-auto d-flex gap-2">
+				<input type="number" class="form-control" name="ghostdays" id="ghostdays" min="0"
+					value="<?php echo $ghostdays === null ? '' : $ghostdays;?>">
+				<button type="submit" class="btn btn-primary"><?php echo __('Conferma')?></button>
 			</div>
 		</div>
 	</form>
@@ -134,43 +176,43 @@ $currentFileName = basename(__FILE__);
 	<div class="mb-3 row">
 		<div class="col-12">
 			<p>
-				<?=__('Puoi usare ${parametro}, per riempire automaticamente i campi. I parametri disponibili sono:') ?>
+				<?php echo __('Puoi usare ${parametro}, per riempire automaticamente i campi. I parametri disponibili sono:') ?>
 				<ul>
-					<li>inviteLink - <?=__('Link d\'invito (solo per in caso il membro sia stato approvato)') ?></li>
-					<li>firstname - <?=__('Nome del candidato') ?></li>
-					<li>interviewerName - <?=__('Nome del recruiter') ?></li>
+					<li>inviteLink - <?php echo __('Link d\'invito (solo per in caso il membro sia stato approvato)') ?></li>
+					<li>firstname - <?php echo __('Nome del candidato') ?></li>
+					<li>interviewerName - <?php echo __('Nome del recruiter') ?></li>
 				</ul>
 			</p>
 		</div>
 	</div>
-	<p><i><?=__('Ricorda che puoi usare il Markdown per formattare il testo') ?></i></p>
+	<p><i><?php echo __('Ricorda che puoi usare il Markdown per formattare il testo') ?></i></p>
 	<form method="post">
 		<?php foreach (Template::SUPPORTED_LOCALES as $locale) : ?>
 			<div class="mb-3 row">
 				<div class="col-sm-12 col-lg-6">
-					<label for="accepted-message-<?=$locale ?>">
-						<?=__('Messaggio accettato') ?> (<?=$locale ?>)
+					<label for="accepted-message-<?php echo $locale ?>">
+			<?php echo __('Messaggio accettato') ?> (<?php echo $locale ?>)
 					</label>
 				</div>
 				<div class="col-sm-6 col-lg-6">
-					<textarea class="form-control autoresize" name="accepted-message-<?=$locale ?>" id="accepted-message-<?=$locale ?>"><?=$acceptedMessage[$locale] ?></textarea>
+					<textarea class="form-control autoresize" name="accepted-message-<?php echo $locale ?>" id="accepted-message-<?php echo $locale ?>"><?php echo $acceptedMessage[$locale] ?></textarea>
 				</div>
 			</div>
 		<?php endforeach; ?>
 		<?php foreach (Template::SUPPORTED_LOCALES as $locale) : ?>
 			<div class="mb-3 row">
 				<div class="col-sm-12 col-lg-6">
-					<label for="rejected-message-<?=$locale ?>">
-						<?=__('Messaggio rifiutato') ?> (<?=$locale ?>)
+					<label for="rejected-message-<?php echo $locale ?>">
+			<?php echo __('Messaggio rifiutato') ?> (<?php echo $locale ?>)
 					</label>
 				</div>
 				<div class="col-sm-6 col-lg-6">
-					<textarea class="form-control autoresize" name="rejected-message-<?=$locale ?>" id="rejected-message-<?=$locale ?>"><?=$rejectedMessage[$locale] ?></textarea>
+					<textarea class="form-control autoresize" name="rejected-message-<?php echo $locale ?>" id="rejected-message-<?php echo $locale ?>"><?php echo $rejectedMessage[$locale] ?></textarea>
 				</div>
 			</div>
 		<?php endforeach; ?>
 		<div class="col-md-auto">
-			<button type="submit" class="btn btn-primary" name="messages" value="true"><?=__('Modifica') ?></button>
+			<button type="submit" class="btn btn-primary" name="messages" value="true"><?php echo __('Modifica') ?></button>
 		</div>
 	</form>
 </div>

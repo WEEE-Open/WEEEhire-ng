@@ -23,8 +23,9 @@ create table users (
 	interviewer text,
 	interviewertg text,
 	interviewstatus int,
-	answers int
---	safetytestdate int
+	answers int,
+	timeofapproval int default null
+	-- safetytestdate int
 );
 
 create unique index users_matricola_uindex
@@ -387,4 +388,4 @@ insert into translations (id, lang, value) values
 	('templates.messages.rejected', 'en-US', 'I''m sorry but you haven''t passed the interview.');
 
 -- Be careful not to change this line other than the number of the version, this is parsed with regex by the updater
-insert into config (id, value) values ('SchemaVersion', '3');
+insert into config (id, value) values ('SchemaVersion', '4');

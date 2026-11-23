@@ -40,6 +40,14 @@ class PageSettings implements RequestHandlerInterface
 				} catch (Exception $e) {
 					$error = $e->getMessage();
 				}
+			} elseif (isset($POST['ghostdays'])) {
+				$input = $POST['ghostdays'];
+				if ($input === '' || filter_var($input, FILTER_VALIDATE_INT) !== false && $input >= 0) {
+					$db->setConfigValue('ghostdays', $input);
+					$changed = true;
+				} else {
+					$error = __('Valore inserito non valido');
+				}
 			} elseif (isset($POST['positions'])) {
 				// Positions
 				$positions = $db->getPositions();
@@ -69,10 +77,12 @@ class PageSettings implements RequestHandlerInterface
 				$changed = true;
 			} elseif (isset($POST['messages'])) {
 				foreach (Template::SUPPORTED_LOCALES as $locale) {
-					if (isset($POST["accepted-message-$locale"]))
+					if (isset($POST["accepted-message-$locale"])) {
 						$db->updateTranslation('templates.messages.accepted', $locale, $POST["accepted-message-$locale"]);
-					if (isset($POST["rejected-message-$locale"]))
+					}
+					if (isset($POST["rejected-message-$locale"])) {
 						$db->updateTranslation('templates.messages.rejected', $locale, $POST["rejected-message-$locale"]);
+					}
 				}
 				$changed = true;
 			}
@@ -85,11 +95,12 @@ class PageSettings implements RequestHandlerInterface
 		}
 
 		$expiry = $db->getConfigValue('expiry');
+		$ghostdays = $db->getConfigValue('ghostdays');
 
 		// Get the timestamp in correct format
 		if ($expiry !== null) {
 			/**
-	   * @noinspection PhpUnhandledExceptionInspection
+			 * @noinspection PhpUnhandledExceptionInspection
 */
 			$expiry = (new DateTime('now', new DateTimeZone('Europe/Rome')))->setTimestamp($expiry);
 		}
@@ -118,6 +129,7 @@ class PageSettings implements RequestHandlerInterface
 				'myuser'           => $_SESSION['uid'],
 				'myname'           => $_SESSION['cn'],
 				'expiry'           => $expiry,
+				'ghostdays'        => $ghostdays,
 				'error'            => $error,
 				'sendMail'         => (int) $db->getConfigValue('notifyEmail'),
 				'positions' => $db->getPositions(Template::getLocale() ?? 'en_US'),

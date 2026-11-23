@@ -41,7 +41,7 @@ require_once 'stars.php';
 	<tbody>
 	<?php foreach ($users as $user) :
 		/**
- * @var User $user
+	   * @var User $user
 */
 		$date = date('Y-m-d H:i', $user['submitted']);
 		$total++;
@@ -76,7 +76,7 @@ require_once 'stars.php';
 			case User::STATUS_PUBLISHED_APPROVED:
 				$approved++;
 				$published++;
-				$statusCell = __('Approvata, pubblicata');
+				$statusCell = sprintf(__('Approvata il %s Pubblicata'), $user['timeofapproval']);
 				$tdcolor = $trcolor = 'class="candidates-approved"';
 				break;
 			case User::STATUS_PUBLISHED_REJECTED:

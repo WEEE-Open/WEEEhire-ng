@@ -25,7 +25,6 @@ class Database
 	 *
 	 * @return SQLite3
 	 */
-
 	public function getDb(): SQLite3
 	{
 		return $this->db;
@@ -94,7 +93,8 @@ class Database
 	{
 		$stmt = $this->db->prepare(
 			'SELECT id, name, surname, degreecourse, year, matricola, area, letter, published, status,
-                                                 hold, recruiter, recruitertg, submitted, emailed, invitelink, visiblenotes
+                                                 hold, recruiter, recruitertg, submitted, emailed, invitelink,
+												 visiblenotes, timeofapproval
                                                  FROM users WHERE id = :id LIMIT 1'
 		);
 		$stmt->bindValue(':id', $id, SQLITE3_TEXT);
@@ -127,6 +127,7 @@ class Database
 			'visiblenotes',
 			'emailed',
 			'invitelink',
+			'timeofapproval'
 			] as $attr
 		) {
 			$user->$attr = $row[$attr];
@@ -136,6 +137,7 @@ class Database
 		$user->emailed = (bool) $user->emailed;
 		$user->status = $user->status === null ? null : (bool) $user->status;
 		$user->invitelink = $user->invitelink === null ? null : $user->invitelink;
+		$user->timeofapproval = $user->timeofapproval === null ? null : (int) $user->timeofapproval;
 
 		return $user;
 	}
@@ -256,6 +258,17 @@ class Database
 		$stmt = $this->db->prepare('INSERT OR REPLACE INTO config (id, value) VALUES (:id, :value)');
 		$stmt->bindValue(':value', $value, SQLITE3_TEXT);
 		$stmt->bindValue(':id', $option, SQLITE3_TEXT);
+		$result = $stmt->execute();
+		if ($result === false) {
+			throw new DatabaseException();
+		}
+	}
+
+	public function setSendEmailTime(string $userId, int $timeofapproval)
+	{
+		$stmt = $this->db->prepare('UPDATE users SET timeofapproval = :timeofapproval WHERE id = :id');
+		$stmt->bindValue(':timeofapproval', $timeofapproval, SQLITE3_INTEGER);
+		$stmt->bindValue(':id', $userId, SQLITE3_TEXT);
 		$result = $stmt->execute();
 		if ($result === false) {
 			throw new DatabaseException();
@@ -383,7 +396,7 @@ class Database
 		// the reason why there is additional subquery with distinct candidate_id because
 		// if I left join and if user has some ( more than one ) notes after join user begin to duplicate
 		// in this case I am getting with distinct candidate_id
-		$query = 'SELECT users.id, name, surname, area, recruiter, published, status, submitted, hold, evaluation.vote AS myvote, candidate_id AS has_note
+		$query = 'SELECT users.id, name, surname, area, recruiter, published, status, submitted, hold, evaluation.vote AS myvote, candidate_id AS has_note, timeofapproval
                     FROM users
                     LEFT JOIN evaluation ON ref_user_id=users.id AND evaluation.id_evaluator=:user
                     LEFT JOIN ( SELECT DISTINCT candidate_id FROM notes WHERE uid=:user ) ON candidate_id=users.id
@@ -407,6 +420,7 @@ class Database
 			'submitted'    => $row['submitted'],
 			'evaluation'   => $votes[$row['id']] ?? null,
 			'has_note'     => $row['has_note'], // convert candidate_id to has_note
+			'timeofapproval' => $row['timeofapproval'],
 			];
 		}
 
@@ -808,7 +822,7 @@ class Database
 	{
 		$dtz = new DateTimeZone('Europe/Rome');
 		// safetyTestDate
-		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, hold, interviewstatus, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname, name');
+		$result = $this->db->query('SELECT id, name, surname, area, interviewer, recruiter, interview, hold, interviewstatus, IFNULL(LENGTH(answers), 0) as al, IFNULL(LENGTH(invitelink), 0) as il, timeofapproval FROM users WHERE status >= 1 AND published >= 1 ORDER BY interview DESC, surname, name');
 		$compact = [];
 		while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			if ($row['interview'] === null) {
@@ -836,7 +850,8 @@ class Database
 			'answers'         => (bool) $row['al'],
 			'when'            => $when,
 			'invite'          => (bool) $row['il'],
-			'safetyTestDate'  => $safetyTestDate
+			'safetyTestDate'  => $safetyTestDate,
+			'timeofapproval'  => $row['timeofapproval']
 			];
 		}
 
@@ -1134,7 +1149,7 @@ class Database
 	{
 		$dtz = $dtz ?? new DateTimeZone('Europe/Rome');
 		/**
-	* @noinspection PhpUnhandledExceptionInspection
+	   * @noinspection PhpUnhandledExceptionInspection
 */
 		$dt = new DateTime('now', $dtz);
 		$dt->setTimestamp($timestamp);

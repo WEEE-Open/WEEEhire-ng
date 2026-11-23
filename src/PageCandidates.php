@@ -38,7 +38,7 @@ class PageCandidates implements RequestHandlerInterface
 			$user = $db->getUser($id);
 
 			if ($user === null) {
-				   return new HtmlResponse($template->render('error', ['message' => 'Invalid user ID']), 404);
+					  return new HtmlResponse($template->render('error', ['message' => 'Invalid user ID']), 404);
 			}
 
 			// A form has been submitted
@@ -69,9 +69,9 @@ class PageCandidates implements RequestHandlerInterface
 				} elseif (isset($POST['resendemail'])) {
 					if ($status === User::STATUS_NEW) {
 						try {
-								  $token = $db->regenerateToken($id);
+							$token = $db->regenerateToken($id);
 						} catch (DatabaseException $e) {
-							   return new HtmlResponse($template->render('error', ['message' => 'Database error']), 500);
+							return new HtmlResponse($template->render('error', ['message' => 'Database error']), 500);
 						} catch (\Exception $e) {
 							return new HtmlResponse($template->render('error', ['message' => 'User does not exists']), 404);
 						}
@@ -103,7 +103,7 @@ class PageCandidates implements RequestHandlerInterface
 						$subject = $POST['subject'] ?? '';
 						$recruiter = $POST['recruiter'] ?? '';
 						if (strlen($email) <= 0) {
-								  return new HtmlResponse($template->render('error', ['message' => 'Write an email']), 400);
+							return new HtmlResponse($template->render('error', ['message' => 'Write an email']), 400);
 						}
 						if (strlen($subject) <= 0) {
 							return new HtmlResponse(
@@ -122,6 +122,7 @@ class PageCandidates implements RequestHandlerInterface
 						Email::sendMail(Utils::politoMail($user->matricola), $subject, $email);
 						$db->setEmailed($id, true);
 						$db->setPublished($id, true);
+						$db->setSendEmailTime($id, time());
 					} elseif ($status === User::STATUS_NEW_REJECTED) {
 						$db->setPublished($id, true);
 					} elseif ($status === User::STATUS_NEW_HOLD) {
@@ -205,25 +206,25 @@ class PageCandidates implements RequestHandlerInterface
 					$userInfo = $db->getUser($user["id"]); // 'id', 'name', 'surname', 'degreecourse', 'year', 'matricola','area', 'letter', 'published', 'status', 'hold', 'recruiter', 'recruitertg', 'submitted', 'visiblenotes', 'emailed', 'invitelink'
 					$interviewInfo = $db->getInterview($user["id"]); // "id","when","status","recruiter","recruitertg","answers","hold","safetyTestDate"
 					$details = [
-						"id" => $userInfo->id,
-						"name" => $userInfo->name,
-						"surname" => $userInfo->surname,
-						"degreeCourse" => $userInfo->degreecourse,
-						"year" => $userInfo->year,
-						"matricola" => $userInfo->matricola,
-						"area" => $userInfo->area,
-						"letter" => $userInfo->letter,
-						"submitted" => $userInfo->submitted,
-						"hold" => $userInfo->hold ? 'Yes' : 'No',
-						"published" => $userInfo->published ? 'Yes' : 'No',
-						"recruiter" => $userInfo->recruiter,
-						"recruiterTg" => $userInfo->recruitertg,
-						"visibleNotes" => $userInfo->visiblenotes,
-						"emailed" => $userInfo->emailed ? 'Yes' : 'No',
-						"inviteLink" => $userInfo->invitelink,
-						"interviewNotes" => $interviewInfo->answers,
-						"interviewHold" => $interviewInfo->hold ? 'Yes' : 'No',
-						"saftyTestDate" => $interviewInfo->safetyTestDate,
+					"id" => $userInfo->id,
+					"name" => $userInfo->name,
+					"surname" => $userInfo->surname,
+					"degreeCourse" => $userInfo->degreecourse,
+					"year" => $userInfo->year,
+					"matricola" => $userInfo->matricola,
+					"area" => $userInfo->area,
+					"letter" => $userInfo->letter,
+					"submitted" => $userInfo->submitted,
+					"hold" => $userInfo->hold ? 'Yes' : 'No',
+					"published" => $userInfo->published ? 'Yes' : 'No',
+					"recruiter" => $userInfo->recruiter,
+					"recruiterTg" => $userInfo->recruitertg,
+					"visibleNotes" => $userInfo->visiblenotes,
+					"emailed" => $userInfo->emailed ? 'Yes' : 'No',
+					"inviteLink" => $userInfo->invitelink,
+					"interviewNotes" => $interviewInfo->answers,
+					"interviewHold" => $interviewInfo->hold ? 'Yes' : 'No',
+					"saftyTestDate" => $interviewInfo->safetyTestDate,
 					];
 					if ($userInfo->status === true) {
 						$details["applicationStatus"] = 'Approved';
